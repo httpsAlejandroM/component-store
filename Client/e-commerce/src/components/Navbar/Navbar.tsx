@@ -9,7 +9,7 @@ import { useGetComponentsQuery } from "../../redux/componentsApi/componentsApi"
 function Navbar() {
 
   const [categorys, setCategorys] = useState<string[]>([])
-  const [brands, setBrands] = useState<string[]>([])
+  // const [brands, setBrands] = useState<string[]>([])
   const { data } = useGetComponentsQuery()
 
   useEffect(() => {
@@ -19,10 +19,10 @@ function Navbar() {
       const categoriasSinFiltrar = response?.map((producto: ComponentInterface) => producto.category);
       const categorias: string[] = [...new Set(categoriasSinFiltrar)] as string[];
   
-      const marcasSinFiltrar = response?.map((producto: ComponentInterface) => producto.brand);
-      const marcas: string[] = [...new Set(marcasSinFiltrar)] as string[];
+      // const marcasSinFiltrar = response?.map((producto: ComponentInterface) => producto.brand);
+      // const marcas: string[] = [...new Set(marcasSinFiltrar)] as string[];
       setCategorys(sortFunction(categorias));
-      setBrands(sortFunction(marcas));
+      // setBrands(sortFunction(marcas));
     };
   
     data && getComponents();
@@ -52,7 +52,7 @@ function Navbar() {
                 <Navlink linkName="Productos" route="/shop"></Navlink>
                 <Navlink linkName="Arma tu Pc" route="arma-tu-pc"></Navlink>
                 <NavDropDown linkName="Categorias" submenu={categorys} />
-                <NavDropDown linkName="Marcas" submenu={brands} />
+                {/* <NavDropDown linkName="Marcas" submenu={brands} /> */}
                 <Navlink linkName="Ayuda" route="/ayuda"></Navlink>
 
               </ul>

@@ -2,8 +2,8 @@
 function Footer() {
 
     return (
-        <footer className='second-color pb-2 container-fluid'>
-            <div className="text-white d-flex flex-column flex-lg-row justify-content-lg-evenly pt-3 mb-md-3 mb-xl-2">
+        <footer className='second-color'>
+            <div className="container-fluid text-white d-flex flex-column flex-lg-row justify-content-lg-evenly pt-3 mb-md-3 mb-xl-2">
                 <div className="d-flex flex-column col-12 col-sm-12 col-lg-4 col-xl-3 col-xxl-2 text-start ms-2 ms-lg-0 mt-1 mt-lg-0">
                     <h5 className="text-success fs-5">Información</h5>
                     <ul className="navbar-nav">
@@ -17,7 +17,7 @@ function Footer() {
                    <h5 className="text-success fs-5">¿Dónde estamos?</h5>
                    <ul className="navbar-nav">
                         <li className="fs-6">Av. 9 de Julio s/n, C1043 CABA</li>
-                        <li className="fs-6">Lunes a Viernes de 10:00 a 13:00 y de 15:00 a 19:00hs. Sab de 10:00 a 14:00 Hs</li>
+                        <li className="fs-6">Lunes a Viernes de 10:00 a 19:00 y Sábados de 10:00 a 14:00 Hs</li>
                        
                     </ul>
                     </div>
@@ -30,7 +30,7 @@ function Footer() {
                     </ul>
                     </div>
             </div>
-            <div className='container text-start text-md-center mt-2'>
+            <div className='text-start text-md-center mt-2 sbg-color py-1'>
                 <small className='text-white'>&copy;2023 <a className="text-white link-success" href="https://www.linkedin.com/in/alejandro-medina-b4558419b/">Alejandro Medina.</a></small>
             </div>
         </footer>

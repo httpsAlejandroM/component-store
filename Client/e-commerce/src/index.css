@@ -60,7 +60,8 @@ body{
   color: var(--main-color) !important;
 }
 
-.card:hover {
+.card:hover,
+.mosaico img:hover {
   box-shadow: 1px 0.08rem 7px 0px rgba(255, 254, 255, 1) !important;
 }
 
@@ -151,6 +152,11 @@ color: var(--main-color) !important;
 }
 
 /********** My styles *************/
+
+.disabled {
+  opacity: 0.7;
+  pointer-events: none;
+}
 
 .sbg-color {
   background-color: var(--second-bg-color);
