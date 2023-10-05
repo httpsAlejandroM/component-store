@@ -1,8 +1,19 @@
+import CardsContainer from "../../components/Cards/CardsContainer"
+import { useGetComponentsQuery } from "../../redux/componentsApi/componentsApi"
+import SorterComponent from "./SorterComponent"
 
 function Shop() {
+
+  const { data } = useGetComponentsQuery()
   return (
-    <section className="min-vh-100">
-        <h1 className="display-1 text-white">Shop</h1>
+    <section className="container row min-vh-100 justify-content-center">
+      <aside className="col-2">
+
+      </aside>
+      <section className="col-10 d-flex flex-column">
+        <SorterComponent />
+        {data && <CardsContainer data={data.data}></CardsContainer>}
+      </section>
     </section>
   )
 }

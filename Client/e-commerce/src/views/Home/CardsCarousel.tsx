@@ -3,11 +3,11 @@ import { ComponentInterface } from "../../interfaces"
 import { useState, useEffect } from "react"
 
 interface props {
-    sectionCards:string
-    arr: ComponentInterface[]
+  sectionCards: string
+  arr: ComponentInterface[]
 }
 
-function CardsCarousel({arr, sectionCards}:props) {
+function CardsCarousel({ arr, sectionCards }: props) {
 
   const [cardsPerSlide, setCardsPerSlide] = useState(1);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -18,7 +18,7 @@ function CardsCarousel({arr, sectionCards}:props) {
   for (let i = 0; i < totalSlides; i++) {
     const startIndex = i * cardsPerSlide;
     const endIndex = startIndex + cardsPerSlide;
-    const slideData = arr.slice(startIndex, endIndex); 
+    const slideData = arr.slice(startIndex, endIndex);
     slides.push(slideData);
   }
 
@@ -31,8 +31,8 @@ function CardsCarousel({arr, sectionCards}:props) {
     } else if (window.innerWidth >= 992) {
       setCardsPerSlide(3);
     }
-      else if (window.innerWidth >= 771) {
-        setCardsPerSlide(2);
+    else if (window.innerWidth >= 771) {
+      setCardsPerSlide(2);
     } else {
       setCardsPerSlide(1);
     }
@@ -60,32 +60,32 @@ function CardsCarousel({arr, sectionCards}:props) {
   }, [currentIndex]);
 
   return (
-    <div id={sectionCards} className="carousel slide home ">
-  <div className="carousel-inner ">
-    <div className="carousel-item active ">
-    <CardsContainer data={slides[0]}></CardsContainer>
-    </div>
-    {
-      slides.slice(1, 20).map((slideData, index) => (
-        <div
-        key={index}
-        className={`carousel-item`}
-      >
-        <CardsContainer data={slideData}></CardsContainer>
-      </div>
+    <article id={sectionCards} className="carousel slide home ">
+      <div className="carousel-inner ">
+        <div className="carousel-item active ">
+          <CardsContainer data={slides[0]}></CardsContainer>
+        </div>
+        {
+          slides.slice(1, 20).map((slideData, index) => (
+            <div
+              key={index}
+              className={`carousel-item`}
+            >
+              <CardsContainer data={slideData}></CardsContainer>
+            </div>
           ))
-    }
- 
-    </div>
-  <button className="carousel-control-prev" onClick={handlePrev} type="button" data-bs-target={`#${sectionCards}`} data-bs-slide="prev">
-    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span className="visually-hidden">Previous</span>
-  </button>
-  <button className="carousel-control-next" onClick={handleNext} type="button" data-bs-target={`#${sectionCards}`} data-bs-slide="next">
-    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-    <span className="visually-hidden">Next</span>
-  </button>
-</div>
+        }
+
+      </div>
+      <button className="carousel-control-prev" onClick={handlePrev} type="button" data-bs-target={`#${sectionCards}`} data-bs-slide="prev">
+        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Previous</span>
+      </button>
+      <button className="carousel-control-next" onClick={handleNext} type="button" data-bs-target={`#${sectionCards}`} data-bs-slide="next">
+        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Next</span>
+      </button>
+    </article>
   )
 }
 

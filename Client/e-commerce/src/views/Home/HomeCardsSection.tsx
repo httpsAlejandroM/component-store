@@ -1,15 +1,9 @@
-import { useEffect } from "react"
 import { useGetComponentsQuery } from "../../redux/componentsApi/componentsApi"
 import CardsCarousel from "./CardsCarousel"
 
 function HomeCardsSection() {
 
 const { data } = useGetComponentsQuery()
-
-
-useEffect(()=>{
-    
-},[data])
 
   return (
     <article className="container">

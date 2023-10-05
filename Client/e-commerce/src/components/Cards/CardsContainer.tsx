@@ -10,7 +10,7 @@ function CardsContainer({data}:arrComponents) {
 
 
   return (
-    <article className="row d-flex flex-row justify-content-center">
+    <div className="row d-flex flex-row justify-content-center">
         {
             data && data.map((component: ComponentInterface) => {
                 return (
@@ -26,7 +26,7 @@ function CardsContainer({data}:arrComponents) {
                 )
             })
         }
-    </article>
+    </div>
   )
 }
 

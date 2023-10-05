@@ -54,15 +54,26 @@ body{
   color: var(--bg-color) !important;
 }
 
-.btn-outline-success:hover{
-  background-color: var(--second-color) !important;
-  border-color: var(--main-color);
+.btn-outline-success:hover,
+.btn-outline-success:focus{
+  background-color: transparent !important;
+  border-color: var(--main-color) !important;
   color: var(--main-color) !important;
+}
+.btn-outline-success:focus .btn-outline-success:disabled{
+  background-color: transparent !important;
+  border-color: var(--main-color) !important;
+  color: var(--main-color) !important;
+}
+
+.card,
+.mosaico img{
+  transition: 0.1s ease-out !important;
 }
 
 .card:hover,
 .mosaico img:hover {
-  box-shadow: 1px 0.08rem 7px 0px rgba(255, 254, 255, 1) !important;
+  box-shadow: 1px 1px 7px -1px rgba(255, 254, 255, 1) !important;
 }
 
 .carousel-control-prev-icon {
