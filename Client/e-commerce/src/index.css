@@ -60,11 +60,13 @@ body{
   border-color: var(--main-color) !important;
   color: var(--main-color) !important;
 }
-.btn-outline-success:focus .btn-outline-success:disabled{
-  background-color: transparent !important;
-  border-color: var(--main-color) !important;
-  color: var(--main-color) !important;
+
+.btn-outline-success {
+  --bs-btn-active-bg: transparent !important;
+  --bs-btn-active-border-color: var(--main-color) !important;
 }
+
+
 
 .card,
 .mosaico img{

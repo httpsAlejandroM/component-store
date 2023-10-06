@@ -12,11 +12,11 @@ function SorterComponent() {
                 <button className="btn btn-outline-success dropdown-toggle " style={{ width: 160 }} type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     {currentSort}
                 </button>
-                <ul className="dropdown-menu dropdown-menu-dark">
+                <ul className="dropdown-menu dropdown-menu-dark second-color">
                     {
                         sortOptions.map((option: string, index: number) => {
                             return (
-                                <li key={index}><button className="dropdown-item" onClick={() => setCurrentSort(option)}>{option}</button></li>
+                                <li key={index}><button className={`dropdown-item text-white link-success ${currentSort == option? "disabled" : ""}`} onClick={() => setCurrentSort(option)}>{option}</button></li>
                             )
                         })
                     }
