@@ -8,7 +8,7 @@ function SorterComponent() {
     return (
         <div className="d-flex flex-row align-items-center justify-content-end me-4 mt-3">
             <span className="text-white fs-5">Ordenar por</span>
-            <div className="dropdown ms-2">
+            <div className="dropdown ms-2 me-3">
                 <button className="btn btn-outline-success dropdown-toggle " style={{ width: 160 }} type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     {currentSort}
                 </button>
