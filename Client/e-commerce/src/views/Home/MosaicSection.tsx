@@ -9,6 +9,10 @@ import mosaico6 from "../../assets/mosaico6.jpg"
 function MosaicSection() {
     return (
         <section className="container mt-5 d-flex flex-column justify-content-center align-items-center gap-4">
+            <div className="container-fluid">
+            <h1 className="text-success text-center mb-4 display-5 fw-bold">Los mejores Componentes de PC te esperan</h1>
+            <hr className="border-success border-2  my-4" />
+            </div>
             <div className="row mosaico">
                 <div className="col-6">
                     <a href="#"><img className="img-fluid rounded-1" src={mosaico} alt="Mosaico" /></a>

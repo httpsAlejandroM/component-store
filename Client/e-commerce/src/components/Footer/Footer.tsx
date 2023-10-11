@@ -5,7 +5,7 @@ function Footer() {
         <footer className='second-color'>
             <div className="container-fluid text-white d-flex flex-column flex-lg-row justify-content-lg-evenly pt-3 mb-md-3 mb-xl-2">
                 <div className="d-flex flex-column col-12 col-sm-12 col-lg-4 col-xl-3 col-xxl-2 text-start ms-2 ms-lg-0 mt-1 mt-lg-0">
-                    <h5 className="text-success fs-5">Información</h5>
+                    <h4 className="text-success fs-5">Información</h4>
                     <ul className="navbar-nav">
                         <li ><a  className="text-white link-success fs-6" href="">Contacto</a></li>
                         <li ><a className="text-white link-success fs-6"  href="">Preguntas frecuentes</a></li>
@@ -14,7 +14,7 @@ function Footer() {
                     </ul>
                 </div>
                 <div className="d-flex flex-column col-12 col-sm-12 col-lg-4 col-xl-3 col-xxl-2 text-start ms-2 ms-lg-0 mt-3 mt-lg-0">
-                   <h5 className="text-success fs-5">¿Dónde estamos?</h5>
+                   <h4 className="text-success fs-5">¿Dónde estamos?</h4>
                    <ul className="navbar-nav">
                         <li className="fs-6">Av. 9 de Julio s/n, C1043 CABA</li>
                         <li className="fs-6">Lunes a Viernes de 10:00 a 19:00 y Sábados de 10:00 a 14:00 Hs</li>
@@ -22,7 +22,7 @@ function Footer() {
                     </ul>
                     </div>
                 <div className="d-flex flex-column col-12 col-sm-12 col-lg-4 col-xl-3 col-xxl-2 text-start ms-2 ms-lg-0 mt-3 mt-lg-0">
-                    <h5 className="text-success fs-5">Seguinos en nustras redes</h5>
+                    <h4 className="text-success fs-5">Seguinos en nustras redes</h4>
                     <ul className="navbar-nav d-flex flex-row justify-content-start gap-5">
                         <li><a className="link-success text-white px-1" href="https://facebook.com" target='_blank'><i className='bi bi-facebook fs-3'></i></a></li>
                         <li><a className="link-success text-white px-1" href="https://twitter.com" target='_blank'><i className='bi bi-twitter fs-3'></i></a></li>

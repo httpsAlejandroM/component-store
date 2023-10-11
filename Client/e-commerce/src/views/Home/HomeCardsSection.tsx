@@ -10,6 +10,7 @@ const { data } = useGetComponentsQuery()
         <div className="my-5">
           <h3 className="text-success">Últimos Ingresos</h3>
           <hr className="border-success border-2  my-4" />
+          <div></div>
          {
           data && <CardsCarousel sectionCards={"lastsIn"} arr={data.data.slice(103, 103+20)}></CardsCarousel>
 

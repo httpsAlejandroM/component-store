@@ -9,8 +9,8 @@ function Shop() {
   return (
     <section className="container min-vh-100 d-flex flex-row justify-content-center">
       {data && <FilterComponent data={data.data}></FilterComponent>}
-      <section className="col-10 d-flex flex-column">
-        <SorterComponent />
+      <section className="col-10 d-flex flex-column ">
+        <SorterComponent/>
         {data && <CardsContainer data={data.data}></CardsContainer>}
       </section>
     </section>

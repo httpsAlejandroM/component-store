@@ -22,7 +22,7 @@ function Card({ stock, title, price, image }: Card) {
             <small className={`card-text rounded-1 fw-bold text-white px-1 ${stock ? "bg-success" : "bg-danger"}`}>{stock ? "En stock" : "Sin stock"}</small>
           </div>
           <div className="mt-3">
-            <h5 className="card-title fs-6 text-start">{title}</h5>
+            <h3 className="card-title fs-6 text-start">{title}</h3>
           </div>
           <div className="position-absolute bottom-0 mb-3">
             
