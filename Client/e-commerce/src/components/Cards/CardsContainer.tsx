@@ -3,14 +3,15 @@ import Card from "./Card"
 
 interface arrComponents {
   data: ComponentInterface[]
+  blur?: boolean
 }
 
-function CardsContainer({data}:arrComponents) {
+function CardsContainer({data, blur}:arrComponents) {
 
 
 
   return (
-    <div className="row d-flex flex-row justify-content-center">
+    <div className={`${blur? "blur" : ""} row d-flex flex-row justify-content-center`}>
         {
             data && data.map((component: ComponentInterface) => {
                 return (

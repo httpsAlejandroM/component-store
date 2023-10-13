@@ -6,9 +6,9 @@ function SorterComponent() {
 
     const sortOptions = ["De A - Z", "De Z - A", "Menor precio", "Mayor precio", "Más relevantes"]
     return (
-        <div className="d-flex flex-row align-items-center justify-content-end me-4 mt-3">
-            <span className="text-white fs-5">Ordenar por</span>
-            <div className="dropdown ms-2 me-3">
+        <>
+            <span className="text-white fs-5 me-2">Ordenar por</span>
+            <div className="dropdown ">
                 <button className="btn btn-outline-success dropdown-toggle " style={{ width: 160 }} type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     {currentSort}
                 </button>
@@ -23,7 +23,7 @@ function SorterComponent() {
 
                 </ul>
             </div>
-        </div>
+        </>
     )
 }
 

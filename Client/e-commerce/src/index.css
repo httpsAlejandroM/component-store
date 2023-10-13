@@ -16,20 +16,20 @@
   --body-font: "Poppins", sans-serif;
   --bg-color: rgb(255, 254, 255);
   --second-bg-color: rgb(19, 24, 29);
-  --main-color:  rgb(200, 250, 96);
+  --main-color: rgb(200, 250, 96);
   --second-color: rgb(40, 45, 50);
   --main-alpha-color: #8fca0e;
   --size-carousel: 120px;
 }
 
 * {
-  
+
   text-decoration: none;
   scroll-behavior: smooth;
   font-family: 'Poppins', sans-serif;
 }
 
-body{
+body {
   background-color: var(--second-bg-color);
 }
 
@@ -38,25 +38,43 @@ body{
 
 /********* Bootstrap styles  *********/
 
+.accordion{
+  --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fffeff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fffeff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+
+}
+
+.accordion:hover {
+  --bs-accordion-border-color: var(--main-color) !important;
+  --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23c8fa60'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23c8fa60'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+
+}
+
 .accordion-button:not(.collapsed) {
-  background-color: rgba(200, 250, 96, 0.7);
+  background-color: var(--second-color);
+  border-color: var(--main-color) !important;
 }
 
 .accordion-button:focus {
-  border-color: var(--main-color);
+  border-color: var(--main-color) !important;
   box-shadow: inset 0 calc(-1 * var(--bs-accordion-border-width)) 0 var(--main-color);
 }
 
+.accordion-button:hover{
+  border-color: var(--main-color) !important;
+}
 
-.bg-success{
+
+.bg-success {
   background-color: var(--main-alpha-color) !important;
 }
 
-.bg-danger{
+.bg-danger {
   background-color: rgb(245, 127, 23) !important;
 }
 
-.border-success{
+.border-success {
   border-color: var(--main-color) !important;
 }
 
@@ -82,27 +100,23 @@ body{
 
 
 
-.btn-outline-success{
-  border-color: var(--bg-color);
-  color: var(--bg-color) !important;
-}
-
-.btn-outline-success:hover,
-.btn-outline-success:focus{
-  background-color: transparent !important;
-  border-color: var(--main-color) !important;
-  color: var(--main-color) !important;
-}
-
 .btn-outline-success {
+  border-color: var(--bg-color) !important;
+  color: var(--bg-color) !important;
   --bs-btn-active-bg: transparent !important;
   --bs-btn-active-border-color: var(--main-color) !important;
 }
 
+.btn-outline-success:hover,
+.btn-outline-success:focus {
+  background-color: var(--second-color) !important;
+  border-color: var(--main-color) !important;
+  color: var(--main-color) !important;
+}
 
 
 .card,
-.mosaico img{
+.mosaico img {
   transition: 0.1s ease-out !important;
 }
 
@@ -124,32 +138,36 @@ body{
 
 
 
-.home .carousel-control-prev{
-  max-width: 32px; /* Establece el ancho máximo del botón Next */
-  left: -10px; /* Alinea el botón a la derecha del carrusel */
-  right: auto; 
+.home .carousel-control-prev {
+  max-width: 32px;
+  /* Establece el ancho máximo del botón Next */
+  left: -10px;
+  /* Alinea el botón a la derecha del carrusel */
+  right: auto;
 }
 
 .home .carousel-control-next {
-  max-width: 32px; /* Establece el ancho máximo del botón Next */
-  right: -10px; /* Alinea el botón a la derecha del carrusel */
-  left: auto; 
+  max-width: 32px;
+  /* Establece el ancho máximo del botón Next */
+  right: -10px;
+  /* Alinea el botón a la derecha del carrusel */
+  left: auto;
 }
 
 
 .carousel-indicators {
   background-color: transparent !important;
 
-  [data-bs-target]{
+  [data-bs-target] {
     background-color: var(--main-color);
   }
 }
 
 .dropdown-menu {
   max-height: 60vh;
- overflow-wrap:break-word;
- overflow-y: auto;
- overflow-x: hidden;
+  overflow-wrap: break-word;
+  overflow-y: auto;
+  overflow-x: hidden;
 
 }
 
@@ -157,25 +175,31 @@ body{
   background-color: transparent !important;
 }
 
-.form-control:focus{
+.form-control:focus {
   border-color: var(--main-alpha-color);
   box-shadow: 0 0 0 0.10rem rgba(200, 250, 96, 0.90)
 }
 
-.link-success{
+.form-check-input:checked {
+  background-color: #87b91a;
+  border-color: #87b91a;
+}
+
+.link-success {
   text-decoration: none;
   color: var(--main-alpha-color);
 }
 
-.link-success:hover, .link-success:focus {
-color: var(--main-color) !important;
+.link-success:hover,
+.link-success:focus {
+  color: var(--main-color) !important;
 }
 
-.navbar-nav-scroll{
+.navbar-nav-scroll {
   overflow-x: hidden;
 }
 
-.navbar-toggler{
+.navbar-toggler {
   border-color: var(--main-alpha-color);
   --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28200, 250, 96, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
   transition: all 0.3s ease-out;
@@ -187,14 +211,14 @@ color: var(--main-color) !important;
 }
 
 .navbar-toggler:focus {
-  box-shadow:none !important
+  box-shadow: none !important
 }
 
-.text-success{
+.text-success {
   color: var(--main-color) !important;
 }
 
-.text-dark{
+.text-dark {
   color: var(--second-color) !important
 }
 
@@ -205,21 +229,38 @@ color: var(--main-color) !important;
   pointer-events: none;
 }
 
+.filter-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border: 1px solid var(--second-color);
+  padding: 10px;
+  z-index: 1;
+}
 
-.link-success-dark{
+.bi-filter-square:hover{
+color: var(--main-color) !important;
+}
+
+.blur{
+  opacity: 0.5;
+}
+
+.link-success-dark {
   color: var(--second-color);
 }
 
-.link-success-dark:hover{
+.link-success-dark:hover {
   /* color: var(--main-alpha-color)  !important; */
-  text-decoration-color:var(--main-alpha-color) !important;
+  text-decoration-color: var(--main-alpha-color) !important;
   text-decoration-thickness: 1.5px
 }
 
 
 
 
-.priceInput{
+.priceInput {
   width: 100px;
 }
 
@@ -228,10 +269,13 @@ color: var(--main-color) !important;
 }
 
 .second-color {
-  background-color: var(--second-color);
+  background-color: var(--second-color) !important;
 }
 
-nav .second-color div, ul, li, form {
+nav .second-color div,
+ul,
+li,
+form {
   background-color: var(--second-color);
 }
 
@@ -248,8 +292,8 @@ nav .second-color div, ul, li, form {
   position: absolute;
   top: 0;
   bottom: 0;
-  width:15%;
-  background: linear-gradient(to right, transparent, var(--second-bg-color) );
+  width: 15%;
+  background: linear-gradient(to right, transparent, var(--second-bg-color));
 }
 
 .slider::before {
@@ -278,32 +322,34 @@ nav .second-color div, ul, li, form {
   width: 100%;
 }
 
-@media (min-width: 576px) { }
+@media (min-width: 576px) {}
 
 /* // Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) { }
+@media (min-width: 768px) {}
 
 /* // Large devices (desktops, 992px and up) */
-@media (min-width: 992px) { }
+@media (min-width: 992px) {}
 
 /* // X-Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
- 
- }
+@media (min-width: 1200px) {}
 
 /* // XX-Large devices (larger desktops, 1400px and up) */
-@media (min-width: 1400px) { 
+@media (min-width: 1400px) {
 
-  .home .carousel-control-prev{
-    max-width: 32px; /* Establece el ancho máximo del botón Next */
-    left: -3rem; /* Alinea el botón a la derecha del carrusel */
-    right: auto; 
+  .home .carousel-control-prev {
+    max-width: 32px;
+    /* Establece el ancho máximo del botón Next */
+    left: -3rem;
+    /* Alinea el botón a la derecha del carrusel */
+    right: auto;
   }
-  
+
   .home .carousel-control-next {
-    max-width: 32px; /* Establece el ancho máximo del botón Next */
-    right: -3rem; /* Alinea el botón a la derecha del carrusel */
-    left: auto; 
+    max-width: 32px;
+    /* Establece el ancho máximo del botón Next */
+    right: -3rem;
+    /* Alinea el botón a la derecha del carrusel */
+    left: auto;
   }
 }
 
@@ -314,6 +360,7 @@ nav .second-color div, ul, li, form {
     -webkit-transform: translateX(0);
     transform: translateX(0);
   }
+
   100% {
     -webkit-transform: translateX(calc(var(--size-carousel) * -21));
     transform: translateX(calc(var(--size-carousel) * -21));

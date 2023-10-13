@@ -23,20 +23,20 @@ const filterHandler = (category:string) => {
 }
     
     return (
-        <aside className="mt-4 col-2 ">
+        <aside className="mt-4 col-2 d-none d-xl-flex flex-xl-column align-items-start ">
             
-            <div className="d-flex flex-column mt-4">
+            <div className="d-flex flex-column mt-4 col-12">
                 <h5 className="text-white">Precio</h5>
                 <div className="d-flex flex-column flex-xl-row align-items-start justify-content-center"> 
                    <input type="number" className="priceInput rounded-2"  placeholder="$ Minimo" />
                     <div className="text-white p-2">{`-`}</div>
                    <input type="number"className="priceInput rounded-2"   placeholder="$ Maximo" />
                 </div>
-                <button className="sbg-color rounded-2 w-100 btn btn-outline-success text-white mt-3  mt-xl-1"><i className="bi bi-chevron-right"></i></button>
+                <button className="sbg-color  btn btn-outline-success rounded-2 w-100  text-white mt-3  mt-xl-1"><i className="bi bi-chevron-right"></i></button>
                
             </div>
             <AccordionFilterComponent data={data} setFilter={filterHandler}></AccordionFilterComponent>
-            <div className="mt-4">
+            <div className="mt-4 col-12">
                 <p className="text-white fs-6">{`${data.length} resultados`}</p>
             <div className="flex-wrap ">
                 {

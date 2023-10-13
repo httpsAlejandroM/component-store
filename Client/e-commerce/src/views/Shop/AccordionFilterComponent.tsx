@@ -30,11 +30,11 @@ function AccordionFilterComponent({data, setFilter}:props) {
 
 
   return (
-    <div className="accordion mt-4" id="accordionFlushExample">
-                <div className="accordion-item">
-                    <h2 className="accordion-header">
+    <div className="accordion mt-4 col-12 " id="accordionFlushExample">
+                <div className="accordion-item ">
+                    <h2 className="accordion-header ">
                         
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        <button className="accordion-button collapsed sbg-color  btn btn-outline-success" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                             Categorias
                         </button>
                     </h2>
@@ -42,15 +42,15 @@ function AccordionFilterComponent({data, setFilter}:props) {
                         {
                             Object.entries(categoryCounts).map(([category, count])=>{
                                 return (
-                                    <div key={category}  className="mt-2 ms-2"><a onClick={()=>setFilter(category)} href="#" className={`${linkHoverStyle}`} >{category}<small> ({count})</small></a></div>
+                                    <div key={category}  className="mt-2 ms-2 fs-7"><a onClick={()=>setFilter(category)} href="#" className={`${linkHoverStyle}`} >{category}<small> ({count})</small></a></div>
                                 )
                             })
                         }
                     </div>
                 </div>
-                <div className="accordion-item">
+                <div className="accordion-item ">
                     <h2 className="accordion-header">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        <button className="accordion-button collapsed sbg-color  btn btn-outline-success" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
                             Marcas
                         </button>
                     </h2>
@@ -58,7 +58,7 @@ function AccordionFilterComponent({data, setFilter}:props) {
                     {
                             Object.entries(brandsCounts).map(([brand, count])=>{
                                 return (
-                                    <div key={brand} className="mt-2 ms-2"><a onClick={()=>setFilter(brand)} className={`${linkHoverStyle}`} href="#">{brand}<small> ({count})</small></a></div>
+                                    <div key={brand} className="mt-2 ms-2 fs-7"><a onClick={()=>setFilter(brand)} className={`${linkHoverStyle}`} href="#">{brand}<small> ({count})</small></a></div>
                                 )
                             })
                         }
