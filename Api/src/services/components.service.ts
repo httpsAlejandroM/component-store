@@ -1,4 +1,7 @@
+import filterInterface from "../interfaces/filter.interface";
 import interfaceProduct from "../interfaces/product.interface"
+import QueryInterface from "../interfaces/querys.interface";
+import QuerInterface from "../interfaces/querys.interface";
 import Products from "../models/products"
 import { Document, Types } from 'mongoose';
 
@@ -40,11 +43,34 @@ const removeComponent = async (id:string) => {
     return await Products.findByIdAndRemove(id)
 }
 
+const applyFilters = async (name:string | undefined, category:string | undefined, brand:string | undefined)=> {
+     const filterOptions:filterInterface = {}; 
+
+    if (name) {
+      filterOptions.title = new RegExp(name, 'i');
+    }
+    if (category) {
+      const categoryValues = category.split(",");      
+      const regex = categoryValues.map((categoria:string)=>new RegExp(categoria, 'i'))
+      filterOptions.category = { $in: regex };
+    }
+    if (brand) {
+      const brandValues = brand.split(",");
+      const regex = brandValues.map((marca:string)=>new RegExp(marca, 'i'))
+      filterOptions.brand = { $in: regex };
+    }
+    //   .skip((page - 1) * limit)
+    //   .limit(limit)
+      const productFiltered = await Products.find(filterOptions)
+      return productFiltered
+}
+
 export {
     getAllComponents,
     createComponent,
     getComponentById,
     updateComponent,
     removeComponent,
-    createDocumentsBD
+    createDocumentsBD,
+    applyFilters
 }

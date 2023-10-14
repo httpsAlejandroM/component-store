@@ -34,7 +34,7 @@ function AccordionFilterComponent({data, setFilter}:props) {
                 <div className="accordion-item ">
                     <h2 className="accordion-header ">
                         
-                        <button className="accordion-button collapsed sbg-color  btn btn-outline-success" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        <button className="accordion-button collapsed sbg-color btn-outline-success" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                             Categorias
                         </button>
                     </h2>
@@ -50,7 +50,7 @@ function AccordionFilterComponent({data, setFilter}:props) {
                 </div>
                 <div className="accordion-item ">
                     <h2 className="accordion-header">
-                        <button className="accordion-button collapsed sbg-color  btn btn-outline-success" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        <button className="accordion-button collapsed sbg-color btn-outline-success" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
                             Marcas
                         </button>
                     </h2>

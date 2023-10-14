@@ -18,7 +18,7 @@
   --second-bg-color: rgb(19, 24, 29);
   --main-color: rgb(200, 250, 96);
   --second-color: rgb(40, 45, 50);
-  --main-alpha-color: #8fca0e;
+  --main-alpha-color: #87b91a;
   --size-carousel: 120px;
 }
 
@@ -232,13 +232,22 @@ body {
 .filter-menu {
   position: absolute;
   top: 100%;
-  right: 0;
-  background-color: white;
+  right: -50%;
   border: 1px solid var(--second-color);
   padding: 10px;
   z-index: 1;
 }
 
+.filter-menu::before {
+    content: '';
+    position: absolute;
+    top: -21px;
+    right: 30px;
+    transform: translateX(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent var(--second-color) transparent;
+}
 .bi-filter-square:hover{
 color: var(--main-color) !important;
 }

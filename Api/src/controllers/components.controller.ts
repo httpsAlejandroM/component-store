@@ -1,6 +1,7 @@
-import { createComponent, getAllComponents, getComponentById, updateComponent, removeComponent, createDocumentsBD } from "../services/components.service";
+import { createComponent, getAllComponents, getComponentById, updateComponent, removeComponent, createDocumentsBD, applyFilters } from "../services/components.service";
 import { Request, Response  } from "express";
 import utils from "../utils"
+import QueryInterface from "../interfaces/querys.interface";
 
 const { responseHandler, errorHandler, componentsArray} = utils
 
@@ -14,10 +15,19 @@ const createBD = async (req:Request, res:Response) => {
 }
 
 const getComponents = async (req:Request, res:Response) => {
-    try {
-        const products = await getAllComponents()
-        responseHandler(res, 200, products)
-    } catch (error) {
+    const { title, category, brand }:QueryInterface = req.query;
+
+    try {  
+        if (title  || category || brand) {
+          const productByName = await applyFilters(title, category, brand);
+         productByName.length?  responseHandler(res, 200, productByName) : responseHandler(res, 400, {messagge: "No se encontraron resultados que coincidan con su búsqueda."})
+        }
+        else{
+         const allProducts = await getAllComponents()
+         responseHandler(res, 200, allProducts)
+        }
+        }
+     catch (error) {
         errorHandler(res, 400, "Error, algo salio mal")
     }
 }

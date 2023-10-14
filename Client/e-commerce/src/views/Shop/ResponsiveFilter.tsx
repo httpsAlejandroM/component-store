@@ -22,7 +22,7 @@ function ResponsiveFilter({ data, setBlur }: props) {
                 <span className="text-white fs-4">{`${data.length} resultados`}</span>
             </div>
             <div className="d-flex align-items-center position-relative">
-                <button className="btn" onClick={() => menuHandler()}><i className="bi bi-filter-square text-white fs-2"></i></button>
+                <button aria-label="Boton de filtrado" className="btn" onClick={() => menuHandler()}><i className="bi bi-filter-square text-white fs-2"></i></button>
                 {isFilterMenuOpen && <FilterDesplegable data={data}></FilterDesplegable>}
             </div>
         </div>
