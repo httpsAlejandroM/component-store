@@ -6,13 +6,16 @@ import ResponsiveFilter from "./ResponsiveFilter"
 import SorterComponent from "./SorterComponent"
 
 function Shop() {
-  const { data } = useGetComponentsQuery()
   const [ blur, setBlur ] = useState(false)
-
+  const [fetchFilters, setFetchFilters] = useState({});
+  const { data } = useGetComponentsQuery(fetchFilters,{
+    refetchOnMountOrArgChange:true
+  })
+ 
   return (
     <section  className={`container min-vh-100 d-flex flex-column align-items-center flex-xl-row justify-content-xl-center align-items-xl-start`}>
-      {data && <ResponsiveFilter data={data.data} setBlur={setBlur}></ResponsiveFilter>}
-      {data && <FilterComponent data={data.data} ></FilterComponent>}
+      {data && <ResponsiveFilter data={data.data} setBlur={setBlur} ></ResponsiveFilter>}
+      {data && <FilterComponent data={data.data} setFetchFilters={setFetchFilters} fetchFilters={fetchFilters}></FilterComponent>}
       <section className="col-10 d-flex flex-column ">
         <div className="d-none d-xl-flex flex-row align-items-center justify-content-end me-4 mt-3">
         <SorterComponent/>

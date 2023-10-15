@@ -10,7 +10,7 @@ function Navbar() {
 
   const [categorys, setCategorys] = useState<string[]>([])
   // const [brands, setBrands] = useState<string[]>([])
-  const { data } = useGetComponentsQuery()
+  const { data } = useGetComponentsQuery({})
 
   useEffect(() => {
 

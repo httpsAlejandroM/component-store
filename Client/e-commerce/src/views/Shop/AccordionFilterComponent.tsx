@@ -42,7 +42,7 @@ function AccordionFilterComponent({data, setFilter}:props) {
                         {
                             Object.entries(categoryCounts).map(([category, count])=>{
                                 return (
-                                    <div key={category}  className="mt-2 ms-2 fs-7"><a onClick={()=>setFilter(category)} href="#" className={`${linkHoverStyle}`} >{category}<small> ({count})</small></a></div>
+                                    <div key={category}  className="mt-2 ms-2 fs-7"><a onClick={()=>setFilter({category: category})} href="#" className={`${linkHoverStyle}`} >{category}<small> ({count})</small></a></div>
                                 )
                             })
                         }
@@ -58,7 +58,7 @@ function AccordionFilterComponent({data, setFilter}:props) {
                     {
                             Object.entries(brandsCounts).map(([brand, count])=>{
                                 return (
-                                    <div key={brand} className="mt-2 ms-2 fs-7"><a onClick={()=>setFilter(brand)} className={`${linkHoverStyle}`} href="#">{brand}<small> ({count})</small></a></div>
+                                    <div key={brand} className="mt-2 ms-2 fs-7"><a onClick={()=>setFilter({brand: brand})} className={`${linkHoverStyle}`} href="#">{brand}<small> ({count})</small></a></div>
                                 )
                             })
                         }

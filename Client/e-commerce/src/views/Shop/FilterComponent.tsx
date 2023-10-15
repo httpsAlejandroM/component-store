@@ -4,24 +4,57 @@ import { useState } from "react"
 
 interface props {
     data: ComponentInterface[]
+    setFetchFilters: Function
+    fetchFilters: Object
 }
 
+interface filterInterface {
+    category:string
+    brand:string
+}
 
-function FilterComponent({data}:props) {
+type filterState = {
+    category: string[]
+    brand: string[]
+}
 
-    const [currentFilters, setCurrentFilters] = useState<string[]>([])
+function FilterComponent({data, setFetchFilters, fetchFilters}:props) {
 
-const filterHandler = (category:string) => {
-    if(currentFilters.includes(category)){
-        const deleteCategory = currentFilters.filter((categoria)=>categoria !== category)
-        setCurrentFilters(deleteCategory)
+    const [currentFilters, setCurrentFilters] = useState<filterState>({category:[],brand:[] })
+
+const filterHandler = (producto:filterInterface) => {
+    //verifico que la key dinamica sea category o brand para que no llore typescript
+    const nombreDeLaPropiedad =  Object.keys(producto)[0] === "category"? "category" : "brand" 
+    //accedo dinamicamente a las propiedades del state y verifico que incluyan los valores del objeto que llega por parametro en caso de inclurlo lo borro
+    if(currentFilters[nombreDeLaPropiedad].includes(producto[nombreDeLaPropiedad])){
+        const deletedCategory = currentFilters[nombreDeLaPropiedad].filter((categoria)=>categoria !== producto[nombreDeLaPropiedad])
+    //hago una copia del state y cambio dinamicamente la propiedad category o brand y la actualizo con el nuevo resultado
+        setCurrentFilters({...currentFilters, [nombreDeLaPropiedad]: deletedCategory})
+        setFetchFilters({...fetchFilters, [nombreDeLaPropiedad]:deletedCategory.join(",")  })
     }
     else{
-      const newCategory = [...currentFilters, category]
-      setCurrentFilters(newCategory)
+      const newCategory = [...currentFilters[nombreDeLaPropiedad], producto[nombreDeLaPropiedad]]
+      setCurrentFilters({...currentFilters, [nombreDeLaPropiedad]:newCategory})
+      setFetchFilters({...fetchFilters, [nombreDeLaPropiedad]: newCategory.join(",")})
+    }
+
+
+}
+
+const btnCloseHandler = (filter:string) => {
+    if(currentFilters.category.includes(filter)){
+        const deleteFilter = currentFilters.category.filter((filtro)=> filtro !== filter )
+        setCurrentFilters({...currentFilters, category: deleteFilter})
+        setFetchFilters({...fetchFilters, category:deleteFilter.join(",")  })
+    }
+    else{
+        const deleteFilter = currentFilters.brand.filter((filtro)=> filtro !== filter )
+        setCurrentFilters({...currentFilters, brand: deleteFilter})
+        setFetchFilters({...fetchFilters, brand:deleteFilter.join(",")  })
     }
 }
-    
+
+const allFilters = [...currentFilters.category, ...currentFilters.brand]
     return (
         <aside className="mt-4 col-2 d-none d-xl-flex flex-xl-column align-items-start ">
             
@@ -40,10 +73,10 @@ const filterHandler = (category:string) => {
                 <p className="text-white fs-6">{`${data.length} resultados`}</p>
             <div className="flex-wrap ">
                 {
-                    currentFilters.map((filter:string)=>{
+                    allFilters.map((filter:any)=>{
                         return (
                             <div key={filter} className="d-inline-flex flex-row align-items-center second-color ps-1 m-1" data-bs-theme="dark">
-                                <div  className="text-white"><small>{filter}</small></div><button onClick={()=>filterHandler(filter)} type="button" className="btn-close" aria-label="Close"></button>
+                                <div  className="text-white"><small>{filter}</small></div><button onClick={()=>btnCloseHandler(filter)} type="button" className="btn-close" aria-label="Close"></button>
                             </div>
                         )
                     })
