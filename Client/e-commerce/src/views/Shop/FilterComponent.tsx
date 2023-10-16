@@ -1,6 +1,7 @@
 import { ComponentInterface } from "../../interfaces"
 import AccordionFilterComponent from "./AccordionFilterComponent"
 import { useState } from "react"
+import { useAppSelector } from "../../redux/hooks"
 
 interface props {
     data: ComponentInterface[]
@@ -20,6 +21,7 @@ type filterState = {
 
 function FilterComponent({data, setFetchFilters, fetchFilters}:props) {
 
+    const searchTerm = useAppSelector((state)=> state.searchReducer)
     const [currentFilters, setCurrentFilters] = useState<filterState>({category:[],brand:[] })
 
 const filterHandler = (producto:filterInterface) => {
@@ -70,7 +72,8 @@ const allFilters = [...currentFilters.category, ...currentFilters.brand]
             </div>
             <AccordionFilterComponent data={data} setFilter={filterHandler}></AccordionFilterComponent>
             <div className="mt-4 col-12">
-                <p className="text-white fs-6">{`${data.length} resultados`}</p>
+                <p className="text-white fs-6">{searchTerm.title? searchTerm.title : "Todos los productos"}</p>
+                <span className="text-white fs-7">{`${searchTerm.title? `${data.length} resultados de busqueda` : `${data.length} resultados`}`}</span>
             <div className="flex-wrap ">
                 {
                     allFilters.map((filter:any)=>{

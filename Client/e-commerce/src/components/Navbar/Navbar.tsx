@@ -5,12 +5,18 @@ import { ComponentInterface } from "../../interfaces"
 import { sortFunction } from "../../utilities"
 import logoPag from "../../assets/firebase.png"
 import { useGetComponentsQuery } from "../../redux/componentsApi/componentsApi"
+import { setSearchTerm } from "../../redux/slices/search.slice"
+import { useAppDispatch } from "../../redux/hooks"
+
 
 function Navbar() {
-
+  const dispatch = useAppDispatch();
+  const [input, setInput] = useState("")
   const [categorys, setCategorys] = useState<string[]>([])
-  // const [brands, setBrands] = useState<string[]>([])
-  const { data } = useGetComponentsQuery({})
+  const { data } = useGetComponentsQuery({title:input},{
+    refetchOnMountOrArgChange:true
+  })
+
 
   useEffect(() => {
 
@@ -18,15 +24,22 @@ function Navbar() {
       const response = data && data.data;
       const categoriasSinFiltrar = response?.map((producto: ComponentInterface) => producto.category);
       const categorias: string[] = [...new Set(categoriasSinFiltrar)] as string[];
-  
-      // const marcasSinFiltrar = response?.map((producto: ComponentInterface) => producto.brand);
-      // const marcas: string[] = [...new Set(marcasSinFiltrar)] as string[];
       setCategorys(sortFunction(categorias));
-      // setBrands(sortFunction(marcas));
     };
   
     data && getComponents();
   }, [data])
+
+  const setInputHandler = (event:any) => {
+    const value = event.target.value
+    setInput(value)
+   //dispatch(setSearchTerm(value))
+  }
+  
+  const searchHandler = () => {
+  dispatch(setSearchTerm(input))
+  setInput("")
+  }
 
   return (
     <header className="sticky-top second-color">
@@ -38,8 +51,8 @@ function Navbar() {
               <a className="" href="#"><img className="img-fluid ms-lg-3" src={logoPag} alt="Logo Pagina" /></a>
             </div>
             <form className="col-11 d-none d-lg-flex container py-4 w-75 " role="search">
-              <input className="form-control me-3" type="search" placeholder="Buscar componentes" aria-label="Search" />
-              <button className="btn btn-outline-success ms-1" type="submit">Buscar</button>
+              <input className="form-control me-3" type="search" value={input} onChange={setInputHandler} placeholder="Buscar componentes" aria-label="Search" />
+              <button className="btn btn-outline-success ms-1" onClick={searchHandler} type="submit">Buscar</button>
             </form>
           </div>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,16 +65,13 @@ function Navbar() {
                 <Navlink linkName="Productos" route="/shop"></Navlink>
                 <Navlink linkName="Arma tu Pc" route="arma-tu-pc"></Navlink>
                 <NavDropDown linkName="Categorias" submenu={categorys} />
-                {/* <NavDropDown linkName="Marcas" submenu={brands} /> */}
                 <Navlink linkName="Ayuda" route="/ayuda"></Navlink>
-
               </ul>
               <form className="col-11 d-flex container py-2  d-lg-none" role="search">
                 <input className="form-control me-3" type="search" placeholder="Buscar componentes" aria-label="Search" />
                 <button className="btn btn-outline-success ms-1" type="submit">Buscar</button>
               </form>
             </div>
-
 
           </div>
         </div>
