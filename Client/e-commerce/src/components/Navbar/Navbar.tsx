@@ -5,7 +5,7 @@ import { ComponentInterface } from "../../interfaces"
 import { sortFunction } from "../../utilities"
 import logoPag from "../../assets/firebase.png"
 import { useGetComponentsQuery } from "../../redux/componentsApi/componentsApi"
-import { setSearchTerm } from "../../redux/slices/search.slice"
+import { setFetchFilters } from "../../redux/slices/search.slice"
 import { useAppDispatch } from "../../redux/hooks"
 
 
@@ -37,7 +37,7 @@ function Navbar() {
   }
   
   const searchHandler = () => {
-  dispatch(setSearchTerm(input))
+  dispatch(setFetchFilters({title: input, category: "", brand: ""}))
   setInput("")
   }
 

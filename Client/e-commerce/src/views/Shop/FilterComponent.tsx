@@ -1,12 +1,15 @@
 import { ComponentInterface } from "../../interfaces"
 import AccordionFilterComponent from "./AccordionFilterComponent"
 import { useState } from "react"
-import { useAppSelector } from "../../redux/hooks"
+import { useAppSelector, useAppDispatch } from "../../redux/hooks"
+import { setFetchFilters } from "../../redux/slices/search.slice"
 
+//RENDERIZZAR LOS FILTROS DESDE LAS QUERYS Y NO DESDE LE ESTADO LOCAL
+//AGREGAR BOTONES PARA LIMPIAR BUSQUEDA EN FILTRO Y FILTRO RESPONSIVE. 
+//AGREGAR EL TERMINO DE BUSQUEDA EN FILTRO RESPONSIVE
+//AGREGAR PAGINADO Y ORDENAMIENDO
 interface props {
     data: ComponentInterface[]
-    setFetchFilters: Function
-    fetchFilters: Object
 }
 
 interface filterInterface {
@@ -19,25 +22,27 @@ type filterState = {
     brand: string[]
 }
 
-function FilterComponent({data, setFetchFilters, fetchFilters}:props) {
+function FilterComponent({data}:props) {
 
-    const searchTerm = useAppSelector((state)=> state.searchReducer)
+    const dispatch = useAppDispatch()
+
+    const fetchFilters = useAppSelector((state)=> state.searchReducer)
     const [currentFilters, setCurrentFilters] = useState<filterState>({category:[],brand:[] })
 
 const filterHandler = (producto:filterInterface) => {
     //verifico que la key dinamica sea category o brand para que no llore typescript
-    const nombreDeLaPropiedad =  Object.keys(producto)[0] === "category"? "category" : "brand" 
+    const nameOfProperty =  Object.keys(producto)[0] === "category"? "category" : "brand" 
     //accedo dinamicamente a las propiedades del state y verifico que incluyan los valores del objeto que llega por parametro en caso de inclurlo lo borro
-    if(currentFilters[nombreDeLaPropiedad].includes(producto[nombreDeLaPropiedad])){
-        const deletedCategory = currentFilters[nombreDeLaPropiedad].filter((categoria)=>categoria !== producto[nombreDeLaPropiedad])
+    if(currentFilters[nameOfProperty].includes(producto[nameOfProperty])){
+        const deletedCategory = currentFilters[nameOfProperty].filter((categoria)=>categoria !== producto[nameOfProperty])
     //hago una copia del state y cambio dinamicamente la propiedad category o brand y la actualizo con el nuevo resultado
-        setCurrentFilters({...currentFilters, [nombreDeLaPropiedad]: deletedCategory})
-        setFetchFilters({...fetchFilters, [nombreDeLaPropiedad]:deletedCategory.join(",")  })
+        setCurrentFilters({...currentFilters, [nameOfProperty]: deletedCategory})
+        dispatch(setFetchFilters({...fetchFilters, [nameOfProperty]:deletedCategory.join(",")  }))
     }
     else{
-      const newCategory = [...currentFilters[nombreDeLaPropiedad], producto[nombreDeLaPropiedad]]
-      setCurrentFilters({...currentFilters, [nombreDeLaPropiedad]:newCategory})
-      setFetchFilters({...fetchFilters, [nombreDeLaPropiedad]: newCategory.join(",")})
+      const newCategory = [...currentFilters[nameOfProperty], producto[nameOfProperty]]
+      setCurrentFilters({...currentFilters, [nameOfProperty]:newCategory})
+      dispatch(setFetchFilters({...fetchFilters, [nameOfProperty]: newCategory.join(",")}))
     }
 
 
@@ -47,12 +52,12 @@ const btnCloseHandler = (filter:string) => {
     if(currentFilters.category.includes(filter)){
         const deleteFilter = currentFilters.category.filter((filtro)=> filtro !== filter )
         setCurrentFilters({...currentFilters, category: deleteFilter})
-        setFetchFilters({...fetchFilters, category:deleteFilter.join(",")  })
+        dispatch(setFetchFilters({...fetchFilters, category:deleteFilter.join(",")  }))
     }
     else{
         const deleteFilter = currentFilters.brand.filter((filtro)=> filtro !== filter )
         setCurrentFilters({...currentFilters, brand: deleteFilter})
-        setFetchFilters({...fetchFilters, brand:deleteFilter.join(",")  })
+        dispatch(setFetchFilters({...fetchFilters, brand:deleteFilter.join(",")  }))
     }
 }
 
@@ -72,8 +77,8 @@ const allFilters = [...currentFilters.category, ...currentFilters.brand]
             </div>
             <AccordionFilterComponent data={data} setFilter={filterHandler}></AccordionFilterComponent>
             <div className="mt-4 col-12">
-                <p className="text-white fs-6">{searchTerm.title? searchTerm.title : "Todos los productos"}</p>
-                <span className="text-white fs-7">{`${searchTerm.title? `${data.length} resultados de busqueda` : `${data.length} resultados`}`}</span>
+                <p className="text-white fs-6">{fetchFilters.title? fetchFilters.title : "Todos los productos"}</p>
+                <span className="text-white fs-7">{`${fetchFilters.title? `${data.length} resultados de busqueda` : `${data.length} resultados`}`}</span>
             <div className="flex-wrap ">
                 {
                     allFilters.map((filter:any)=>{

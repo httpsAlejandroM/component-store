@@ -8,17 +8,16 @@ import { useAppSelector } from "../../redux/hooks"
 
 function Shop() {
 
-  const searchTerm = useAppSelector((state)=> state.searchReducer)
+  const fetchFilters = useAppSelector((state)=> state.searchReducer)
   const [ blur, setBlur ] = useState(false)
-  const [fetchFilters, setFetchFilters] = useState({title: ""});
-  const { data } = useGetComponentsQuery({...fetchFilters, ...searchTerm},{
+  const { data } = useGetComponentsQuery(fetchFilters,{
     refetchOnMountOrArgChange:true
   })
 
   return (
     <section  className={`container min-vh-100 d-flex flex-column align-items-center flex-xl-row justify-content-xl-center align-items-xl-start`}>
       {data && <ResponsiveFilter data={data.data} setBlur={setBlur} ></ResponsiveFilter>}
-      {data && <FilterComponent data={data.data} setFetchFilters={setFetchFilters} fetchFilters={fetchFilters}></FilterComponent>}
+      {data && <FilterComponent data={data.data}></FilterComponent>}
       <section className="col-10 d-flex flex-column ">
         <div className="d-none d-xl-flex flex-row align-items-center justify-content-end me-4 mt-3">
         <SorterComponent/>
