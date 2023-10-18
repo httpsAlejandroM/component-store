@@ -3,7 +3,7 @@ import CardsCarousel from "./CardsCarousel"
 
 function HomeCardsSection() {
 
-const { data } = useGetComponentsQuery({})
+const { data } = useGetComponentsQuery({title:"", category: "", brand: ""})
 
   return (
     <article className="container">

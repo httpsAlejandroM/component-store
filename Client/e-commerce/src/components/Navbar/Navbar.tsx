@@ -13,7 +13,7 @@ function Navbar() {
   const dispatch = useAppDispatch();
   const [input, setInput] = useState("")
   const [categorys, setCategorys] = useState<string[]>([])
-  const { data } = useGetComponentsQuery({title:input},{
+  const { data } = useGetComponentsQuery({title:"", category: "", brand: ""},{
     refetchOnMountOrArgChange:true
   })
 
@@ -28,15 +28,15 @@ function Navbar() {
     };
   
     data && getComponents();
-  }, [data])
+  }, [])
 
   const setInputHandler = (event:any) => {
     const value = event.target.value
     setInput(value)
-   //dispatch(setSearchTerm(value))
   }
-  
-  const searchHandler = () => {
+
+  const searchHandler = (event:any) => {
+    event.preventDefault()
   dispatch(setFetchFilters({title: input, category: "", brand: ""}))
   setInput("")
   }
@@ -50,9 +50,10 @@ function Navbar() {
             <div className=" d-none d-md-flex align-items-center col-1 " >
               <a className="" href="#"><img className="img-fluid ms-lg-3" src={logoPag} alt="Logo Pagina" /></a>
             </div>
-            <form className="col-11 d-none d-lg-flex container py-4 w-75 " role="search">
+            <form className="col-11 d-none d-lg-flex container py-4 w-75" role="search">
               <input className="form-control me-3" type="search" value={input} onChange={setInputHandler} placeholder="Buscar componentes" aria-label="Search" />
-              <button className="btn btn-outline-success ms-1" onClick={searchHandler} type="submit">Buscar</button>
+              
+              <button className="btn btn-outline-success ms-1" onClick={(event)=> searchHandler(event)} type="submit">Buscar</button>
             </form>
           </div>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">

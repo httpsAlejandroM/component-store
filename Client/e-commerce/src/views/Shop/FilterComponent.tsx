@@ -1,16 +1,14 @@
-import { ComponentInterface } from "../../interfaces"
 import AccordionFilterComponent from "./AccordionFilterComponent"
 import { useState } from "react"
 import { useAppSelector, useAppDispatch } from "../../redux/hooks"
 import { setFetchFilters } from "../../redux/slices/search.slice"
+import { useGetComponentsQuery } from "../../redux/componentsApi/componentsApi"
 
 //RENDERIZZAR LOS FILTROS DESDE LAS QUERYS Y NO DESDE LE ESTADO LOCAL
 //AGREGAR BOTONES PARA LIMPIAR BUSQUEDA EN FILTRO Y FILTRO RESPONSIVE. 
 //AGREGAR EL TERMINO DE BUSQUEDA EN FILTRO RESPONSIVE
 //AGREGAR PAGINADO Y ORDENAMIENDO
-interface props {
-    data: ComponentInterface[]
-}
+//AGREGAR DIV DE SUGERENCIAS AL BUSCADOR DEL SHOP
 
 interface filterInterface {
     category:string
@@ -22,12 +20,14 @@ type filterState = {
     brand: string[]
 }
 
-function FilterComponent({data}:props) {
-
-    const dispatch = useAppDispatch()
-
-    const fetchFilters = useAppSelector((state)=> state.searchReducer)
+function FilterComponent() {
+    
     const [currentFilters, setCurrentFilters] = useState<filterState>({category:[],brand:[] })
+    const dispatch = useAppDispatch()
+    const fetchFilters = useAppSelector((state)=> state.searchReducer)
+    const { data } = useGetComponentsQuery(fetchFilters,{
+        refetchOnMountOrArgChange:false
+      })
 
 const filterHandler = (producto:filterInterface) => {
     //verifico que la key dinamica sea category o brand para que no llore typescript
@@ -44,8 +44,6 @@ const filterHandler = (producto:filterInterface) => {
       setCurrentFilters({...currentFilters, [nameOfProperty]:newCategory})
       dispatch(setFetchFilters({...fetchFilters, [nameOfProperty]: newCategory.join(",")}))
     }
-
-
 }
 
 const btnCloseHandler = (filter:string) => {
@@ -75,10 +73,10 @@ const allFilters = [...currentFilters.category, ...currentFilters.brand]
                 <button className="sbg-color  btn btn-outline-success rounded-2 w-100  text-white mt-3  mt-xl-1"><i className="bi bi-chevron-right"></i></button>
                
             </div>
-            <AccordionFilterComponent data={data} setFilter={filterHandler}></AccordionFilterComponent>
+            { data && <AccordionFilterComponent data={data.data} setFilter={filterHandler}></AccordionFilterComponent>}
             <div className="mt-4 col-12">
                 <p className="text-white fs-6">{fetchFilters.title? fetchFilters.title : "Todos los productos"}</p>
-                <span className="text-white fs-7">{`${fetchFilters.title? `${data.length} resultados de busqueda` : `${data.length} resultados`}`}</span>
+                {data && <span className="text-white fs-7">{`${fetchFilters.title? `${data.data.length} resultados de busqueda` : `${data.data.length} resultados`}`}</span>}
             <div className="flex-wrap ">
                 {
                     allFilters.map((filter:any)=>{

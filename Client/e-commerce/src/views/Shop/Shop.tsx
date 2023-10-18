@@ -11,13 +11,13 @@ function Shop() {
   const fetchFilters = useAppSelector((state)=> state.searchReducer)
   const [ blur, setBlur ] = useState(false)
   const { data } = useGetComponentsQuery(fetchFilters,{
-    refetchOnMountOrArgChange:true
+    refetchOnMountOrArgChange:false
   })
 
   return (
     <section  className={`container min-vh-100 d-flex flex-column align-items-center flex-xl-row justify-content-xl-center align-items-xl-start`}>
       {data && <ResponsiveFilter data={data.data} setBlur={setBlur} ></ResponsiveFilter>}
-      {data && <FilterComponent data={data.data}></FilterComponent>}
+      {data && <FilterComponent ></FilterComponent>}
       <section className="col-10 d-flex flex-column ">
         <div className="d-none d-xl-flex flex-row align-items-center justify-content-end me-4 mt-3">
         <SorterComponent/>
