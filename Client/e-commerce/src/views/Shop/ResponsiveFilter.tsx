@@ -16,8 +16,10 @@ function ResponsiveFilter({ data, setBlur }: props) {
         setBlur(!isFilterMenuOpen)
     }
 
+    
+
     return (
-        <div className="mt-3 d-flex flex-row justify-content-evenly container d-xl-none">
+        <aside className="mt-3 d-flex flex-row justify-content-evenly container d-xl-none">
             <div className="d-flex align-items-center">
                 <span className="text-white fs-4">{`${data.length} resultados`}</span>
             </div>
@@ -25,7 +27,7 @@ function ResponsiveFilter({ data, setBlur }: props) {
                 <button aria-label="Boton de filtrado" className="btn" onClick={() => menuHandler()}><i className="bi bi-filter-square text-white fs-2"></i></button>
                 {isFilterMenuOpen && <FilterDesplegable data={data}></FilterDesplegable>}
             </div>
-        </div>
+        </aside>
     )
 }
 

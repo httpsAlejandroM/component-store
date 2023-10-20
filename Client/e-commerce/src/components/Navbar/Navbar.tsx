@@ -13,9 +13,7 @@ function Navbar() {
   const dispatch = useAppDispatch();
   const [input, setInput] = useState("")
   const [categorys, setCategorys] = useState<string[]>([])
-  const { data } = useGetComponentsQuery({title:"", category: "", brand: ""},{
-    refetchOnMountOrArgChange:true
-  })
+  const { data } = useGetComponentsQuery({title:"", category: "", brand: ""})
 
 
   useEffect(() => {
@@ -28,7 +26,7 @@ function Navbar() {
     };
   
     data && getComponents();
-  }, [])
+  }, [data])
 
   const setInputHandler = (event:any) => {
     const value = event.target.value
@@ -41,8 +39,26 @@ function Navbar() {
   setInput("")
   }
 
+  const [prevScroll, setPrevScroll] = useState(window.scrollY)
+
+
+  window.onscroll = function() {
+    let currentScrollPos = window.scrollY;
+    const navBar = document.getElementById("header") 
+  
+    if (navBar){
+      if (prevScroll > currentScrollPos) {
+        navBar.style.top = "0";
+      } else {
+        navBar.style.top = "-140px";
+      }
+    }
+    setPrevScroll(currentScrollPos)
+  }
+  
+
   return (
-    <header className="sticky-top second-color">
+    <header className="header" id="header">
       <nav className="container-fluid navbar navbar-expand-lg d-flex flex-column pt-1">
         <div className="container-fluid d-flex m-0 flex-lg-column " >
           <a className="col-1 d-md-none" href="#"><img className="img-fluid ms-lg-3" src={logoPag} alt="Logo Pagina" /></a>

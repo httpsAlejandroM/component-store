@@ -5,7 +5,7 @@ import MosaicSection from "./MosaicSection"
 
 function Home() {
   return (
-    <section className="container-flud min-vh-100 sbg-color d-flex flex-column align-items-center  justify-content-between">
+    <section className="container-flud min-vh-100 sbg-color d-flex flex-column align-items-center  justify-content-between content">
       <Carousel></Carousel>
       <MosaicSection></MosaicSection>
       <HomeCardsSection></HomeCardsSection>

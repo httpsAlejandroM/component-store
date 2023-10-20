@@ -30,7 +30,7 @@ function FilterComponent() {
       })
 
 const filterHandler = (producto:filterInterface) => {
-    //verifico que la key dinamica sea category o brand para que no llore typescript
+    //verifico que la key sea category o brand para que no llore typescript
     const nameOfProperty =  Object.keys(producto)[0] === "category"? "category" : "brand" 
     //accedo dinamicamente a las propiedades del state y verifico que incluyan los valores del objeto que llega por parametro en caso de inclurlo lo borro
     if(currentFilters[nameOfProperty].includes(producto[nameOfProperty])){
@@ -60,8 +60,26 @@ const btnCloseHandler = (filter:string) => {
 }
 
 const allFilters = [...currentFilters.category, ...currentFilters.brand]
+
+// let prevScrollPos = window.scrollY;
+
+// window.onscroll = function() {
+//   let currentScroll = window.scrollY;
+//   const aside = document.getElementById("aside")     
+//   if (aside){
+//     if (currentScroll > 140) {
+//         aside.classList.add("sticky-top", "content")
+//     }
+//     else{
+//         aside.classList.remove("sticky-top", "content")
+//     }
+//   }
+
+//   prevScrollPos = currentScroll
+// }
+
     return (
-        <aside className="mt-4 col-2 d-none d-xl-flex flex-xl-column align-items-start ">
+        <aside className={`mt-4 col-2 d-none d-xl-flex flex-xl-column align-items-start`} id="aside">
             
             <div className="d-flex flex-column mt-4 col-12">
                 <h5 className="text-white">Precio</h5>

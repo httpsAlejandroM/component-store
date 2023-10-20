@@ -15,11 +15,11 @@ function Shop() {
   })
 
   return (
-    <section  className={`container min-vh-100 d-flex flex-column align-items-center flex-xl-row justify-content-xl-center align-items-xl-start`}>
+    <section  className={`container min-vh-100 d-flex flex-column align-items-center flex-xl-row justify-content-xl-center align-items-xl-start content`}>
       {data && <ResponsiveFilter data={data.data} setBlur={setBlur} ></ResponsiveFilter>}
       {data && <FilterComponent ></FilterComponent>}
       <section className="col-10 d-flex flex-column ">
-        <div className="d-none d-xl-flex flex-row align-items-center justify-content-end me-4 mt-3">
+        <div className="d-none d-xl-flex flex-row align-items-center justify-content-end me-4 mt-3 ">
         <SorterComponent/>
 
         </div>
