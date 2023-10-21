@@ -7,12 +7,11 @@ function SorterComponent() {
     const sortOptions = ["De A - Z", "De Z - A", "Menor precio", "Mayor precio", "Más relevantes"]
     return (
         <>
-            <span className="text-white fs-5 me-2">Ordenar por</span>
             <div className="dropdown ">
-                <button className="btn btn-outline-success dropdown-toggle " style={{ width: 160 }} type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <button className="btn btn-outline-success dropdown-toggle col-12"  type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     {currentSort}
                 </button>
-                <ul className="dropdown-menu dropdown-menu-dark second-color">
+                <ul className="dropdown-menu dropdown-menu-dark second-color col-12">
                     {
                         sortOptions.map((option: string, index: number) => {
                             return (

@@ -5,10 +5,9 @@ import { setFetchFilters } from "../../redux/slices/search.slice"
 import { useGetComponentsQuery } from "../../redux/componentsApi/componentsApi"
 
 //RENDERIZZAR LOS FILTROS DESDE LAS QUERYS Y NO DESDE LE ESTADO LOCAL
-//AGREGAR BOTONES PARA LIMPIAR BUSQUEDA EN FILTRO Y FILTRO RESPONSIVE. 
-//AGREGAR EL TERMINO DE BUSQUEDA EN FILTRO RESPONSIVE
 //AGREGAR PAGINADO Y ORDENAMIENDO
 //AGREGAR DIV DE SUGERENCIAS AL BUSCADOR DEL SHOP
+//MANTENER LA TILDE EN CHECKBOX FILTRADOS DESPUES DE CERRAR EL ACORDEON
 
 interface filterInterface {
     category:string
@@ -59,24 +58,12 @@ const btnCloseHandler = (filter:string) => {
     }
 }
 
+const cleanFilterHandler = () => {
+    dispatch(setFetchFilters({title:"", category:"", brand:""}))
+    setCurrentFilters({category:[], brand:[]})
+}
+
 const allFilters = [...currentFilters.category, ...currentFilters.brand]
-
-// let prevScrollPos = window.scrollY;
-
-// window.onscroll = function() {
-//   let currentScroll = window.scrollY;
-//   const aside = document.getElementById("aside")     
-//   if (aside){
-//     if (currentScroll > 140) {
-//         aside.classList.add("sticky-top", "content")
-//     }
-//     else{
-//         aside.classList.remove("sticky-top", "content")
-//     }
-//   }
-
-//   prevScrollPos = currentScroll
-// }
 
     return (
         <aside className={`mt-4 col-2 d-none d-xl-flex flex-xl-column align-items-start`} id="aside">
@@ -91,9 +78,15 @@ const allFilters = [...currentFilters.category, ...currentFilters.brand]
                 <button className="sbg-color  btn btn-outline-success rounded-2 w-100  text-white mt-3  mt-xl-1"><i className="bi bi-chevron-right"></i></button>
                
             </div>
+            <div className="d-flex flex-column mt-4 col-12">
+            <button className="text-white fs-6 btn btn-outline-success" onClick={cleanFilterHandler}> Limpiar filtros <i className="bi bi-trash fs-5 ms-1"></i></button>
+
+            </div>
             { data && <AccordionFilterComponent data={data.data} setFilter={filterHandler}></AccordionFilterComponent>}
             <div className="mt-4 col-12">
+                <div className="">
                 <p className="text-white fs-6">{fetchFilters.title? fetchFilters.title : "Todos los productos"}</p>
+                </div>
                 {data && <span className="text-white fs-7">{`${fetchFilters.title? `${data.data.length} resultados de busqueda` : `${data.data.length} resultados`}`}</span>}
             <div className="flex-wrap ">
                 {
@@ -106,6 +99,7 @@ const allFilters = [...currentFilters.category, ...currentFilters.brand]
                     })
                 }
             </div>
+
             </div>
         </aside>
     )

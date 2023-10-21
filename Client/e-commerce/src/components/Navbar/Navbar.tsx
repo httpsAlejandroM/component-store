@@ -7,9 +7,12 @@ import logoPag from "../../assets/firebase.png"
 import { useGetComponentsQuery } from "../../redux/componentsApi/componentsApi"
 import { setFetchFilters } from "../../redux/slices/search.slice"
 import { useAppDispatch } from "../../redux/hooks"
+import { useNavigate } from 'react-router-dom'
+
 
 
 function Navbar() {
+  const navigate = useNavigate()
   const dispatch = useAppDispatch();
   const [input, setInput] = useState("")
   const [categorys, setCategorys] = useState<string[]>([])
@@ -37,6 +40,7 @@ function Navbar() {
     event.preventDefault()
   dispatch(setFetchFilters({title: input, category: "", brand: ""}))
   setInput("")
+  navigate("/shop")
   }
 
   const [prevScroll, setPrevScroll] = useState(window.scrollY)

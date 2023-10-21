@@ -46,7 +46,7 @@ function CheckboxFilter({ data }: props) {
 
     return (
         <>
-            <div className="accordion-item second-color px-4 d-flex flex-column justify-content-start ">
+            <div className="accordion-item second-color px-4 d-flex flex-column justify-content-start">
                 <h2 className="accordion-header">
 
                     <button className="accordion-button collapsed btn-outline-success second-color " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">

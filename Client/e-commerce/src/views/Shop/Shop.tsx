@@ -20,8 +20,8 @@ function Shop() {
       {data && <FilterComponent ></FilterComponent>}
       <section className="col-10 d-flex flex-column ">
         <div className="d-none d-xl-flex flex-row align-items-center justify-content-end me-4 mt-3 ">
-        <SorterComponent/>
-
+        <span className="text-white fs-5 me-2">Ordenar por</span>
+         <SorterComponent/>
         </div>
         {data && <CardsContainer data={data.data} blur={blur}></CardsContainer>}
       </section>
