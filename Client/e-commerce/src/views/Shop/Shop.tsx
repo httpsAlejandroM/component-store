@@ -8,10 +8,15 @@ import { useAppSelector } from "../../redux/hooks"
 
 function Shop() {
 
+//AGREGAR PAGINADO Y ORDENAMIENDO
+//FILTRO POR PRECIO
+//AGREGAR A SUGERENCIAS DEL BUSCADOR FUNCIONALIDAD PARA MOVER CON LAS FLECHAS 
+//AGREGAR VIEW DE DETALLE DE PRODUCTO
+
   const fetchFilters = useAppSelector((state)=> state.searchReducer)
   const [ blur, setBlur ] = useState(false)
   const { data } = useGetComponentsQuery(fetchFilters,{
-    refetchOnMountOrArgChange:false
+    refetchOnMountOrArgChange:true
   })
 
   return (

@@ -19,7 +19,7 @@ function FilterDesplegable({ data }: props) {
     }
 
     return (
-        <div className="filter-menu second-color d-flex flex-column align-items-start px-5">
+        <div className="filter-menu second-color d-flex flex-column align-items-start px-5 pb-3">
             <span className="text-white fs-5 mb-1">Filtrar por</span>
             <hr className="border-white border-1  my-2 col-12" />
             <div className="accordion col-12 " id="accordionFlushExample">

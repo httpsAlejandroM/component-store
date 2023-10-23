@@ -1,71 +1,57 @@
 import AccordionFilterComponent from "./AccordionFilterComponent"
-import { useState } from "react"
 import { useAppSelector, useAppDispatch } from "../../redux/hooks"
 import { setFetchFilters } from "../../redux/slices/search.slice"
 import { useGetComponentsQuery } from "../../redux/componentsApi/componentsApi"
-
-//RENDERIZZAR LOS FILTROS DESDE LAS QUERYS Y NO DESDE LE ESTADO LOCAL
-//AGREGAR PAGINADO Y ORDENAMIENDO
-//AGREGAR DIV DE SUGERENCIAS AL BUSCADOR DEL SHOP
-//MANTENER LA TILDE EN CHECKBOX FILTRADOS DESPUES DE CERRAR EL ACORDEON
 
 interface filterInterface {
     category:string
     brand:string
 }
 
-type filterState = {
-    category: string[]
-    brand: string[]
-}
-
 function FilterComponent() {
     
-    const [currentFilters, setCurrentFilters] = useState<filterState>({category:[],brand:[] })
     const dispatch = useAppDispatch()
     const fetchFilters = useAppSelector((state)=> state.searchReducer)
     const { data } = useGetComponentsQuery(fetchFilters,{
-        refetchOnMountOrArgChange:false
+        refetchOnMountOrArgChange:true
       })
 
 const filterHandler = (producto:filterInterface) => {
     //verifico que la key sea category o brand para que no llore typescript
     const nameOfProperty =  Object.keys(producto)[0] === "category"? "category" : "brand" 
     //accedo dinamicamente a las propiedades del state y verifico que incluyan los valores del objeto que llega por parametro en caso de inclurlo lo borro
-    if(currentFilters[nameOfProperty].includes(producto[nameOfProperty])){
-        const deletedCategory = currentFilters[nameOfProperty].filter((categoria)=>categoria !== producto[nameOfProperty])
+    if(fetchFilters[nameOfProperty].split(",").includes(producto[nameOfProperty])){
+        const deletedCategory = fetchFilters[nameOfProperty].split(",").filter((categoria)=>categoria !== producto[nameOfProperty])
     //hago una copia del state y cambio dinamicamente la propiedad category o brand y la actualizo con el nuevo resultado
-        setCurrentFilters({...currentFilters, [nameOfProperty]: deletedCategory})
         dispatch(setFetchFilters({...fetchFilters, [nameOfProperty]:deletedCategory.join(",")  }))
     }
     else{
-      const newCategory = [...currentFilters[nameOfProperty], producto[nameOfProperty]]
-      setCurrentFilters({...currentFilters, [nameOfProperty]:newCategory})
+      const newCategory = [...fetchFilters[nameOfProperty], producto[nameOfProperty]]
       dispatch(setFetchFilters({...fetchFilters, [nameOfProperty]: newCategory.join(",")}))
     }
 }
 
-const btnCloseHandler = (filter:string) => {
-    if(currentFilters.category.includes(filter)){
-        const deleteFilter = currentFilters.category.filter((filtro)=> filtro !== filter )
-        setCurrentFilters({...currentFilters, category: deleteFilter})
+const btnCloseHandler = (filter:string) => {    
+    if(fetchFilters.title === filter) {
+        dispatch(setFetchFilters({...fetchFilters, title:""  }))
+    }
+    else if(fetchFilters.category.split(",").includes(filter)){
+        const deleteFilter = fetchFilters.category.split(",").filter((filtro)=> filtro !== filter )
         dispatch(setFetchFilters({...fetchFilters, category:deleteFilter.join(",")  }))
     }
     else{
-        const deleteFilter = currentFilters.brand.filter((filtro)=> filtro !== filter )
-        setCurrentFilters({...currentFilters, brand: deleteFilter})
+        const deleteFilter = fetchFilters.brand.split(",").filter((filtro)=> filtro !== filter )
         dispatch(setFetchFilters({...fetchFilters, brand:deleteFilter.join(",")  }))
     }
 }
 
 const cleanFilterHandler = () => {
     dispatch(setFetchFilters({title:"", category:"", brand:""}))
-    setCurrentFilters({category:[], brand:[]})
 }
 
-const allFilters = [...currentFilters.category, ...currentFilters.brand]
+const allFilters = [fetchFilters.title, ...fetchFilters.category.split(","), ...fetchFilters.brand.split(",")]
 
-    return (
+return (
         <aside className={`mt-4 col-2 d-none d-xl-flex flex-xl-column align-items-start`} id="aside">
             
             <div className="d-flex flex-column mt-4 col-12">
@@ -90,12 +76,14 @@ const allFilters = [...currentFilters.category, ...currentFilters.brand]
                 {data && <span className="text-white fs-7">{`${fetchFilters.title? `${data.data.length} resultados de busqueda` : `${data.data.length} resultados`}`}</span>}
             <div className="flex-wrap ">
                 {
-                    allFilters.map((filter:any)=>{
+                    allFilters.map((filter:string)=>{
+                     if (filter.length){
                         return (
                             <div key={filter} className="d-inline-flex flex-row align-items-center second-color ps-1 m-1" data-bs-theme="dark">
                                 <div  className="text-white"><small>{filter}</small></div><button onClick={()=>btnCloseHandler(filter)} type="button" className="btn-close" aria-label="Close"></button>
                             </div>
                         )
+                     }
                     })
                 }
             </div>

@@ -20,7 +20,7 @@ const getComponents = async (req:Request, res:Response) => {
     try {  
         if (title  || category || brand) {
           const productByName = await applyFilters(title, category, brand);
-         productByName.length?  responseHandler(res, 200, productByName) : responseHandler(res, 400, {messagge: "No se encontraron resultados que coincidan con su búsqueda."})
+         productByName.length?  responseHandler(res, 200, productByName) : responseHandler(res, 200, {message: "No se encontraron resultados que coincidan con su búsqueda."})
         }
         else{
          const allProducts = await getAllComponents()

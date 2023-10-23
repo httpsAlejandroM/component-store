@@ -28,7 +28,6 @@ function AccordionFilterComponent({data, setFilter}:props) {
 
     const linkHoverStyle = "link-offset-1-hover link-underline link-success-dark link-underline-opacity-0 link-underline-opacity-75-hover ms-2"
 
-
   return (
     <div className="accordion mt-4 col-12 " id="accordionFlushExample">
                 <div className="accordion-item ">
@@ -40,7 +39,9 @@ function AccordionFilterComponent({data, setFilter}:props) {
                     </h2>
                     <div id="flush-collapseOne" className="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                         {
-                            Object.entries(categoryCounts).map(([category, count])=>{
+                            Object.entries(categoryCounts)
+                            .sort((a, b) => a[0].localeCompare(b[0]))
+                            .map(([category, count])=>{
                                 return (
                                     <div key={category}  className="mt-2 ms-2 fs-7"><a onClick={()=>setFilter({category: category})} href="#" className={`${linkHoverStyle}`} >{category}<small> ({count})</small></a></div>
                                 )
@@ -56,7 +57,9 @@ function AccordionFilterComponent({data, setFilter}:props) {
                     </h2>
                     <div id="flush-collapseTwo" className="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                     {
-                            Object.entries(brandsCounts).map(([brand, count])=>{
+                            Object.entries(brandsCounts)
+                            .sort((a, b) => a[0].localeCompare(b[0]))
+                            .map(([brand, count])=>{
                                 return (
                                     <div key={brand} className="mt-2 ms-2 fs-7"><a onClick={()=>setFilter({brand: brand})} className={`${linkHoverStyle}`} href="#">{brand}<small> ({count})</small></a></div>
                                 )
