@@ -40,8 +40,9 @@ const productSchema = new Schema<Product>({
         trim: true
     },
     reviews:{
-        type: String,
-        trim: true
+        type: Number,
+        trim: true,
+        default: 0
     },
     banned:{
         type: Boolean,

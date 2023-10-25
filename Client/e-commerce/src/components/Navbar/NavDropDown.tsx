@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setFetchFilters } from "../../redux/slices/search.slice";
 
 interface NavlinkDropwDown {
@@ -9,9 +9,9 @@ interface NavlinkDropwDown {
 
 function NavDropDown({ linkName, submenu }:NavlinkDropwDown) {
   const dispatch = useAppDispatch()
-
+  const fetchFilters = useAppSelector((state)=> state.searchReducer)
   const toCategoryHandler = (item:string) => {
-    dispatch(dispatch(setFetchFilters({ title: "", category:item, brand: "" })))
+    dispatch(dispatch(setFetchFilters({ title: "", category:item, brand: "", order:fetchFilters.order })))
   }
 
   return (

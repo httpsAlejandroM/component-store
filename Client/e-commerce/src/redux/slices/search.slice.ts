@@ -1,19 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 import {type PayloadAction} from '@reduxjs/toolkit'
+import { QueryApi } from '../../interfaces'
 
-interface searchString {
-    title: string
-    category: string
-    brand: string
-}
-
-const initialState:searchString  = {title:"", category: "", brand: ""}
+const initialState:QueryApi  = {title:"", category: "", brand: "", order:""}
 
 export const searchSlice = createSlice({
   name: 'search',
   initialState,
   reducers: {
-    setFetchFilters: (state, action:PayloadAction<searchString>) => {   
+    setFetchFilters: (state, action:PayloadAction<QueryApi>) => {   
         state = action.payload
          return  state
     }

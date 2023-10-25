@@ -1,28 +1,19 @@
 import Navlink from "./Navlink"
 import NavDropDown from "./NavDropDown"
 import { useEffect, useState } from "react"
-import { ComponentInterface, ResponseBackend } from "../../interfaces"
+import { ComponentInterface } from "../../interfaces"
 import { sortFunction } from "../../utilities"
 import logoPag from "../../assets/firebase.png"
 import { useGetComponentsQuery } from "../../redux/componentsApi/componentsApi"
-import { setFetchFilters } from "../../redux/slices/search.slice"
-import { useAppDispatch } from "../../redux/hooks"
-import { useNavigate } from 'react-router-dom'
-import axios from "axios"
-import SuggestionContainer from "../Cards/SuggestionContainer"
+import SearchBar from "./SearchBar"
 
 function Navbar() {
 
   const [prevScroll, setPrevScroll] = useState(window.scrollY)
   const [isNavbarExpanded, setIsNavbarExpanded] = useState(false)
-  const [input, setInput] = useState("")
   const [categorys, setCategorys] = useState<string[]>([])
-  const [ sugerencias, setSugerencias] = useState<ResponseBackend>({error: false, data:[]})
 
-  const { data } = useGetComponentsQuery({ title: "", category: "", brand: "" })
-
-  const navigate = useNavigate()
-  const dispatch = useAppDispatch();
+  const { data } = useGetComponentsQuery({ title: "", category: "", brand: "", order: "" })
 
   useEffect(() => {
     const getComponents = () => {
@@ -32,27 +23,7 @@ function Navbar() {
       setCategorys(sortFunction(categorias));
     };
     data && getComponents();
-
-    const getSuggestions = async() => {
-      const newSuggestions = (await axios.get(`http://localhost:3000/components?title=${input}`)).data      
-      console.log(newSuggestions);
-      setSugerencias(newSuggestions)
-    }
-    getSuggestions()
-  }, [data, input])
-
-
-  const setInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value    
-    setInput(value)
-  }
-
-  const searchHandler = (event: any) => {
-    event.preventDefault()
-    dispatch(setFetchFilters({ title: input, category: "", brand: "" }))
-    setInput("")
-    navigate("/shop")
-  }
+  }, [data])
 
   window.onscroll = function () {
     let currentScrollPos = window.scrollY;
@@ -84,28 +55,7 @@ function Navbar() {
                   src={logoPag}
                   alt="Logo Pagina" /></a>
             </div>
-            <form
-              className="col-11 d-none d-lg-flex container py-4 w-75"
-              role="search">
-              <input
-                className="form-control me-3"
-                type="search" 
-                value={input}
-                onChange={setInputHandler}
-                placeholder="Buscar componentes"
-                aria-label="Search"
-              />
-                
-              {
-               input !== "" && <SuggestionContainer input={input} sugerencias={sugerencias}></SuggestionContainer>
-            }
-              <button
-                className="btn btn-outline-success ms-1"
-                onClick={(event) => searchHandler(event)}
-                type="submit">
-                Buscar
-              </button>
-            </form>
+            <SearchBar styles={"col-11 d-none d-lg-flex container py-4 w-75"}></SearchBar>
           </div>
           <button
             className="navbar-toggler"
@@ -127,10 +77,7 @@ function Navbar() {
                 <NavDropDown linkName="Categorias" submenu={categorys} />
                 <Navlink linkName="Ayuda" route="/ayuda"></Navlink>
               </ul>
-              <form className="col-11 d-flex container py-2  d-lg-none" role="search">
-                <input className="form-control me-3" type="search" placeholder="Buscar componentes" aria-label="Search" />
-                <button className="btn btn-outline-success ms-1" type="submit">Buscar</button>
-              </form>
+              <SearchBar styles="col-11 d-flex container py-2  d-lg-none"></SearchBar>
             </div>
 
           </div>
@@ -141,3 +88,6 @@ function Navbar() {
 }
 
 export default Navbar
+
+
+//col-11 d-none d-lg-flex container py-4 w-75

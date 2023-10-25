@@ -1,10 +1,24 @@
 import { useState } from "react"
+import { useAppDispatch, useAppSelector } from "../../redux/hooks"
+import { setFetchFilters } from "../../redux/slices/search.slice"
+import { useEffect } from "react"
 
 function SorterComponent() {
-
-    const [currentSort, setCurrentSort] = useState<string>("Más relevantes")
-
+    
+    const fetchFilters = useAppSelector((state)=>state.searchReducer)
+    const dispatch = useAppDispatch()
+    const [currentSort, setCurrentSort] = useState(fetchFilters.order? fetchFilters.order :"Más relevantes" )
     const sortOptions = ["De A - Z", "De Z - A", "Menor precio", "Mayor precio", "Más relevantes"]
+
+    const fetchSortHandler = (order:string) => {
+        dispatch(setFetchFilters({...fetchFilters, order:order}))
+        setCurrentSort(order)
+    }
+
+    useEffect(()=>{
+    setCurrentSort(fetchFilters.order? fetchFilters.order :"Más relevantes" )
+    },[fetchFilters])
+
     return (
         <>
             <div className="dropdown ">
@@ -15,7 +29,7 @@ function SorterComponent() {
                     {
                         sortOptions.map((option: string, index: number) => {
                             return (
-                                <li key={index}><button className={`dropdown-item text-white link-success ${currentSort == option? "disabled" : ""}`} onClick={() => setCurrentSort(option)}>{option}</button></li>
+                                <li key={index}><button value={option} className={`dropdown-item text-white link-success ${currentSort == option? "disabled" : ""}`} onClick={() =>fetchSortHandler(option) }>{option}</button></li>
                             )
                         })
                     }
