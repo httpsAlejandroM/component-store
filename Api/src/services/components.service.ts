@@ -19,8 +19,10 @@ const createDocumentsBD = async(components:interfaceProduct[]) => {
  //await Products.deleteMany()
 }
 
-const getAllComponents = async () => {
-    const allComponents = await Products.find();
+const getAllComponents = async (order:string | undefined) => {
+    const orderByTitle = order === "a-z"? 1 : -1
+
+    const allComponents = await Products.find().sort({title:orderByTitle});
     return allComponents;
 }
 
@@ -43,7 +45,7 @@ const removeComponent = async (id:string) => {
     return await Products.findByIdAndRemove(id)
 }
 
-const applyFilters = async (name:string | undefined, category:string | undefined, brand:string | undefined)=> {
+const applyFilters = async (name:string | undefined, category:string | undefined, brand:string | undefined, order:string | undefined)=> {
      const filterOptions:filterInterface = {}; 
 
     if (name) {
@@ -59,11 +61,17 @@ const applyFilters = async (name:string | undefined, category:string | undefined
       const regex = brandValues.map((marca:string)=>new RegExp(marca, 'i'))
       filterOptions.brand = { $in: regex };
     }
-    //   .skip((page - 1) * limit)
-    //   .limit(limit)
-      const productFiltered = await Products.find(filterOptions)
+   
+      const productFiltered = await Products.find(filterOptions).sort({title:1})
       return productFiltered
 }
+ //   .skip((page - 1) * limit)
+//   .limit(limit)
+
+const sortProducts = (order:string) => {
+
+}
+
 
 export {
     getAllComponents,

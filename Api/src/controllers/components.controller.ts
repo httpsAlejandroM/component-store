@@ -15,15 +15,17 @@ const createBD = async (req:Request, res:Response) => {
 }
 
 const getComponents = async (req:Request, res:Response) => {
-    const { title, category, brand }:QueryInterface = req.query;
+    const { title, category, brand, order }:QueryInterface = req.query;
 
     try {  
         if (title  || category || brand) {
-          const productByName = await applyFilters(title, category, brand);
-         productByName.length?  responseHandler(res, 200, productByName) : responseHandler(res, 200, {message: "No se encontraron resultados que coincidan con su búsqueda."})
+          const productByName = await applyFilters(title, category, brand, order);
+         productByName.length
+         ? responseHandler(res, 200, productByName) 
+         : responseHandler(res, 200, {message: "No se encontraron resultados que coincidan con su búsqueda."})
         }
         else{
-         const allProducts = await getAllComponents()
+         const allProducts = await getAllComponents(order)
          responseHandler(res, 200, allProducts)
         }
         }
