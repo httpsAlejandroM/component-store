@@ -1,29 +1,13 @@
 import Navlink from "./Navlink"
 import NavDropDown from "./NavDropDown"
-import { useEffect, useState } from "react"
-import { ComponentInterface } from "../../interfaces"
-import { sortFunction } from "../../utilities"
+import { useState } from "react"
 import logoPag from "../../assets/firebase.png"
-import { useGetComponentsQuery } from "../../redux/componentsApi/componentsApi"
 import SearchBar from "./SearchBar"
 
 function Navbar() {
 
   const [prevScroll, setPrevScroll] = useState(window.scrollY)
   const [isNavbarExpanded, setIsNavbarExpanded] = useState(false)
-  const [categorys, setCategorys] = useState<string[]>([])
-
-  const { data } = useGetComponentsQuery({ title: "", category: "", brand: "", order: "" })
-
-  useEffect(() => {
-    const getComponents = () => {
-      const response = data && data.data;
-      const categoriasSinFiltrar = response?.map((producto: ComponentInterface) => producto.category);
-      const categorias: string[] = [...new Set(categoriasSinFiltrar)] as string[];
-      setCategorys(sortFunction(categorias));
-    };
-    data && getComponents();
-  }, [data])
 
   window.onscroll = function () {
     let currentScrollPos = window.scrollY;
@@ -74,7 +58,7 @@ function Navbar() {
                 <Navlink linkName="Inicio" route="/"></Navlink>
                 <Navlink linkName="Productos" route="/shop"></Navlink>
                 <Navlink linkName="Arma tu Pc" route="arma-tu-pc"></Navlink>
-                <NavDropDown linkName="Categorias" submenu={categorys} />
+                <NavDropDown linkName="Categorias"  />
                 <Navlink linkName="Ayuda" route="/ayuda"></Navlink>
               </ul>
               <SearchBar styles="col-11 d-flex container py-2  d-lg-none"></SearchBar>
@@ -88,6 +72,3 @@ function Navbar() {
 }
 
 export default Navbar
-
-
-//col-11 d-none d-lg-flex container py-4 w-75

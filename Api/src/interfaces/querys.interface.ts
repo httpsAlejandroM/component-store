@@ -3,4 +3,6 @@ export default interface QueryInterface {
     category?: string
     brand?: string
     order?:string
+    page?: number
+    perPage?: number
 }

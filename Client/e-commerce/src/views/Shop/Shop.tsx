@@ -8,7 +8,7 @@ import { useAppSelector } from "../../redux/hooks"
 
 function Shop() {
 
-//AGREGAR PAGINADO Y ORDENAMIENDO
+//AGREGAR PAGINADO
 //FILTRO POR PRECIO
 //AGREGAR VIEW DE DETALLE DE PRODUCTO
 //AGREGAR A SUGERENCIAS DEL BUSCADOR FUNCIONALIDAD PARA MOVER CON LAS FLECHAS 
@@ -21,7 +21,7 @@ function Shop() {
 
   return (
     <section  className={`container min-vh-100 d-flex flex-column align-items-center flex-xl-row justify-content-xl-center align-items-xl-start content`}>
-      {data && <ResponsiveFilter data={data.data} setBlur={setBlur} ></ResponsiveFilter>}
+      {data && <ResponsiveFilter data={data} setBlur={setBlur} ></ResponsiveFilter>}
       {data && <FilterComponent ></FilterComponent>}
       <section className="col-10 d-flex flex-column ">
         <div className="d-none d-xl-flex flex-row align-items-center justify-content-end me-4 mt-3 ">

@@ -13,6 +13,7 @@ export interface ComponentInterface {
 
 export interface ResponseBackend {
     error: boolean,
+    total: number
     data: ComponentInterface[]
 }
 

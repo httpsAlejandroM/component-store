@@ -73,7 +73,7 @@ function FilterComponent() {
                 <div className="">
                     <p className="text-white fs-6">{fetchFilters.title ? fetchFilters.title : "Todos los productos"}</p>
                 </div>
-                {data && <span className="text-white fs-7">{`${fetchFilters.title ? `${data.data.length} resultados de busqueda` : `${data.data.length} resultados`}`}</span>}
+                {data && <span className="text-white fs-7">{`${fetchFilters.title ? `${data.total} resultados de busqueda` : `${data.total} resultados`}`}</span>}
                 <div className="flex-wrap ">
                     {
                         allFilters.map((filter: string) => {
