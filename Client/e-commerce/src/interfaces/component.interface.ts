@@ -22,4 +22,6 @@ export interface QueryApi {
     category: string
     brand: string
     order: string
+    page: number
+    perPage: number
 }

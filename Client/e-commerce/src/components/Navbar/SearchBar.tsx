@@ -7,24 +7,23 @@ import { setFetchFilters } from "../../redux/slices/search.slice"
 import axios from "axios"
 
 interface props {
-    styles?:string
+    styles?: string
 }
 
-function SearchBar({styles}:props) {
+function SearchBar({ styles }: props) {
 
-    const [sugerencias, setSugerencias] = useState<ResponseBackend>({ error: false, data: [] })
+    const [sugerencias, setSugerencias] = useState<ResponseBackend>({ error: false, data: [], total: 0 })
     const [input, setInput] = useState("")
     const fetchFilters = useAppSelector((state) => state.searchReducer)
     const navigate = useNavigate()
     const dispatch = useAppDispatch();
     const inputRef = useRef<any>(null)
-    
-    const [ inputWidth, setInputWidth ] = useState(inputRef.current)
+
+    const [inputWidth, setInputWidth] = useState(inputRef.current)
 
     useEffect(() => {
         const getSuggestions = async () => {
             const newSuggestions = (await axios.get(`http://localhost:3000/components?title=${input}`)).data
-            console.log(newSuggestions);
             setSugerencias(newSuggestions)
         }
         getSuggestions()
@@ -46,7 +45,7 @@ function SearchBar({styles}:props) {
 
     const searchHandler = (event: any) => {
         event.preventDefault()
-        dispatch(setFetchFilters({ title: input, category: "", brand: "", order: fetchFilters.order }))
+        dispatch(setFetchFilters({ title: input, category: "", brand: "", order: fetchFilters.order, page:1, perPage:12 }))
         setInput("")
         navigate("/shop")
     }
@@ -56,7 +55,7 @@ function SearchBar({styles}:props) {
             className={styles}
             role="search">
             <input
-                 ref={inputRef}
+                ref={inputRef}
                 className="form-control me-3"
                 type="search"
                 value={input}
@@ -66,7 +65,7 @@ function SearchBar({styles}:props) {
             />
 
             {
-                input !== "" && <SuggestionContainer inputWidth={inputWidth}  input={input} sugerencias={sugerencias}></SuggestionContainer>
+                input !== "" && <SuggestionContainer inputWidth={inputWidth} input={input} sugerencias={sugerencias}></SuggestionContainer>
             }
             <button
                 className="btn btn-outline-success ms-1"

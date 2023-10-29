@@ -8,8 +8,6 @@ interface arrComponents {
 
 function CardsContainer({data, blur}:arrComponents) {
 
-
-
   return (
     <div className={`${blur? "blur" : ""} row d-flex flex-row justify-content-center`}>
         {

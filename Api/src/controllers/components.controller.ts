@@ -25,7 +25,7 @@ const getComponents = async (req: Request, res: Response) => {
                 : responseHandler(res, 200, { message: "No se encontraron resultados que coincidan con su búsqueda." })
         }
         else {
-            const { allComponents, countQuery } = await getAllComponents({ order, page })
+            const { allComponents, countQuery } = await getAllComponents({ order, page, perPage })
             responseHandler(res, 200, allComponents, countQuery)
         }
     }

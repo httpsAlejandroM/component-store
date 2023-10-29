@@ -8,7 +8,11 @@ interface filterInterface {
     brand: string
 }
 
-function FilterComponent() {
+interface props {
+    setComponents: Function
+}
+
+function FilterComponent({}:props) {
 
     const dispatch = useAppDispatch()
     const fetchFilters = useAppSelector((state) => state.searchReducer)
@@ -23,11 +27,11 @@ function FilterComponent() {
         if (fetchFilters[nameOfProperty].split(",").includes(producto[nameOfProperty])) {
             const deletedCategory = fetchFilters[nameOfProperty].split(",").filter((categoria) => categoria !== producto[nameOfProperty])
             //hago una copia del state y cambio dinamicamente la propiedad category o brand y la actualizo con el nuevo resultado
-            dispatch(setFetchFilters({ ...fetchFilters, [nameOfProperty]: deletedCategory.join(",") }))
+            dispatch(setFetchFilters({ ...fetchFilters, [nameOfProperty]: deletedCategory.join(","), page:1, perPage: 12 }))
         }
         else {
             const newCategory = [...fetchFilters[nameOfProperty], producto[nameOfProperty]]
-            dispatch(setFetchFilters({ ...fetchFilters, [nameOfProperty]: newCategory.join(",") }))
+            dispatch(setFetchFilters({ ...fetchFilters, [nameOfProperty]: newCategory.join(","), page:1, perPage:12 }))
         }
     }
 
@@ -46,7 +50,8 @@ function FilterComponent() {
     }
 
     const cleanFilterHandler = () => {
-        dispatch(setFetchFilters({ title: "", category: "", brand: "", order: "" }))
+        dispatch(setFetchFilters({ title: "", category: "", brand: "", order: "", page: 1, perPage:12 }))
+      
     }
 
     const allFilters = [fetchFilters.title, ...fetchFilters.category.split(","), ...fetchFilters.brand.split(",")]
@@ -68,7 +73,7 @@ function FilterComponent() {
                 <button className="text-white fs-6 btn btn-outline-success" onClick={cleanFilterHandler}> Limpiar filtros <i className="bi bi-trash fs-5 ms-1"></i></button>
 
             </div>
-            {data && <AccordionFilterComponent data={data.data} setFilter={filterHandler}></AccordionFilterComponent>}
+            {data && <AccordionFilterComponent setFilter={filterHandler}></AccordionFilterComponent>}
             <div className="mt-4 col-12">
                 <div className="">
                     <p className="text-white fs-6">{fetchFilters.title ? fetchFilters.title : "Todos los productos"}</p>

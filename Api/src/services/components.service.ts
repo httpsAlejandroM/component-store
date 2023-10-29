@@ -72,8 +72,6 @@ const applyFilters = async ({ title, category, brand, order, page = 1, perPage =
     countQuery
   }
 }
-//   .skip((page - 1) * limit)
-//   .limit(limit)
 
 const sortProducts = (order: string | undefined): { [prop: string]: SortOrder } => {
   switch (order) {

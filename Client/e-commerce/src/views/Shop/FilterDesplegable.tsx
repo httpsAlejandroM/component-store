@@ -15,7 +15,7 @@ function FilterDesplegable({ data }: props) {
     const dispatch = useAppDispatch()
 
     const cleanFilterHandler = () => {
-        dispatch(setFetchFilters({title:"", category:"", brand:""}))
+        dispatch(setFetchFilters({title:"", category:"", brand:"", order:"", page:1, perPage:12}))
     }
 
     return (

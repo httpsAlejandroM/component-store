@@ -3,7 +3,7 @@ import CardsCarousel from "./CardsCarousel"
 
 function HomeCardsSection() {
 
-const { data } = useGetComponentsQuery({title:"", category: "", brand: ""})
+const { data } = useGetComponentsQuery({title:"", category: "", brand: "", order:"", page:1, perPage:60})
 
   return (
     <article className="container">
@@ -12,7 +12,7 @@ const { data } = useGetComponentsQuery({title:"", category: "", brand: ""})
           <hr className="border-success border-2  my-4" />
           <div></div>
          {
-          data && <CardsCarousel sectionCards={"lastsIn"} arr={data.data.slice(103, 103+20)}></CardsCarousel>
+          data && <CardsCarousel sectionCards={"lastsIn"} arr={data.data.slice(40, 60)}></CardsCarousel>
 
          }
     
@@ -21,7 +21,7 @@ const { data } = useGetComponentsQuery({title:"", category: "", brand: ""})
           <h3 className="text-success">Ofertas</h3>
           <hr className="border-success  border-2 my-4" />
           {
-            data && <CardsCarousel sectionCards={"offers"} arr={data.data.slice(80, 80+20)}></CardsCarousel>
+            data && <CardsCarousel sectionCards={"offers"} arr={data.data.slice(20, 40)}></CardsCarousel>
          }
         </div>
         <div className="my-5">

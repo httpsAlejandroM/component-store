@@ -1,10 +1,8 @@
 import axios from "axios";
-import { ComponentInterface } from "../../interfaces";
 import { useEffect, useState } from "react"
 import { useAppSelector } from "../../redux/hooks";
 
 interface props {
-    data: ComponentInterface[]
     setFilter: Function
 }
 
