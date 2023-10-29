@@ -11,7 +11,7 @@ function SorterComponent() {
     const sortOptions = ["De A - Z", "De Z - A", "Menor precio", "Mayor precio", "Más relevantes"]
 
     const fetchSortHandler = (order:string) => {
-        dispatch(setFetchFilters({...fetchFilters, order:order}))
+        dispatch(setFetchFilters({...fetchFilters, order:order, page:1, perPage:12}))
         setCurrentSort(order)
     }
 

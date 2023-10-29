@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { ResponseBackend } from "../../interfaces"
+import { ResponseBackend } from "../../../interfaces"
 import FilterDesplegable from "./FilterDesplegable";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppSelector } from "../../../redux/hooks";
 
 interface props {
     data: ResponseBackend
@@ -28,7 +28,7 @@ function ResponsiveFilter({ data, setBlur }: props) {
             </div>
             <div className="d-flex align-items-center position-relative">
                 <button aria-label="Boton de filtrado" className="btn" onClick={() => menuHandler()}><i className="bi bi-filter-square text-white fs-2"></i></button>
-                {isFilterMenuOpen && <FilterDesplegable data={data.data}></FilterDesplegable>}
+                {isFilterMenuOpen && <FilterDesplegable ></FilterDesplegable>}
             </div>
         </aside>
     )

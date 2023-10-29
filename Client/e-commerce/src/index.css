@@ -231,8 +231,9 @@ body {
 
 .filter-menu {
   position: absolute;
+  width: 250px;
   top: 100%;
-  right: -50%;
+  right: 10%;
   border: 1px solid var(--second-color);
   padding: 10px;
   z-index: 1;
@@ -242,7 +243,7 @@ body {
     content: '';
     position: absolute;
     top: -21px;
-    right: 30px;
+    right: 2px;
     transform: translateX(-50%);
     border-width: 10px;
     border-style: solid;

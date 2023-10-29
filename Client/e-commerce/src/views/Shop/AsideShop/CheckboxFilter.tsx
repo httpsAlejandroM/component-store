@@ -1,46 +1,34 @@
-import { ComponentInterface } from "../../interfaces"
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { setFetchFilters } from "../../redux/slices/search.slice";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { setFetchFilters } from "../../../redux/slices/search.slice";
+import axios from "axios";
 
-interface props {
-    data: ComponentInterface[]
-}
+function CheckboxFilter() {
 
-type CategoryCounts = {
-    [key: string]: number;
-};
-
-function CheckboxFilter({ data }: props) {
-
+    const [currentFilters, setCurrentFilters] = useState({categories:[], brands:[]})
+    const baseUrl = "http://localhost:3000/components/categories-and-brands"
     const fetchFilter = useAppSelector((state) => state.searchReducer)
     const dispatch = useAppDispatch()
 
-    const categoryCounts = data.reduce((acc: CategoryCounts, component) => {
-        const { category } = component;
-        acc[category] = (acc[category] || 0) + 1;
-        return acc;
-    }, {});
-
-    const brandsCounts = data.reduce((acc: CategoryCounts, component) => {
-        const { brand } = component;
-        acc[brand] = (acc[brand] || 0) + 1;
-        return acc;
-    }, {});
+    useEffect(()=>{
+        const getFilters = async() =>{
+            const filters = (await axios.get(`${baseUrl}?&title=${fetchFilter.title}&category=${fetchFilter.category}&brand=${fetchFilter.brand}`)).data.data
+            setCurrentFilters({...currentFilters, categories:filters.categories, brands:filters.brands})
+        }
+        getFilters()
+    },[fetchFilter])
 
     const fetchHandler = (event: any, productName: string) => {
         const propertyValue: "category" | "brand" = event?.target.value
         if (fetchFilter[propertyValue] && fetchFilter[propertyValue].split(",").includes(productName)) {
             const deletedFilter = fetchFilter[propertyValue].split(",").filter((productBy) => productBy !== productName).join(",")
-            dispatch(setFetchFilters({ ...fetchFilter, [propertyValue]: deletedFilter }))
+            dispatch(setFetchFilters({ ...fetchFilter, [propertyValue]: deletedFilter, page: 1, perPage: 12}))
         }
         else {
             const addFilter = [...fetchFilter[propertyValue], productName]
-            dispatch(setFetchFilters({ ...fetchFilter, [propertyValue]: addFilter.join(",") }))
+            dispatch(setFetchFilters({ ...fetchFilter, [propertyValue]: addFilter.join(","), page: 1, perPage: 12}))
         }
     }
-
-    // const categorysFilter = fetchFilter.category && [...fetchFilter.category.split(",")]
-    // const brandsFilter = fetchFilter.brand && [...fetchFilter.brand.split(",")]
 
     return (
         <>
@@ -55,9 +43,7 @@ function CheckboxFilter({ data }: props) {
                 </h2>
                 <div id="flush-collapseOne" className="accordion-collapse collapse second-color mt-2 " data-bs-parent="#accordionFlushExample">
                     {
-                        Object.entries(categoryCounts)
-                        .sort((a, b) => a[0].localeCompare(b[0]))
-                        .map(([category]) => {
+                        currentFilters.categories.map(({ count, category }: { count: number, category: string }) => {
                             const isChecked = fetchFilter.category.includes(category)
                             return (
                                 <div key={category} className="form-check form-check px-0 ms-2 my-1">
@@ -65,7 +51,7 @@ function CheckboxFilter({ data }: props) {
                                         checked={isChecked}
                                         onChange={(event) => { fetchHandler(event, category) }} value="category" id={`${category}`} />
                                     <label className="form-check-label text-white link-success" htmlFor={`${category}`}>
-                                        {`${category}`}
+                                        {`${category} (${count})`}
                                     </label>
                                 </div>
                             )
@@ -86,9 +72,7 @@ function CheckboxFilter({ data }: props) {
                 </h2>
                 <div id="flush-collapseTwo" className="accordion-collapse collapse second-color mt-2" data-bs-parent="#accordionFlushExample">
                     {
-                        Object.entries(brandsCounts)
-                        .sort((a, b) => a[0].localeCompare(b[0]))
-                        .map(([brand]) => {
+                        currentFilters.brands.map(({ count, brand }: { count: number, brand: string }) => {
                             const isChecked = fetchFilter.brand.includes(brand)
                             return (
                                 <div key={brand} className="form-check form-check ps-0 ms-2 my-1">
@@ -97,7 +81,7 @@ function CheckboxFilter({ data }: props) {
                                     checked={isChecked}
                                     onChange={(event) => { fetchHandler(event, brand) }} value="brand" id={`${brand}`} />
                                     <label className="form-check-label text-white link-success " htmlFor={`${brand}`}>
-                                        {`${brand}`}
+                                        {`${brand} (${count})`}
                                     </label>
                                 </div>
                             )
