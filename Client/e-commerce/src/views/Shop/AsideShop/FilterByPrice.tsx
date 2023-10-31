@@ -4,9 +4,10 @@ import { useState } from "react"
 
 interface props{
     styles: string
+    inputStyle: string
 }
 
-function FilterByPrice({styles}:props) {
+function FilterByPrice({styles, inputStyle}:props) {
 
 const [price, setPrice] = useState({minPrice:"", maxPrice:""})
 const fetchFilter = useAppSelector((state)=>state.searchReducer)
@@ -25,14 +26,14 @@ const fetchPrice = (event:any) => {
 }
 
   return (
-    <div className={styles}>
+    <div className={`${styles}` }>
                 <h5 className="text-white">Precio</h5>
                 <div className="d-flex flex-column flex-xl-row align-items-start justify-content-center">
-                    <input value={price.minPrice} name="minPrice" onChange={(event)=>setPriceHandler(event)} type="number" className="priceInput rounded-2" placeholder="$ Minimo" />
-                    <div className="text-white p-2">{`-`}</div>
-                    <input value={price.maxPrice} name="maxPrice" onChange={(event)=>setPriceHandler(event)} type="number" className="priceInput rounded-2" placeholder="$ Maximo" />
+                    <input value={price.minPrice} name="minPrice" onChange={(event)=>setPriceHandler(event)} type="number" className={`${inputStyle}`} placeholder="$ Minimo" />
+                    <div className="text-white p-2 d-none d-xl-flex">{`-`}</div>
+                    <input value={price.maxPrice} name="maxPrice" onChange={(event)=>setPriceHandler(event)} type="number" className={`${inputStyle}`} placeholder="$ Maximo" />
                 </div>
-                <button onClick={(event)=>fetchPrice(event)} className="sbg-color  btn btn-outline-success rounded-2 w-100  text-white mt-3  mt-xl-1"><i className="bi bi-chevron-right"></i></button>
+                <button onClick={(event)=>fetchPrice(event)} className="btn btn-outline-success rounded-2 w-100  text-white mt-3  mt-xl-1"><i className="bi bi-chevron-right"></i></button>
 
             </div>
   )

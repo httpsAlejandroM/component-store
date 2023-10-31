@@ -12,12 +12,10 @@ function Shop() {
 //AGREGAR FILTRO DE PRECIO A LA VERSION RESPONSIVE
 //AGREGAR VIEW DE DETALLE DE PRODUCTO
 //AGREGAR A SUGERENCIAS DEL BUSCADOR FUNCIONALIDAD PARA MOVER CON LAS FLECHAS 
-
 const [components, setComponents] = useState<ComponentInterface[]>([])
 const fetchFilters = useAppSelector((state)=> state.searchReducer)
 const [ blur, setBlur ] = useState(false)
 const dispatch = useAppDispatch()
-
 const { data } = useGetComponentsQuery({...fetchFilters, page:fetchFilters.page},{refetchOnMountOrArgChange:true})
 
 const fetchPageHandler = () => dispatch(setFetchFilters({ ...fetchFilters, page:fetchFilters.page +1 }))

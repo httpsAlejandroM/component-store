@@ -9,9 +9,7 @@ interface props {
     setComponents: Function
 }
 
-
 function FilterComponent({ }: props) {
-
     
     const fetchFilters = useAppSelector((state) => state.searchReducer)
     const { data } = useGetComponentsQuery(fetchFilters, {  refetchOnMountOrArgChange: true})
@@ -23,13 +21,12 @@ function FilterComponent({ }: props) {
     : !fetchFilters.minPrice && fetchFilters.maxPrice
     ? `Hasta $${fetchFilters.maxPrice}`
     : ""
-
+    
     const allFilters = [fetchFilters.title, ...fetchFilters.category.split(","), ...fetchFilters.brand.split(","), price]
-
 
     return (
         <aside className={`mt-4 col-2 d-none d-xl-flex flex-xl-column align-items-start`} id="aside">
-            <FilterByPrice styles="d-flex flex-column mt-4 col-12"/>
+            <FilterByPrice styles="d-flex flex-column mt-4 col-12" inputStyle="priceInput rounded-2"/>
             <CleanFilterButton/>
             {data && <AccordionFilterComponent ></AccordionFilterComponent>}
             <div className="mt-4 col-12">
