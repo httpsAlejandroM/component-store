@@ -24,4 +24,6 @@ export interface QueryApi {
     order: string
     page: number
     perPage: number
+    minPrice?: number | string
+    maxPrice?: number | string
 }

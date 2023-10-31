@@ -15,11 +15,11 @@ const createBD = async (req: Request, res: Response) => {
 }
 
 const getComponents = async (req: Request, res: Response) => {
-    const { title, category, brand, order, page, perPage }: QueryInterface = req.query;
+    const { title, category, brand, order, page, perPage, minPrice, maxPrice }: QueryInterface = req.query;
 
     try {
-        if (title || category || brand) {
-            const { productFiltered, countQuery } = await applyFilters({ title, category, brand, order, page, perPage });
+        if (title || category || brand || minPrice || maxPrice) {
+            const { productFiltered, countQuery } = await applyFilters(req.query);
             productFiltered.length
                 ? responseHandler(res, 200, productFiltered, countQuery)
                 : responseHandler(res, 200, { message: "No se encontraron resultados que coincidan con su búsqueda." })
@@ -35,9 +35,9 @@ const getComponents = async (req: Request, res: Response) => {
 }
 
 const getCategoriesAndBrands = async (req: Request, res: Response) => {
-    const {category, brand, title}:QueryInterface = req.query
+    const {category, brand, title, minPrice, maxPrice}:QueryInterface = req.query
     try {
-        const categoriesAndBrands = await getAllCategoriesAndBrands({category, brand, title})
+        const categoriesAndBrands = await getAllCategoriesAndBrands(req.query)
         responseHandler(res, 200, categoriesAndBrands)
     } catch (error) {
         errorHandler(res, 400, "Error, algo salio mal", error)

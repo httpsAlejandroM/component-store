@@ -52,11 +52,7 @@ function CardsCarousel({ arr, sectionCards }: props) {
 
   useEffect(() => {
     handleResize();
-    window.addEventListener("resize", handleResize);
-    // return () => {
-    //   // Limpia el listener de evento cuando se desmonta el componente
-    //   window.removeEventListener("resize", handleResize);
-    // };        
+    window.addEventListener("resize", handleResize);       
   }, [currentIndex]);
 
   return (

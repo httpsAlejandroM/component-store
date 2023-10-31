@@ -48,11 +48,10 @@ const removeComponent = async (id: string) => {
   return await Products.findByIdAndRemove(id)
 }
 
-const applyFilters = async ({ title, category, brand, order, page = 1, perPage = 12 }: QueryInterface) => {
+const applyFilters = async ({ title, category, brand, order, page = 1, perPage = 12, minPrice, maxPrice }: QueryInterface) => {
   const filterOptions: filterInterface = {};
-  if (title) {
-    filterOptions.title = new RegExp(title, 'i');
-  }
+  if (title) filterOptions.title = new RegExp(title, 'i');
+  
   if (category) {
     const categoryValues = category.split(",");
     const regex = categoryValues.map((categoria: string) => new RegExp(categoria, 'i'))
@@ -64,6 +63,11 @@ const applyFilters = async ({ title, category, brand, order, page = 1, perPage =
     filterOptions.brand = { $in: regex };
   }
   
+  if (minPrice) filterOptions.price = { $gte: minPrice};
+  
+  if (maxPrice) filterOptions.price = { ...filterOptions.price, $lte: maxPrice };
+
+
   const countQuery = await Products.countDocuments(filterOptions)
   const orderBy = sortProducts(order)
   const productFiltered = await Products.find(filterOptions).sort(orderBy).skip((page - 1) * perPage).limit(perPage)
@@ -159,10 +163,10 @@ const sortProducts = (order: string | undefined): { [prop: string]: SortOrder } 
 //   return allCategoriesAndBrands;
 // };
 
-const getAllCategoriesAndBrands = async ({ category, brand, title }: QueryInterface) => {
+const getAllCategoriesAndBrands = async ({ category, brand, title, minPrice, maxPrice }: QueryInterface) => {
   const aggregatePipeline: any[] = [];
 
-  if (category || brand || title) {
+  if (category || brand || title  || minPrice || maxPrice) {
     const matchStage: any = {};
 
     if (category) matchStage.category = category;
@@ -171,6 +175,10 @@ const getAllCategoriesAndBrands = async ({ category, brand, title }: QueryInterf
 
     if (title) matchStage.title = new RegExp(title, 'i');
 
+    if (minPrice) matchStage.price = { $gte: Number(minPrice) };
+    
+    if (maxPrice) matchStage.price = { ...matchStage.price, $lte: Number(maxPrice) };
+    
     aggregatePipeline.push({
       $match: matchStage
     });

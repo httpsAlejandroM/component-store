@@ -10,7 +10,7 @@ export const componentsApi = createApi({
   endpoints: (builder) => ({
     getComponents: builder.query<ResponseBackend, QueryApi>({
       //destructuro las propiedades que necesito para la query y sumo sus valores a la query en caso de que los haya
-      query: ({ title, category, brand, order, page, perPage }) => {
+      query: ({ title, category, brand, order, page, perPage, minPrice, maxPrice }) => {
         let query = '/components?';
         if (title) query += `&title=${title}`;
         if (category) query += `&category=${category}`;
@@ -18,6 +18,8 @@ export const componentsApi = createApi({
         if (order) query += `&order=${order}`
         if (page) query += `&page=${page}`
         if (perPage) query += `&perPage=${perPage}`
+        if (minPrice) query += `&minPrice=${minPrice}`
+        if (maxPrice) query += `&maxPrice=${maxPrice}`
         return query;
       },
     }),

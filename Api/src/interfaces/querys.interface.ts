@@ -5,4 +5,6 @@ export default interface QueryInterface {
     order?:string
     page?: number
     perPage?: number
+    minPrice?: number
+    maxPrice?: number
 }

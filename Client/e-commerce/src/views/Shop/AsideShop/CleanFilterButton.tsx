@@ -8,7 +8,7 @@ function CleanFilterButton() {
     const dispatch = useAppDispatch()
     
     const cleanFilterHandler = () => {
-        dispatch(setFetchFilters({title:"", category:"", brand:"", order:"", page:1, perPage:12}))
+        dispatch(setFetchFilters({title:"", category:"", brand:"", order:"", page:1, perPage:12, minPrice:"", maxPrice:""}))
     }
     
 

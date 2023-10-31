@@ -35,7 +35,7 @@ function AccordionFilterComponent() {
     
     useEffect(() => {
         const getCategories = async () => {
-            const categories = (await axios.get(`${baseURL}?&title=${fetchFilters.title}&category=${fetchFilters.category}&brand=${fetchFilters.brand}`)).data.data
+            const categories = (await axios.get(`${baseURL}?&title=${fetchFilters.title}&category=${fetchFilters.category}&brand=${fetchFilters.brand}&minPrice=${fetchFilters.minPrice}&maxPrice=${fetchFilters.maxPrice}`)).data.data
             setCurrentFilters({...currentFilters, categories:categories.categories, brands:categories.brands})
         }
         getCategories()

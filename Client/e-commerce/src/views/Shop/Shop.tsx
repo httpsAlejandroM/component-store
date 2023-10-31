@@ -9,7 +9,7 @@ import { setFetchFilters } from "../../redux/slices/search.slice"
 import { ComponentInterface } from "../../interfaces"
 
 function Shop() {
-//FILTRO POR PRECIO
+//AGREGAR FILTRO DE PRECIO A LA VERSION RESPONSIVE
 //AGREGAR VIEW DE DETALLE DE PRODUCTO
 //AGREGAR A SUGERENCIAS DEL BUSCADOR FUNCIONALIDAD PARA MOVER CON LAS FLECHAS 
 

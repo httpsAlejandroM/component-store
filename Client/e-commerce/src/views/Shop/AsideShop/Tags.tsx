@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hooks"
 import { setFetchFilters } from "../../../redux/slices/search.slice"
 
 interface props {
-    tags: string[]
+    tags: string[];
 }
 
 function Tags({ tags }: props) {
@@ -18,16 +18,19 @@ function Tags({ tags }: props) {
             const deleteFilter = fetchFilters.category.split(",").filter((filtro) => filtro !== filter)
             dispatch(setFetchFilters({ ...fetchFilters, category: deleteFilter.join(",") }))
         }
-        else {
+        else if (fetchFilters.brand.split(",").includes(filter)) {
             const deleteFilter = fetchFilters.brand.split(",").filter((filtro) => filtro !== filter)
             dispatch(setFetchFilters({ ...fetchFilters, brand: deleteFilter.join(",") }))
+        }
+        else {
+            dispatch(setFetchFilters({ ...fetchFilters, minPrice:"" , maxPrice:"" }))
         }
     }
 
     return (
         <div className="flex-wrap ">
             {
-                tags.map((filter: string) => {
+                tags?.map((filter: string) => {
                     if (filter.length) {
                         return (
                             <div key={filter} className="d-inline-flex flex-row align-items-center second-color ps-1 m-1" data-bs-theme="dark">
