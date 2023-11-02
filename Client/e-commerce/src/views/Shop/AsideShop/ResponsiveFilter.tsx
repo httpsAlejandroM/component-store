@@ -27,7 +27,10 @@ function ResponsiveFilter({ data, setBlur }: props) {
                 {data && <span className="text-white fs-4">{`${fetchFilters.title ? `${data.total} resultados de busqueda` : `${data.total} resultados`}`}</span>}
             </div>
             <div className="d-flex align-items-center position-relative">
-                <button aria-label="Boton de filtrado" className="btn" onClick={() => menuHandler()}><i className="bi bi-filter-square text-white fs-2"></i></button>
+                <button aria-label="Boton de filtrado" 
+                className="btn" 
+                onClick={() => menuHandler()}><i 
+                className="bi bi-sort-down menu-desplegable text-white fs-2"></i></button>
                 {isFilterMenuOpen && <FilterDesplegable ></FilterDesplegable>}
             </div>
         </aside>

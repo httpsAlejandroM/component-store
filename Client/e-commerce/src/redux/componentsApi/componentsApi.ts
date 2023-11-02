@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { QueryApi, ResponseBackend } from '../../interfaces'
+import { ComponentByIdQuery, QueryApi, ResponseBackend, ResponseComponentById } from '../../interfaces'
 
 const API = "http://localhost:3000"
 
@@ -23,9 +23,11 @@ export const componentsApi = createApi({
         return query;
       },
     }),
-
+    getComponentById: builder.query<ResponseComponentById, ComponentByIdQuery>({
+      query:({id})=> `/components/${id}`
+    })
   }),
 
 })
 
-export const { useGetComponentsQuery, useLazyGetComponentsQuery } = componentsApi
+export const { useGetComponentsQuery, useLazyGetComponentsQuery, useGetComponentByIdQuery } = componentsApi

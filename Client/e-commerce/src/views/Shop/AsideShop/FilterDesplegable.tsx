@@ -7,7 +7,7 @@ function FilterDesplegable() {
     
     return (
         <div className="filter-menu second-color d-flex flex-column align-items-start pb-3">
-            <FilterByPrice styles="d-flex flex-column mt-4 col-12" inputStyle="d-flex flex-column mt-4 col-12"/>
+            <FilterByPrice styles="d-flex flex-column col-12" inputStyle="d-flex flex-column mt-2 mb-2 col-12"/>
             <hr className="border-white border-1  mt-3 mb-2 col-12" />
             <span className="text-white fs-5 mb-2">Filtrar por</span>
             {/* <hr className="border-white border-1  my-2 col-12" /> */}

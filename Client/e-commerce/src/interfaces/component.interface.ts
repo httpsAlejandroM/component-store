@@ -27,3 +27,13 @@ export interface QueryApi {
     minPrice?: number | string
     maxPrice?: number | string
 }
+
+export interface ComponentByIdQuery {
+    id?: string
+}
+
+export interface ResponseComponentById {
+    error: boolean,
+    total: number
+    data: ComponentInterface
+}

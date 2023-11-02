@@ -185,6 +185,12 @@ body {
   border-color: #87b91a;
 }
 
+.img-thumbnail{
+  cursor: pointer;
+}
+
+
+
 .link-success {
   text-decoration: none;
   color: var(--main-alpha-color);
@@ -224,6 +230,10 @@ body {
 
 /********** My styles *************/
 
+.arrow-to-top{
+right: 3%;
+}
+
 .disabled {
   opacity: 0.7;
   pointer-events: none;
@@ -249,7 +259,7 @@ body {
     border-style: solid;
     border-color: transparent transparent var(--second-color) transparent;
 }
-.bi-filter-square:hover{
+.menu-desplegable:hover{
 color: var(--main-color) !important;
 }
 

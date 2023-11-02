@@ -9,7 +9,6 @@ import { setFetchFilters } from "../../redux/slices/search.slice"
 import { ComponentInterface } from "../../interfaces"
 
 function Shop() {
-//AGREGAR FILTRO DE PRECIO A LA VERSION RESPONSIVE
 //AGREGAR VIEW DE DETALLE DE PRODUCTO
 //AGREGAR A SUGERENCIAS DEL BUSCADOR FUNCIONALIDAD PARA MOVER CON LAS FLECHAS 
 const [components, setComponents] = useState<ComponentInterface[]>([])
@@ -23,7 +22,7 @@ const fetchPageHandler = () => dispatch(setFetchFilters({ ...fetchFilters, page:
 useEffect(()=>{
   if (data) fetchFilters.page === 1 
   ? setComponents(data?.data) 
-  : setComponents((prevComponent)=> [...prevComponent, ...data?.data]) 
+  : setComponents((prevComponent)=> [...prevComponent,  ...data.data.filter(item => !prevComponent.includes(item))]) 
 },[data])
 
 useEffect(()=>{
@@ -40,7 +39,10 @@ useEffect(()=>{
          <SorterComponent/>
         </div>
         {components && <CardsContainer data={components} blur={blur}></CardsContainer>}
-        {components.length == data?.total? "" : <button onClick={()=>fetchPageHandler()} className="text-white fs-6 btn btn-outline-success my-4 col-4 align-self-center">Ver más productos</button> }
+        <div className="d-flex flex-row align-items-center justify-content-center">
+        {components.length == data?.total? "" : <button onClick={()=>fetchPageHandler()} className="text-white fs-6 btn btn-outline-success my-4 col-md-4 align-self-center text-align-start">Ver más productos</button> }
+        <a className={`btn arrow-to-top position-absolute arrow-to-top p-0 ${components.length == data?.total? "pb-4 mb-5" : ""}`} href="#"><i className="bi bi-chevron-up menu-desplegable text-white display-3"></i></a>
+        </div>
       </main>
     </section>
   )

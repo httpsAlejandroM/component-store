@@ -16,6 +16,7 @@ function CardsContainer({data, blur}:arrComponents) {
                   
                     <Card 
                     key={component._id}
+                    id={component._id}
                     stock={component.stock}
                     title={component.title}
                     price={component.price}
