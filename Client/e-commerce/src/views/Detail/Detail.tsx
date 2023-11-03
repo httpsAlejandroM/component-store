@@ -9,6 +9,10 @@ function Detail() {
 
     const {data} = useGetComponentByIdQuery({id:id})
 
+//A INPUT DE CANTIDAD PONER DE PRODUCTOS A COMPRAR PONER PARA ESCRIBIR UN NUMERO Y NO SOLO AUMENTAR O BAJAR CONTIDAD CON BOTONES
+//AGREGAR EFECTO DE ZOOM A LA IMAGEN DEL PRODUCTO
+//DESCRIPCION CON FORMATO DE TABLA
+//COLOR AL CORAZON 
 return (
     <main className="container content">
         {data && <BuySection data={data.data}></BuySection>}

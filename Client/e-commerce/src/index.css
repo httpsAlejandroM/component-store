@@ -114,7 +114,6 @@ body {
   color: var(--main-color) !important;
 }
 
-
 .card,
 .mosaico img {
   transition: 0.1s ease-out !important;
@@ -234,6 +233,24 @@ body {
 right: 3%;
 }
 
+.btn-buy{
+  background-color:  rgba(15, 133, 50,0.9);
+  color: var(--bg-color);
+  }
+  
+  .btn-buy:hover{
+    background-color: #147732;;
+    color: var(--bg-color);
+  }
+  .btn-add-cart{
+    background-color: rgba(15, 133, 50,0.2);
+  }
+  .btn-add-cart:hover{
+    background-color: rgba(15, 133, 50,0.3);
+    color: #147732;
+  }
+  
+
 .disabled {
   opacity: 0.7;
   pointer-events: none;
@@ -263,6 +280,11 @@ right: 3%;
 color: var(--main-color) !important;
 }
 
+.border-success-alpha{
+border-color:#00a00d;
+border-width: 1.5px;
+}
+
 .blur{
   opacity: 0.5;
 }
@@ -279,6 +301,12 @@ color: var(--main-color) !important;
   z-index: 10;
 }
 
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .box-translate:hover {
   transform: scale(1.03) !important;
 }
@@ -292,8 +320,6 @@ color: var(--main-color) !important;
   text-decoration-color: var(--main-alpha-color) !important;
   text-decoration-thickness: 1.5px
 }
-
-
 
 
 .priceInput {
@@ -400,6 +426,10 @@ form {
 
 .slider .slide img {
   width: 100%;
+}
+
+.text-success-alpha{
+  color: #147732;
 }
 
 @media (min-width: 576px) {
