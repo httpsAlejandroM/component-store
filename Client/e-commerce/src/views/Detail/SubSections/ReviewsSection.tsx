@@ -1,5 +1,5 @@
-import SortReviews from "./SortReviews"
-import StarsRating from "./StarsRating"
+import SortReviews from "./Components/SortReviews"
+import StarsRating from "./Components/StarsRating"
 
 function ReviewsSection() {
 
@@ -32,10 +32,9 @@ function ReviewsSection() {
     ]
 
     return (
-        <section>
-            <hr className="border-dark border-1  my-0 " />
+        <section className="container">
             <div className="d-flex flex-column">
-                <h3 className="text-success-alpha p-1 fs-2 mb-0 mt-5 mb-3">Opiniones del producto</h3>
+                <h3 className="text-success-alpha p-1 fs-2 mt-2 mb-3">Opiniones del producto</h3>
                 
                 <div className="d-flex flex-row justify-content-between">
                 <div className="d-flex flex-row fs-5 text-warning align-items-center my-3">

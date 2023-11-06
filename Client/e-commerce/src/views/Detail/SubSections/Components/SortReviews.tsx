@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useEffect } from "react"
 //import { setFetchFilters } from "../../../redux/slices/search.slice"
-import { useAppSelector } from "../../../redux/hooks"
+import { useAppSelector } from "../../../../redux/hooks"
 
 function SortReviews() {
     const fetchFilters = useAppSelector((state)=>state.searchReducer)
