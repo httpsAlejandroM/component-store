@@ -7,27 +7,35 @@ import SorterComponent from "./SorterComponent"
 import { useAppDispatch, useAppSelector } from "../../redux/hooks"
 import { setFetchFilters } from "../../redux/slices/search.slice"
 import { ComponentInterface } from "../../interfaces"
+import Loader from "./Loader"
 
 function Shop() {
-//AGREGAR VIEW DE DETALLE DE PRODUCTO
 //AGREGAR A SUGERENCIAS DEL BUSCADOR FUNCIONALIDAD PARA MOVER CON LAS FLECHAS 
 const [components, setComponents] = useState<ComponentInterface[]>([])
+const [isLoading, setIsLoading] = useState(true)
 const fetchFilters = useAppSelector((state)=> state.searchReducer)
 const [ blur, setBlur ] = useState(false)
 const dispatch = useAppDispatch()
 const { data } = useGetComponentsQuery({...fetchFilters, page:fetchFilters.page},{refetchOnMountOrArgChange:true})
 
-const fetchPageHandler = () => dispatch(setFetchFilters({ ...fetchFilters, page:fetchFilters.page +1 }))
+const fetchPageHandler = () => {
+  setIsLoading(true)
+  dispatch(setFetchFilters({ ...fetchFilters, page:fetchFilters.page +1 }))
+}
 
 useEffect(()=>{
   if (data) fetchFilters.page === 1 
   ? setComponents(data?.data) 
   : setComponents((prevComponent)=> [...prevComponent,  ...data.data.filter(item => !prevComponent.includes(item))]) 
+  setIsLoading(false)
+
 },[data])
 
 useEffect(()=>{
   fetchFilters.page > 1 && dispatch(setFetchFilters({...fetchFilters, page: 1})) 
 },[])
+
+
 
   return (
     <section  className={`container min-vh-100 d-flex flex-column align-items-center flex-xl-row justify-content-xl-center align-items-xl-start content`}>
@@ -40,8 +48,9 @@ useEffect(()=>{
         </div>
         {components && <CardsContainer data={components} blur={blur}></CardsContainer>}
         <div className="d-flex flex-row align-items-center justify-content-center">
-        {components.length == data?.total? "" : <button onClick={()=>fetchPageHandler()} className="text-white fs-6 btn btn-outline-success my-4 col-md-4 align-self-center text-align-start">Ver más productos</button> }
-        <a className={`btn arrow-to-top position-absolute arrow-to-top p-0 ${components.length == data?.total? "pb-4 mb-5" : ""}`} href="#"><i className="bi bi-chevron-up menu-desplegable text-white display-3"></i></a>
+          {components.length == data?.total? "" : <Loader isLoading={isLoading} fetchPageHandler={fetchPageHandler}/>}
+          {fetchFilters.page > 1 && <a className={`btn arrow-to-top position-absolute arrow-to-top p-0 ${components.length == data?.total? "pb-4 mb-5" : ""}`} href="#"><i className="bi bi-chevron-up menu-desplegable text-white display-3"></i></a>
+}
         </div>
       </main>
     </section>
