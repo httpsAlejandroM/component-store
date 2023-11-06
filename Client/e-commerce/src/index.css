@@ -239,7 +239,7 @@ right: 3%;
   }
   
   .btn-buy:hover{
-    background-color: #147732;;
+    background-color: #147732;
     color: var(--bg-color);
   }
   .btn-add-cart{
@@ -249,7 +249,19 @@ right: 3%;
     background-color: rgba(15, 133, 50,0.3);
     color: #147732;
   }
-  
+
+
+  .bi-dash-square-fill,
+  .bi-plus-square-fill{
+    color:rgba(15, 133, 50,0.9);
+  }
+
+  .bi-dash-square-fill:hover,
+  .bi-plus-square-fill:hover{
+    color: #147732;
+  }
+
+                  
 
 .disabled {
   opacity: 0.7;
@@ -309,6 +321,15 @@ border-width: 1.5px;
 
 .box-translate:hover {
   transform: scale(1.03) !important;
+}
+
+.li-description {
+  list-style: inside;
+  list-style-type: square;
+}
+
+.li-description::marker {
+  color:#147732
 }
 
 .link-success-dark {
@@ -429,7 +450,7 @@ form {
 }
 
 .text-success-alpha{
-  color: #147732;
+  color: rgba(15, 133, 50,0.9);
 }
 
 @media (min-width: 576px) {
