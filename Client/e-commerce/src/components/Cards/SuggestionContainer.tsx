@@ -5,9 +5,10 @@ interface props {
     input: string
     sugerencias: ResponseBackend | { error: boolean, data: ComponentInterface[] | any }
     inputWidth: number
+    setInput: Function
 }
 
-function SuggestionContainer({ input, sugerencias, inputWidth }: props) {
+function SuggestionContainer({ input, sugerencias, inputWidth, setInput }: props) {
 
     let contenido;
 
@@ -17,7 +18,7 @@ function SuggestionContainer({ input, sugerencias, inputWidth }: props) {
         </div>;
     } else if (sugerencias.data && sugerencias.data.length > 0) {
         contenido = sugerencias.data.map((componente: any) => (
-            <SuggestionCard key={componente._id}  title={componente.title} image={componente.image} />
+            <SuggestionCard key={componente._id} id={componente._id} title={componente.title} image={componente.image} setInput={setInput} />
         ));
     }
 

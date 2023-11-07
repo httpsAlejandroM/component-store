@@ -65,7 +65,7 @@ function SearchBar({ styles }: props) {
             />
 
             {
-                input !== "" && <SuggestionContainer inputWidth={inputWidth} input={input} sugerencias={sugerencias}></SuggestionContainer>
+                input !== "" && <SuggestionContainer setInput={setInput} inputWidth={inputWidth} input={input} sugerencias={sugerencias}></SuggestionContainer>
             }
             <button
                 className="btn btn-outline-success ms-1"
