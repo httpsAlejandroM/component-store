@@ -45,7 +45,7 @@ function SearchBar({ styles }: props) {
 
     const searchHandler = (event: any) => {
         event.preventDefault()
-        dispatch(setFetchFilters({ title: input, category: "", brand: "", order: fetchFilters.order, page:1, perPage:12 }))
+        dispatch(setFetchFilters({ title: input, category: "", brand: "", order: fetchFilters.order, page:1, perPage:12, minPrice:"" ,maxPrice:"" }))
         setInput("")
         navigate("/shop")
     }
