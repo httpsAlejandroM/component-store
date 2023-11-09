@@ -3,7 +3,7 @@ const {MONGO_HOST, MONGO_DATABASE, MONGO_PASSWORD, MONGO_USER} = require("./conf
 
 async function connect() {
     try {
-      const db = await mongoose.connect(`mongodb://${MONGO_HOST}/${MONGO_DATABASE}`,{
+      const db = await mongoose.connect(`${MONGO_DATABASE}`,{
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
