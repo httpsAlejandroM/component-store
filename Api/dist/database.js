@@ -9,13 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 const mongoose = require("mongoose");
+const { MONGO_HOST, MONGO_DATABASE, MONGO_PASSWORD, MONGO_USER } = require("./config");
 function connect() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            yield mongoose.connect("mongodb://localhost/component-store", {
+            const db = yield mongoose.connect(`${MONGO_DATABASE}`, {
                 useNewUrlParser: true,
+                useUnifiedTopology: true,
             });
-            console.log("Db connected");
+            console.log(`Db connected to ${db.connection.name}`);
         }
         catch (error) {
             console.log(`Error: ${error}`);
