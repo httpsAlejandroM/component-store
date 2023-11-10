@@ -9,8 +9,8 @@
   "scripts": {
     "clean": "rimraf ./dist",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js"
+    "build": "npm install && tsc",
+    "start": "TG_ALLOW_MIXED=ALLOW node dist/index.js"
   },
   "keywords": [],
   "author": "",
