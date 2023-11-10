@@ -23,7 +23,8 @@ function SearchBar({ styles }: props) {
 
     useEffect(() => {
         const getSuggestions = async () => {
-            const newSuggestions = (await axios.get(`http://localhost:3000/components?title=${input}`)).data
+            const URL = "https://component-store.onrender.com/"
+            const newSuggestions = (await axios.get(`${URL}components?title=${input}`)).data
             setSugerencias(newSuggestions)
         }
         getSuggestions()

@@ -16,7 +16,8 @@ function AccordionFilterComponent() {
     const [currentFilters, setCurrentFilters] =useState({categories:[], brands:[]})
     const fetchFilters = useAppSelector((state)=>state.searchReducer)
     const dispatch = useAppDispatch()
-    const baseURL = "http://localhost:3000/components/categories-and-brands"
+    //const baseURL = "http://localhost:3000/components/categories-and-brands"
+    const baseURL = "https://component-store.onrender.com/components/categories-and-brands"
 
     const filterHandler = (producto: filterInterface) => {
         //verifico que la key sea category o brand para que no llore typescript

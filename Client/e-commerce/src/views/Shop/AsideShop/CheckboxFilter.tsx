@@ -6,7 +6,8 @@ import axios from "axios";
 function CheckboxFilter() {
 
     const [currentFilters, setCurrentFilters] = useState({categories:[], brands:[]})
-    const baseUrl = "http://localhost:3000/components/categories-and-brands"
+    //const baseUrl = "http://localhost:3000/components/categories-and-brands"
+    const baseUrl = "https://component-store.onrender.com/components/categories-and-brands"
     const fetchFilter = useAppSelector((state) => state.searchReducer)
     const dispatch = useAppDispatch()
 

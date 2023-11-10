@@ -14,12 +14,13 @@ function NavDropDown({ linkName }: NavlinkDropwDown) {
   const dispatch = useAppDispatch()
   const fetchFilters = useAppSelector((state) => state.searchReducer)
   const toCategoryHandler = (item: string) => {
-    dispatch(dispatch(setFetchFilters({ title: "", category: item, brand: "", order: fetchFilters.order })))
+    dispatch(dispatch(setFetchFilters({ title: "", category: item, brand: "", order: fetchFilters.order,page:1, perPage:12, minPrice:"", maxPrice:"" })))
   }
 
   useEffect(()=>{
     const getSubmenu = async () => {
-      const categories = (await axios.get("http://localhost:3000/components/categories-and-brands")).data.data
+      const URL = "https://component-store.onrender.com/components/categories-and-brands"
+      const categories = (await axios.get(`${URL}`)).data.data
       setSubmenu(categories.categories)
     }
 
