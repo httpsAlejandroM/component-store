@@ -52,8 +52,7 @@ useEffect(()=>{
         {components && <CardsContainer data={components} blur={blur}></CardsContainer>}
         <div className="d-flex flex-row align-items-center justify-content-center">
           {components.length == data?.total? "" : <ShopLoader isLoading={isLoading} fetchPageHandler={fetchPageHandler}/>}
-          {fetchFilters.page > 1 && <a className={`btn arrow-to-top position-absolute arrow-to-top p-0 ${components.length == data?.total? "pb-4 mb-5" : ""}`} href="#shop"><i className="bi bi-chevron-up menu-desplegable text-white display-3"></i></a>
-}
+          {/* {fetchFilters.page > 1 && <a className={`btn position-absolute  arrow-to-top p-0 ${components.length == data?.total? "pb-4 mb-5" : ""}`} href="#shop"><i className="bi bi-chevron-up menu-desplegable text-white display-3"></i></a>} */}
         </div>
       </main>
     </section>
