@@ -1,3 +1,4 @@
+import Spinner from "../../components/Spinner"
 
 interface props {
   isLoading: boolean
@@ -7,9 +8,7 @@ interface props {
 function Loading({isLoading, fetchPageHandler}:props) {
 
   if (isLoading){
-    return (<div className="spinner-border text-success d-flex align-self-center fs-6 my-4 col-md-4" role="status">
-    <span className="visually-hidden">Loading...</span>
-  </div>)
+    return (<Spinner styles={{width:"2.2rem", height: "2.2rem"}}/>)
   }
   else {
 return (

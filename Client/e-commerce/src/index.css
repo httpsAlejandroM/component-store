@@ -453,6 +453,10 @@ form {
   color: rgba(15, 133, 50,0.9);
 }
 
+.text-success-main {
+  color: var(--main-alpha-color);
+}
+
 @media (min-width: 576px) {
   .searchResults .results {
     padding: 20px;

@@ -3,6 +3,7 @@ import NavDropDown from "./NavDropDown"
 import { useState } from "react"
 import logoPag from "../../assets/firebase.png"
 import SearchBar from "./SearchBar"
+import { Link } from "react-router-dom"
 
 function Navbar() {
 
@@ -27,17 +28,13 @@ function Navbar() {
     <header className="header" id="header">
       <nav className="container-fluid navbar navbar-expand-lg d-flex flex-column pt-1">
         <div className="container-fluid d-flex m-0 flex-lg-column " >
-          <a className="col-1 d-md-none"
-            href="#"><img
-              className="img-fluid ms-lg-3"
-              src={logoPag} alt="Logo Pagina" /></a>
           <div className="d-flex d-lg-flex ">
             <div className=" d-none d-md-flex align-items-center col-1 " >
-              <a className=""
-                href="#"><img
+              <Link className=""
+                to="/"><img
                   className="img-fluid ms-lg-3"
                   src={logoPag}
-                  alt="Logo Pagina" /></a>
+                  alt="Logo Pagina" /></Link>
             </div>
             <SearchBar styles={"col-11 d-none d-lg-flex container py-4 w-75"}></SearchBar>
           </div>

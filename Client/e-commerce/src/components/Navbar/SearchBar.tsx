@@ -20,12 +20,14 @@ function SearchBar({ styles }: props) {
     const inputRef = useRef<any>(null)
 
     const [inputWidth, setInputWidth] = useState(inputRef.current)
-
+    const [isLoading, setIsLoading] = useState(false)
     useEffect(() => {
         const getSuggestions = async () => {
+            setIsLoading(true)
             const URL = "https://component-store.onrender.com/"
             const newSuggestions = (await axios.get(`${URL}components?title=${input}`)).data
             setSugerencias(newSuggestions)
+            setIsLoading(false)
         }
         getSuggestions()
 
@@ -66,7 +68,7 @@ function SearchBar({ styles }: props) {
             />
 
             {
-                input !== "" && <SuggestionContainer setInput={setInput} inputWidth={inputWidth} input={input} sugerencias={sugerencias}></SuggestionContainer>
+                input !== "" && <SuggestionContainer isLoading={isLoading} setInput={setInput} inputWidth={inputWidth} input={input} sugerencias={sugerencias}></SuggestionContainer>
             }
             <button
                 className="btn btn-outline-success ms-1"
