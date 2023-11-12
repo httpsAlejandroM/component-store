@@ -231,7 +231,7 @@ body {
 
 .arrow-to-top{
  bottom: 0px;
- right: 0
+ right: -7vw
 }
 
 .btn-buy{
@@ -476,6 +476,11 @@ form {
 /* // Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
 
+  .arrow-to-top{
+    bottom: 0px;
+    right: -8vw
+   }
+
   .content {
     padding-top: 140px !important;
   }
@@ -500,14 +505,19 @@ form {
 }
 
 /* // X-Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {}
+@media (min-width: 1200px) {
+  .arrow-to-top{
+    bottom: 0px;
+    right: -2.2vw
+   }
+}
 
 /* // XX-Large devices (larger desktops, 1400px and up) */
 @media (min-width: 1400px) {
 
   .arrow-to-top{
     bottom: 0px;
-    right: -4%
+    right: -3vw
    }
    
 
