@@ -9,6 +9,7 @@ import { setFetchFilters } from "../../redux/slices/search.slice"
 import { ComponentInterface } from "../../interfaces"
 import ShopLoader from "./ShopLoader"
 import Loader from "../../components/Loader"
+import ArrowTop from "../../components/ArrowTop"
 
 function Shop() {
 //POSITION STATIC O FIXED A FLECHA PARA IR HACIA ARRIBA
@@ -52,9 +53,11 @@ useEffect(()=>{
         {components && <CardsContainer data={components} blur={blur}></CardsContainer>}
         <div className="d-flex flex-row align-items-center justify-content-center">
           {components.length == data?.total? "" : <ShopLoader isLoading={isLoading} fetchPageHandler={fetchPageHandler}/>}
-          {fetchFilters.page > 1 && <a className={`btn position-absolute  arrow-to-top p-0 ${components.length == data?.total? "pb-4 mb-5" : ""}`} href="#shop"><i className="bi bi-chevron-up menu-desplegable text-white display-3"></i></a>}
+          
         </div>
+        <div className="sticky-bottom">{fetchFilters.page > 1 && <ArrowTop />}</div>
       </main>
+      
     </section>
   )
  }

@@ -8,7 +8,7 @@ interface props {
 function Loading({isLoading, fetchPageHandler}:props) {
 
   if (isLoading){
-    return (<Spinner styles={{width:"2.2rem", height: "2.2rem"}}/>)
+    return (<Spinner styles={{width:"2.4rem", height: "2.4rem"}}/>)
   }
   else {
 return (

@@ -230,7 +230,8 @@ body {
 /********** My styles *************/
 
 .arrow-to-top{
-right: 3%;
+ bottom: 0px;
+ right: 0
 }
 
 .btn-buy{
@@ -272,7 +273,7 @@ right: 3%;
   position: absolute;
   width: 250px;
   top: 100%;
-  right: 10%;
+  right: 25%;
   border: 1px solid var(--second-color);
   padding: 10px;
   z-index: 1;
@@ -282,7 +283,7 @@ right: 3%;
     content: '';
     position: absolute;
     top: -21px;
-    right: 2px;
+    right: 6.5vw;
     transform: translateX(-50%);
     border-width: 10px;
     border-style: solid;
@@ -466,7 +467,11 @@ form {
 }
 
 /* // Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {}
+@media (min-width: 768px) {
+  .filter-menu::before {
+    right: 9vw;
+  }
+}
 
 /* // Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
@@ -488,6 +493,10 @@ form {
     border-top: none;
   
   }
+
+  .filter-menu::before {
+    right: 10vw;
+  }
 }
 
 /* // X-Large devices (large desktops, 1200px and up) */
@@ -495,6 +504,12 @@ form {
 
 /* // XX-Large devices (larger desktops, 1400px and up) */
 @media (min-width: 1400px) {
+
+  .arrow-to-top{
+    bottom: 0px;
+    right: -4%
+   }
+   
 
   .home .carousel-control-prev {
     max-width: 32px;

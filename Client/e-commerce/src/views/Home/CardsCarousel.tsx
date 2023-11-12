@@ -12,7 +12,7 @@ function CardsCarousel({ arr, sectionCards }: props) {
   const [cardsPerSlide, setCardsPerSlide] = useState(1);
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalSlides = Math.ceil(arr.length / cardsPerSlide);
-
+  
   const slides = [];
   //"Paginado" del carousel
   for (let i = 0; i < totalSlides; i++) {

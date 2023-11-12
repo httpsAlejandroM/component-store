@@ -19,14 +19,11 @@ function ResponsiveFilter({ data, setBlur }: props) {
     }
 
     return (
-        <aside className="mt-3 d-flex flex-row justify-content-evenly container d-xl-none">
-            <div className="d-flex align-items-center">
-                <p className="text-white fs-4 m-0">{fetchFilters.title ? fetchFilters.title : "Todos los productos"}</p>
+        <aside className="mt-3 d-flex flex-row row container d-xl-none">
+            <div className="d-flex align-items-center justify-content-center col-6">
+                {data && <span className="text-white fs-6">{`${fetchFilters.title ? `${data.total} Resultados de busqueda` : `${data.total} Resultados`}`}</span>}
             </div>
-            <div className="d-flex align-items-center">
-                {data && <span className="text-white fs-4">{`${fetchFilters.title ? `${data.total} resultados de busqueda` : `${data.total} resultados`}`}</span>}
-            </div>
-            <div className="d-flex align-items-center position-relative">
+            <div className="d-flex align-items-center  justify-content-center position-relative col-6">
                 <button aria-label="Boton de filtrado" 
                 className="btn" 
                 onClick={() => menuHandler()}><i 
