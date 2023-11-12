@@ -19,8 +19,8 @@ function SortReviews() {
 
     return (
         <>
-            <div className="dropdown ">
-                <button className="btn btn-buy dropdown-toggle col-12"  type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <div className="dropdown col-12">
+                <button className="btn btn-buy col-12 dropdown-toggle px-0"  type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     {currentSort}
                 </button>
                 <ul className="dropdown-menu dropdown-menu-dark second-color col">

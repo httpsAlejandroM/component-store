@@ -3,6 +3,7 @@ import { ComponentInterface } from "../../../interfaces"
 import mosaico from "../../../../src/assets/mosaico.jpg"
 import { useEffect } from "react";
 import BuyContainer from "./Components/BuyContainer";
+import Carousel from "../../../components/Carousel";
 
 interface props {
     data: ComponentInterface
@@ -20,7 +21,7 @@ function BuySection({ data }: props) {
 
     return (
         <section className="container row mt-4" style={{ minHeight: "85vh" }}>
-            <div className="bg-light col-1 rounded-top-4 p-1">
+            <div className="d-none d-lg-flex flex-column bg-light col-lg-1 rounded-top-4 p-1">
                 {images.map((image: string) => (
                     <img
                         key={image}
@@ -31,9 +32,10 @@ function BuySection({ data }: props) {
                     />
                 ))}
             </div>
-            <div className="bg-light col-7 p-4 position-relative  d-flex align-items-start justify-content-center">
+            <div className="d-none d-lg-flex bg-light col-lg-7 p-4 position-relative   align-items-start justify-content-center">
                 <img className="img-fluid sticky-top z-1 p-4" style={{ maxHeight: "80vh" }} src={selectedImage} alt={data.title} />
             </div>
+            <Carousel arrayImages={images} autoPlay={false}/>
             <BuyContainer data={data}/>
             <hr className="border-dark border-1  col-12 p-0" />
         </section>

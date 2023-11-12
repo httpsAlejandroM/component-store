@@ -37,16 +37,12 @@ function ReviewsSection() {
                 <h3 className="text-success-alpha p-1 fs-2 mt-2 mb-3">Opiniones del producto</h3>
                 
                 <div className="d-flex flex-row justify-content-between">
-                <div className="d-flex flex-row fs-5 text-warning align-items-center my-3">
-                    <p className="me-3 mb-0 text-dark p-0">4.5</p>
-                    <span className="bi bi-star-fill"></span>
-                    <span className="bi bi-star-fill"></span>
-                    <span className="bi bi-star-fill"></span>
-                    <span className="bi bi-star-fill"></span>
-                    <span className="bi bi-star-half"></span>
-                    <span className="text-dark ms-2 fs-6">(1)</span>
+                <div className="col-5 d-flex flex-row fs-5 text-warning align-items-center my-3">
+                <p className="me-3 mb-0 text-dark p-0">4.5</p>
+                    <StarsRating review={4}></StarsRating>
+                    <span className="text-dark fs-6">(1)</span>
                 </div>
-                   <div className="col-2">
+                   <div className="col-lg-3 col-xl-2">
                    <SortReviews/>
                    </div>
                 </div>

@@ -237,6 +237,7 @@ body {
 .btn-buy{
   background-color:  rgba(15, 133, 50,0.9);
   color: var(--bg-color);
+  transition: 0.4 ease-out ;
   }
   
   .btn-buy:hover{
@@ -245,6 +246,7 @@ body {
   }
   .btn-add-cart{
     background-color: rgba(15, 133, 50,0.2);
+    transition: 0.4 ease-out ;
   }
   .btn-add-cart:hover{
     background-color: rgba(15, 133, 50,0.3);
