@@ -55,7 +55,7 @@ function Navbar() {
                 <Navlink linkName="Inicio" route="/"></Navlink>
                 <Navlink linkName="Productos" route="/shop"></Navlink>
                 <Navlink linkName="Arma tu Pc" route="arma-tu-pc"></Navlink>
-                <NavDropDown linkName="Categorias"  />
+                <NavDropDown linkName="Categorias" />
                 <Navlink linkName="Ayuda" route="/ayuda"></Navlink>
               </ul>
               <SearchBar styles="col-11 d-flex container py-2  d-lg-none"></SearchBar>

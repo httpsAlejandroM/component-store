@@ -3,10 +3,10 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setFetchFilters } from "../../redux/slices/search.slice";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { collapseHandler } from "./Navlink";
 
 interface NavlinkDropwDown {
   linkName: string;
-  //submenu: string[];
 }
 
 function NavDropDown({ linkName }: NavlinkDropwDown) {
@@ -15,6 +15,7 @@ function NavDropDown({ linkName }: NavlinkDropwDown) {
   const fetchFilters = useAppSelector((state) => state.searchReducer)
   const toCategoryHandler = (item: string) => {
     dispatch(dispatch(setFetchFilters({ title: "", category: item, brand: "", order: fetchFilters.order,page:1, perPage:12, minPrice:"", maxPrice:"" })))
+    collapseHandler()
   }
 
   useEffect(()=>{
@@ -26,9 +27,9 @@ function NavDropDown({ linkName }: NavlinkDropwDown) {
 
     getSubmenu()
   },[])
-
+  
   return (
-    <li className="nav-item dropdown mx-3 fs-5">
+    <li className="nav-item dropdown mx-3 fs-5" >
       <button className="nav-link dropdown-toggle text-white link-success" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         {linkName}
       </button>
