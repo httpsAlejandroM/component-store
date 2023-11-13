@@ -162,12 +162,25 @@ body {
   }
 }
 
+
+
+.carousel-inner .active{
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+
 .dropdown-menu {
   max-height: 60vh;
   overflow-wrap: break-word;
   overflow-y: auto;
   overflow-x: hidden;
 
+}
+
+.carousel-item {
+  align-content: center;
 }
 
 .dropdown-item {
