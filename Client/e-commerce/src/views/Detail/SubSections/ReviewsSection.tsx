@@ -53,10 +53,12 @@ function ReviewsSection() {
                         <div key={index} className="d-flex flex-column p-3 my-0">
                             <div className="d-flex flex-row justify-content-between ">
                                 <div className="d-flex flex-column flex-sm-row ">
-                                    <span className="text-success-alpha">{review.user}</span>
-                                    <span className="fw-normal text-dark ms-3">{review.date}</span>
+                                <span className="text-success-alpha">{review.user}</span>
+                                    <StarsRating review={review.stars} ></StarsRating>
                                 </div>
-                                <StarsRating review={review.stars} ></StarsRating>
+                                
+                                    <span className="fw-normal text-dark ">{review.date}</span>
+                                    
                             </div>
                             <div className="d-flex py-1 fs-6">
                                 <p className="mt-1">{review.review}

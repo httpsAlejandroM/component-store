@@ -13,7 +13,7 @@ function StarsRating({review}:props) {
         <span key={index} className="bi bi-star text-warning fs-6 me-1"></span>
       ));
   return (
-    <div className="me-2">
+    <div className="me-2 ms-sm-3">
     {starElements}
     {emptyStarElements}
   </div>
