@@ -14,24 +14,24 @@ function MosaicSection() {
             <hr className="border-success border-2  my-4" />
             </div>
             <div className="row mosaico">
-                <div className="col-6">
+                <div className="col-12 col-md-6">
                     <a href="#"><img className="img-fluid rounded-1" src={mosaico} alt="Mosaico" /></a>
                 </div>
-                <div className="col-3">
+                <div className="col-6 col-md-3 mt-4 mt-md-0">
                     <a href="#"><img className="img-fluid rounded-1" src={mosaico2} alt="Mosaico" /></a>
                 </div>
-                <div className="col-3">
+                <div className="col-6 col-md-3 mt-4 mt-md-0">
                     <a href="#"><img className="img-fluid rounded-1" src={mosaico3} alt="Mosaico" /></a>
                 </div>
             </div>
             <div className="row mosaico">
-                <div className="col-3">
+                <div className="col-6 col-md-3">
                     <a href="#"><img className="img-fluid rounded-1" src={mosaico4} alt="Mosaico" /></a>
                 </div>
-                <div className="col-3">
+                <div className="col-6 col-md-3 ">
                     <a href="#"><img className="img-fluid rounded-1" src={mosaico5} alt="Mosaico" /></a>
                 </div>
-                <div className="col-6">
+                <div className="col-12 col-md-6 mt-4 mt-md-0">
                     <a href="#"><img className="img-fluid rounded-1" src={mosaico6} alt="Mosaico" /></a>
                 </div>
             </div>

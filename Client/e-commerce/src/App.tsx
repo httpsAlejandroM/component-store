@@ -6,6 +6,7 @@ const Navbar = lazy(() => import('./components/Navbar/Navbar'));
 const Home = lazy(() => import('./views/Home/Home'));
 const Shop = lazy(() => import('./views/Shop/Shop'));
 const Detail = lazy(() => import('./views/Detail/Detail'));
+const Support = lazy(()=> import("./views/Support/Support"))
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
           <Route path={`/detail/:id`} element={<Detail />} />
+          <Route path={`/ayuda`} element={<Support />} />
         </Routes>
         <Footer />
       </Suspense>

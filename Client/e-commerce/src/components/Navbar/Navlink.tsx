@@ -8,7 +8,7 @@ interface NavlinkProps {
 
  const collapseElementList = document.querySelector("#navbarScroll")
  const collapser = document.querySelector(".navbar-toggler")
- export const collapseHandler = () => {
+ const collapseHandler = () => {
     if (collapser) {
       collapser.classList.add("collapsed")
       collapser.setAttribute("aria-expanded", "false")
@@ -19,7 +19,7 @@ interface NavlinkProps {
   function Navlink({ linkName, route }: NavlinkProps) {
     
     return (
-      <li className="nav-item mx-3 fs-5" onClick={collapseHandler}>
+      <li className="nav-item mx-3 fs-5" onClick={()=>collapseHandler()}>
         <Link className="nav-link text-white link-success" aria-current="page" to={route}>
           {linkName}
         </Link>

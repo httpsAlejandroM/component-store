@@ -3,7 +3,9 @@ import { ComponentInterface } from "../../../interfaces"
 import mosaico from "../../../../src/assets/mosaico.jpg"
 import { useEffect } from "react";
 import BuyContainer from "./Components/BuyContainer";
-import Carousel from "../../../components/Carousel";
+import CarouselDetail from "../../../components/CarouselDetail";
+import FavButton from "./Components/FavButton";
+import StarsRating from "./Components/StarsRating";
 
 interface props {
     data: ComponentInterface
@@ -35,8 +37,15 @@ function BuySection({ data }: props) {
             <div className="d-none d-lg-flex bg-light col-lg-7 p-4 position-relative   align-items-start justify-content-center">
                 <img className="img-fluid sticky-top z-1 p-4" style={{ maxHeight: "80vh" }} src={selectedImage} alt={data.title} />
             </div>
-            <Carousel arrayImages={images} autoPlay={false}/>
-            <BuyContainer data={data}/>
+            <div className="d-flex flex-column d-lg-none">
+                <div className="d-flex align-items-center justify-content-between">
+                    <StarsRating review={4}></StarsRating>
+                    <FavButton styles="d-flex justify-content-end"></FavButton>
+                </div>
+                <h2 className="d-flex text-dark display-5 text-wrap text-truncate mb-0">{data.title}</h2>
+            </div>
+            <CarouselDetail arrayImages={images} autoPlay={false} />
+            <BuyContainer data={data} />
             <hr className="border-dark border-1  col-12 p-0" />
         </section>
     )

@@ -12,19 +12,19 @@ function ReviewsSection() {
 
     const reviews: userReview[] = [
         {
-            user: "Skogarmaor",
+            user: "Ragnar Lothbrok",
             date: "5/11/2023",
             stars: 4,
             review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum accusamus consequuntur rerum, voluptates Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum accusamus consequuntur rerum,"
         },
         {
-            user: "Skogarmaor",
+            user: "Ragnar Lothbrok",
             date: "5/11/2023",
             stars: 4,
             review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum accusamus consequuntur rerum, voluptates Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum accusamus consequuntur rerum,"
         },
         {
-            user: "Skogarmaor",
+            user: "Ragnar Lothbrok",
             date: "5/11/2023",
             stars: 4,
             review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum accusamus consequuntur rerum, voluptates Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum accusamus consequuntur rerum,"

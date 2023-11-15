@@ -16,7 +16,7 @@ function BuyContainer({data}:props) {
                 <FavButton styles="d-none d-lg-flex justify-content-end"></FavButton>
                 <h2 className="d-none d-lg-flex text-dark display-6 text-wrap text-truncate">{data.title}</h2>
                 <div className="d-none d-lg-flex flex-row fs-5 text-warning align-items-center mt-2">
-                    <p className="me-3 mb-0 text-dark p-0">4.5</p>
+                    <span className="me-3 mb-0 text-dark p-0">4.5</span>
                     <StarsRating review={4}></StarsRating>
                     <span className="text-dark fs-6">(1)</span>
                 </div>

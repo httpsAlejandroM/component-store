@@ -3,10 +3,10 @@ interface props {
     autoPlay: boolean
 }
 
-function Carousel({ arrayImages, autoPlay }: props) {
+function CarouselDetail({ arrayImages, autoPlay }: props) {
     return (
         <article className="d-flex justify-content-center align-items-center d-lg-none" >
-            <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-theme="light" data-bs-ride={autoPlay ? "carousel" : "false"} >
+            <div id="carouselExampleAutoplaying" className="carousel slide w-100" data-bs-theme="light" data-bs-ride={autoPlay ? "carousel" : "false"} >
                 <div className="carousel-inner" >
                     <div className="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
@@ -21,7 +21,7 @@ function Carousel({ arrayImages, autoPlay }: props) {
                         ))}
                     </div>
                     <div className="carousel-item active " style={{maxHeight:"60vh", minHeight:"60vh"}} data-bs-interval="5500">
-                        <img src={arrayImages[0]}  className="d-block img-fluid" alt="Imagen del producto 1" />
+                        <img src={arrayImages[0]}  style={{maxHeight:"50vh"}} className="d-block img-fluid" alt="Imagen del producto 1" />
                     </div>
                     {
                         arrayImages.slice(1).map((image: string, index: number) => {
@@ -29,13 +29,13 @@ function Carousel({ arrayImages, autoPlay }: props) {
                                 <div
                                     key={image}
                                     className="carousel-item " style={{maxHeight:"60vh", minHeight:"60vh"}} data-bs-interval="5500">
-                                    <img src={image}  className="d-block img-fluid" alt={`Imagen del producto ${index + 2}`} />
+                                    <img src={image}  className=" img-fluid" alt={`Imagen del producto ${index + 2}`} />
                                 </div>
                             )
                         })
                     }
                 </div>
-                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                <button className="carousel-control-prev" type="button"  data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
                     <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span className="visually-hidden">Previous</span>
                 </button>
@@ -50,4 +50,4 @@ function Carousel({ arrayImages, autoPlay }: props) {
     )
 }
 
-export default Carousel
+export default CarouselDetail

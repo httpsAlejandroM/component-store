@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setFetchFilters } from "../../redux/slices/search.slice";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { collapseHandler } from "./Navlink";
 
 interface NavlinkDropwDown {
   linkName: string;
@@ -27,6 +26,16 @@ function NavDropDown({ linkName }: NavlinkDropwDown) {
 
     getSubmenu()
   },[])
+
+const collapseElementList = document.querySelector("#navbarScroll")
+ const collapser = document.querySelector(".navbar-toggler")
+ const collapseHandler = () => {
+    if (collapser) {
+      collapser.classList.add("collapsed")
+      collapser.setAttribute("aria-expanded", "false")
+      collapseElementList && collapseElementList.classList.remove("show")
+    }
+  }
   
   return (
     <li className="nav-item dropdown mx-3 fs-5" >
