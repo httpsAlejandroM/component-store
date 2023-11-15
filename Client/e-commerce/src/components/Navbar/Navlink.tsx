@@ -6,7 +6,11 @@ interface NavlinkProps {
     route: string
   }
 
- const collapseElementList = document.querySelector("#navbarScroll")
+ 
+  
+  function Navlink({ linkName, route }: NavlinkProps) {
+
+    const collapseElementList = document.querySelector("#navbarScroll")
  const collapser = document.querySelector(".navbar-toggler")
  const collapseHandler = () => {
     if (collapser) {
@@ -15,8 +19,6 @@ interface NavlinkProps {
       collapseElementList && collapseElementList.classList.remove("show")
     }
   }
-  
-  function Navlink({ linkName, route }: NavlinkProps) {
     
     return (
       <li className="nav-item mx-3 fs-5" onClick={()=>collapseHandler()}>
