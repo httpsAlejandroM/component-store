@@ -35,25 +35,26 @@ function ReviewsSection() {
         <section className="container">
             <div className="d-flex flex-column">
                 <h3 className="text-success-alpha p-1 fs-2 mt-2 mb-3">Opiniones del producto</h3>
-                
-                <div className="d-flex flex-row justify-content-between">
-                <div className="col-5 d-flex flex-row fs-5 text-warning align-items-center my-3">
-                <p className="me-3 mb-0 text-dark p-0">4.5</p>
-                    <StarsRating review={4}></StarsRating>
-                    <span className="text-dark fs-6">(1)</span>
-                </div>
-                   <div className="col-lg-3 col-xl-2">
-                   <SortReviews/>
-                   </div>
+
+                <div className="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between">
+                    <div className="col-12 col-sm-5 d-flex flex-row fs-5 text-warning align-items-center my-3">
+                        <p className="me-3 mb-0 text-dark p-0">4.5</p>
+                        <StarsRating review={4}></StarsRating>
+                        <span className="text-dark fs-6">(1)</span>
+                    </div>
+                    <div className="col-10 mb-2 mb-sm-0 col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                        <SortReviews />
+                    </div>
                 </div>
             </div>
             {
                 reviews.map((review: userReview, index: number) => {
                     return (
                         <div key={index} className="d-flex flex-column p-3 my-0">
-                            <div className="d-flex flex-row justify-content-between">
-                                <div className="d-flex flex-row">
-                                    <span className="text-success-alpha">{review.user} <span className="fw-normal text-dark">{review.date}</span></span>
+                            <div className="d-flex flex-row justify-content-between ">
+                                <div className="d-flex flex-column flex-sm-row ">
+                                    <span className="text-success-alpha">{review.user}</span>
+                                    <span className="fw-normal text-dark ms-3">{review.date}</span>
                                 </div>
                                 <StarsRating review={review.stars} ></StarsRating>
                             </div>
@@ -61,7 +62,7 @@ function ReviewsSection() {
                                 <p className="mt-1">{review.review}
                                 </p>
                             </div>
-                            <hr className="border-dark border-1 my-0"/>
+                            <hr className="border-dark border-1 my-0" />
                         </div>
                     )
                 })

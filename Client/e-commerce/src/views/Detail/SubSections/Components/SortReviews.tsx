@@ -19,7 +19,7 @@ function SortReviews() {
 
     return (
         <>
-            <div className="dropdown col-12">
+            <div className="dropdown col-9 col-sm-12">
                 <button className="btn btn-buy col-12 dropdown-toggle px-0"  type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     {currentSort}
                 </button>
