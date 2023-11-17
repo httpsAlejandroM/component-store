@@ -4,8 +4,8 @@ import mosaico from "../../../../src/assets/mosaico.jpg"
 import { useEffect } from "react";
 import BuyContainer from "./Components/BuyContainer";
 import CarouselDetail from "../../../components/CarouselDetail";
-import FavButton from "./Components/FavButton";
-import StarsRating from "./Components/StarsRating";
+import ImgDetail from "./Components/ImgDetail";
+import TopResponsiveDetail from "./Components/TopResponsiveDetail";
 
 interface props {
     data: ComponentInterface
@@ -34,22 +34,10 @@ function BuySection({ data }: props) {
                     />
                 ))}
             </div>
-            <div className="d-none d-lg-flex bg-light col-lg-7 p-4 position-relative   align-items-start justify-content-center">
-                <img className="img-fluid sticky-top z-1 p-4" style={{ maxHeight: "80vh" }} src={selectedImage} alt={data.title} />
-            </div>
-            <div className="d-flex flex-column d-lg-none">
-                <div className="d-flex align-items-center justify-content-between">
-                <div className="d-flex flex-row fs-5 text-warning align-items-center mt-2">
-                    <span className="me-3 mb-0 text-dark p-0">4.5</span>
-                    <StarsRating review={4}></StarsRating>
-                    <span className="text-dark fs-6">(1)</span>
-                </div>
-                    <FavButton styles="d-flex justify-content-end"></FavButton>
-                </div>
-                <h2 className="d-flex text-dark display-5 text-wrap text-truncate mb-0">{data.title}</h2>
-            </div>
+            <ImgDetail selectedImage={selectedImage} data={data}/>
+            <TopResponsiveDetail data={data}/>
             <CarouselDetail arrayImages={images} autoPlay={false} />
-            <BuyContainer data={data} />
+            <BuyContainer data={data} selectedImage={selectedImage}/>
             <hr className="border-dark border-1  col-12 p-0" />
         </section>
     )
