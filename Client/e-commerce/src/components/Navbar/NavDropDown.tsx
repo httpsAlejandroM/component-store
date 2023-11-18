@@ -6,9 +6,10 @@ import axios from "axios";
 
 interface NavlinkDropwDown {
   linkName: string;
+  collapseHandler:Function
 }
 
-function NavDropDown({ linkName }: NavlinkDropwDown) {
+function NavDropDown({ linkName, collapseHandler }: NavlinkDropwDown) {
   const [submenu, setSubmenu] = useState([])
   const dispatch = useAppDispatch()
   const fetchFilters = useAppSelector((state) => state.searchReducer)
@@ -27,16 +28,7 @@ function NavDropDown({ linkName }: NavlinkDropwDown) {
     getSubmenu()
   },[])
 
-const collapseElementList = document.querySelector("#navbarScroll")
- const collapser = document.querySelector(".navbar-toggler")
- const collapseHandler = () => {
-    if (collapser) {
-      collapser.classList.add("collapsed")
-      collapser.setAttribute("aria-expanded", "false")
-      collapseElementList && collapseElementList.classList.remove("show")
-    }
-  }
-  
+
   return (
     <li className="nav-item dropdown mx-3 fs-5" >
       <button className="nav-link dropdown-toggle text-white link-success" role="button" data-bs-toggle="dropdown" aria-expanded="false">

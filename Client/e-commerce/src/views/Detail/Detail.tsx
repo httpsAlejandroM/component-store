@@ -19,11 +19,10 @@ function Detail() {
 
     //AGREGAR EFECTO DE ZOOM A LA IMAGEN DEL PRODUCTO
     //A INPUT DE CANTIDAD PONER DE PRODUCTOS A COMPRAR PONER PARA ESCRIBIR UN NUMERO Y NO SOLO AUMENTAR O BAJAR CONTIDAD CON BOTONES
-    //ADAPTAR A MOBILE
     //AGREGAR FUNCIONALIDADES
 
     return (
-        <main className="container-fluid content ">
+        <main className="container-fluid content mt-4">
             <section className="bg-light container rounded-4 py-1">
                 {data && <BuySection data={data.data}></BuySection>}
                 {data && <DescriptionProduct data={data} />}
