@@ -12,7 +12,6 @@ interface props {
 }
 
 function BuySection({ data }: props) {
-    //PONER USEREF EN COMPONENTE NAVLINK Y NAVDROPDOWN
 
     const images = [data.image, mosaico]
     const [selectedImage, setSelectedImage] = useState(images[0])
@@ -26,7 +25,6 @@ function BuySection({ data }: props) {
     }
 
     const moveLens = (event: any) => {
-        //console.log(`X:${e.pageX} Y:${e.pageY}`);
         let x, y, cx, cy, max_xpos, max_ypos;
         const productImgRect = productImg.current?.getBoundingClientRect()
 
@@ -48,19 +46,22 @@ function BuySection({ data }: props) {
 
             magnifiedImg.current.style.backgroundImage = `url(${selectedImage})`;
             magnifiedImg.current.style.backgroundPosition = `-${x * cx}px -${y * cy}px`;
-            magnifiedImg.current.style.backgroundSize = `${productImgRect.width * cx}px ${productImgRect?.height * cy+250}px`
+            magnifiedImg.current.style.backgroundSize = `${productImgRect.width * cx}px ${productImgRect?.height * cy+150}px`
             magnifiedImg.current.style.backgroundRepeat = "no-repeat"
         }
 
-
         if (lens.current) {
             lens.current.style.cssText = `top: ${y}px; left:${x}px`
+            lens.current.classList.add("active")
+            magnifiedImg.current?.classList.add("active")
         }
-
-
-
-
     }
+
+    const leaveLens = () => {
+      lens.current &&  lens.current.classList.remove("active")
+      magnifiedImg.current?.classList.remove("active")
+    }
+
     useEffect(() => {
         setSelectedImage(images[0])
     }, [data])
@@ -78,7 +79,7 @@ function BuySection({ data }: props) {
                     />
                 ))}
             </div>
-            <ImgDetail selectedImage={selectedImage} data={data} lensRef={lens} productImgRef={productImg} magnify={magnify} />
+            <ImgDetail selectedImage={selectedImage} data={data} lensRef={lens} productImgRef={productImg} magnify={magnify} leaveLens={leaveLens}/>
             <TopResponsiveDetail data={data} />
             <CarouselDetail arrayImages={images} autoPlay={false} />
             <BuyContainer data={data} selectedImage={selectedImage} magnifiedImgRef={magnifiedImg} />
