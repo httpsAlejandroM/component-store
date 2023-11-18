@@ -12,7 +12,7 @@ interface props {
     magnifiedImgRef: any
 }
 
-function BuyContainer({ data, selectedImage, magnifiedImgRef }: props) {
+function BuyContainer({ data, magnifiedImgRef }: props) {
     return (
         <div className="bg-light col-lg-4 p-4 d-flex flex-column  position-relative border border-dark-subtle text-wrap rounded-top-4 rounded-bottom-0 border-bottom-0">
             <div ref={magnifiedImgRef} className={`magnified-img d-none d-lg-flex bg-light position-absolute top-0 start-0 p-2 rounded-4 `}>
