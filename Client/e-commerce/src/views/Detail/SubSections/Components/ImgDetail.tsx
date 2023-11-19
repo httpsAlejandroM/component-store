@@ -13,7 +13,7 @@ function ImgDetail({ selectedImage, data, lensRef, productImgRef, magnify, leave
 
     return (
         < >
-            <div className="d-none d-lg-flex bg-light col-lg-7 p-4 position-relative align-items-start justify-content-center">
+            <div className="lens-container d-none d-lg-flex bg-dark col-lg-7 p-4 position-relative ">
                 <img onMouseMove={(e)=>magnify(e)} ref={productImgRef} className="img-fluid sticky-top z-1 p-4" style={{ maxHeight: "80vh" }} src={selectedImage} alt={data.title} />
                 <div ref={lensRef} onMouseOut={(e)=>leaveLens(e)} onMouseMove={(e)=>magnify(e)} className='magnifier-lens z-2'></div>
             </div>

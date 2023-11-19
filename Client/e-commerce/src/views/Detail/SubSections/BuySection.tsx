@@ -20,23 +20,19 @@ function BuySection({ data }: props) {
     const productImg = useRef<HTMLImageElement>(null)
     const magnifiedImg = useRef<HTMLDivElement>(null)
 
-    const magnify = (event: any) => {
-        moveLens(event)
-    }
-
     const moveLens = (event: any) => {
         let x, y, cx, cy, max_xpos, max_ypos;
         const productImgRect = productImg.current?.getBoundingClientRect()
 
         if (productImgRect && lens.current) {
-            x = event.pageX - productImgRect.left - lens.current.offsetWidth / 3.2;
-            y = event.pageY - productImgRect.top - lens.current.offsetHeight / 3.7
+            x = event.clientX - productImgRect.left - lens.current.offsetWidth / 3.2;
+            y = event.clientY - productImgRect.top - lens.current.offsetHeight / 3.7
             max_xpos = productImgRect.width - lens.current.offsetWidth
             max_ypos = productImgRect.height - lens.current.offsetHeight
 
             if (x > max_xpos) x = max_xpos;
             if (x < 0) x = 0;
-            if (y > max_ypos) x = max_ypos;
+            if (y > max_ypos) y = max_ypos;
             if (y < 0) y = 0;
         }
 
@@ -45,8 +41,8 @@ function BuySection({ data }: props) {
             cy = magnifiedImg.current?.offsetHeight / lens.current?.offsetHeight
 
             magnifiedImg.current.style.backgroundImage = `url(${selectedImage})`;
-            magnifiedImg.current.style.backgroundPosition = `-${x * cx}px -${y * cy}px`;
-            magnifiedImg.current.style.backgroundSize = `${productImgRect.width * cx}px ${productImgRect?.height * cy+150}px`
+            magnifiedImg.current.style.backgroundPosition = `-${x * cx}px -${-95 + y * cy}px`;
+            magnifiedImg.current.style.backgroundSize = `${productImgRect.width * cx}px ${productImgRect?.height * cy}px`
             magnifiedImg.current.style.backgroundRepeat = "no-repeat"
         }
 
@@ -64,7 +60,7 @@ function BuySection({ data }: props) {
 
     useEffect(() => {
         setSelectedImage(images[0])
-    }, [data])
+    }, [data, productImg])
 
     return (
         <section className="container row mt-2" style={{ minHeight: "85vh" }}>
@@ -79,7 +75,7 @@ function BuySection({ data }: props) {
                     />
                 ))}
             </div>
-            <ImgDetail selectedImage={selectedImage} data={data} lensRef={lens} productImgRef={productImg} magnify={magnify} leaveLens={leaveLens}/>
+            <ImgDetail selectedImage={selectedImage} data={data} lensRef={lens} productImgRef={productImg} magnify={moveLens} leaveLens={leaveLens}/>
             <TopResponsiveDetail data={data} />
             <CarouselDetail arrayImages={images} autoPlay={false} />
             <BuyContainer data={data} selectedImage={selectedImage} magnifiedImgRef={magnifiedImg} />
