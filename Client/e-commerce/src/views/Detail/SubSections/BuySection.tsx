@@ -19,29 +19,30 @@ function BuySection({ data }: props) {
     const lens = useRef<HTMLDivElement>(null)
     const productImg = useRef<HTMLImageElement>(null)
     const magnifiedImg = useRef<HTMLDivElement>(null)
+    const containerImg = useRef<HTMLDivElement>(null)
 
     const moveLens = (event: any) => {
-        let x, y, cx, cy, max_xpos, max_ypos;
+        let x, y, cx, cy, max_xpos, max_ypos, marginX, marginY;
         const productImgRect = productImg.current?.getBoundingClientRect()
+       
+        if (productImgRect && lens.current && containerImg.current) {
+            marginX = (containerImg.current?.offsetWidth - productImgRect?.width ) / 2
+            marginY = (containerImg.current?.offsetHeight - productImgRect?.height) / 2
+            x = event.clientX - productImgRect.left - lens.current.offsetWidth / 2 + marginX;
+            y = event.clientY - productImgRect.top - lens.current.offsetHeight / 2 + marginY
+            max_xpos = productImgRect.width - lens.current.offsetWidth + marginX
+            max_ypos = productImgRect.height - lens.current.offsetHeight + marginY 
 
-        if (productImgRect && lens.current) {
-            x = event.clientX - productImgRect.left - lens.current.offsetWidth / 3.2;
-            y = event.clientY - productImgRect.top - lens.current.offsetHeight / 3.7
-            max_xpos = productImgRect.width - lens.current.offsetWidth
-            max_ypos = productImgRect.height - lens.current.offsetHeight
-
-            if (x > max_xpos) x = max_xpos;
-            if (x < 0) x = 0;
-            if (y > max_ypos) y = max_ypos;
-            if (y < 0) y = 0;
+            x = Math.max(marginX, Math.min(x, max_xpos));
+            y = Math.max(marginY, Math.min(y, max_ypos));
         }
 
-        if (magnifiedImg.current && lens.current && x && y && productImgRect) {
-            cx = magnifiedImg.current?.offsetWidth / lens.current?.offsetWidth
+        if (magnifiedImg.current && lens.current && x && y && productImgRect && marginX && marginY) {
+            cx = magnifiedImg.current?.offsetWidth / lens.current?.offsetWidth 
             cy = magnifiedImg.current?.offsetHeight / lens.current?.offsetHeight
 
             magnifiedImg.current.style.backgroundImage = `url(${selectedImage})`;
-            magnifiedImg.current.style.backgroundPosition = `-${x * cx}px -${-95 + y * cy}px`;
+            magnifiedImg.current.style.backgroundPosition = `-${(x - marginX)* cx}px -${(y - marginY) * cy}px`;
             magnifiedImg.current.style.backgroundSize = `${productImgRect.width * cx}px ${productImgRect?.height * cy}px`
             magnifiedImg.current.style.backgroundRepeat = "no-repeat"
         }
@@ -75,7 +76,7 @@ function BuySection({ data }: props) {
                     />
                 ))}
             </div>
-            <ImgDetail selectedImage={selectedImage} data={data} lensRef={lens} productImgRef={productImg} magnify={moveLens} leaveLens={leaveLens}/>
+            <ImgDetail selectedImage={selectedImage} data={data} containerImg={containerImg} lensRef={lens} productImgRef={productImg} magnify={moveLens} leaveLens={leaveLens}/>
             <TopResponsiveDetail data={data} />
             <CarouselDetail arrayImages={images} autoPlay={false} />
             <BuyContainer data={data} selectedImage={selectedImage} magnifiedImgRef={magnifiedImg} />

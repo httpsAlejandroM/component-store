@@ -607,9 +607,9 @@ form {
   position: absolute;
   top: 0;
   left: 0;
-  width: 130px;
-  height: 118px;
-  background-color: rgba(0, 0, 0, .4);
+  width: 150px;
+  height: 150px;
+  background-color: rgba(0, 0, 0, .5);
   border: 2px solid var(--green-dark);
   display: none;
 }
@@ -628,11 +628,10 @@ form {
 }
 
 .magnified-img.active {
-  display: block;
+  display: flex;
 }
   
   .lens-container{
     overflow: hidden;
-    align-self: center;
-  
   }
+
