@@ -38,8 +38,8 @@ function ReviewsSection() {
 
                 <div className="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between">
                     <div className="col-12 col-sm-5 d-flex flex-row fs-5 text-warning align-items-center my-3">
-                        <p className="me-3 mb-0 text-dark p-0">4.5</p>
-                        <StarsRating review={4}></StarsRating>
+                        <p className="me-3 mb-0 fs-3 text-dark p-0">4.5</p>
+                        <StarsRating review={4.5}></StarsRating>
                         <span className="text-dark fs-6">(1)</span>
                     </div>
                     <div className="col-10 mb-2 mb-sm-0 col-sm-5 col-md-4 col-lg-3 col-xl-2">
@@ -53,8 +53,8 @@ function ReviewsSection() {
                         <div key={index} className="d-flex flex-column p-3 my-0">
                             <div className="d-flex flex-row justify-content-between ">
                                 <div className="d-flex flex-column flex-sm-row ">
-                                <span className="text-success-alpha me-3">{review.user}</span>
-                                    <StarsRating review={review.stars} ></StarsRating>
+                                <span className="text-success-alpha me-3 fw-bolder">{review.user}</span>
+                                    <StarsRating review={4.5} ></StarsRating>
                                 </div>
                                 
                                     <span className="fw-normal text-dark ">{review.date}</span>

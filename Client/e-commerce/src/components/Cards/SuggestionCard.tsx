@@ -9,7 +9,7 @@ interface SuggestionCard {
 
 function SuggestionCard({ title, image, id, setInput }: SuggestionCard) {
   return (
-        <Link to={`/detail/${id}`} 
+        <Link title={title} to={`/detail/${id}`} 
         onClick={()=>setInput("")}
         style={{textDecoration:"none"}} >
     <div className={`results text-decoration-none d-flex align-items-center justify-content-start`} > 

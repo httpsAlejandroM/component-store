@@ -20,8 +20,8 @@ function BuyContainer({ data, magnifiedImgRef }: props) {
             <FavButton styles="d-none d-lg-flex justify-content-end"></FavButton>
             <h2 className="d-none d-lg-flex text-dark display-6 text-wrap text-truncate">{data.title}</h2>
             <div className="d-none d-lg-flex flex-row fs-5 text-warning align-items-center mt-2">
-                <span className="me-3 mb-0 text-dark p-0">4.5</span>
-                <StarsRating review={4}></StarsRating>
+                <span className="me-3 mb-0 text-dark p-0">{4.5}</span>
+                <StarsRating review={4.5}></StarsRating>
                 <span className="text-dark fs-6">(1)</span>
             </div>
             <div className="mt-2 "><p className="m-0 p-0 display-4">{`$${data.price}`}</p></div>
