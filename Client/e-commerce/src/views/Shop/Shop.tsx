@@ -12,7 +12,6 @@ import Loader from "../../components/Loader"
 import ArrowTop from "../../components/ArrowTop"
 
 function Shop() {
-//POSITION STATIC O FIXED A FLECHA PARA IR HACIA ARRIBA
 //AGREGAR A SUGERENCIAS DEL BUSCADOR FUNCIONALIDAD PARA MOVER CON LAS FLECHAS 
 const [components, setComponents] = useState<ComponentInterface[]>([])
 const [isLoading, setIsLoading] = useState(true)

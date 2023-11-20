@@ -202,16 +202,36 @@ body {
   overflow-wrap: break-word;
   overflow-y: auto;
   overflow-x: hidden;
-
 }
 
 .carousel-item {
   align-content: center;
 }
 
+.link-bg-light {
+  text-decoration: none;
+  color: var(--second-color);
+}
+
+.link-bg-light:hover,
+.link-bg-light:focus {
+  color: var(--green-dark) !important;
+}
+
 .dropdown-item {
   background-color: transparent !important;
 }
+
+.bg-white{
+  background-color: #f8f9fa !important;
+}
+
+.col-sm-12 .btn:first-child:active,.col-sm-12 .btn.active,.col-sm-12 .btn.show {
+  color: #fff;
+  background-color: #147732 !important;
+  border-color: #147732;
+}
+
 
 .form-control:focus {
   border-color: var(--main-alpha-color);
@@ -226,7 +246,6 @@ body {
 .img-thumbnail {
   cursor: pointer;
 }
-
 
 
 .link-success {

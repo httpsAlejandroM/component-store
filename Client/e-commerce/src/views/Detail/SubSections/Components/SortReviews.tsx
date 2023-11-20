@@ -23,11 +23,11 @@ function SortReviews() {
                 <button className="btn btn-buy col-12 dropdown-toggle px-0"  type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     {currentSort}
                 </button>
-                <ul className="dropdown-menu dropdown-menu-dark second-color col">
+                <ul className="dropdown-menu bg-white col-12">
                     {
                         sortOptions.map((option: string, index: number) => {
                             return (
-                                <li key={index}><button value={option} className={`dropdown-item text-white link-success ${currentSort == option? "disabled" : ""}`} onClick={() =>fetchSortHandler(option) }>{option}</button></li>
+                                <li key={index}><button value={option} className={`dropdown-item bg-white text-dark link-bg-light ${currentSort == option? "disabled" : ""}`} onClick={() =>fetchSortHandler(option) }>{option}</button></li>
                             )
                         })
                     }
