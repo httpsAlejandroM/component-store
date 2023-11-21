@@ -8,7 +8,7 @@ export default interface Product {
     description:string[], //Types.Array<string>,
     category:string,
     price:number,
-    stock?:number,
+    stock:number,
     reviews?:Types.DocumentArray<Review>,
     banned:boolean
 }
