@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const {DB, HOST, PORT_API} = process.env;
 
-module.exports = {
+module.exports = { 
     MONGO_DATABASE: DB, // DB "mongodb://localhost/component-store"
     MONGO_USER: "admin",
     MONGO_PASSWORD: "admin",

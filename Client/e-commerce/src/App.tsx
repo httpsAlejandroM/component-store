@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom"
 import { lazy, Suspense } from 'react';
 import Loader from "./components/Loader";
+import RouteNotFound from "./components/RouteNotFound";
 const Footer = lazy(() => import('./components/Footer/Footer'));
 const Navbar = lazy(() => import('./components/Navbar/Navbar'));
 const Home = lazy(() => import('./views/Home/Home'));
@@ -15,6 +16,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="*" element={<RouteNotFound/>}/>
           <Route path="/shop" element={<Shop />} />
           <Route path={`/detail/:id`} element={<Detail />} />
           <Route path={`/ayuda`} element={<Support />} />

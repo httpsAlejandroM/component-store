@@ -1,6 +1,6 @@
 
 interface props {
-  styles: object
+  styles?: object
   alpha?:boolean
 }
 

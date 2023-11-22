@@ -1,3 +1,4 @@
+import Spinner from "../../components/Spinner"
 import { useGetComponentsQuery } from "../../redux/componentsApi/componentsApi"
 import CardsCarousel from "./CardsCarousel"
 
@@ -24,7 +25,7 @@ const carouselSections = [
   return (
     <article className="container">
     {
-      carouselSections.map((section)=>{
+      data ? carouselSections.map((section)=>{
         return (
           <div key={section.id} className="my-5">
           <h3 className="text-success">{section.title}</h3>
@@ -34,6 +35,15 @@ const carouselSections = [
 
          }
     
+        </div>
+        )
+      })
+      : carouselSections.map((section)=>{
+        return (
+          <div key={section.id} className="my-5">
+          <h3 className="text-success" >{section.title}</h3>
+          <hr className="border-success border-2  my-4" />
+         <Spinner styles={{margin:"auto"}}/>
         </div>
         )
       })
