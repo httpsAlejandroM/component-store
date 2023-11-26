@@ -24,7 +24,7 @@ function Detail() {
 
     return (
         <main className="container-fluid content mt-4">
-            <section className="bg-light container rounded-4 py-1">
+            <section className="bg-light container d-flex flex-column align-items-center rounded-4 py-1">
                 {data && <BuySection data={data.data}></BuySection>}
                 {data && <DescriptionProduct data={data} />}
                 <ReviewsSection />

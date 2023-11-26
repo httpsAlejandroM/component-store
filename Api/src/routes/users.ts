@@ -4,7 +4,7 @@ import { getUsers, getUserByEmail, postUser, putUser, deleteUser } from "../cont
 const router = Router()
 
 router.get("/", getUsers)
-router.get("/:email", getUserByEmail)
+router.post("/login", getUserByEmail)
 router.post("/", postUser)
 router.put("/:id", putUser)
 router.delete("/:id", deleteUser)

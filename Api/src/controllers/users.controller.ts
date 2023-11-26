@@ -12,10 +12,10 @@ const getUsers = async (req: Request, res: Response) => {
     }
 }
 const getUserByEmail = async (req: Request, res: Response) => {
-    const { email } = req.params
+    const { email } = req.body
     try {
         const userByEmail = await UserByEmail(email)
-        responseHandler(res, 200, userByEmail)
+        responseHandler(res, 200, userByEmail[0])
     } catch (error) {
         errorHandler(res, 400, "Error, algo salio mal", error)
     }

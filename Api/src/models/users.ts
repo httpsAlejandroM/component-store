@@ -38,7 +38,7 @@ const userSchema = new Schema<User>({
     },
     image: {
         type: String,
-        default: "https://ibb.co/hyqFFB3",
+        default: "https://i.ibb.co/f2cddkj/perfil-default.png",
         trim: true,
     },
     favorites: [
