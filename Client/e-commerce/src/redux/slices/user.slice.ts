@@ -22,7 +22,6 @@ export const userSlice = createSlice({
   reducers: {
     getUser: (state, action:PayloadAction<userInfo>) => {
          const {email, image, userName} = action.payload
-         console.log(action.payload);
          
          return {
           ...state,

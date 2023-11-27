@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom"
 import { lazy, Suspense } from 'react';
 import Loader from "./components/Loader";
 import RouteNotFound from "./components/RouteNotFound";
+import { PrivateRoutes, PublicRoutes } from "./utilities/routes";
 const Footer = lazy(() => import('./components/Footer/Footer'));
 const Navbar = lazy(() => import('./components/Navbar/Navbar'));
 const Home = lazy(() => import('./views/Home/Home'));
@@ -10,21 +11,23 @@ const Detail = lazy(() => import('./views/Detail/Detail'));
 const Support = lazy(()=> import("./views/Support/Support"))
 const Login = lazy(()=> import("./components/Login/Login"))
 const Dashboard = lazy(()=> import("./components/Dashboard/Dashboard"))
-
-
+const AuthGuard = lazy(()=> import("./components/AuthGuard"))
+ 
 function App() {
   return (
     <>
       <Suspense fallback={<Loader/>}>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path={PublicRoutes.HOME} element={<Home />} />
           <Route path="*" element={<RouteNotFound/>}/>
-          <Route path="shop" element={<Shop />} />
-          <Route path={`detail/:id`} element={<Detail />} />
-          <Route path={`ayuda`} element={<Support />} />
-          <Route path="dashboard" element={<Dashboard/>}/>
-          <Route path="login" element={<Login/>}/>
+          <Route path={PublicRoutes.SHOP} element={<Shop />} />
+          <Route path={`${PublicRoutes.DETAIL}/:id`} element={<Detail />} />
+          <Route path={PublicRoutes.SUPPORT} element={<Support />} />
+          <Route path={PublicRoutes.LOGIN} element={<Login/>}/>
+          <Route element={<AuthGuard/>}>
+          <Route path={PrivateRoutes.DASHBOARD} element={<Dashboard/>}/>
+          </Route>
         </Routes>
         <Footer />
       </Suspense>

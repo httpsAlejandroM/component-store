@@ -4,6 +4,7 @@ import { useState, useRef } from "react"
 import logoPag from "../../assets/firebase.png"
 import SearchBar from "./SearchBar"
 import { Link } from "react-router-dom"
+import { PublicRoutes } from "../../utilities/routes"
 
 function Navbar() {
   const [prevScroll, setPrevScroll] = useState(window.scrollY)
@@ -63,11 +64,11 @@ function Navbar() {
           <div ref={collapseElementList} className="collapse navbar-collapse justify-content-lg-center" id="navbarScroll">
             <div>
               <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" >
-                <Navlink collapseHandler={collapseHandler} linkName="Inicio" route="/"></Navlink>
-                <Navlink collapseHandler={collapseHandler} linkName="Productos" route="/shop"></Navlink>
+                <Navlink collapseHandler={collapseHandler} linkName="Inicio" route={PublicRoutes.HOME}></Navlink>
+                <Navlink collapseHandler={collapseHandler} linkName="Productos" route={PublicRoutes.SHOP}></Navlink>
                 <Navlink collapseHandler={collapseHandler} linkName="Arma tu Pc" route="arma-tu-pc"></Navlink>
                 <NavDropDown collapseHandler={collapseHandler} linkName="Categorias" />
-                <Navlink collapseHandler={collapseHandler} linkName="Ayuda" route="/ayuda"></Navlink>
+                <Navlink collapseHandler={collapseHandler} linkName="Ayuda" route={PublicRoutes.SUPPORT}></Navlink>
               </ul>
               <SearchBar styles="col-11 d-flex container py-2  d-lg-none"></SearchBar>
             </div>

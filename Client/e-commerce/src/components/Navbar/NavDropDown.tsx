@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setFetchFilters } from "../../redux/slices/search.slice";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { PublicRoutes } from "../../utilities/routes";
 
 interface NavlinkDropwDown {
   linkName: string;
@@ -38,7 +39,7 @@ function NavDropDown({ linkName, collapseHandler }: NavlinkDropwDown) {
         {
           submenu.map((item:{count:number, category:string}, index: number) => {
             return (
-              <li key={index}><Link to="/shop" onClick={() => toCategoryHandler(item.category)} key={index} className="dropdown-item text-white link-success">{item.category}</Link></li>
+              <li key={index}><Link to={PublicRoutes.SHOP} onClick={() => toCategoryHandler(item.category)} key={index} className="dropdown-item text-white link-success">{item.category}</Link></li>
             )
           })
         }

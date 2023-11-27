@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { PublicRoutes } from "../../utilities/routes"
 
 interface SuggestionCard {
     title:string
@@ -9,7 +10,7 @@ interface SuggestionCard {
 
 function SuggestionCard({ title, image, id, setInput }: SuggestionCard) {
   return (
-        <Link title={title} to={`/detail/${id}`} 
+        <Link title={title} to={`/${PublicRoutes.DETAIL}/${id}`} 
         onClick={()=>setInput("")}
         style={{textDecoration:"none"}} >
     <div className={`results text-decoration-none d-flex align-items-center justify-content-start`} > 
