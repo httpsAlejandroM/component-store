@@ -11,19 +11,25 @@ const getUsers = async (req: Request, res: Response) => {
         errorHandler(res, 400, "Error, algo salio mal", error)
     }
 }
-const getUserByEmail = async (req: Request, res: Response) => {
-    const { email } = req.body
+const loginHandler = async (req: Request, res: Response) => {
+    const { email, password } = req.body
     try {
-        const userByEmail = await UserByEmail(email)
+        if(!email || !password){
+            return errorHandler(res,400,"Faltan campos requeridos")
+        }
+        const userByEmail = await UserByEmail(email, password)
         responseHandler(res, 200, userByEmail[0])
     } catch (error) {
         errorHandler(res, 400, "Error, algo salio mal", error)
     }
 }
 const postUser = async (req: Request, res: Response) => {
-    const { name, email, birthday, userName } = req.body
+    const { name, email, userName, password} = req.body
     try {
-        const newUser = await createUser(name, email, userName)
+        if(!userName || !email || !userName || !password){
+            return errorHandler(res,400,"Faltan campos requeridos")
+        }
+        const newUser = await createUser(name, email, userName, password)
         responseHandler(res, 200, newUser)
     } catch (error) {
         errorHandler(res, 400, "Error, algo salio mal", error)
@@ -38,7 +44,7 @@ const deleteUser = async (req: Request, res: Response) => {
 
 export {
     getUsers,
-    getUserByEmail,
+    loginHandler,
     postUser,
     putUser,
     deleteUser
