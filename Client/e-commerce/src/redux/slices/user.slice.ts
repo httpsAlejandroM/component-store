@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import {type PayloadAction} from '@reduxjs/toolkit'
-import { userInfo } from '../../interfaces/user.interface'
+import { AuthState } from '../../interfaces/user.interface'
 
-const initialState: userInfo = {
+const initialState: AuthState = {
     id: "",
     name: "",
     email: "",
@@ -13,14 +13,17 @@ const initialState: userInfo = {
     image: "",
     isAdmin: false,
     direction: "",
-    userName: ""
+    userName: "",
+    accessToken: "",
+    refreshToken: "",
+    isAuthenticated: false
 }
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    getUser: (state, action:PayloadAction<userInfo>) => {
+    getUser: (state, action:PayloadAction<AuthState>) => {
          const {email, image, userName} = action.payload
          
          return {
@@ -29,6 +32,24 @@ export const userSlice = createSlice({
           email,
           image
          }
+    },
+    setTokens: (state, action: PayloadAction<{ accessToken: string; refreshToken: string }>) => {
+      const { accessToken, refreshToken } = action.payload;
+
+      return {
+        ...state,
+        isAuthenticated: true,
+        accessToken,
+        refreshToken,
+      };
+    },
+    clearTokens: (state) => {
+      return {
+        ...state,
+        isAuthenticated: false,
+        accessToken: "",
+        refreshToken: "",
+      };
     }
   },
 })

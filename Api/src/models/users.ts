@@ -1,6 +1,9 @@
 import { Schema, model } from "mongoose";
 import User from "../interfaces/user.interface";
 import bcrypt from "bcrypt"
+import { generateAccessToken, generateRefreshToken } from "../services/auth.service";
+import getUserInfo from "../utils/getUserInfo";
+import Token from "./token";
 
 const userSchema = new Schema<User>({
     name: {
@@ -96,6 +99,22 @@ userSchema.methods.userNameExist = async function(userName:string){
 userSchema.methods.comparePassword = async function(password:string, hash:string){
     const same = await bcrypt.compare(password, hash)
     return same
+}
+
+userSchema.methods.creacteAccessToken = function(){
+return generateAccessToken(getUserInfo(this))
+}
+
+userSchema.methods.creacteRefreshToken = async function(){
+    const refreshToken = generateRefreshToken(getUserInfo(this))
+    try {
+        await new Token({token: refreshToken}).save()
+
+        return refreshToken
+    } catch (error) {
+        console.log(error);
+        
+    }
 }
 
 export default model("User", userSchema);

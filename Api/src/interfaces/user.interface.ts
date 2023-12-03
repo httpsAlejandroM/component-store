@@ -10,8 +10,17 @@ export default interface User {
     isAdmin: boolean,
     banned: boolean,
     image: string,
-    favorites: Favorite[]
+    favorites: Favorite[],
     cart: Favorite[]
     userNameExist(userName: string): Promise<boolean>;
-    comparePassword(password: string): Promise<boolean>;
+    comparePassword(password: string, hash:string): Promise<boolean>;
+    creacteAccessToken(): Promise<string>
+    creacteRefreshToken(): Promise<string>
+}
+
+export interface UserInterface {
+    userName: string
+    name: string
+    _id: string
+    image: string
 }

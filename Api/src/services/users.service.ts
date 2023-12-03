@@ -1,14 +1,34 @@
-import users from "../models/users";
 import Users from "../models/users";
+import getUserInfo from "../utils/getUserInfo";
 
 const getAllUsers = async () => {
     const allUsers = await Users.find()
     return allUsers
 }
 
-const UserByEmail = async (email:string, password:string) => {
-    const userByEmail = Users.find({email:email})
-    return userByEmail
+const loginUser = async (email:string, password:string) => {
+    const userByEmail = await Users.findOne({email:email})
+    if(userByEmail) {
+        const correctPassword = await userByEmail.comparePassword(password, userByEmail.password)
+        if(correctPassword){
+            const accessToken = userByEmail.creacteAccessToken()
+            const refreshToken = await userByEmail.creacteRefreshToken()
+            return {
+                accessToken,
+                refreshToken,
+                userInfo: getUserInfo(userByEmail)
+            }
+        }
+        else{
+            return "User or password incorrect"
+        }
+        
+    }
+    else {
+        return "User not found"
+    }
+
+
 }
 
 
@@ -25,6 +45,6 @@ const createUser = async (name:string, email:string, userName:string, password:s
 
 export {
     getAllUsers,
-    UserByEmail,
+    loginUser,
     createUser
 }

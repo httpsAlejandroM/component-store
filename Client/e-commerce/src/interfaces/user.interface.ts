@@ -28,5 +28,11 @@ export interface QueryUser {
 export interface userResponse {
     error: boolean
     total: number
-    data: userInfo
+    data: AuthState
+}
+
+export interface AuthState extends userInfo {
+    isAuthenticated: boolean
+    accessToken: string 
+    refreshToken: string 
 }

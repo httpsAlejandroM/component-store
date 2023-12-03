@@ -1,41 +1,59 @@
 import { Navigate } from "react-router-dom"
-import { useLoginMutation } from "../../redux/userApi/userApi"
 import { useAppDispatch, useAppSelector } from "../../redux/hooks"
-import { getUser } from "../../redux/slices/user.slice"
 import { PrivateRoutes } from "../../utilities/routes"
+import axios from "axios"
+import { useState } from "react"
 
 
 function Login() {
-  const userInfo = useAppSelector((state)=>state.userReducer)
-  const [login] = useLoginMutation({ fixedCacheKey: "shared-update-post" })
+  const [formState, setFormState] = useState({
+    email: "",
+    password:""
+  })
+
+  const { email, password } = formState
+
+  const userInfo = useAppSelector((state) => state.userReducer)
   const dispatch = useAppDispatch()
 
   const fetchUser = async (e: any) => {
     e.preventDefault()
     try {
-      const userInfo = await login({ email: "Ragnar@asgard.com" }).unwrap()
-      userInfo && dispatch(getUser(userInfo))
+      const response = await axios.post("http://localhost:3000/users/login", {
+
+      })
     } catch (error) {
       console.log(error);
-
     }
   }
 
-  if(userInfo.email){
-    return <Navigate to={`/${PrivateRoutes.DASHBOARD}`}/>
+  if (userInfo.email) {
+    return <Navigate to={`/${PrivateRoutes.DASHBOARD}`} />
   }
-  
+
   return (
     <section className="min-vh-100 content d-flex justify-content-center align-items-center">
-      <form className="bg-light w-25 p-5 d-flex flex-column">
+      <form className="bg-light w-25 p-5 d-flex flex-column rounded rounded-3">
         <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-          <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-          <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+          <label htmlFor="exampleInputEmail1" className="form-label"> Email address </label>
+          <input
+            type="email"
+            placeholder="Ingrese su Email"
+            name="email"
+            value={email}
+            className="form-control"
+          />
         </div>
         <div className="mb-3">
           <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-          <input type="password" className="form-control" id="exampleInputPassword1" />
+          <input
+            type="password"
+            name="password"
+            value={password}
+            placeholder="Ingrese su password"
+            className="form-control"
+            id="exampleInputPassword1"
+          />
         </div>
         <button type="submit" onClick={(e) => fetchUser(e)} className="btn btn-primary">Submit</button>
       </form>

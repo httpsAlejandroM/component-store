@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UserByEmail, createUser, getAllUsers } from "../services/users.service";
+import { loginUser, createUser, getAllUsers } from "../services/users.service";
 import errorHandler from "../utils/errorHandler";
 import responseHandler from "../utils/responseHandler";
 
@@ -11,19 +11,19 @@ const getUsers = async (req: Request, res: Response) => {
         errorHandler(res, 400, "Error, algo salio mal", error)
     }
 }
-const loginHandler = async (req: Request, res: Response) => {
+const loginController = async (req: Request, res: Response) => {
     const { email, password } = req.body
     try {
         if(!email || !password){
             return errorHandler(res,400,"Faltan campos requeridos")
         }
-        const userByEmail = await UserByEmail(email, password)
-        responseHandler(res, 200, userByEmail[0])
+        const userByEmail = await loginUser(email, password)
+        responseHandler(res, 200, userByEmail)
     } catch (error) {
         errorHandler(res, 400, "Error, algo salio mal", error)
     }
 }
-const postUser = async (req: Request, res: Response) => {
+const signUpController = async (req: Request, res: Response) => {
     const { name, email, userName, password} = req.body
     try {
         if(!userName || !email || !userName || !password){
@@ -44,8 +44,8 @@ const deleteUser = async (req: Request, res: Response) => {
 
 export {
     getUsers,
-    loginHandler,
-    postUser,
+    loginController,
+    signUpController,
     putUser,
     deleteUser
 }
