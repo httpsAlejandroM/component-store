@@ -14,18 +14,23 @@ const loginUser = async (email:string, password:string) => {
             const accessToken = userByEmail.creacteAccessToken()
             const refreshToken = await userByEmail.creacteRefreshToken()
             return {
+                isAuthenticated:true,
                 accessToken,
                 refreshToken,
                 userInfo: getUserInfo(userByEmail)
             }
         }
         else{
-            return "User or password incorrect"
+            return {
+                message: "User or password incorrect"
+            }
         }
         
     }
     else {
-        return "User not found"
+        return {
+            message: "User not found"
+        }
     }
 
 

@@ -31,8 +31,18 @@ export interface userResponse {
     data: AuthState
 }
 
-export interface AuthState extends userInfo {
+export interface AuthState {
     isAuthenticated: boolean
     accessToken: string 
-    refreshToken: string 
+    refreshToken: string,
+    userInfo: userInfo
+}
+
+export interface AccessToken {
+    accessToken: string
+}
+
+export interface AccessTokenResponse {
+    error: boolean
+    data : AccessToken
 }

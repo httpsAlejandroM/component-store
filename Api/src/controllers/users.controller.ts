@@ -15,7 +15,7 @@ const loginController = async (req: Request, res: Response) => {
     const { email, password } = req.body
     try {
         if(!email || !password){
-            return errorHandler(res,400,"Faltan campos requeridos")
+            return responseHandler(res,200,{message: "Faltan campos requeridos"})
         }
         const userByEmail = await loginUser(email, password)
         responseHandler(res, 200, userByEmail)

@@ -3,7 +3,7 @@ import { refreshTokenController } from "../controllers/auth.controller";
 
 const router = Router()
 
-router.get("/", refreshTokenController)
+router.post("/", refreshTokenController)
 
 
 export { router }
