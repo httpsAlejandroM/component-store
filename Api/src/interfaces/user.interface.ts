@@ -19,8 +19,11 @@ export default interface User {
 }
 
 export interface UserInterface {
-    userName: string
+    id: string
     name: string
-    _id: string
+    email: string
+    userName: string
     image: string
+    favorites: Favorite[]
+    cart: Favorite[]
 }

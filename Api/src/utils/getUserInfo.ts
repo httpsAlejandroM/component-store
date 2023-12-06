@@ -1,5 +1,6 @@
+import { UserInterface } from "../interfaces/user.interface"
 
-const getUserInfo = (user:any) => {
+const getUserInfo = (user:any) :UserInterface => {
     return {
         id: user._id,
         name: user.name,

@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks"
 import { PrivateRoutes } from "../../utilities/routes"
 import axios from "axios"
 import useForm from "../../customHooks/useForm"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { getUser, setTokens } from "../../redux/slices/user.slice"
 
 

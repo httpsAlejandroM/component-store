@@ -1,4 +1,4 @@
-import { useContext, createContext, useState, useEffect } from "react"
+import { useContext, createContext, useState } from "react"
 import { userResponse } from "../interfaces/user.interface"
 
 interface AuthProviderProps{

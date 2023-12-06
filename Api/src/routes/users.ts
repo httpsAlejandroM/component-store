@@ -1,9 +1,11 @@
 import { Router } from "express";
-import { getUsers, loginController, signUpController, putUser, deleteUser } from "../controllers/users.controller";
+import { getUsers, loginController, signUpController, putUser, deleteUser, getUser } from "../controllers/users.controller";
+import { authenticate } from "../middlewares/authMiddleware";
 
 const router = Router()
 
-router.get("/", getUsers)
+router.get("/", authenticate, getUser)
+router.get("/allusers", getUsers)
 router.post("/login", loginController)
 router.post("/", signUpController)
 router.put("/:id", putUser)
