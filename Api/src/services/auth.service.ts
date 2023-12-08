@@ -1,36 +1,46 @@
-const { REFRESH_TOKEN, ACCESS_TOKEN } = require("../config");
-import Jwt from "jsonwebtoken"
 import Token from "../models/token";
+import getUserInfo from "../utils/getUserInfo";
+import Users from "../models/users";
+import { generateAccessToken, verifyRefreshToken } from "../utils/tokensHelpers";
 
-const sign = (payload: any, isAccessToken: boolean) => {
-    return Jwt.sign(
-        payload,
-        isAccessToken
-            ? ACCESS_TOKEN
-            : REFRESH_TOKEN,
-        {
-            algorithm: "HS256",
-            expiresIn: 3600
+const createUser = async (name:string, email:string, userName:string, password:string) => {
+    const newUser = new Users({name, email, userName, password}) //otra opcion const newUser = await Users.create({name, email, userName, password})
+    const exist = await newUser.userNameExist(userName)
+    
+    if(exist) return "Username already exist"
+
+    return await newUser.save()
+}
+
+
+const loginUser = async (email:string, password:string) => {
+    const userByEmail = await Users.findOne({email:email})
+    if(userByEmail) {
+        const correctPassword = await userByEmail.comparePassword(password, userByEmail.password)
+        if(correctPassword){
+            const accessToken = userByEmail.creacteAccessToken()
+            const refreshToken = await userByEmail.creacteRefreshToken()
+            return {
+                isAuthenticated:true,
+                accessToken,
+                refreshToken,
+                userInfo: getUserInfo(userByEmail)
+            }
         }
-    )
-}
-
-const generateAccessToken =  (user: any) => {
-    return  sign({ user }, true)
-}
-
-const generateRefreshToken = (user: any) => {
-    return sign({ user }, false)
-}
-
-const verifyAccessToken = (token: string) => {
-    return Jwt.verify(token, ACCESS_TOKEN)
-}
-
-const verifyRefreshToken = (token: string) => {
-    if (token) {
-        return Jwt.verify(token, REFRESH_TOKEN)
+        else{
+            return {
+                message: "User or password incorrect"
+            }
+        }
+        
     }
+    else {
+        return {
+            message: "User not found"
+        }
+    }
+
+
 }
 
 const findRefreshToken = async (refreshToken: string) => {
@@ -63,9 +73,9 @@ const deleteRefreshToken = async (refreshToken:string) => {
 }
 
 export {
+    createUser,
+    loginUser,
     generateAccessToken,
-    generateRefreshToken,
     findRefreshToken,
-    verifyAccessToken,
     deleteRefreshToken
 }
