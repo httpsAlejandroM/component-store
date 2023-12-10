@@ -5,9 +5,13 @@ import { generateAccessToken, verifyRefreshToken } from "../utils/tokensHelpers"
 
 const createUser = async (name:string, email:string, userName:string, password:string) => {
     const newUser = new Users({name, email, userName, password}) //otra opcion const newUser = await Users.create({name, email, userName, password})
-    const exist = await newUser.userNameExist(userName)
-    
-    if(exist) return "Username already exist"
+    const errorMessage = []
+    const emailExist = await newUser.EmailExist(email)
+    const userNameExist = await newUser.userNameExist(userName)
+
+    if(emailExist)  errorMessage.push("Email en uso")
+    if(userNameExist) errorMessage.push("Nombre de usuario en uso")
+    if(errorMessage.length > 0) return {message: errorMessage}
 
     return await newUser.save()
 }
@@ -75,7 +79,6 @@ const deleteRefreshToken = async (refreshToken:string) => {
 export {
     createUser,
     loginUser,
-    generateAccessToken,
     findRefreshToken,
     deleteRefreshToken
 }

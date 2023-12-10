@@ -1,10 +1,11 @@
-import { Navigate } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../redux/hooks"
-import { PrivateRoutes } from "../../utilities/routes"
+import { PrivateRoutes, PublicRoutes } from "../../utilities/routes"
 import axios from "axios"
 import useForm from "../../customHooks/useForm"
 import { useState } from "react"
 import { getUser, setTokens } from "../../redux/slices/user.slice"
+import { BASE_URL_AUTH } from "./SignUp"
 
 
 function Login() {
@@ -25,7 +26,7 @@ function Login() {
   const fetchUser = async (e: any) => {
     e.preventDefault()
     try {
-      const response = await axios.post("http://localhost:3000/users/login", {
+      const response = await axios.post(`${BASE_URL_AUTH}/login`, {
         email,
         password
       })
@@ -77,6 +78,7 @@ function Login() {
           />
         </div>
         <button type="submit" onClick={(e) => fetchUser(e)} className="btn btn-primary">Submit</button>
+        <div className="d-flex mt-4"><p>Aun no esta registrado? <Link className="link-primary" to={`/${PublicRoutes.SIGNUP}`}>Registrese</Link></p></div>
       </form>
     </section>
   )

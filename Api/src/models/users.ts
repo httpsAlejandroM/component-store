@@ -1,9 +1,9 @@
 import { Schema, model } from "mongoose";
 import User from "../interfaces/user.interface";
 import bcrypt from "bcrypt"
-import { generateAccessToken, generateRefreshToken } from "../services/auth.service";
 import getUserInfo from "../utils/getUserInfo";
 import Token from "./token";
+import { generateAccessToken, generateRefreshToken } from "../utils/tokensHelpers";
 
 const userSchema = new Schema<User>({
     name: {
@@ -91,9 +91,13 @@ userSchema.pre("save", function(next){
 })
 
 userSchema.methods.userNameExist = async function(userName:string){
-    const result = await this.model("User").find({userName})
+    const userNameExist = await this.model("User").find({userName})
+    return userNameExist.length > 0
+}
 
-    return result.length > 0
+userSchema.methods.EmailExist = async function(email:string){
+    const emailExist = await this.model("User").find({email})
+    return emailExist.length > 0
 }
 
 userSchema.methods.comparePassword = async function(password:string, hash:string){

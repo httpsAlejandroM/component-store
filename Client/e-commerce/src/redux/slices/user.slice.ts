@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { type PayloadAction } from '@reduxjs/toolkit'
 import { AuthState, userResponse } from '../../interfaces/user.interface'
 //const token = localStorage.getItem("token")
-const BASE_URL = "http://localhost:3000/users"
+const BASE_URL = "http://localhost:3000/auth"
 
 
 export const requestNewAccessToken = createAsyncThunk("reqNewToken", async (refreshToken:string) => {
@@ -56,7 +56,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     getUser: (state, action: PayloadAction<userResponse>) => {
-      const { email, userName } = action.payload.data.userInfo
+      const { email, userName, image } = action.payload.data.userInfo
       
       return {
         ...state,
@@ -64,7 +64,7 @@ export const userSlice = createSlice({
           ...state.userInfo,
           userName,
           email,
-          //image
+          image
         }
       }
     },

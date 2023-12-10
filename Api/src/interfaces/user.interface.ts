@@ -12,7 +12,8 @@ export default interface User {
     image: string,
     favorites: Favorite[],
     cart: Favorite[]
-    userNameExist(userName: string): Promise<boolean>;
+    userNameExist(userName:string): Promise<boolean>;
+    EmailExist(email:string): Promise<boolean>;
     comparePassword(password: string, hash:string): Promise<boolean>;
     creacteAccessToken(): Promise<string>
     creacteRefreshToken(): Promise<string>

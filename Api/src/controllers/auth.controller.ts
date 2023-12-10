@@ -8,7 +8,7 @@ const signUpController = async (req: Request, res: Response) => {
     const { name, email, userName, password } = req.body
     try {
         if (!userName || !email || !userName || !password) {
-            return errorHandler(res, 400, "Faltan campos requeridos")
+            return responseHandler(res, 200, {message: ["Faltan campos requeridos"]})
         }
         const newUser = await createUser(name, email, userName, password)
         responseHandler(res, 200, newUser)

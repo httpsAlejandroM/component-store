@@ -9,7 +9,8 @@ const Home = lazy(() => import('./views/Home/Home'));
 const Shop = lazy(() => import('./views/Shop/Shop'));
 const Detail = lazy(() => import('./views/Detail/Detail'));
 const Support = lazy(()=> import("./views/Support/Support"))
-const Login = lazy(()=> import("./components/Login/Login"))
+const SignUp = lazy(()=> import("./components/Auth/SignUp"))
+const Login = lazy(()=> import("./components/Auth/Login"))
 const Dashboard = lazy(()=> import("./components/Dashboard/Dashboard"))
 const AuthGuard = lazy(()=> import("./components/AuthGuard"))
  
@@ -24,6 +25,7 @@ function App() {
           <Route path={PublicRoutes.SHOP} element={<Shop />} />
           <Route path={`${PublicRoutes.DETAIL}/:id`} element={<Detail />} />
           <Route path={PublicRoutes.SUPPORT} element={<Support />} />
+          <Route path={PublicRoutes.SIGNUP} element={<SignUp/>}/>
           <Route path={PublicRoutes.LOGIN} element={<Login/>}/>
           <Route element={<AuthGuard/>}>
           <Route path={PrivateRoutes.DASHBOARD} element={<Dashboard/>}/>
