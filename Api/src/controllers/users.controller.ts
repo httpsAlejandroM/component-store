@@ -8,7 +8,8 @@ import { CustomRequest } from "../interfaces/customRequest.interface";
 const getUser = async (req: CustomRequest, res: Response) => {
     const { user } = req
     try {
-        return responseHandler(res,200, {userInfo: user})
+        const isAuthenticated = user? true : false
+        return responseHandler(res,200, {isAuthenticated, userInfo: user})
     } catch (error) {
         errorHandler(res, 400, "Algo salio mal", error)
     }

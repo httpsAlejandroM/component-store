@@ -14,12 +14,8 @@ export const userApi = createApi({
                 body: credentials
             }),
             transformResponse: (response: userResponse) => {
-                const { email, userName, image } = response.data
-                return {
-                    image,
-                    email,
-                    userName
-                }
+                console.log(response);
+                
             }
         })
     })

@@ -49,7 +49,8 @@ const loginUser = async (email:string, password:string) => {
 
 const findRefreshToken = async (refreshToken: string) => {
     const foundToken = await Token.findOne({ token: refreshToken })
-
+    console.log(foundToken);
+    
     if (!foundToken) return { message: "No autorizado" }
 
     const token = foundToken.token ? foundToken.token : ""

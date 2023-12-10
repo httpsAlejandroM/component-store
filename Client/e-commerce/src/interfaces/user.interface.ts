@@ -36,6 +36,7 @@ export interface AuthState {
     accessToken: string 
     refreshToken: string,
     userInfo: userInfo
+    message?: string
 }
 
 export interface AccessToken {

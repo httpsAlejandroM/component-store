@@ -35,10 +35,10 @@ const refreshTokenController = async (req: Request, res: Response) => {
     try {
         if (refreshToken) {
             const accessToken = await findRefreshToken(refreshToken)
-            responseHandler(res, 200, { accessToken })
+            responseHandler(res, 200, accessToken)
         }
         else {
-            responseHandler(res, 401, { message: "No autorizado 1" })
+            responseHandler(res, 401, { message: "No autorizado" })
         }
     } catch (error) {
         errorHandler(res, 400, "Error, algo salio mal", error)

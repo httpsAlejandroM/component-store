@@ -1,41 +1,39 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { type PayloadAction } from '@reduxjs/toolkit'
 import { AuthState, userResponse } from '../../interfaces/user.interface'
-//const token = localStorage.getItem("token")
-const BASE_URL = "http://localhost:3000/auth"
+import { getRefreshToken } from '../../utilities/getRefreshToken'
+import { getAccessToken, getUserInfo } from '../../auth/AuthHelpers'
 
+const refreshToken = getRefreshToken()
 
-export const requestNewAccessToken = createAsyncThunk("reqNewToken", async (refreshToken:string) => {
-  const response = await fetch(`${BASE_URL}/refresh-token`,{
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${refreshToken}`
+export const checkAuth = createAsyncThunk("userInfo/checkAutch", async (_, { getState }) => {
+  const currentState = getState() as AuthState
+  if (currentState.accessToken) {
+    const userInfo = await getUserInfo(currentState.accessToken)
+    if (userInfo) {
+      console.log(userInfo);
+      return userInfo
     }
-  })
-  if(response.ok){
-    const json = await response.json()
-    return json.data.accessToken
-  }
-})
-
-export const checkAuth = createAsyncThunk(`checkAuth`, async () =>{
-  if(initialState.accessToken){
-//el usuario esta autenticado
-  }
-  else{
-    //el usuario no est autenticado
+    return null
+  } else {
     const token = getRefreshToken()
     if(token){
-
+      const newAccessToken = await getAccessToken()
+      if(newAccessToken){
+        const userInfo = await getUserInfo(newAccessToken)        
+        if(userInfo){
+          return userInfo
+        }
+      }
     }
+    return 
   }
-} )
+})
 
 const initialState: AuthState = {
   isAuthenticated: false,
   accessToken: "",
-  refreshToken:"",
+  refreshToken: refreshToken ? refreshToken : "",
   userInfo: {
     id: "",
     name: "",
@@ -44,7 +42,7 @@ const initialState: AuthState = {
     birthday: "",
     cart: [],
     favorites: [],
-    image: "https://elcomercio.pe/resizer/O8x8YYFbZZTw4nrrPgyCOpwELMM=/580x330/smart/filters:format(jpeg):quality(90)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/PGYD2K7YIFDU3GGYJIOPLCPAPY.jpg",
+    image: "",
     isAdmin: false,
     direction: "",
     userName: "",
@@ -57,7 +55,6 @@ export const userSlice = createSlice({
   reducers: {
     getUser: (state, action: PayloadAction<userResponse>) => {
       const { email, userName, image } = action.payload.data.userInfo
-      
       return {
         ...state,
         userInfo: {
@@ -69,14 +66,16 @@ export const userSlice = createSlice({
       }
     },
     setTokens: (state, action: PayloadAction<userResponse>) => {
-      const { accessToken, refreshToken, isAuthenticated } = action.payload.data;
+      const { refreshToken, isAuthenticated, accessToken } = action.payload.data;
 
-       localStorage.setItem("token", JSON.stringify(refreshToken))
-      
+      if (refreshToken) {
+        localStorage.setItem("token", JSON.stringify(refreshToken))
+      }
+
       return {
         ...state,
         isAuthenticated,
-        accessToken,
+        accessToken
       };
     },
     clearTokens: (state) => {
@@ -87,6 +86,27 @@ export const userSlice = createSlice({
         refreshToken: "",
       };
     }
+  },
+  extraReducers: (builder) => {
+    builder
+      // .addCase(checkAuth.pending, (state) => {
+
+      // })
+      .addCase(checkAuth.fulfilled, (state, action) => {
+        if(action.payload){
+          const { isAuthenticated, userInfo } = action.payload.data
+          return {
+            ...state,
+            isAuthenticated,
+            userInfo
+          }
+        }
+        
+      })
+      .addCase(checkAuth.rejected, (state) => {
+        console.log(state);
+        
+      });
   },
 })
 
