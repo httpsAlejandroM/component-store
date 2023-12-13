@@ -4,8 +4,6 @@ import { AuthState, userResponse } from '../../interfaces/user.interface'
 import { getRefreshToken } from '../../utilities/getRefreshToken'
 import { getAccessToken, getUserInfo } from '../../auth/AuthHelpers'
 
-const refreshToken = getRefreshToken()
-
 export const checkAuth = createAsyncThunk("userInfo/checkAutch", async (_, { getState }) => {
   const currentState = getState() as AuthState
   if (currentState.accessToken) {
@@ -33,7 +31,7 @@ export const checkAuth = createAsyncThunk("userInfo/checkAutch", async (_, { get
 const initialState: AuthState = {
   isAuthenticated: false,
   accessToken: "",
-  refreshToken: refreshToken ? refreshToken : "",
+  refreshToken: "",
   userInfo: {
     id: "",
     name: "",
@@ -79,6 +77,10 @@ export const userSlice = createSlice({
       };
     },
     clearTokens: (state) => {
+      const refreshToken = getRefreshToken()
+      if (refreshToken) {
+        localStorage.removeItem("token")
+      } 
       return {
         ...state,
         isAuthenticated: false,

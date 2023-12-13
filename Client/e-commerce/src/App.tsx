@@ -1,8 +1,10 @@
 import { Routes, Route } from "react-router-dom"
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import Loader from "./components/Loader";
 import RouteNotFound from "./components/RouteNotFound";
 import { PrivateRoutes, PublicRoutes } from "./utilities/routes";
+import { checkAuth } from "./redux/slices/user.slice";
+import { useAppDispatch } from "./redux/hooks";
 const Footer = lazy(() => import('./components/Footer/Footer'));
 const Navbar = lazy(() => import('./components/Navbar/Navbar'));
 const Home = lazy(() => import('./views/Home/Home'));
@@ -13,15 +15,12 @@ const SignUp = lazy(() => import("./components/Auth/SignUp"))
 const Login = lazy(() => import("./components/Auth/Login"))
 const Dashboard = lazy(() => import("./components/Dashboard/Dashboard"))
 const AuthGuard = lazy(() => import("./components/AuthGuard"))
-import { useEffect } from "react";
-import { checkAuth } from "./redux/slices/user.slice";
-import { useAppDispatch } from "./redux/hooks";
 
 function App() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-   dispatch( checkAuth())
+    dispatch(checkAuth())
   }, [])
 
   return (

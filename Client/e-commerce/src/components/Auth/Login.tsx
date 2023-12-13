@@ -34,10 +34,12 @@ function Login() {
         setError(response.data.data.message)
       }
       else{
+        console.log("usuario logeado");
+        
       setError("")  
       dispatch(getUser(response.data))
       dispatch(setTokens(response.data))
-      return <Navigate to={`/${PrivateRoutes.DASHBOARD}`} />
+      //return <Navigate to={`/${PrivateRoutes.DASHBOARD}`}  />
       }
 
     } catch (error) {

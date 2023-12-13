@@ -26,28 +26,32 @@ function Navbar() {
     }
     setPrevScroll(currentScrollPos)
   }
-  
- const collapseHandler = () => {
-  if (collapser.current) {
-    collapser.current.classList.add("collapsed")
-    collapser.current.setAttribute("aria-expanded", "false")
-    collapseElementList.current && collapseElementList.current.classList.remove("show")
+
+  const collapseHandler = () => {
+    if (collapser.current) {
+      collapser.current.classList.add("collapsed")
+      collapser.current.setAttribute("aria-expanded", "false")
+      collapseElementList.current && collapseElementList.current.classList.remove("show")
+    }
   }
-}
 
   return (
     <header ref={navBar} className="header" id="header">
-      <nav className="container-fluid navbar navbar-expand-lg d-flex flex-column pt-1">
+      <nav className="container navbar navbar-expand-lg d-flex flex-column pt-1">
         <div className="container-fluid d-flex m-0 flex-lg-column " >
-          <div className="d-flex d-lg-flex ">
+          <div className="d-flex d-lg-flex">
             <div className=" d-none d-md-flex align-items-center col-1 " >
               <Link className=""
-                to="/"><img
+                to={`${PublicRoutes.HOME}`}><img
                   className="img-fluid ms-lg-3"
                   src={logoPag}
                   alt="Logo Pagina" /></Link>
             </div>
-            <SearchBar styles={"col-11 d-none d-lg-flex container py-4 w-75"}></SearchBar>
+            <SearchBar styles={"col-11 d-none d-lg-flex container py-4 w-75 "}></SearchBar>
+            <div className="align-self-center">
+              {/* <button className="btn"><i className="bi bi-cart2 text-white fs-3"></i></button> */}
+              <Link to={`${PublicRoutes.LOGIN}`} className="btn btn-outline-success ms-1 border-0"><i className="bi bi-person-fill fs-3"></i></Link>
+            </div>
           </div>
           <button
             ref={collapser}

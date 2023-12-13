@@ -70,7 +70,7 @@ const deleteRefreshToken = async (refreshToken:string) => {
    const deletedToken = await Token.findOneAndRemove({token: refreshToken})
 
    if(deletedToken){
-    return {message:"Token deleted" }
+    return {success:"Token deleted" }
    }
    else{
     return {message:"Token not found"}
