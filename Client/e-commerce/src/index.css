@@ -292,6 +292,20 @@ body {
   right: -7vw
 }
 
+/* .bg-login{
+  background-image: url(../src/assets/diseño2.jpeg);
+  background-position: center center;
+} */
+
+.bg-section-login{
+  background-color: #00a00d;
+  background: linear-gradient(to right, var(--second-bg-color), var(--main-alpha-color)) !important;
+}
+
+/* .white-shadow{
+  box-shadow: 1px 1px 7px -1px rgba(255, 254, 255, 1) !important;
+} */
+
 .btn-buy {
   background-color: rgba(15, 133, 50, 0.9);
   color: var(--bg-color);
