@@ -292,10 +292,11 @@ body {
   right: -7vw
 }
 
-/* .bg-login{
+.bg-login{
   background-image: url(../src/assets/diseño2.jpeg);
   background-position: center center;
-} */
+  background-size: cover;
+}
 
 .bg-section-login{
   background-color: #00a00d;

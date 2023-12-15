@@ -9,7 +9,6 @@ import { BASE_URL_AUTH } from "./SignUp"
 import onFireGamingLogo from "../../assets/firebase.png"
 import facebook from "../../assets/facebok.png"
 import google from "../../assets/google.png"
-import diseño from "../../assets/diseño2.jpeg"
 
 function Login() {
   const initialForm = {
@@ -55,14 +54,14 @@ function Login() {
   return (
     <section className="min-vh-100 container-fluid content bg-section-login d-flex align-items-center justify-content-center">
       <div className="row container align-items-stretch mt-4 mb-4">
-        <div className="col bg-login d-none d-lg-block col-md-5 col-lg-6 rounded-start-3" style={{ backgroundImage: `url(${diseño})`, backgroundPosition: "center center" }}>
+        <div className="col bg-login d-none d-lg-block col-md-5 col-lg-6 rounded-start-3" >
 
         </div>
         <div className="col bg-light rounded-end-3 p-5">
 
           <div className="text-end">
             <img src={onFireGamingLogo} style={{ width: 48 }} alt="Logo" />
-            <h2 className="fw-bold text-dark text-center py-5">Bienvenido</h2>
+            <h2 className="fw-bold text-dark text-center py-4">Bienvenido</h2>
 
             {/* ********** ERROR MESSAGE *********** */}
 
