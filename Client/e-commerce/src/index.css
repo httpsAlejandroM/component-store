@@ -356,19 +356,6 @@ body {
   z-index: 1;
 }
 
-.filter-menu::before {
-  content: '';
-  position: absolute;
-  top: -21px;
-  right: 6.5vw;
-  transform: translateX(-50%);
-  border-width: 10px;
-  border-style: solid;
-  border-color: transparent transparent var(--second-color) transparent;
-}
-
-
-
 .menu-desplegable:hover {
   color: var(--main-color) !important;
 }

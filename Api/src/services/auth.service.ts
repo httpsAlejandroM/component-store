@@ -33,7 +33,7 @@ const loginUser = async (email:string, password:string) => {
         }
         else{
             return {
-                message: "User or password incorrect"
+                message: "Correo electrónico o Contraseña incorrectos"
             }
         }
         

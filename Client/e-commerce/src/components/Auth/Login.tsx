@@ -9,6 +9,7 @@ import { BASE_URL_AUTH } from "./SignUp"
 import onFireGamingLogo from "../../assets/firebase.png"
 import facebook from "../../assets/facebok.png"
 import google from "../../assets/google.png"
+import { Tooltip } from 'react-tooltip';
 
 function Login() {
   const initialForm = {
@@ -25,8 +26,24 @@ function Login() {
     return <Navigate to={`/${PrivateRoutes.DASHBOARD}`} />
   }
 
+  const validateEmail = (email: string) => {
+    const patronEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    return patronEmail.test(email)
+  }
+
+  const validatePassword = (password: string) => {
+    const patronPassword = /^(?=.*[A-Z])(?=.*\d).{8,20}$/;
+
+    return patronPassword.test(password);
+  }
+
   const fetchUser = async (e: any) => {
     e.preventDefault()
+    if (!validatePassword(password) || !validateEmail(email)) {
+      setError("Complete correctamente los campos")
+      return
+    }
     try {
       const response = await axios.post(`${BASE_URL_AUTH}/login`, {
         email,
@@ -53,6 +70,26 @@ function Login() {
 
   return (
     <section className="min-vh-100 container-fluid content bg-section-login d-flex align-items-center justify-content-center">
+      {email && !validateEmail(email) &&
+        <Tooltip
+          id="my-tooltip"
+          place="bottom">
+        </Tooltip>
+      }
+      {
+        password && !validatePassword(password) &&
+        <Tooltip
+          id="passwordTooltip"
+          place="bottom"
+        >
+          <div className="text-start bg-tooltip">
+            <p>La contraseña debe contener:</p>
+            <div>- Al menos una letra mayúscula.</div>
+            <div>- Al menos un número.</div>
+            <div>- Entre 8 a 20 caracteres.</div>
+          </div>
+        </Tooltip>
+      }
       <div className="row container align-items-stretch mt-4 mb-4">
         <div className="col bg-login d-none d-lg-block col-md-5 col-lg-6 rounded-start-3" >
 
@@ -66,47 +103,59 @@ function Login() {
             {/* ********** ERROR MESSAGE *********** */}
 
             <div>
-              <p style={{ backgroundColor: "#FFDADA" }} className="text-danger text-start fw-bold">{error}</p>
+              {error && <p style={{ backgroundColor: "#fce8e8" }} className="text-danger text-start py-1 px-2">{error}</p>}
             </div>
 
-            <form className="bg-light">
 
-              <div className="mb-4 text-start">
+            <form className="bg-light " noValidate>
+
+              <div className="mb-4 text-start ">
                 <label className="form-label text-dark" htmlFor="email" >Correo electrónico</label>
-                <input 
-                className="form-control" 
-                type="email" id="email" 
-                value={email} name="email" 
-                onChange={onInputChange} />
+                <input
+                  className={`form-control ${email ? !validateEmail(email) ? "is-invalid" : "is-valid" : ""}`}
+                  type="email" id="email"
+                  value={email} name="email"
+                  onChange={onInputChange}
+                  data-tooltip-id="my-tooltip"
+                  data-tooltip-content="Introduza un correo electrónico valido"
+                  data-tooltip-delay-show={800}
+                />
+
               </div>
 
               <div className="mb-4 text-start">
                 <label className="form-label text-dark" htmlFor="password" >Contraseña</label>
-                <input 
-                className="form-control" 
-                type="password" id="password" 
-                value={password} name="password" 
-                onChange={onInputChange} />
+                <input
+                  className={`form-control ${password ? !validatePassword(password) ? "is-invalid" : "is-valid" : ""}`}
+                  type="password" id="password"
+                  value={password} name="password"
+                  data-tooltip-id="passwordTooltip"
+                  onChange={onInputChange}
+                  data-tooltip-delay-show={800}
+                />
+
               </div>
 
               <div className="d-grid">
                 <button className="btn btn-buy" type="submit" onClick={fetchUser}>Iniciar Sesión</button>
               </div>
 
-              <div className="my-3 text-dark text-start">
+              <div className="my-3 text-dark text-start my-4">
                 <span className="text-dark ">No tienes cuenta? <Link className="" to={`/${PublicRoutes.SIGNUP}`}>Regístrate</Link></span>
-               
+
                 <br />
                 {/* <span><a href="#">Recuperar contraseña</a></span> */}
               </div>
             </form>
 
-            <hr />
+            <div className="mt-4">
+              <div className="border-bottom border-2 text-center" style={{ height: "0.8rem" }}>
+                <span className="col-12 bg-light px-2">O Iniciar Sesión con</span>
+              </div>
+            </div>
 
             <div className="container w-100 my-5 text-dark ">
-              <div className="row text-center">
-                <div className="col-12">Iniciar Sesión con</div>
-              </div>
+
               <div className="row mt-3">
                 <div className="col-12 col-sm">
                   <button className="btn btn-outline-primary w-100 my-1">
