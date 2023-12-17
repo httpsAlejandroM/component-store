@@ -10,6 +10,7 @@ import onFireGamingLogo from "../../assets/firebase.png"
 import facebook from "../../assets/facebok.png"
 import google from "../../assets/google.png"
 import { Tooltip } from 'react-tooltip';
+import { validateEmail, validatePassword } from "../../utilities/inputsValidates"
 
 function Login() {
   const initialForm = {
@@ -26,17 +27,6 @@ function Login() {
     return <Navigate to={`/${PrivateRoutes.DASHBOARD}`} />
   }
 
-  const validateEmail = (email: string) => {
-    const patronEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    return patronEmail.test(email)
-  }
-
-  const validatePassword = (password: string) => {
-    const patronPassword = /^(?=.*[A-Z])(?=.*\d).{8,20}$/;
-
-    return patronPassword.test(password);
-  }
 
   const fetchUser = async (e: any) => {
     e.preventDefault()
@@ -117,7 +107,7 @@ function Login() {
                   value={email} name="email"
                   onChange={onInputChange}
                   data-tooltip-id="my-tooltip"
-                  data-tooltip-content="Introduza un correo electrónico valido"
+                  data-tooltip-content="Introduzca un correo electrónico valido"
                   data-tooltip-delay-show={800}
                 />
 
