@@ -306,6 +306,9 @@ body {
 /* .white-shadow{
   box-shadow: 1px 1px 7px -1px rgba(255, 254, 255, 1) !important;
 } */
+.bg-tooltip{
+  background-color: var(--second-bg-color);
+}
 
 .btn-buy {
   background-color: rgba(15, 133, 50, 0.9);

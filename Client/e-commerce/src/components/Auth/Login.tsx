@@ -71,12 +71,15 @@ function Login() {
         <Tooltip
           id="passwordTooltip"
           place="bottom"
+          style={{backgroundColor:"#13181d"}}
         >
           <div className="text-start bg-tooltip">
             <p>La contraseña debe contener:</p>
-            <div>- Al menos una letra mayúscula.</div>
-            <div>- Al menos un número.</div>
-            <div>- Entre 8 a 20 caracteres.</div>
+            <ul className="bg-tooltip px-3">
+              <li className="bg-tooltip">Al menos una letra mayúscula.</li>
+              <li className="bg-tooltip">Al menos un número.</li>
+              <li className="bg-tooltip">Entre 8 a 20 caracteres.</li>
+            </ul>
           </div>
         </Tooltip>
       }
