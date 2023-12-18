@@ -9,8 +9,6 @@ import { BASE_URL_AUTH } from "./SignUp"
 import onFireGamingLogo from "../../assets/firebase.png"
 import facebook from "../../assets/facebok.png"
 import google from "../../assets/google.png"
-import { Tooltip } from 'react-tooltip';
-import { validateEmail, validatePassword } from "../../utilities/inputsValidates"
 
 function Login() {
   const initialForm = {
@@ -30,10 +28,7 @@ function Login() {
 
   const fetchUser = async (e: any) => {
     e.preventDefault()
-    if (!validatePassword(password) || !validateEmail(email)) {
-      setError("Complete correctamente los campos")
-      return
-    }
+    
     try {
       const response = await axios.post(`${BASE_URL_AUTH}/login`, {
         email,
@@ -60,29 +55,6 @@ function Login() {
 
   return (
     <section className="min-vh-100 container-fluid content bg-section-login d-flex align-items-center justify-content-center">
-      {email && !validateEmail(email) &&
-        <Tooltip
-          id="my-tooltip"
-          place="bottom">
-        </Tooltip>
-      }
-      {
-        password && !validatePassword(password) &&
-        <Tooltip
-          id="passwordTooltip"
-          place="bottom"
-          style={{backgroundColor:"#13181d"}}
-        >
-          <div className="text-start bg-tooltip">
-            <p>La contraseña debe contener:</p>
-            <ul className="bg-tooltip px-3">
-              <li className="bg-tooltip">Al menos una letra mayúscula.</li>
-              <li className="bg-tooltip">Al menos un número.</li>
-              <li className="bg-tooltip">Entre 8 a 20 caracteres.</li>
-            </ul>
-          </div>
-        </Tooltip>
-      }
       <div className="row container align-items-stretch mt-4 mb-4">
         <div className="col bg-login d-none d-lg-block col-md-5 col-lg-6 rounded-start-3" >
 
@@ -105,7 +77,7 @@ function Login() {
               <div className="mb-4 text-start ">
                 <label className="form-label text-dark" htmlFor="email" >Correo electrónico</label>
                 <input
-                  className={`form-control ${email ? !validateEmail(email) ? "is-invalid" : "is-valid" : ""}`}
+                  className={`form-control }`}
                   type="email" id="email"
                   value={email} name="email"
                   onChange={onInputChange}
@@ -119,12 +91,10 @@ function Login() {
               <div className="mb-4 text-start">
                 <label className="form-label text-dark" htmlFor="password" >Contraseña</label>
                 <input
-                  className={`form-control ${password ? !validatePassword(password) ? "is-invalid" : "is-valid" : ""}`}
+                  className={`form-control `}
                   type="password" id="password"
                   value={password} name="password"
-                  data-tooltip-id="passwordTooltip"
                   onChange={onInputChange}
-                  data-tooltip-delay-show={800}
                 />
 
               </div>
