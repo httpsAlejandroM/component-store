@@ -418,6 +418,10 @@ body {
   width: 100px;
 }
 
+.pointer{
+  cursor: pointer;
+}
+
 .sbg-color {
   background-color: var(--second-bg-color);
 }
@@ -531,6 +535,10 @@ form {
 
 .text-success-main {
   color: var(--main-alpha-color);
+}
+
+.w-60{
+  width: 65%;
 }
 
 @media (min-width: 576px) {

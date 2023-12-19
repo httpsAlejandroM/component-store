@@ -4,9 +4,12 @@ import { useState, useRef } from "react"
 import logoPag from "../../assets/firebase.png"
 import SearchBar from "./SearchBar"
 import { Link } from "react-router-dom"
-import { PublicRoutes } from "../../utilities/routes"
+import { PrivateRoutes, PublicRoutes } from "../../utilities/routes"
+import { useAppSelector } from "../../redux/hooks"
 
 function Navbar() {
+
+  const userInfo = useAppSelector((state) => state.userReducer)
   const [prevScroll, setPrevScroll] = useState(window.scrollY)
   const [isNavbarExpanded, setIsNavbarExpanded] = useState(false)
 
@@ -40,17 +43,23 @@ function Navbar() {
       <nav className="container navbar navbar-expand-lg d-flex flex-column pt-1">
         <div className="container-fluid d-flex m-0 flex-lg-column " >
           <div className="d-flex d-lg-flex">
-            <div className=" d-none d-md-flex align-items-center col-1 " >
+            <div className=" d-none d-lg-flex align-items-center col-1 " >
               <Link className=""
                 to={`${PublicRoutes.HOME}`}><img
                   className="img-fluid ms-lg-3"
                   src={logoPag}
                   alt="Logo Pagina" /></Link>
             </div>
-            <SearchBar styles={"col-11 d-none d-lg-flex container py-4 w-75 "}></SearchBar>
+            <SearchBar styles={`col-11 d-none d-lg-flex container py-4 me-4 ${userInfo.isAuthenticated? "w-60" : "w-75"}`}></SearchBar>
             <div className="align-self-center">
-              {/* <button className="btn"><i className="bi bi-cart2 text-white fs-3"></i></button> */}
-              <Link to={`${PublicRoutes.LOGIN}`} className="btn btn-outline-success ms-1 border-0"><i className="bi bi-person-fill fs-3"></i></Link>
+              {
+                userInfo.isAuthenticated &&
+                <>
+                <Link to={`${PrivateRoutes.DASHBOARD}`} className="btn btn-outline-success ms-1 pt-2 border-0"><i className="bi bi-heart fs-4"></i></Link>
+                <Link to={`${PrivateRoutes.DASHBOARD}`} className="btn btn-outline-success ms-1 pb-2 border-0"><i className="bi bi-cart2 fs-3"></i></Link>
+                </>
+              }
+              <Link to={`${PublicRoutes.LOGIN}`} className="btn btn-outline-success ms-1 border-0"><i className="bi bi-person-fill fs-2"></i></Link>
             </div>
           </div>
           <button
