@@ -40,7 +40,7 @@ function Navbar() {
 
   return (
     <header ref={navBar} className="header" id="header">
-      <nav className="container navbar navbar-expand-lg d-flex flex-column pt-1">
+      <nav className="container-fluid navbar navbar-expand-lg d-flex flex-column pt-1">
         <div className="container-fluid d-flex m-0 flex-lg-column " >
           <div className="d-flex d-lg-flex">
             <div className=" d-none d-lg-flex align-items-center col-1 " >
