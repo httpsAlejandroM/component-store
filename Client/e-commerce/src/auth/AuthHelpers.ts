@@ -1,9 +1,10 @@
 import { userResponse } from "../interfaces/user.interface";
+import { API } from "../redux/componentsApi/componentsApi";
 import { getRefreshToken } from "../utilities/getRefreshToken";
 
 const getUserInfo = async (accessToken:string) => {
     try {
-        const response = await fetch(`http://localhost:3000/users`, {
+        const response = await fetch(`${API}/users`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -26,7 +27,7 @@ const getUserInfo = async (accessToken:string) => {
 
 const getAccessToken = async () => {
 try {
-    const response = await fetch(`http://localhost:3000/auth/refresh-token`, {
+    const response = await fetch(`${API}/auth/refresh-token`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

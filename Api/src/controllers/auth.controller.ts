@@ -38,7 +38,7 @@ const refreshTokenController = async (req: Request, res: Response) => {
             responseHandler(res, 200, accessToken)
         }
         else {
-            responseHandler(res, 401, { message: "No autorizado" })
+            responseHandler(res, 200, { message: "No autorizado" })
         }
     } catch (error) {
         errorHandler(res, 400, "Error, algo salio mal", error)

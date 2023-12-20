@@ -10,8 +10,9 @@ import google from "../../assets/google.png"
 import onFireGamingLogo from "../../assets/firebase.png"
 import { PlacesType, Tooltip } from 'react-tooltip';
 import { validateEmail, validatePassword, validateName, isSamePassword, validateUserName } from "../../utilities/inputsValidates"
+import { API } from "../../redux/componentsApi/componentsApi"
 
-export const BASE_URL_AUTH = "http://localhost:3000/auth"
+export const BASE_URL_AUTH = `${API}/auth`
 
 interface inputSignUpInterface {
   nameLabel: string
