@@ -22,7 +22,7 @@ function Login() {
   const dispatch = useAppDispatch()
 
   if (userInfo.isAuthenticated) {
-    return <Navigate to={`/${PrivateRoutes.DASHBOARD}`} />
+    return <Navigate to={`${PrivateRoutes.DASHBOARD}`} />
   }
 
 
@@ -104,7 +104,7 @@ function Login() {
               </div>
 
               <div className="my-3 text-dark text-start my-4">
-                <span className="text-dark ">No tienes cuenta? <Link className="" to={`/${PublicRoutes.SIGNUP}`}>Regístrate</Link></span>
+                <span className="text-dark ">No tienes cuenta? <Link className="" to={`${PublicRoutes.SIGNUP}`}>Regístrate</Link></span>
 
                 <br />
                 {/* <span><a href="#">Recuperar contraseña</a></span> */}

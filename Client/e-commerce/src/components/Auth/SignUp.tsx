@@ -156,7 +156,7 @@ function Login() {
           theme: "light",
         });
         setTimeout(() => {
-          navigate(`/${PublicRoutes.LOGIN}`);
+          navigate(`${PublicRoutes.LOGIN}`);
         }, 2500);
       }
 
@@ -268,7 +268,7 @@ function Login() {
                 <button className="btn btn-buy" type="submit" onClick={onClickHandler}>Registrarse</button>
               </div>
               <div className="my-3 text-dark text-start">
-                <span className="text-dark ">Ya estas registrado? <Link className="" to={`/${PublicRoutes.LOGIN}`}>Inicia Sesión</Link></span>
+                <span className="text-dark ">Ya estas registrado? <Link className="" to={`${PublicRoutes.LOGIN}`}>Inicia Sesión</Link></span>
                 <br />
               </div>
             </form>
