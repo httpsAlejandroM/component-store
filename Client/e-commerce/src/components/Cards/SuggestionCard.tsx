@@ -10,7 +10,7 @@ interface SuggestionCard {
 
 function SuggestionCard({ title, image, id, setInput }: SuggestionCard) {
   return (
-        <Link title={title} to={`/${PublicRoutes.DETAIL}/${id}`} 
+        <Link title={title} to={`${PublicRoutes.DETAIL}/${id}`} 
         onClick={()=>setInput("")}
         style={{textDecoration:"none"}} >
     <div className={`results text-decoration-none d-flex align-items-center justify-content-start`} > 

@@ -13,7 +13,7 @@ function Card({ stock, title, price, image, id }: Card) {
 
   return (
     <div title={title} className={`card m-2 col-2 box-translate ${!stock? "disabled " : ""}`} style={{ width: "15rem", height: "25rem" }}>
-      <Link to={`/${PublicRoutes.DETAIL}/${id}`}  className="text-decoration-none h-100">
+      <Link to={`${PublicRoutes.DETAIL}/${id}`}  className="text-decoration-none h-100">
         <div className="row align-items-center justify-content-center" style={{ height: "15rem" }}>
           <img src={image} className="card-img-top " style={{ maxHeight: "15rem", maxWidth: "11rem" }} alt="" />
         </div>
