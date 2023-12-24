@@ -8,10 +8,8 @@ import { Link } from "react-router-dom"
 import { PrivateRoutes } from "../../utilities/routes"
 import styles from "./Sidebar.module.css"
 
-interface props {
-}
 
-function Sidebar({  }: props) {
+function Sidebar() {
 
     const userInfo = useAppSelector((state) => state.userReducer)
     const dispatch = useAppDispatch()
@@ -82,8 +80,8 @@ function Sidebar({  }: props) {
                 <i 
                 title={"Menú"}
                 onClick={()=>setOpen(!open)}
-                className={`bi bi-list text-white fs-3 ${styles.hamburger}`}></i>
-                {open? <span className={`${styles.hamburger} card-title text-white fs-6 d-inline-block text-truncate w-100`}>{userInfo.userInfo.name}</span> : null}
+                className={`bi bi-list text-white link-success fs-3 ${styles.hamburger}`}></i>
+                {open? <span className={`${styles.hamburger} card-title text-white fs-6 d-inline-block text-truncate w-100 `}>{userInfo.userInfo.name}</span> : null}
             </div>
             {/* LINKS TO DASHBOARD SECTIONS */}
             <ul className="list-group mt-4">
@@ -98,7 +96,7 @@ function Sidebar({  }: props) {
                             to={item.link}
                             aria-current="page"
                             >
-                            <i className={item.icon}></i>
+                            <i className={`${item.icon} fs-5`}></i>
                             <div className="">
                             {open ? <span className="text-truncate">{item.name}</span> : null}
                             </div>
@@ -113,7 +111,7 @@ function Sidebar({  }: props) {
                 <i 
                 title="Cerrar sesión"
                 onClick={logOut}
-                className={`bi bi-box-arrow-left text-white fs-4 ${styles.hamburger}`}></i>
+                className={`bi bi-box-arrow-left text-white link-success fs-4 ${styles.hamburger}`}></i>
             </div>
         </aside>
     )

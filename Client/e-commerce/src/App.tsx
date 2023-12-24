@@ -22,7 +22,7 @@ function App() {
   useEffect(() => {
     dispatch(checkAuth())
   }, [])
-
+  
   return (
     <>
       <Suspense fallback={<Loader />}>
