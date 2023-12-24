@@ -1,4 +1,4 @@
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { PrivateRoutes } from "../../utilities/routes";
 import { lazy, Suspense } from "react";
 import Loader from "../Loader";
@@ -19,7 +19,6 @@ function Dashboard() {
       <Suspense fallback={<Loader/>}>
         <main className="min-vh-100 d-flex flex-row content">
            <Sidebar />
-           <Outlet/>
           <Routes>
             <Route path={PrivateRoutes.DASHBOARD_SHOPPING} element={<Compras/>}/>
               <Route path={PrivateRoutes.DASHBOARD_REVIEWS} element={<Opiniones />} />

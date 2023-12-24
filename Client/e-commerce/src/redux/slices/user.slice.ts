@@ -28,13 +28,8 @@ export const checkAuth = createAsyncThunk("userInfo/checkAutch", async (_, { get
   }
 })
 
-type status = {
-  loading : boolean
-}
-
-const initialState: AuthState & status = {
+const initialState: AuthState = {
   isAuthenticated: false,
-  loading: false,
   accessToken: "",
   refreshToken: "",
   userInfo: {
@@ -96,12 +91,12 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(checkAuth.pending, (state) => {
-        return {
-          ...state,
-          loading: true
-        }
-      })
+      // .addCase(checkAuth.pending, (state) => {
+      //   return {
+      //     ...state,
+      //     loading: true
+      //   }
+      // })
       .addCase(checkAuth.fulfilled, (state, action) => {
         if(action.payload){
           const { isAuthenticated, userInfo } = action.payload.data
@@ -109,7 +104,6 @@ export const userSlice = createSlice({
             ...state,
             isAuthenticated,
             userInfo,
-            loading: false
           }
         }
         
@@ -117,7 +111,6 @@ export const userSlice = createSlice({
       .addCase(checkAuth.rejected, (state) => {
         return{
           ...state,
-          loading: false
         }
       });
   },

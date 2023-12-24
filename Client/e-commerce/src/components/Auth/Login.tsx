@@ -25,7 +25,6 @@ function Login() {
     return <Navigate to={`${PrivateRoutes.DASHBOARD}`} />
   }
 
-
   const fetchUser = async (e: any) => {
     e.preventDefault()
     
@@ -43,7 +42,6 @@ function Login() {
         setError("")
         dispatch(getUser(response.data))
         dispatch(setTokens(response.data))
-        //return <Navigate to={`/${PrivateRoutes.DASHBOARD}`}  />
       }
 
     } catch (error) {
