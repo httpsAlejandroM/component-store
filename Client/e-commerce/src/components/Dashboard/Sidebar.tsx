@@ -43,7 +43,7 @@ function Sidebar() {
         {
             name: "Compras",
             icon: "bi bi-bag",
-            link: PrivateRoutes.DASHBOARD
+            link: PrivateRoutes.DASHBOARD_SHOPPING
         },
         {
             name: "Opiniones",

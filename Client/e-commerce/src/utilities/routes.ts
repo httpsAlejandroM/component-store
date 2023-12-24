@@ -9,6 +9,7 @@ export const PublicRoutes = {
 
 export const PrivateRoutes = {
     DASHBOARD: "/dashboard",
+    DASHBOARD_SHOPPING: "",
     DASHBOARD_REVIEWS: "reviews",
     DASHBOARD_FAVORITES: "favorites",
     DASHBOARD_CART:"cart",

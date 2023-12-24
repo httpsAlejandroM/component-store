@@ -20,7 +20,7 @@ function Dashboard() {
         <main className="min-vh-100 d-flex flex-row content">
            <Sidebar />
           <Routes>
-            <Route path="/" element={<Compras/>}/>
+            <Route path={PrivateRoutes.DASHBOARD_SHOPPING} element={<Compras/>}/>
               <Route path={PrivateRoutes.DASHBOARD_REVIEWS} element={<Opiniones />} />
               <Route path={PrivateRoutes.DASHBOARD_FAVORITES}  element={<Favoritos />}/>
               <Route path={PrivateRoutes.DASHBOARD_CART} element={<Carrito />} />
