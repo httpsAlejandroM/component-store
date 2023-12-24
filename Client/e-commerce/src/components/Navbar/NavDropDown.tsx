@@ -4,6 +4,7 @@ import { setFetchFilters } from "../../redux/slices/search.slice";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { PublicRoutes } from "../../utilities/routes";
+import { API } from "../../redux/componentsApi/componentsApi";
 
 interface NavlinkDropwDown {
   linkName: string;
@@ -21,7 +22,7 @@ function NavDropDown({ linkName, collapseHandler }: NavlinkDropwDown) {
 
   useEffect(()=>{
     const getSubmenu = async () => {
-      const URL = "https://component-store.onrender.com/components/categories-and-brands"
+      const URL = `${API}/components/categories-and-brands`
       const categories = (await axios.get(`${URL}`)).data.data
       setSubmenu(categories.categories)
     }

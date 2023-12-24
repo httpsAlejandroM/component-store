@@ -36,7 +36,7 @@ function App() {
           <Route path={PublicRoutes.SIGNUP} element={<SignUp />} />
           <Route path={PublicRoutes.LOGIN} element={<Login />} />
           <Route element={<AuthGuard />}>
-            <Route path={PrivateRoutes.DASHBOARD} element={<Dashboard />} />
+            <Route path={PrivateRoutes.DASHBOARD+"/*"} element={<Dashboard />}/>
           </Route>
         </Routes>
         <Footer />

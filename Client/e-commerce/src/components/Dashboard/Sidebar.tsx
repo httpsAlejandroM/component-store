@@ -3,16 +3,20 @@ import { BASE_URL_AUTH } from "../Auth/SignUp"
 import { getRefreshToken } from "../../utilities/getRefreshToken"
 import { userResponse } from "../../interfaces/user.interface"
 import { clearTokens } from "../../redux/slices/user.slice"
+import { useState } from "react"
+import { Link } from "react-router-dom"
+import { PrivateRoutes } from "../../utilities/routes"
+import styles from "./Sidebar.module.css"
 
-interface props{
-    setSelectedItem: Function
+interface props {
 }
 
-function Sidebar({setSelectedItem}:props) {
+function Sidebar({  }: props) {
 
     const userInfo = useAppSelector((state) => state.userReducer)
     const dispatch = useAppDispatch()
-
+    const [open, setOpen] = useState(false)
+   
     const logOut = async () => {
         try {
             const response = await fetch(`${BASE_URL_AUTH}/logout`, {
@@ -40,63 +44,77 @@ function Sidebar({setSelectedItem}:props) {
     const sectionsUserDashboard = [
         {
             name: "Compras",
-            icon: "bi bi-bag"
+            icon: "bi bi-bag",
+            link: PrivateRoutes.DASHBOARD
         },
         {
             name: "Opiniones",
-            icon: "bi bi-chat"
+            icon: "bi bi-chat",
+            link: PrivateRoutes.DASHBOARD_REVIEWS
         },
         {
             name: "Favoritos",
-            icon: "bi bi-heart"
+            icon: "bi bi-heart",
+            link: PrivateRoutes.DASHBOARD_FAVORITES
         },
-        
+
         {
             name: "Carrito",
-            icon: "bi bi-cart2"
+            icon: "bi bi-cart2",
+            link: PrivateRoutes.DASHBOARD_CART
         },
         {
             name: "Soporte",
-            icon: "bi bi-question-circle"
+            icon: "bi bi-question-circle",
+            link: PrivateRoutes.DASHBOARD_SUPPORT
         },
         {
-            name: "Mi Perfil",
-            icon: "bi bi-person-fill-gear"
+            name: "Mi perfil",
+            icon: "bi bi-person-fill-gear",
+            link: PrivateRoutes.DASHBOARD_MY_PROFILE
         }
     ]
 
-const userItems = sectionsUserDashboard.map((item)=>{
-return (
-    <li 
-    className="row py-3 gap-2 btn-outline-success pointer" 
-    key={item.name}
-    onClick={()=>setSelectedItem(item.name.split(" ").join(""))}
-    >
-        <i className={`${item.icon} col-2 fs-4 `}></i>
-        <span className="col fs-5 align-self-center">{item.name}</span>
-    </li>
-)
-})
-
     return (
-        <aside className="min-vh-100 d-flex flex-column align-items-center second-color col-12 col-sm-5 col-md-4 col-lg-3 col-xl-3 col-xxl-2 content">
-            {
-                userInfo && <div className="second-color mt-3 col-4" >
-                    <img src={userInfo.userInfo.image} className="card-img" alt="..." />
-                    <div className="card-body text-center mt-3">
-                        <p className="card-title text-white fs-4">{userInfo.userInfo.userName}</p>
-                    </div>
-                </div>
-            }
-            <hr className="border-light border-2  col-10 " />
-            <div className="text-white">
-            <ul className="">
-            {userItems}
-            </ul>
+        <aside className={`${open ? styles.sidebarOpen : styles.sidebarClose} second-color`}>
+            {/* MENU HAMBURGUESA */}
+            <div className="d-flex align-items-center">
+                <i 
+                title={"Menú"}
+                onClick={()=>setOpen(!open)}
+                className={`bi bi-list text-white fs-3 ${styles.hamburger}`}></i>
+                {open? <span className={`${styles.hamburger} card-title text-white fs-6 d-inline-block text-truncate w-100`}>{userInfo.userInfo.name}</span> : null}
             </div>
-            <hr className="border-light border-2  col-10 " />
-            <button onClick={logOut} className="btn btn-success mt-1">Cerrar sesión</button>
-
+            {/* LINKS TO DASHBOARD SECTIONS */}
+            <ul className="list-group mt-4">
+                {
+                    sectionsUserDashboard.map((item) => {
+                        return (
+                          <li  key={item.name}
+                          title={item.name}
+                          >
+                            <Link 
+                            className={`${open? styles.linkOpen : styles.normal } text-white link-success `} 
+                            to={item.link}
+                            aria-current="page"
+                            >
+                            <i className={item.icon}></i>
+                            <div className="">
+                            {open ? <span className="text-truncate">{item.name}</span> : null}
+                            </div>
+                            </Link>
+                          </li>
+                        )
+                    })
+                }
+            </ul>
+                {/*LOG OUT */}
+            <div className="mt-3 ">
+                <i 
+                title="Cerrar sesión"
+                onClick={logOut}
+                className={`bi bi-box-arrow-left text-white fs-4 ${styles.hamburger}`}></i>
+            </div>
         </aside>
     )
 }

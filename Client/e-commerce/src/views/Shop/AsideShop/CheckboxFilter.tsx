@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { setFetchFilters } from "../../../redux/slices/search.slice";
 import axios from "axios";
+import { API } from "../../../redux/componentsApi/componentsApi";
 
 function CheckboxFilter() {
 
     const [currentFilters, setCurrentFilters] = useState({categories:[], brands:[]})
-    //const baseUrl = "http://localhost:3000/components/categories-and-brands"
-    const baseUrl = "https://component-store.onrender.com/components/categories-and-brands"
+    const baseUrl = `${API}/components/categories-and-brands`
     const fetchFilter = useAppSelector((state) => state.searchReducer)
     const dispatch = useAppDispatch()
 

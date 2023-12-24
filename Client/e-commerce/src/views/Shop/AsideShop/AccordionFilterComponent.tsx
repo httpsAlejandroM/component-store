@@ -2,22 +2,19 @@ import axios from "axios";
 import { useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { setFetchFilters } from "../../../redux/slices/search.slice";
-
+import { API } from "../../../redux/componentsApi/componentsApi";
 
 interface filterInterface {
     category: string
     brand: string
 }
 
-
-
 function AccordionFilterComponent() {
     
     const [currentFilters, setCurrentFilters] =useState({categories:[], brands:[]})
     const fetchFilters = useAppSelector((state)=>state.searchReducer)
     const dispatch = useAppDispatch()
-    //const baseURL = "http://localhost:3000/components/categories-and-brands"
-    const baseURL = "https://component-store.onrender.com/components/categories-and-brands"
+    const baseURL = `${API}/components/categories-and-brands`
 
     const filterHandler = (producto: filterInterface) => {
         //verifico que la key sea category o brand para que no llore typescript
