@@ -9,7 +9,6 @@ import { PublicRoutes } from "../../utilities/routes"
 import { setFetchFilters } from "../../redux/slices/search.slice"
 import { useAppDispatch, useAppSelector } from "../../redux/hooks"
 
-
 function MosaicSection() {
     
     const mosaicFilter = {
@@ -31,10 +30,10 @@ function MosaicSection() {
             </div>
             <div className="row mosaico">
                 <div className="col-12 col-md-6">
-                    <Link  preventScrollReset={true} to={`${PublicRoutes.SHOP}`} onClick={()=>getPeripherals(mosaicFilter.perhipherals)}><img className="img-fluid rounded-1" src={mosaico} alt="Explorá nuestros perifericos" /></Link>
+                    <Link to={`${PublicRoutes.SHOP}`} onClick={()=>getPeripherals(mosaicFilter.perhipherals)}><img className="img-fluid rounded-1" src={mosaico} alt="Explorá nuestros perifericos" /></Link>
                 </div>
                 <div className="col-6 col-md-3 mt-4 mt-md-0">
-                    <Link preventScrollReset={false} to={`${PublicRoutes.SHOP}`} onClick={()=>getPeripherals(mosaicFilter.Pc)}><img className="img-fluid rounded-1" src={mosaico2} alt="PC gamers armadas" /></Link>
+                    <Link to={`${PublicRoutes.SHOP}`} onClick={()=>getPeripherals(mosaicFilter.Pc)}><img className="img-fluid rounded-1" src={mosaico2} alt="PC gamers armadas" /></Link>
                 </div>
                 <div className="col-6 col-md-3 mt-4 mt-md-0">
                     <Link   to={`arma-tu-pc`} ><img className="img-fluid rounded-1" src={mosaico3} alt="Armá tu PC" /></Link>
