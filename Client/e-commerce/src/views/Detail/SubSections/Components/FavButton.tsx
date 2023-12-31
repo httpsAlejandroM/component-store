@@ -9,7 +9,7 @@ interface props {
     componentFav: ComponentInterface
 }
 
-function FavButton({styles, isFav, componentFav, userId}:props) {
+function FavButton({styles, isFav, componentFav}:props) {
 
 //AGREGAR LOS FAVS A LA BD
     const dispatch = useAppDispatch()
