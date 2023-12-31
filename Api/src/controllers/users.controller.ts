@@ -38,12 +38,12 @@ const deleteUser = async (req: Request, res: Response) => {
 }
 
 const updateWishList = async (req: CustomRequest, res: Response)=>{
-    const { favComponentId, cartComponentId, email  } = req.body
+    const { favComponentId, cartComponentId, userId  } = req.body
     const { user } = req
     
+    if(!userId) return responseHandler(res, 200, {message: "Faltan campos requeridos"})
     try {
-        const productById = await updateCartAndFav({favComponentId, cartComponentId, email})
-        
+        const productById = await updateCartAndFav({favComponentId, cartComponentId, userId})
         responseHandler(res, 200, productById)
     } catch (error) {
         console.log(error);

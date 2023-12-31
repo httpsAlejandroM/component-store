@@ -73,12 +73,15 @@ export const userSlice = createSlice({
     },
       setFavOrCart: (state, action: PayloadAction<{componentFav?:ComponentInterface, cart?: ComponentInterface}>) =>{
         const {componentFav} = action.payload
-
+        
+        
         let result
         if(componentFav){
          const existComponent = state.userInfo.favorites?.some((component)=> component._id === componentFav._id)
+        
+         
          if(existComponent){
-          result = state.userInfo.favorites?.filter((component)=> component !== componentFav)
+          result = state.userInfo.favorites?.filter((component)=> component._id !== componentFav._id)
          }
          else{
           result = state.userInfo.favorites?.concat(componentFav)

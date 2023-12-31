@@ -1,9 +1,8 @@
 import Users from "../models/users";
 import Products from "../models/products"
-import { getComponentById } from "./components.service";
 import User, { CartAndFavIds } from "../interfaces/user.interface";
-import { Types } from "mongoose";
 import getUserInfo from "../utils/getUserInfo";
+import { ObjectId } from "mongodb";
 
 const getAllUsers = async () => {
     const allUsers = await Users.find().populate({
@@ -42,34 +41,37 @@ const getUserByEmail = async (email: string) => {
 }
 
 const updateUserFavs = async (user: User, prop: "favorites" | "cart", id: string) => {
-
-    const existProduct = user[prop].find((product) => product.productId == id)
-
+    
+    const existProduct = user[prop].some((product) => product.productId.equals(new ObjectId(id)));
+ 
     if (existProduct) {
-        const newFavorites = user[prop].filter((product) => product.productId != id)
+        const newFavorites = user[prop].filter((product) => !product.productId.equals(new ObjectId(id)));
         return newFavorites
+
     } else {
-        user[prop].push({ productId: id })
-
-        return null
+        user[prop].push({ productId: new ObjectId(id) });
+       
     }
-
+    return null
 }
 
-const updateCartAndFav = async ({ favComponentId, cartComponentId, email }: CartAndFavIds) => {
-    const userById = await getUserByEmail(email)
+const updateCartAndFav = async ({ favComponentId, cartComponentId, userId }: CartAndFavIds) => {
+    const userById = await getUserById(userId)
 
     if (userById) {
         if (favComponentId) {
-            const newFavorites = await updateUserFavs(userById, "favorites", favComponentId)
-            if (newFavorites) userById.favorites = newFavorites
+           const newFavorites = await updateUserFavs(userById, "favorites", favComponentId)
+         if(newFavorites){
+            userById.favorites = newFavorites
+         }
         }
         if (cartComponentId) {
-            const newCart = await updateUserFavs(userById, "cart", cartComponentId)
-            if (newCart) userById.cart = newCart
+          
+           
         }
-        await userById.save()
-        return userById
+        
+       await  userById.save()
+        return getUserInfo(userById)
     }
 }
 

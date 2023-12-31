@@ -26,7 +26,7 @@ function Favoritos() {
                 <div key={component._id}>
                 <div className="row col-12 align-items-center justify-content-center p-4">
                   <CheckboxInput containerStyle="col-1" inputStyle="border-2 border-dark-subtle" inputValue={component._id} />
-                  <FavoriteCard containerStyle={`row col-11 align-self-center justify-content-center`} name={component.title} price={component.price} image={component.image}/>
+                  <FavoriteCard containerStyle={`row col-11 align-self-center justify-content-center`} component={component}/>
                 </div>
                 {userInfo.userInfo.favorites && index !== userInfo.userInfo.favorites.length -1? <hr /> : null}
                 </div>

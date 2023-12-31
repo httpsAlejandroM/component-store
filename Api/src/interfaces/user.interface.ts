@@ -30,7 +30,7 @@ export interface UserInterface {
 }
 
 interface userId  {
-    email: string
+    userId: string
 }
 
 export interface CartAndFavIds extends userId {
