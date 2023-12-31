@@ -55,8 +55,8 @@ function Navbar() {
               {
                 userInfo.isAuthenticated &&
                 <>
-                <Link to={`${PrivateRoutes.DASHBOARD}`} className="btn btn-outline-success ms-1 pt-2 border-0"><i className="bi bi-heart fs-4"></i></Link>
-                <Link to={`${PrivateRoutes.DASHBOARD}`} className="btn btn-outline-success ms-1 pb-2 border-0"><i className="bi bi-cart2 fs-3"></i></Link>
+                <Link to={`${PrivateRoutes.DASHBOARD_FAVORITES}`} className="btn btn-outline-success ms-1 pt-2 border-0"><i className="bi bi-heart fs-4"></i></Link>
+                <Link to={`${PrivateRoutes.DASHBOARD_CART}`} className="btn btn-outline-success ms-1 pb-2 border-0"><i className="bi bi-cart2 fs-3"></i></Link>
                 </>
               }
               <Link to={`${PublicRoutes.LOGIN}`} className="btn btn-outline-success ms-1 border-0"><i className="bi bi-person-fill fs-2"></i></Link>
