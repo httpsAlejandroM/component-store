@@ -1,16 +1,20 @@
 import { Request, Response } from "express";
-import { getAllUsers } from "../services/users.service";
+import { getAllUsers, getUserByEmail, getUserById, updateCartAndFav } from "../services/users.service";
 import errorHandler from "../utils/errorHandler";
 import responseHandler from "../utils/responseHandler";
 import { CustomRequest } from "../interfaces/customRequest.interface";
-import { getComponentById } from "../services/components.service";
+import getUserInfo from "../utils/getUserInfo";
 
 
 const getUser = async (req: CustomRequest, res: Response) => {
     const { user } = req
     try {
         const isAuthenticated = user? true : false
-        return responseHandler(res,200, {isAuthenticated, userInfo: user})
+        if(user) {
+            const userByEmail = getUserInfo(await getUserByEmail(user?.email))
+            return responseHandler(res,200, {isAuthenticated, userInfo: userByEmail})
+        }
+        
     } catch (error) {
         errorHandler(res, 400, "Algo salio mal", error)
     }
@@ -26,18 +30,19 @@ const getUsers = async (req: Request, res: Response) => {
 }
 
 const putUser = async (req: Request, res: Response) => {
+    responseHandler(res,200, {message: "jajasj"})
 
 }
 const deleteUser = async (req: Request, res: Response) => {
 
 }
 
-const postFavorite = async (req: CustomRequest, res: Response)=>{
-    const { componentId } = req.body
+const updateWishList = async (req: CustomRequest, res: Response)=>{
+    const { favComponentId, cartComponentId, email  } = req.body
     const { user } = req
     
     try {
-        const productById = await getComponentById(componentId)
+        const productById = await updateCartAndFav({favComponentId, cartComponentId, email})
         
         responseHandler(res, 200, productById)
     } catch (error) {
@@ -51,5 +56,5 @@ export {
     getUsers,
     putUser,
     deleteUser,
-    postFavorite
+    updateWishList
 }

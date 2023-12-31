@@ -1,11 +1,10 @@
-import { useGetComponentsQuery } from "../../../redux/componentsApi/componentsApi"
+import { useAppSelector } from "../../../redux/hooks"
 import FavoriteCard from "../../Cards/FavoriteCard"
 import CheckboxInput from "../../CheckboxInput"
 
 function Favoritos() {
 
-  const { data } = useGetComponentsQuery({ category: "", brand: "", order: "", title: "", page: 1, perPage: 3 })
-
+ const userInfo = useAppSelector((state)=>state.userReducer)
 
   return (
     <div className="container mb-5 mt-4">
@@ -22,14 +21,14 @@ function Favoritos() {
         {/* aca van las cartas */}
         <div className="container row">
           {
-            data?.data && data.data.map((component, index) => {
+            userInfo.userInfo.favorites && userInfo.userInfo.favorites.map((component, index) => {
               return (
                 <div key={component._id}>
                 <div className="row col-12 align-items-center justify-content-center p-4">
                   <CheckboxInput containerStyle="col-1" inputStyle="border-2 border-dark-subtle" inputValue={component._id} />
                   <FavoriteCard containerStyle={`row col-11 align-self-center justify-content-center`} name={component.title} price={component.price} image={component.image}/>
                 </div>
-                {index !== data?.data.length -1? <hr /> : null}
+                {userInfo.userInfo.favorites && index !== userInfo.userInfo.favorites.length -1? <hr /> : null}
                 </div>
               )
             })

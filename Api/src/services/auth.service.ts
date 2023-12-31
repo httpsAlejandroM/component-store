@@ -2,6 +2,7 @@ import Token from "../models/token";
 import getUserInfo from "../utils/getUserInfo";
 import Users from "../models/users";
 import { generateAccessToken, verifyRefreshToken } from "../utils/tokensHelpers";
+import { getUserByEmail } from "./users.service";
 
 const createUser = async (name:string, email:string, userName:string, password:string) => {
     const newUser = new Users({name, email, userName, password}) //otra opcion const newUser = await Users.create({name, email, userName, password})
@@ -18,7 +19,7 @@ const createUser = async (name:string, email:string, userName:string, password:s
 
 
 const loginUser = async (email:string, password:string) => {
-    const userByEmail = await Users.findOne({email:email})
+    const userByEmail =  await getUserByEmail(email) //await Users.findOne({email:email})
     if(userByEmail) {
         const correctPassword = await userByEmail.comparePassword(password, userByEmail.password)
         if(correctPassword){

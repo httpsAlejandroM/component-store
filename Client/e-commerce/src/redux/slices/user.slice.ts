@@ -3,6 +3,7 @@ import { type PayloadAction } from '@reduxjs/toolkit'
 import { AuthState, userResponse } from '../../interfaces/user.interface'
 import { getRefreshToken } from '../../utilities/getRefreshToken'
 import { getAccessToken, getUserInfo } from '../../auth/AuthHelpers'
+import { ComponentInterface } from '../../interfaces'
 
 export const checkAuth = createAsyncThunk("userInfo/checkAutch", async (_, { getState }) => {
   const currentState = getState() as AuthState
@@ -57,17 +58,42 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     getUser: (state, action: PayloadAction<userResponse>) => {
-      const { email, userName, image } = action.payload.data.userInfo
+      const { email, userName, image, favorites, cart } = action.payload.data.userInfo
       return {
         ...state,
         userInfo: {
           ...state.userInfo,
           userName,
           email,
-          image
+          image,
+          favorites,
+          cart
         }
       }
     },
+      setFavOrCart: (state, action: PayloadAction<{componentFav?:ComponentInterface, cart?: ComponentInterface}>) =>{
+        const {componentFav} = action.payload
+
+        let result
+        if(componentFav){
+         const existComponent = state.userInfo.favorites?.some((component)=> component._id === componentFav._id)
+         if(existComponent){
+          result = state.userInfo.favorites?.filter((component)=> component !== componentFav)
+         }
+         else{
+          result = state.userInfo.favorites?.concat(componentFav)
+         }
+        }
+
+        return {
+          ...state,
+          userInfo:{
+            ...state.userInfo,
+            favorites: result
+          }
+        }
+      }
+    ,
     setTokens: (state, action: PayloadAction<userResponse>) => {
       const { refreshToken, isAuthenticated, accessToken } = action.payload.data;
 
@@ -123,6 +149,6 @@ export const userSlice = createSlice({
   },
 })
 
-export const { getUser, setTokens, clearTokens } = userSlice.actions
+export const { getUser, setTokens, clearTokens, setFavOrCart } = userSlice.actions
 
 export default userSlice.reducer

@@ -28,3 +28,12 @@ export interface UserInterface {
     favorites: Favorite[]
     cart: Favorite[]
 }
+
+interface userId  {
+    email: string
+}
+
+export interface CartAndFavIds extends userId {
+    favComponentId?: string
+    cartComponentId?: string
+}

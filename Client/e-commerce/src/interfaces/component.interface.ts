@@ -11,6 +11,9 @@ export interface ComponentInterface {
     banned: boolean,
 }
 
+export interface productId {
+    productId: ComponentInterface
+}
 export interface ResponseBackend {
     error: boolean,
     total: number

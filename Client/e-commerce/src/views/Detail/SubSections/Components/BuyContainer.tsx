@@ -1,4 +1,5 @@
 import { ComponentInterface } from "../../../../interfaces"
+import { useAppSelector } from "../../../../redux/hooks"
 import AddCart from "./AddCart"
 import Benefits from "./Benefits"
 import BuyButton from "./BuyButton"
@@ -13,11 +14,15 @@ interface props {
 }
 
 function BuyContainer({ data, magnifiedImgRef }: props) {
+
+    const userInfo = useAppSelector((state)=>state.userReducer)
+    const isFav = userInfo.userInfo?.favorites?.some((product)=> product._id == data._id)
+
     return (
         <div className="bg-light col-lg-4 p-4 d-flex flex-column  position-relative border border-dark-subtle text-wrap rounded-top-4 rounded-bottom-0 border-bottom-0">
             <div ref={magnifiedImgRef} className={`magnified-img bg-light position-absolute top-0 start-0  rounded-4 `}>
             </div>
-            <FavButton styles="d-none d-lg-flex justify-content-end"></FavButton>
+            <FavButton componentFav={data} userId={userInfo.userInfo.email} isFav={isFav} styles="d-none d-lg-flex justify-content-end"></FavButton>
             <h2 className="d-none d-lg-flex text-dark display-6 text-wrap text-truncate">{data.title}</h2>
             <div className="d-none d-lg-flex flex-row fs-5 text-warning align-items-center mt-2">
                 <span className="me-3 mb-0 text-dark p-0">{4.5}</span>
