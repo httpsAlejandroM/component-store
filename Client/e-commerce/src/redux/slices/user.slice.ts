@@ -75,7 +75,7 @@ export const userSlice = createSlice({
         const {componentFav} = action.payload
         
         
-        let result
+        let result 
         if(componentFav){
          const existComponent = state.userInfo.favorites?.some((component)=> component._id === componentFav._id)
         
@@ -92,7 +92,7 @@ export const userSlice = createSlice({
           ...state,
           userInfo:{
             ...state.userInfo,
-            favorites: result
+            favorites: result || []
           }
         }
       }

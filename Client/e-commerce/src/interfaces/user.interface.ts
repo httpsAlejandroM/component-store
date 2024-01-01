@@ -16,8 +16,8 @@ export interface userInfo {
     isAdmin?: boolean
     banned?: boolean
     image?: string
-    favorites?: ComponentInterface[]
-    cart?: ComponentInterface[]
+    favorites: ComponentInterface[]
+    cart: ComponentInterface[]
 }
 
 export interface QueryUser {
