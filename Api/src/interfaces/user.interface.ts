@@ -34,6 +34,6 @@ interface userId  {
 }
 
 export interface CartAndFavIds extends userId {
-    favComponentId?: string
-    cartComponentId?: string
+    favComponentId?: string[]
+    cartComponentId?: string[]
 }

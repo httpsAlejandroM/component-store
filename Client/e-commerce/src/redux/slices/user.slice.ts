@@ -97,6 +97,22 @@ export const userSlice = createSlice({
         }
       }
     ,
+    updateState: (state, action: PayloadAction<ComponentInterface[]>) =>{
+      const arrayComponents  = action.payload
+      
+      let result:ComponentInterface[]  = []
+
+      if(arrayComponents) result = result.concat(arrayComponents)
+
+      return {
+        ...state,
+        userInfo:{
+          ...state.userInfo,
+          favorites: result || []
+        }
+      }
+    }
+  ,
     setTokens: (state, action: PayloadAction<userResponse>) => {
       const { refreshToken, isAuthenticated, accessToken } = action.payload.data;
 
@@ -152,6 +168,6 @@ export const userSlice = createSlice({
   },
 })
 
-export const { getUser, setTokens, clearTokens, setFavOrCart } = userSlice.actions
+export const { getUser, setTokens, clearTokens, setFavOrCart, updateState } = userSlice.actions
 
 export default userSlice.reducer
