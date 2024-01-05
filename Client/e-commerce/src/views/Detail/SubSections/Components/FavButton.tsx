@@ -19,7 +19,7 @@ function FavButton({styles, isFav, componentFav, userId, setIsFav}:props) {
 
     const favHandler = () =>{
         dispatch(setFavOrCart({componentFav}))
-        userId && favoritesBDHandler(userId, componentFav._id)
+        userId && favoritesBDHandler(userId, [componentFav._id])
         setIsFav(!isFav)
     }
  

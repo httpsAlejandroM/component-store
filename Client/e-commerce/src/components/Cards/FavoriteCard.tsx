@@ -15,7 +15,7 @@ function FavoriteCard({ containerStyle, component }: props) {
     const userInfo = useAppSelector((state) => state.userReducer)
 
     const removeFavHandler = () => {
-        userInfo.userInfo.id && favoritesBDHandler(userInfo.userInfo.id, component._id)
+        userInfo.userInfo.id && favoritesBDHandler(userInfo.userInfo.id, [component._id])
         dispatch(setFavOrCart({ componentFav: component }))
     }
 

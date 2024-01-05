@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hooks"
 import FavoriteCard from "../../Cards/FavoriteCard"
 import CheckboxInput from "../../CheckboxInput"
 import { updateState } from "../../../redux/slices/user.slice"
+import { favoritesBDHandler } from "../../../utilities/componentsCartAndFavs"
 
 function Favoritos() {
   const userInfo = useAppSelector((state) => state.userReducer)
@@ -32,7 +33,9 @@ function Favoritos() {
 
   const removeSelectedHandler = () => {
     const filteredComponents = userInfo.userInfo.favorites.filter((component)=> !checkInputs.includes(component._id))
+    userInfo.userInfo.id && favoritesBDHandler(userInfo.userInfo.id, checkInputs)
     filteredComponents &&  dispatch(updateState(filteredComponents))
+
   }
 
  const allCheckedCondition =  userInfo.userInfo.favorites.length === 0? false : checkInputs.length < userInfo.userInfo.favorites.length ? false : true

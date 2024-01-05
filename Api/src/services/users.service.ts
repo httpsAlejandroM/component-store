@@ -1,9 +1,7 @@
 import Users from "../models/users";
-import Products from "../models/products"
-import User, { CartAndFavIds } from "../interfaces/user.interface";
+import { CartAndFavIds } from "../interfaces/user.interface";
 import getUserInfo from "../utils/getUserInfo";
 import { ObjectId } from "mongodb";
-import products from "../models/products";
 
 const getAllUsers = async () => {
     const allUsers = await Users.find().populate({
@@ -41,35 +39,20 @@ const getUserByEmail = async (email: string) => {
     return userByEmail
 }
 
-// const updateUserFavs = async (user: User, prop: "favorites" | "cart", id: string) => {
-
-//     const existProduct = user[prop].some((product) => product.productId.equals(new ObjectId(id)));
-
-//     if (existProduct) {
-//         const newFavorites = user[prop].filter((product) => !product.productId.equals(new ObjectId(id)));
-//         return newFavorites
-
-//     } else {
-//         user[prop].push({ productId: new ObjectId(id) });
-
-//     }
-//     return null
-// }
-
 const updateUserFavs = async (userId: string, prop: 'favorites' | 'cart', ids: string[]) => {
 
     try {
         const user = await getUserById(userId);
         if (user){
-            const filteredProducts = user[prop].filter((product) =>  !ids.includes(product.productId.toString()));
-            if(filteredProducts.length > 0){
-                //user[prop] = filteredProducts
-                //await user.save()
+            const existProduct = user[prop].filter((product) =>  ids.includes(product.productId.toString()));
+            
+            if(existProduct.length > 0){
+                const filteredProducts = user[prop].filter((product) =>  !ids.includes(product.productId.toString()));
+
                 return filteredProducts
             }else {
-                //user[prop] = user[prop].concat({productId: new ObjectId(ids[0])})
-               // await user.save()
-                return user[prop].concat({productId: new ObjectId(ids[0])})
+
+                return [...user[prop], {productId: new ObjectId(ids[0])}]
             }
         }
 
