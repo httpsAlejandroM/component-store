@@ -88,23 +88,3 @@ export {
     getUserById,
     getUserByEmail
 }
-
-
- // if (!user) {
-        //     throw new Error('Usuario no encontrado');
-        // }
-
-        // const existingProductIds = user[prop].map(product => product.productId.toString());
-        // console.log(existingProductIds);
-        
-        // const newProductIds = ids.filter(id => !existingProductIds.includes(id.toString()));
-
-        // if (newProductIds.length > 0) {
-        //     // Agregar nuevos productos a la lista de favoritos del usuario
-        //     user[prop].push(...newProductIds.map(productId => ({ productId: new ObjectId(productId) })));
-        //     await user.save();
-        // } else {
-        //     // Eliminar productos existentes de la lista de favoritos del usuario
-        //     user[prop] = user[prop].filter(product => !ids.includes(product.productId));
-        //     await user.save();
-        // }
