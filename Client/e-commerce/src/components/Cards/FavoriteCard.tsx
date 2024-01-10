@@ -20,7 +20,7 @@ function FavoriteCard({ containerStyle, component }: props) {
     }
 
     return (
-        <div className={`${containerStyle}`}>
+        <div className={`${containerStyle}`} style={{height:"150px"}}>
 
             <div className="col-2 d-flex align-items-center justify-content-center">
                 <img className="img-fluid col-12 align-self-center" src={component.image} alt={component.title} />
