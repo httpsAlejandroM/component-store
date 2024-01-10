@@ -40,6 +40,8 @@ function Favoritos() {
 
  const allCheckedCondition =  userInfo.userInfo.favorites.length === 0? false : checkInputs.length < userInfo.userInfo.favorites.length ? false : true
  
+const favoritos = userInfo.userInfo.favorites
+
   return (
     <div className="container mb-5 mt-4">
       <h2 className="fs-3 mb-4 text-white">Favoritos</h2>
@@ -53,7 +55,7 @@ function Favoritos() {
             className="btn p-0 fs-6 btn-link link-offset"
             >Eliminar favoritos seleccionados</button>
           </div>
-          <span className="fs-6 me-4 "> Favoritos 1 - 3 de 3</span>
+          <span className="fs-6 me-4 ">{`Favoritos 1 - ${favoritos.length} de ${favoritos.length}`}</span>
         </div>
         <hr />
         {/* aca van las cartas */}
@@ -64,7 +66,7 @@ function Favoritos() {
                 <div key={component._id}>
                   <div className="row col-12 align-items-center justify-content-center p-4">
                     <CheckboxInput isChecked={checkInputs.includes(component._id) ? true : false} checkFunction={handleCheckboxChange} containerStyle="col-1" inputStyle="border-2 border-dark-subtle" inputValue={component._id} />
-                    <FavoriteCard containerStyle={`row col-11 align-self-center justify-content-center`} component={component} />
+                    <FavoriteCard containerStyle={`row col-11 col-lg-11 align-self-center justify-content-center`} component={component} />
                   </div>
                   {userInfo.userInfo.favorites && index !== userInfo.userInfo.favorites.length - 1 ? <hr /> : null}
                 </div>

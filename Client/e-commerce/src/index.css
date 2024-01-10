@@ -349,6 +349,10 @@ body {
   pointer-events: none;
 }
 
+.favorite-card{
+  height: 300px;
+}
+
 .filter-menu {
   position: absolute;
   width: 250px;
@@ -585,6 +589,11 @@ form {
   .filter-menu::before {
     right: 10vw;
   }
+
+  .favorite-card{
+    height: 150px;
+  }
+  
 }
 
 /* // X-Large devices (large desktops, 1200px and up) */

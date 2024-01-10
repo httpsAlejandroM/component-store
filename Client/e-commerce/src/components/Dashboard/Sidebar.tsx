@@ -14,7 +14,7 @@ function Sidebar() {
     const userInfo = useAppSelector((state) => state.userReducer)
     const dispatch = useAppDispatch()
     const [open, setOpen] = useState(false)
-   
+
     const logOut = async () => {
         try {
             const response = await fetch(`${BASE_URL_AUTH}/logout`, {
@@ -74,44 +74,46 @@ function Sidebar() {
     ]
 
     return (
-        <aside className={`${open ? styles.sidebarOpen : styles.sidebarClose} second-color`}>
+        <aside className={`${open ? styles.sidebarOpen : styles.sidebarClose} second-color d-none`}>
             {/* MENU HAMBURGUESA */}
             <div className="d-flex align-items-center">
-                <i 
-                title={"Menú"}
-                onClick={()=>setOpen(!open)}
-                className={`bi bi-list text-white link-success fs-3 ${styles.hamburger}`}></i>
-                {open? <span className={`${styles.hamburger} card-title text-white fs-6 d-inline-block text-truncate w-100 `}>{userInfo.userInfo.name}</span> : null}
+                <i
+                    title={"Menú"}
+                    onClick={() => setOpen(!open)}
+                    className={`bi bi-list text-white link-success fs-3 ${styles.hamburger}`}></i>
+                {open ? <span className={`${styles.hamburger} card-title text-white fs-6 d-inline-block text-truncate w-100 `}>{userInfo.userInfo.name}</span> : null}
             </div>
             {/* LINKS TO DASHBOARD SECTIONS */}
             <ul className="list-group mt-4">
                 {
                     sectionsUserDashboard.map((item) => {
                         return (
-                          <li  key={item.name}
-                          title={item.name}
-                          >
-                            <Link 
-                            className={`${open? styles.linkOpen : styles.normal } text-white link-success `} 
-                            to={item.link}
-                            aria-current="page"
+                            <li key={item.name}
+                                title={item.name}
                             >
-                            <i className={`${item.icon} fs-5`}></i>
-                            <div className="">
-                            {open ? <span className="text-truncate">{item.name}</span> : null}
-                            </div>
-                            </Link>
-                          </li>
+                                <Link
+                                    className={`${open ? styles.linkOpen : styles.normal} text-white link-success `}
+                                    to={item.link}
+                                    aria-current="page"
+                                >
+                                    <i className={`${item.icon} fs-5`}></i>
+                                    <div className="">
+                                        {open ? <span className="text-truncate">{item.name}</span> : null}
+                                    </div>
+                                </Link>
+                            </li>
                         )
                     })
                 }
             </ul>
-                {/*LOG OUT */}
-            <div className="mt-3 ">
-                <i 
-                title="Cerrar sesión"
-                onClick={logOut}
-                className={`bi bi-box-arrow-left text-white link-success fs-4 ${styles.hamburger}`}></i>
+            {/*LOG OUT */}
+            <div className="mt-1 d-flex flex-row align-items-center">
+                <i
+                    title="Cerrar sesión"
+                    onClick={logOut}
+                    className={`bi bi-box-arrow-left text-white link-success fs-4 ${styles.hamburger}`}></i>
+                    {open ? <span className={`${styles.hamburger} card-title text-white fs-6 text-truncate w-100 `}>Cerrar sesión</span> : null}
+
             </div>
         </aside>
     )
