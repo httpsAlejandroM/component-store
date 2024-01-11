@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from "../../redux/hooks"
 import { setFetchFilters } from "../../redux/slices/search.slice"
 import axios from "axios"
+import { API } from "../../redux/componentsApi/componentsApi"
 
 interface props {
     styles?: string
@@ -24,8 +25,8 @@ function SearchBar({ styles }: props) {
     useEffect(() => {
         const getSuggestions = async () => {
             setIsLoading(true)
-            const URL = "https://component-store.onrender.com/"
-            const newSuggestions = (await axios.get(`${URL}components?title=${input}`)).data
+            const URL = `${API}`
+            const newSuggestions = (await axios.get(`${URL}/components?title=${input}`)).data
             setSugerencias(newSuggestions)
             setIsLoading(false)
         }
@@ -55,7 +56,7 @@ function SearchBar({ styles }: props) {
 
     return (
         <form
-            className={styles}
+            className={`${styles} position-relative`}
             role="search">
             <input
                 ref={inputRef}

@@ -74,7 +74,7 @@ function Sidebar() {
     ]
 
     return (
-        <aside className={`${open ? styles.sidebarOpen : styles.sidebarClose} second-color d-none`}>
+        <aside className={`${open ? styles.sidebarOpen : styles.sidebarClose} second-color`}>
             {/* MENU HAMBURGUESA */}
             <div className="d-flex align-items-center">
                 <i

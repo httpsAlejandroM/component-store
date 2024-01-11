@@ -52,14 +52,14 @@ const favoritos = userInfo.userInfo.favorites
             <button 
             disabled={userInfo.userInfo.favorites.length === 0? true : false}
             onClick={removeSelectedHandler}
-            className="btn p-0 fs-6 btn-link link-offset"
-            >Eliminar favoritos seleccionados</button>
+            className="btn p-0 fs-6 btn-link link-offset  "
+            >Eliminar seleccionados</button>
           </div>
           <span className="fs-6 me-4 ">{`Favoritos 1 - ${favoritos.length} de ${favoritos.length}`}</span>
         </div>
         <hr />
         {/* aca van las cartas */}
-        <div className="container row">
+        <div className="container row ">
           {
             userInfo.userInfo.favorites && userInfo.userInfo.favorites.map((component, index) => {
               return (
