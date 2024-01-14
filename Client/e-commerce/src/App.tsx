@@ -18,7 +18,7 @@ const AuthGuard = lazy(() => import("./components/AuthGuard"))
 const Compras = lazy(() => import("./components/Dashboard/UserSections/Compras"))
 const Opiniones = lazy(() => import("./components/Dashboard/UserSections/Opiniones"))
 const Favoritos = lazy(() => import("./components/Dashboard/UserSections/Favoritos"))
-const Carrito = lazy(() => import("./components/Dashboard/UserSections/Carrito"))
+const Carrito = lazy(() => import("./components/Dashboard/UserSections/Carrito/Carrito"))
 const Soporte = lazy(() => import("./components/Dashboard/UserSections/Soporte"))
 const MiPerfil = lazy(() => import("./components/Dashboard/UserSections/MiPerfil"))
 

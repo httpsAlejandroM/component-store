@@ -20,18 +20,18 @@ function FavoriteCard({ containerStyle, component }: props) {
     }
 
     return (
-        <div className={`${containerStyle} favorite-card`}>
+        <div className={`${containerStyle} `}>
 
-            <div className="col-5 col-lg-2 d-flex  align-items-center justify-content-center">
+            <div className="col-10 col-sm-6 col-lg-2 d-flex  align-items-center justify-content-center order-sm-1 order-1">
                 <img className="img-fluid col-12 align-self-center" src={component.image} alt={component.title} />
             </div>
 
-            <div className="col-5 col-lg align-self-center">
+            <div className="col-12 col-sm-6 col-lg align-self-center order-sm-2 order-0">
                 <h3 className="fs-6">{component.title}</h3>
                 <span className="fs-3">{`$${component.price}`}</span>
             </div>
 
-            <div className="col-10 col-lg-4 col-xxl-3 d-flex flex-column gap-3 align-self-center">
+            <div className="col-12 col-sm-10 col-lg-4 col-xxl-3 d-flex flex-column gap-3 align-self-center order-sm-3 order-2">
                 <button className="btn btn-buy col col-xl-10">
                     Agregar al Carrito
                 </button>

@@ -243,6 +243,10 @@ body {
   border-color: #87b91a;
 }
 
+#headFavorites .fs-6 {
+  font-size: 0.8rem !important;
+}
+
 .img-thumbnail {
   cursor: pointer;
 }
@@ -350,7 +354,7 @@ body {
 }
 
 .favorite-card{
-  height: 300px;
+  height: 380px;
 }
 
 .filter-menu {
@@ -550,6 +554,14 @@ form {
     padding: 20px;
     max-height: 95px;
     min-height: 95px;
+  }
+
+  #headFavorites .fs-6 {
+    font-size: 1rem !important;
+  }
+
+  .favorite-card{
+    height: 300px;
   }
 }
 

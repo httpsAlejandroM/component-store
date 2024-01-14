@@ -46,29 +46,30 @@ const favoritos = userInfo.userInfo.favorites
     <div className="container mb-5 mt-4">
       <h2 className="fs-3 mb-4 text-white">Favoritos</h2>
       <div className="d-flex flex-column bg-light rounded-3">
-        <div className="d-flex flex-row justify-content-between pt-3">
-          <div className="d-flex gap-2 align-items-center ms-4">
-            <CheckboxInput isChecked={allCheckedCondition} checkFunction={checkedAllcheckbox} containerStyle="ms-3 px-3" inputStyle="border-2 border-dark-subtle" inputValue="Component" />
+        <div className="d-flex flex-row align-items-center justify-content-between pt-3" id="headFavorites">
+          <div className="d-flex gap-2 align-items-center ms-3">
+            <CheckboxInput isChecked={allCheckedCondition} checkFunction={checkedAllcheckbox} containerStyle="ms-2 ms-sm-3 px-sm-3" inputStyle="border-2 border-dark-subtle" inputValue="Component" />
             <button 
-            disabled={userInfo.userInfo.favorites.length === 0? true : false}
+            disabled={favoritos.length === 0? true : false}
             onClick={removeSelectedHandler}
-            className="btn p-0 fs-6 btn-link link-offset  "
+            className="btn p-0 fs-6 btn-link link-offset col-10"
+            title="Eliminar seleccionados"
             >Eliminar seleccionados</button>
           </div>
-          <span className="fs-6 me-4 ">{`Favoritos 1 - ${favoritos.length} de ${favoritos.length}`}</span>
+          <span className="fs-6 me-2 me-sm-4 ">{`Favoritos 1 - ${favoritos.length} de ${favoritos.length}`}</span>
         </div>
         <hr />
         {/* aca van las cartas */}
         <div className="container row ">
           {
-            userInfo.userInfo.favorites && userInfo.userInfo.favorites.map((component, index) => {
+            favoritos && favoritos.map((component, index) => {
               return (
                 <div key={component._id}>
                   <div className="row col-12 align-items-center justify-content-center p-4">
                     <CheckboxInput isChecked={checkInputs.includes(component._id) ? true : false} checkFunction={handleCheckboxChange} containerStyle="col-1" inputStyle="border-2 border-dark-subtle" inputValue={component._id} />
-                    <FavoriteCard containerStyle={`row col-11 col-lg-11 align-self-center justify-content-center`} component={component} />
+                    <FavoriteCard containerStyle={`row col-11 col-lg-11 align-self-center justify-content-center favorite-card`} component={component} />
                   </div>
-                  {userInfo.userInfo.favorites && index !== userInfo.userInfo.favorites.length - 1 ? <hr /> : null}
+                  {favoritos && index !== favoritos.length - 1 ? <hr /> : null}
                 </div>
               )
             })

@@ -10,7 +10,7 @@
 
 .sidebarClose{
     width: 60px;
-    height: 100vh;
+    height: auto;
     transition-duration: 0.3s;
     display: flex;
     flex-direction: column;
@@ -25,7 +25,7 @@
 
 .sidebarOpen {
     width: 200px;
-    height: 100vh;
+    height: auto;
     transition-duration: 0.3s;
     
     .hamburger {
