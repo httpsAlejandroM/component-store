@@ -32,7 +32,7 @@ function BuyContainer({ data, magnifiedImgRef }: props) {
                 <span className="text-dark fs-6">(1)</span>
             </div>
             <div className="mt-2 "><p className="m-0 p-0 display-4">{`$${data.price}`}</p></div>
-            <QuantityProduct data={data} styles="d-flex justify-content- justify-content-lg-start  align-items-center mt-2 "></QuantityProduct>
+            <QuantityProduct stock={data.stock} styles="d-flex justify-content- justify-content-lg-start  align-items-center mt-2 "></QuantityProduct>
             <div className="d-flex flex-column gap-2 align-items-center my-4">
                 <BuyButton />
                 <AddCart />

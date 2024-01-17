@@ -40,3 +40,12 @@ export interface ResponseComponentById {
     total: number
     data: ComponentInterface
 }
+
+export interface CartComponentInterface {
+    _id: string,
+    title: string,
+    image: string,
+    price: number,
+    stock: number
+    quantity: number
+}

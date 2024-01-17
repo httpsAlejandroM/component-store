@@ -1,12 +1,11 @@
-import { ComponentInterface } from "../../../../interfaces"
 import { useState } from "react"
 
 interface props {
-    data: ComponentInterface
+    stock: number
     styles: string
 }
 
-function QuantityProduct({ styles, data }: props) {
+function QuantityProduct({ styles, stock }: props) {
 
     const [quantityProduct, setQuantityProduct] = useState(1)
 
@@ -17,7 +16,7 @@ function QuantityProduct({ styles, data }: props) {
     }
 
     const addQuantity = () => {
-        if (quantityProduct < data.stock) {
+        if (quantityProduct < stock) {
             setQuantityProduct(quantityProduct + 1)
         }
     }
@@ -30,7 +29,7 @@ function QuantityProduct({ styles, data }: props) {
                 <button onClick={() => addQuantity()} className="btn btn-sm p-1 "><i className="bi bi-plus-square-fill  fs-3 "></i></button>
             </div>
 
-            <div className="d-inline-flex ms-3"><span>{`(${data.stock} disponibles)`}</span></div>
+            <div className="d-inline-flex ms-3"><span>{`(${stock} disponibles)`}</span></div>
         </div>
     )
 }
