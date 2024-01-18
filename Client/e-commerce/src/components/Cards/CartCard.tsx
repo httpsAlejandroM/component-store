@@ -39,8 +39,8 @@ function CartCard({ id, image, title, price, quantity, stock }: props) {
         </div>
       </div>
 
-      <div className="offset-lg-2 offset-xl-0 col-lg-4 col-xl-2 align-items-center d-flex justify-content-start">
-        <QuantityProduct stock={stock} styles="col-12">
+      <div className="offset-lg-2 ps-5 ps-xl-0 offset-xl-0 col-lg-4 col-xl-2 align-items-center d-flex justify-content-start">
+        <QuantityProduct stock={stock} styles="col-12 ps-3 ps-xl-0">
         <div className="col-12 text-center" style={{fontSize:"0.6rem"}}><span>{`${stock} disponibles`}</span></div>
         </QuantityProduct>
       </div>
