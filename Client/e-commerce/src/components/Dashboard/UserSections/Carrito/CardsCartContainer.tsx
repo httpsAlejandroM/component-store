@@ -8,12 +8,12 @@ interface props {
 
 function CardsCartContainer({components}:props) {
   return (
-    <div className="col-8 col-xxl-9 bg-light min-vh-100 rounded-3">
+    <div className="col col-lg-10 col-xl-8  offset-lg-1 offset-xl-0 bg-light rounded-3">
        {
         components.map((component:CartComponentInterface)=>{
           return (
+           <div key={component._id} className="d-flex flex-column align-items-center justify-content-center">
             <CartCard 
-            key={component._id}
             id={component._id} 
             price={component.price}
             image={component.image}
@@ -21,6 +21,8 @@ function CardsCartContainer({components}:props) {
             stock={component.stock}
             title={component.title}
             />
+            <hr className="col-12 p-0"/>
+           </div>
           )
         })
        }

@@ -1,11 +1,12 @@
-import { useState } from "react"
+import { ReactNode, useState } from "react"
 
 interface props {
     stock: number
     styles: string
+    children?: ReactNode
 }
 
-function QuantityProduct({ styles, stock }: props) {
+function QuantityProduct({ styles, stock, children }: props) {
 
     const [quantityProduct, setQuantityProduct] = useState(1)
 
@@ -23,13 +24,12 @@ function QuantityProduct({ styles, stock }: props) {
 
     return (
         <div className={styles}>
-            <div className="d-flex flex-row align-items-center  gap-3">
+            <div className="d-flex flex-row align-items-center justify-content-center  gap-3">
                 <button onClick={() => removeQuantity()} className="btn btn-sm p-1"><i className="bi bi-dash-square-fill fs-3"></i></button>
                 <span className="fs-3">{quantityProduct}</span>
                 <button onClick={() => addQuantity()} className="btn btn-sm p-1 "><i className="bi bi-plus-square-fill  fs-3 "></i></button>
             </div>
-
-            <div className="d-inline-flex ms-3"><span>{`(${stock} disponibles)`}</span></div>
+            {children}
         </div>
     )
 }

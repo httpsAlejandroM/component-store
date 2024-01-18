@@ -52,7 +52,7 @@ const favoritos = userInfo.userInfo.favorites
             <button 
             disabled={favoritos.length === 0? true : false}
             onClick={removeSelectedHandler}
-            className="btn p-0 fs-6 btn-link link-offset col-10"
+            className="btn p-0 fs-6 btn-link link-offset col-10 text-decoration-none"
             title="Eliminar seleccionados"
             >Eliminar seleccionados</button>
           </div>

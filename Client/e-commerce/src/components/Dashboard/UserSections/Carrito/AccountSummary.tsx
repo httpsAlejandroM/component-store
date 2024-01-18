@@ -32,7 +32,7 @@ function AccountSummary({ components }: props) {
     })
 
     return (
-        <div className="col-4 col-xxl-3">
+        <div className="col-12 col-xl-4 col-xxl-3 sticky-bottom mt-5 mt-xl-0 position-lg-static">
             <div className="col-12 bg-light justify-content-center p-3 rounded-3">
                 <h3 className="fs-5 text-start">
                     Resumen de compra
