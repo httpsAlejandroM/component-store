@@ -549,6 +549,10 @@ form {
   width: 65%;
 }
 
+.fs-7{
+  font-size: 0.8rem;
+}
+
 @media (min-width: 576px) {
   .searchResults .results {
     padding: 20px;
@@ -562,6 +566,10 @@ form {
 
   .favorite-card{
     height: 300px;
+  }
+
+  .fs-7{
+    font-size: 1rem;
   }
 }
 
@@ -605,6 +613,8 @@ form {
   .favorite-card{
     height: 150px;
   }
+
+ 
   
 }
 

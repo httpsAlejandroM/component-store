@@ -7,6 +7,7 @@ import BuyButton from "./BuyButton"
 import FavButton from "./FavButton"
 import QuantityProduct from "./QuantityProduct"
 import StarsRating from "./StarsRating"
+import { cartComponentProps } from "../../../../utilities/cartProps"
 
 interface props {
     data: ComponentInterface
@@ -18,7 +19,7 @@ function BuyContainer({ data, magnifiedImgRef }: props) {
 
     const userInfo = useAppSelector((state)=>state.userReducer)
     const [ isFav, setIsFav ] = useState(userInfo.userInfo?.favorites?.some((product)=> product._id == data._id))
-
+    const [quantityProduct, setQuantityProduct] = useState(1)
 
     return (
         <div className="bg-light col-lg-4 p-4 d-flex flex-column  position-relative border border-dark-subtle text-wrap rounded-top-4 rounded-bottom-0 border-bottom-0">
@@ -32,10 +33,10 @@ function BuyContainer({ data, magnifiedImgRef }: props) {
                 <span className="text-dark fs-6">(1)</span>
             </div>
             <div className="mt-2 "><p className="m-0 p-0 display-4">{`$${data.price}`}</p></div>
-            <QuantityProduct children={<div className="d-inline-flex ms-3"><span>{`(${data.stock} disponibles)`}</span></div>} stock={data.stock} styles="d-flex justify-content- justify-content-lg-start  align-items-center mt-2 "></QuantityProduct>
+            <QuantityProduct quantityProduct={quantityProduct} setQuantityProduct={setQuantityProduct} children={<div className="d-inline-flex ms-3"><span>{`(${data.stock} disponibles)`}</span></div>} stock={data.stock} styles="d-flex justify-content- justify-content-lg-start  align-items-center mt-2 "></QuantityProduct>
             <div className="d-flex flex-column gap-2 align-items-center my-4">
                 <BuyButton />
-                <AddCart />
+                <AddCart component={cartComponentProps(data, quantityProduct) }/>
             </div>
             <Benefits />
 

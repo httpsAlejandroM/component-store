@@ -3,7 +3,7 @@ import { type PayloadAction } from '@reduxjs/toolkit'
 import { AuthState, userResponse } from '../../interfaces/user.interface'
 import { getRefreshToken } from '../../utilities/getRefreshToken'
 import { getAccessToken, getUserInfo } from '../../auth/AuthHelpers'
-import { ComponentInterface } from '../../interfaces'
+import { CartComponentInterface, ComponentInterface } from '../../interfaces'
 
 export const checkAuth = createAsyncThunk("userInfo/checkAutch", async (_, { getState }) => {
   const currentState = getState() as AuthState
@@ -71,8 +71,8 @@ export const userSlice = createSlice({
         }
       }
     },
-      setFavOrCart: (state, action: PayloadAction<{componentFav?:ComponentInterface, cart?: ComponentInterface}>) =>{
-        const {componentFav} = action.payload
+      setFavOrCart: (state, action: PayloadAction<{componentFav?:ComponentInterface, cartComponent?: CartComponentInterface}>) =>{
+        const {componentFav, cartComponent} = action.payload
         
         
         let result 
@@ -87,12 +87,24 @@ export const userSlice = createSlice({
           result = state.userInfo.favorites?.concat(componentFav)
          }
         }
+        let cartResult
+        if(cartComponent){
+          const existComponent = state.userInfo.cart?.find((component)=> component._id === cartComponent._id)
+          if(existComponent){
+           existComponent.quantity = existComponent.quantity + cartComponent.quantity
+
+          }
+          else{
+            cartResult = state.userInfo.cart.concat(cartComponent)
+          }
+        }
 
         return {
           ...state,
           userInfo:{
             ...state.userInfo,
-            favorites: result || []
+            favorites: result || [],
+            cart: cartResult || []
           }
         }
       }

@@ -16,7 +16,7 @@ function AccountSummary({ components }: props) {
         return totalProducts
     }, 0)
 
-    const totalProducts = <div className="my-2 row justify-content-center">
+    const totalProducts = <div className="my-1 my-sm-2 row justify-content-center">
         <span className="fs-6 text-start col-12">
             {`Productos (${quantityProducts})`}
         </span>
@@ -24,7 +24,7 @@ function AccountSummary({ components }: props) {
 
     const detailProducts = components.map((component) => {
         return (
-            <div key={component.title} className="my-2 row justify-content-center">
+            <div key={component.title} className="my-1 my-sm-2 row justify-content-center">
                 <span className="fs-6 col-10 text-start">{component.title}</span>
                 <span className="fs-6 col-2 text-center">{`x${component.quantity}`}</span>
             </div>

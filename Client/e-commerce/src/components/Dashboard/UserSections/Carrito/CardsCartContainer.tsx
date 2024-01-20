@@ -8,7 +8,7 @@ interface props {
 
 function CardsCartContainer({components}:props) {
   return (
-    <div className="col col-lg-10 col-xl-8  offset-lg-1 offset-xl-0 bg-light rounded-3">
+    <div className="col-10 offset-1 offset-sm-0 col-sm-12 col-lg-10 col-xl-8  offset-lg-1 offset-xl-0 bg-light rounded-3">
        {
         components.map((component:CartComponentInterface)=>{
           return (

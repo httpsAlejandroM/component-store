@@ -1,14 +1,16 @@
-import { ReactNode, useState } from "react"
+import { ReactNode } from "react"
 
 interface props {
     stock: number
     styles: string
-    children?: ReactNode
+    children?: ReactNode,
+    quantityProduct: number
+    setQuantityProduct: Function
 }
 
-function QuantityProduct({ styles, stock, children }: props) {
+function QuantityProduct({ styles, stock, children, quantityProduct, setQuantityProduct  }: props) {
 
-    const [quantityProduct, setQuantityProduct] = useState(1)
+   // const [quantityProduct, setQuantityProduct] = useState(1)
 
     const removeQuantity = () => {
         if (quantityProduct > 1) {

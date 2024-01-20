@@ -1,4 +1,4 @@
-import { ComponentInterface } from "."
+import { CartComponentInterface, ComponentInterface } from "."
 
 export interface User {
     id: string
@@ -17,7 +17,7 @@ export interface userInfo {
     banned?: boolean
     image?: string
     favorites: ComponentInterface[]
-    cart: ComponentInterface[]
+    cart: CartComponentInterface[]
 }
 
 export interface QueryUser {
