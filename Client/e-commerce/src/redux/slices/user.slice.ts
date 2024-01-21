@@ -16,16 +16,16 @@ export const checkAuth = createAsyncThunk("userInfo/checkAutch", async (_, { get
     return null
   } else {
     const token = getRefreshToken()
-    if(token){
+    if (token) {
       const newAccessToken = await getAccessToken()
-      if(newAccessToken){
-        const userInfo = await getUserInfo(newAccessToken)        
-        if(userInfo){
+      if (newAccessToken) {
+        const userInfo = await getUserInfo(newAccessToken)
+        if (userInfo) {
           return userInfo
         }
       }
     }
-    return 
+    return
   }
 })
 
@@ -33,7 +33,7 @@ type Status = {
   loading: boolean
 }
 
-const initialState: AuthState & Status= {
+const initialState: AuthState & Status = {
   isAuthenticated: false,
   loading: false,
   accessToken: "",
@@ -71,60 +71,62 @@ export const userSlice = createSlice({
         }
       }
     },
-      setFavOrCart: (state, action: PayloadAction<{componentFav?:ComponentInterface, cartComponent?: CartComponentInterface}>) =>{
-        const {componentFav, cartComponent} = action.payload
-        
-        
-        let result 
-        if(componentFav){
-         const existComponent = state.userInfo.favorites?.some((component)=> component._id === componentFav._id)
-        
-         
-         if(existComponent){
-          result = state.userInfo.favorites?.filter((component)=> component._id !== componentFav._id)
-         }
-         else{
+    setFavOrCart: (state, action: PayloadAction<{ componentFav?: ComponentInterface, cartComponent?: CartComponentInterface }>) => {
+      const { componentFav, cartComponent } = action.payload
+
+
+      let result
+      if (componentFav) {
+        const existComponent = state.userInfo.favorites?.some((component) => component._id === componentFav._id)
+
+
+        if (existComponent) {
+          result = state.userInfo.favorites?.filter((component) => component._id !== componentFav._id)
+        }
+        else {
           result = state.userInfo.favorites?.concat(componentFav)
-         }
-        }
-        let cartResult
-        if(cartComponent){
-          const existComponent = state.userInfo.cart?.find((component)=> component._id === cartComponent._id)
-          if(existComponent){
-           existComponent.quantity = existComponent.quantity + cartComponent.quantity
-
-          }
-          else{
-            cartResult = state.userInfo.cart.concat(cartComponent)
-          }
-        }
-
-        return {
-          ...state,
-          userInfo:{
-            ...state.userInfo,
-            favorites: result || [],
-            cart: cartResult || []
-          }
         }
       }
-    ,
-    updateState: (state, action: PayloadAction<ComponentInterface[]>) =>{
-      const arrayComponents  = action.payload
-      
-      let result:ComponentInterface[]  = []
-
-      if(arrayComponents) result = result.concat(arrayComponents)
+      let cartResult
+      if (cartComponent) {
+        const existComponent = state.userInfo.cart?.find((component) => component._id === cartComponent._id)
+        if (existComponent) {
+          const newQuantity = existComponent.quantity + cartComponent.quantity
+          const updatedQuantity = { ...existComponent, quantity: newQuantity }
+          const filteredComponent = state.userInfo.cart?.filter((component) => component._id !== cartComponent._id)
+          cartResult = [...filteredComponent, updatedQuantity]
+        }
+        else {
+          cartResult = state.userInfo.cart.concat(cartComponent)
+        }
+      }
 
       return {
         ...state,
-        userInfo:{
+        userInfo: {
+          ...state.userInfo,
+          favorites: result || [],
+          cart: cartResult || []
+        }
+      }
+    }
+    ,
+    updateState: (state, action: PayloadAction<ComponentInterface[] | any>) => {
+      const arrayComponents = action.payload
+
+      let result: ComponentInterface[] = []
+
+      if (arrayComponents) result = result.concat(arrayComponents)
+
+      return {
+        ...state,
+        userInfo: {
           ...state.userInfo,
           favorites: result || []
         }
       }
     }
-  ,
+    ,
     setTokens: (state, action: PayloadAction<userResponse>) => {
       const { refreshToken, isAuthenticated, accessToken } = action.payload.data;
 
@@ -142,7 +144,7 @@ export const userSlice = createSlice({
       const refreshToken = getRefreshToken()
       if (refreshToken) {
         localStorage.removeItem("token")
-      } 
+      }
       return {
         ...state,
         isAuthenticated: false,
@@ -160,7 +162,7 @@ export const userSlice = createSlice({
         }
       })
       .addCase(checkAuth.fulfilled, (state, action) => {
-        if(action.payload){
+        if (action.payload) {
           const { isAuthenticated, userInfo } = action.payload.data
           return {
             ...state,
@@ -169,10 +171,10 @@ export const userSlice = createSlice({
             loading: false
           }
         }
-        
+
       })
       .addCase(checkAuth.rejected, (state) => {
-        return{
+        return {
           ...state,
           loading: false
         }

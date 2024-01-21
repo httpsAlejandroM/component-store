@@ -346,6 +346,13 @@ body {
   color: #147732;
 }
 
+.cart-card {
+  height: 415px;
+}
+
+.cart-card-img{
+  max-width: 200px;
+}
 
 
 .disabled {
@@ -553,6 +560,7 @@ form {
   font-size: 0.8rem;
 }
 
+
 @media (min-width: 576px) {
   .searchResults .results {
     padding: 20px;
@@ -571,6 +579,14 @@ form {
   .fs-7{
     font-size: 1rem;
   }
+
+.cart-card{
+  height: 245px
+}
+
+.cart-card-img {
+  max-width: 100px;
+}
 }
 
 /* // Medium devices (tablets, 768px and up) */

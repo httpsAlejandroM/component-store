@@ -1,4 +1,4 @@
-import { CartComponentInterface, ComponentInterface } from "../interfaces"
+import { ComponentInterface } from "../interfaces"
 
 const cartComponentProps = (component:ComponentInterface, quantity: number) => {
     const componentFilteredProps = {

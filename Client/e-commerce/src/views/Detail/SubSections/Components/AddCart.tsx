@@ -10,8 +10,6 @@ function AddCart({component}:props) {
 
 const dispatch = useAppDispatch()
 
-console.log(component);
-
 
 const addComponentCart = () => {
     dispatch(setFavOrCart({cartComponent: component}))

@@ -32,7 +32,7 @@ function AccountSummary({ components }: props) {
     })
 
     return (
-        <div className="col-12 col-xl-4 col-xxl-3 sticky-bottom mt-5 mt-xl-0 position-lg-static">
+        <div className="col-12 col-xl-4 col-xxl-3 sticky-bottom mt-5 mt-xl-0 position-lg-static z-0">
             <div className="col-12 bg-light justify-content-center p-3 rounded-3">
                 <h3 className="fs-5 text-start">
                     Resumen de compra
@@ -47,7 +47,7 @@ function AccountSummary({ components }: props) {
                         Total
                     </span>
                     <span className="col-6 fw-bolder fs-5">
-                        {`$${total}`}
+                        {`$${total.toFixed(2)}`}
                     </span>
                 </div>
                 <button className="offset px-0 col-12 btn btn-buy">
