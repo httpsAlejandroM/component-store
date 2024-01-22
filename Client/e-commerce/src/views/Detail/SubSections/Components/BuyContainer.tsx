@@ -7,7 +7,7 @@ import BuyButton from "./BuyButton"
 import FavButton from "./FavButton"
 import QuantityProduct from "./QuantityProduct"
 import StarsRating from "./StarsRating"
-import { cartComponentProps } from "../../../../utilities/cartProps"
+import { cartComponentProps } from "../../../../utilities/cartHelpers"
 
 interface props {
     data: ComponentInterface

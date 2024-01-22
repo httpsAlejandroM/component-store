@@ -113,16 +113,23 @@ export const userSlice = createSlice({
     ,
     updateState: (state, action: PayloadAction<ComponentInterface[] | any>) => {
       const arrayComponents = action.payload
+      const { cartComponent } = action.payload
 
       let result: ComponentInterface[] = []
+      let newCartList
+
 
       if (arrayComponents) result = result.concat(arrayComponents)
-
+      if(cartComponent){
+        const filteredCartProducts = state.userInfo.cart?.filter((component)=> component._id !== cartComponent._id)
+         newCartList = [...filteredCartProducts, cartComponent]
+      }
       return {
         ...state,
         userInfo: {
           ...state.userInfo,
-          favorites: result || []
+          favorites: result || [],
+          cart: newCartList || []
         }
       }
     }

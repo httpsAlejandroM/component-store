@@ -4,6 +4,7 @@ import CardsCarousel from "../Home/CardsCarousel";
 import BuySection from "./SubSections/BuySection";
 import ReviewsSection from "./SubSections/ReviewsSection";
 import DescriptionProduct from "./SubSections/DescriptionProduct";
+import Loader from "../../components/Loader";
 
 function Detail() {
     const { id } = useParams()
@@ -24,24 +25,28 @@ function Detail() {
 
     return (
         <main className="container-fluid content mt-4">
-            <section className="bg-light container d-flex flex-column align-items-center rounded-4 py-1">
-                {data && <BuySection data={data.data}></BuySection>}
-                {data && <DescriptionProduct data={data} />}
-                <ReviewsSection />
-            </section>
-            <section className="container">
-                <div className="my-5">
-                    <h3 className="text-success">Productos Relacionados</h3>
-                    <hr className="border-success border-2  my-4" />
-                    <div></div>
-                    {
-                        productsRelacionados && <CardsCarousel sectionCards={"Related"} arr={productsRelacionados?.data.slice(0, 20)}></CardsCarousel>
+            {
+                data ?
+                    <>
+                        <section className="bg-light container d-flex flex-column align-items-center rounded-4 py-1">
+                            <BuySection data={data.data}></BuySection>
+                            <DescriptionProduct description={data.data.description} />
+                            <ReviewsSection />
+                        </section>
+                        <section className="container">
+                            <div className="my-5">
+                                <h3 className="text-success">Productos Relacionados</h3>
+                                <hr className="border-success border-2  my-4" />
+                                {
+                                    productsRelacionados && <CardsCarousel sectionCards={"Related"} arr={productsRelacionados?.data.slice(0, 20)}></CardsCarousel>
 
-                    }
+                                }
 
-                </div>
-            </section>
-
+                            </div>
+                        </section>
+                    </>
+                    : <Loader />
+            }
         </main>
     )
 }
