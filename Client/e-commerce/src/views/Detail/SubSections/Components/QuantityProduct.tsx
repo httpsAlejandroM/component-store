@@ -6,19 +6,28 @@ interface props {
     children?: ReactNode,
     quantityProduct: number
     setQuantityProduct: Function
+    updateCart?: boolean
+    cartQuantityHandler?: Function
 }
 
-function QuantityProduct({ styles, stock, children, quantityProduct, setQuantityProduct }: props) {
+function QuantityProduct({ styles, stock, children, quantityProduct, setQuantityProduct, updateCart = false, cartQuantityHandler }: props) {
 
     const removeQuantity = () => {
         if (quantityProduct > 1) {
             setQuantityProduct(quantityProduct - 1)
+            if(updateCart){
+                cartQuantityHandler &&  cartQuantityHandler(quantityProduct - 1)
+                
+            }
         }
     }
 
     const addQuantity = () => {
         if (quantityProduct < stock) {
             setQuantityProduct(quantityProduct + 1)
+            if(updateCart){
+                cartQuantityHandler &&  cartQuantityHandler(quantityProduct + 1)
+            }
         }
     }
 

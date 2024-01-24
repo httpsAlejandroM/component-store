@@ -44,10 +44,18 @@ const filterProductsCartById = (cartUser: CartComponentInterface[], product: Car
     return filteredCart
 }
 
+const updateProductById = (cartUser: CartComponentInterface[], product: CartComponentInterface) => {
+    const updatedCartProducts = cartUser.map((component) => {
+        return component._id === product._id ? product : component;
+    });
+
+    return updatedCartProducts
+}
 export {
     cartComponentProps,
     getProductCartById,
     checkExistProduct,
     isStockSufficient,
-    filterProductsCartById
+    filterProductsCartById,
+    updateProductById
 }

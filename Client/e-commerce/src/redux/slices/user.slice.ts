@@ -4,7 +4,7 @@ import { AuthState, userInfo, userResponse } from '../../interfaces/user.interfa
 import { getRefreshToken } from '../../utilities/getRefreshToken'
 import { getAccessToken, getUserInfo } from '../../auth/AuthHelpers'
 import { CartComponentInterface, ComponentInterface } from '../../interfaces'
-import { filterProductsCartById, getProductCartById } from '../../utilities/cartHelpers'
+import { filterProductsCartById, getProductCartById, updateProductById } from '../../utilities/cartHelpers'
 
 //SEPARAR RESPONSABILIDADES CARRO Y FAVORITOS
 
@@ -131,10 +131,9 @@ export const userSlice = createSlice({
 
       if (arrayComponents) result.favorites = result.favorites.concat(arrayComponents)
       if (cartComponent) {
+        const updatedCart = updateProductById(state.userInfo.cart, cartComponent)
         console.log(cartComponent);
-        
-        const filteredCartProducts = filterProductsCartById(state.userInfo.cart, cartComponent)
-        result.cart = [...filteredCartProducts, cartComponent]
+        result.cart = updatedCart
       }
       return {
         ...state,
