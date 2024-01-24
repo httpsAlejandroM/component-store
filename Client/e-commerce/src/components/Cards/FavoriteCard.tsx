@@ -1,6 +1,6 @@
 import { ComponentInterface } from "../../interfaces"
 import { useAppDispatch, useAppSelector } from "../../redux/hooks"
-import { setFavOrCart } from "../../redux/slices/user.slice"
+import { setFavorites } from "../../redux/slices/user.slice"
 import { favoritesBDHandler } from "../../utilities/componentsCartAndFavs"
 
 interface props {
@@ -16,7 +16,7 @@ function FavoriteCard({ containerStyle, component }: props) {
 
     const removeFavHandler = () => {
         userInfo.userInfo.id && favoritesBDHandler(userInfo.userInfo.id, [component._id])
-        dispatch(setFavOrCart({ componentFav: component }))
+        dispatch(setFavorites({ componentFav: component }))
     }
 
     return (

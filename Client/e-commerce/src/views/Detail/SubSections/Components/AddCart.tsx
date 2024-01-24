@@ -1,6 +1,6 @@
 import { CartComponentInterface } from "../../../../interfaces"
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks"
-import { setFavOrCart } from "../../../../redux/slices/user.slice"
+import { setCart } from "../../../../redux/slices/user.slice"
 import { isStockSufficient } from "../../../../utilities/cartHelpers"
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -45,7 +45,7 @@ function AddCart({ component }: props) {
   const addComponentCart = () => {
     const hasSufficientStock = isStockSufficient(cartItems, component)
     if (hasSufficientStock) {
-      dispatch(setFavOrCart({ cartComponent: component }))
+      dispatch(setCart({ cartComponent: component }))
       addButtonToastHandler(hasSufficientStock)
     }
     else {

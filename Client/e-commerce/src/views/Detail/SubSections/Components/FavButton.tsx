@@ -1,6 +1,6 @@
 import { ComponentInterface } from "../../../../interfaces"
 import { useAppDispatch } from "../../../../redux/hooks"
-import { setFavOrCart } from "../../../../redux/slices/user.slice"
+import { setFavorites } from "../../../../redux/slices/user.slice"
 import { favoritesBDHandler } from "../../../../utilities/componentsCartAndFavs"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -31,7 +31,7 @@ function FavButton({styles, isFav, componentFav, userId, setIsFav}:props) {
     }
 
     const favHandler = () =>{
-        dispatch(setFavOrCart({componentFav}))
+        dispatch(setFavorites({componentFav}))
         userId && favoritesBDHandler(userId, [componentFav._id])
         setIsFav(!isFav)
         favToast()

@@ -38,8 +38,16 @@ const isStockSufficient = (cartUser: CartComponentInterface[], product: CartComp
     return true
 }
 
+const filterProductsCartById = (cartUser: CartComponentInterface[], product: CartComponentInterface) => {
+    const filteredCart = cartUser.filter((component)=> component._id !== product._id)
+
+    return filteredCart
+}
+
 export {
     cartComponentProps,
+    getProductCartById,
     checkExistProduct,
-    isStockSufficient
+    isStockSufficient,
+    filterProductsCartById
 }

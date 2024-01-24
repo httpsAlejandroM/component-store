@@ -1,9 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { type PayloadAction } from '@reduxjs/toolkit'
-import { AuthState, userResponse } from '../../interfaces/user.interface'
+import { AuthState, userInfo, userResponse } from '../../interfaces/user.interface'
 import { getRefreshToken } from '../../utilities/getRefreshToken'
 import { getAccessToken, getUserInfo } from '../../auth/AuthHelpers'
 import { CartComponentInterface, ComponentInterface } from '../../interfaces'
+import { filterProductsCartById, getProductCartById } from '../../utilities/cartHelpers'
+
+//SEPARAR RESPONSABILIDADES CARRO Y FAVORITOS
 
 export const checkAuth = createAsyncThunk("userInfo/checkAutch", async (_, { getState }) => {
   const currentState = getState() as AuthState
@@ -71,29 +74,36 @@ export const userSlice = createSlice({
         }
       }
     },
-    setFavOrCart: (state, action: PayloadAction<{ componentFav?: ComponentInterface, cartComponent?: CartComponentInterface }>) => {
-      const { componentFav, cartComponent } = action.payload
-
-
+    setFavorites: (state, action: PayloadAction<{ componentFav?: ComponentInterface}>) => {
+      const { componentFav} = action.payload
       let result
+
       if (componentFav) {
         const existComponent = state.userInfo.favorites?.some((component) => component._id === componentFav._id)
-
-
-        if (existComponent) {
-          result = state.userInfo.favorites?.filter((component) => component._id !== componentFav._id)
-        }
-        else {
-          result = state.userInfo.favorites?.concat(componentFav)
+        
+        if (existComponent)  result = state.userInfo.favorites?.filter((component) => component._id !== componentFav._id)
+    
+        else  result = state.userInfo.favorites?.concat(componentFav)
+      }
+    
+      return {
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          favorites: result || []
         }
       }
+    },
+    setCart: (state, action: PayloadAction<{cartComponent?: CartComponentInterface }>) => {
+      const { cartComponent } = action.payload
       let cartResult
+
       if (cartComponent) {
-        const existComponent = state.userInfo.cart?.find((component) => component._id === cartComponent._id)
+        const existComponent = getProductCartById(state.userInfo.cart, cartComponent)
         if (existComponent) {
           const newQuantity = existComponent.quantity + cartComponent.quantity
           const updatedQuantity = { ...existComponent, quantity: newQuantity }
-          const filteredComponent = state.userInfo.cart?.filter((component) => component._id !== cartComponent._id)
+          const filteredComponent = filterProductsCartById(state.userInfo.cart, cartComponent)
           cartResult = [...filteredComponent, updatedQuantity]
         }
         else {
@@ -105,7 +115,6 @@ export const userSlice = createSlice({
         ...state,
         userInfo: {
           ...state.userInfo,
-          favorites: result || [],
           cart: cartResult || []
         }
       }
@@ -115,22 +124,21 @@ export const userSlice = createSlice({
       const arrayComponents = action.payload
       const { cartComponent } = action.payload
 
-      let result: ComponentInterface[] = []
-      let newCartList
+      let result :userInfo = {
+        ...state.userInfo
+      }
 
 
-      if (arrayComponents) result = result.concat(arrayComponents)
-      if(cartComponent){
-        const filteredCartProducts = state.userInfo.cart?.filter((component)=> component._id !== cartComponent._id)
-         newCartList = [...filteredCartProducts, cartComponent]
+      if (arrayComponents) result.favorites = result.favorites.concat(arrayComponents)
+      if (cartComponent) {
+        console.log(cartComponent);
+        
+        const filteredCartProducts = filterProductsCartById(state.userInfo.cart, cartComponent)
+        result.cart = [...filteredCartProducts, cartComponent]
       }
       return {
         ...state,
-        userInfo: {
-          ...state.userInfo,
-          favorites: result || [],
-          cart: newCartList || []
-        }
+        userInfo: result
       }
     }
     ,
@@ -189,6 +197,6 @@ export const userSlice = createSlice({
   },
 })
 
-export const { getUser, setTokens, clearTokens, setFavOrCart, updateState } = userSlice.actions
+export const { getUser, setTokens, clearTokens, setFavorites, updateState, setCart } = userSlice.actions
 
 export default userSlice.reducer

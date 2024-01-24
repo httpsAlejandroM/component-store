@@ -347,7 +347,7 @@ body {
 }
 
 .cart-card {
-  height: 415px;
+  height: 420px;
 }
 
 .cart-card-img{
@@ -585,7 +585,7 @@ form {
 }
 
 .cart-card-img {
-  max-width: 100px;
+  max-width: 180px;
 }
 }
 
@@ -630,8 +630,9 @@ form {
     height: 150px;
   }
 
- 
-  
+  .cart-card{
+    height: 220px
+  }
 }
 
 /* // X-Large devices (large desktops, 1200px and up) */
@@ -640,6 +641,12 @@ form {
     bottom: 0px;
     right: -2.2vw
   }
+
+  .cart-card{
+    height: 190px
+  }
+  
+  
 }
 
 /* // XX-Large devices (larger desktops, 1400px and up) */

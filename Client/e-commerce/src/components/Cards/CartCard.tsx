@@ -1,5 +1,7 @@
-import { useState } from "react"
 import QuantityProduct from "../../views/Detail/SubSections/Components/QuantityProduct"
+import { useState } from "react"
+// import { useAppDispatch } from "../../redux/hooks"
+// import { updateState } from "../../redux/slices/user.slice"
 
 interface props {
   id: string
@@ -14,13 +16,29 @@ function CartCard({ id, image, title, price, quantity, stock }: props) {
   //MANDAR AL ESTUADO DE REDUX COMPONENTE TIPO CART ss
 
   const [quantityProduct, setQuantityProduct] = useState<number>(quantity)
-
+  //const dispatch = useAppDispatch()
   const total = quantityProduct * price
 
+  // const cartQuantityHandler = () => {
+  //   const cartComponent = {
+  //     _id:id,
+  //     title,
+  //     image,
+  //     price,
+  //     stock,
+  //     quantity: quantityProduct
+  //   }    
+  //   dispatch(updateState({cartComponent}))
+  // }
+
+  // useEffect(()=>{
+  //   cartQuantityHandler()
+  // },[quantityProduct])
+
   return (
-    <div className="row col-12 rounded-3 py-4  bg-light justify-content-between align-items-center">
+    <div className="cart-card row col-12 rounded-3 py-4  bg-light justify-content-between align-items-center">
       <div className="row col-12  col-sm-3 col-lg-2 col-xl-2 align-items-center justify-content-center d-flex">
-        <img key={id} className="img-fluid " src={image} alt={title} />
+        <img key={id} className="img-fluid cart-card-img" src={image} alt={title} />
       </div>
 
 
@@ -43,7 +61,7 @@ function CartCard({ id, image, title, price, quantity, stock }: props) {
 
         <div className="row col-12 col-xl-6 align-items-center justify-content-between">
             <QuantityProduct quantityProduct={quantityProduct} setQuantityProduct={setQuantityProduct} stock={stock} styles="col-auto ps-3 ps-xl-0">
-              <div className="col-12 text-center d-sm-block d-none" style={{ fontSize: "0.6rem" }}><span>{`${stock} disponibles`}</span></div>
+              <div className="col-12 text-center d-sm-block d-none" ><span className="fs-7 text-truncate">{`${stock} disponibles`}</span></div>
             </QuantityProduct>
             <span className="fs-4 col-auto">{`$${total.toFixed(2)}`}</span>
         </div>

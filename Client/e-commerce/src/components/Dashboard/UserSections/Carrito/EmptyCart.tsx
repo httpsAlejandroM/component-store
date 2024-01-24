@@ -1,15 +1,19 @@
 import { Link } from "react-router-dom"
 import { PublicRoutes } from "../../../../utilities/routes"
+import { FC, HTMLProps, ReactNode } from "react"
 
-function EmptyCart() {
+type EmptySection = HTMLProps<HTMLDivElement> & {
+  children: ReactNode
+  textButton: string
+}
+
+const EmptyCart:FC<EmptySection> = ({children, textButton, ...rest}) => {
   return (
-    <section className="text-dark d-flex align-items-center justify-content-center content">
+    <section {...rest} >
         <div className="bg-light p-4 d-flex flex-column align-items-center justify-content-center rounded-3">
-        {/* <i className="bi bi-cart-x display-1 my-3"></i> */}
-        <h2>Tu carrito está vacio</h2>
-        <p className="fs-6 text-center">¿No sabés qué comprar? ¡Miles de productos te esperan!</p>
+        {children}
         <Link to={PublicRoutes.SHOP} className="btn btn-success">
-            Descubrir productos
+           {textButton}
         </Link>
         </div>
     </section>
