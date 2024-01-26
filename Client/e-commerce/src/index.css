@@ -71,9 +71,9 @@ body {
   background-color: var(--main-alpha-color) !important;
 }
 
-.bg-danger {
+/* .bg-danger {
   background-color: rgb(245, 127, 23) !important;
-}
+} */
 
 .border-success {
   border-color: var(--main-color) !important;

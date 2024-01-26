@@ -25,7 +25,7 @@ function AccountSummary({ components }: props) {
     const detailProducts = components.map((component) => {
         return (
             <div key={component.title} className="my-1 my-sm-2 row justify-content-center align-items-center">
-                <span className="fs-6 col-10 text-start">{component.title}</span>
+                <p className="fs-6 col-10 text-start m-0">{component.title}</p>
                 <span className="fs-6 col-2 text-center">{`x${component.quantity}`}</span>
             </div>
         )

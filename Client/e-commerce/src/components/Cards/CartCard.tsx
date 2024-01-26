@@ -2,8 +2,7 @@ import { useAppDispatch } from "../../redux/hooks"
 import { updateState } from "../../redux/slices/user.slice"
 import QuantityProduct from "../../views/Detail/SubSections/Components/QuantityProduct"
 import { useState } from "react"
-// import { useAppDispatch } from "../../redux/hooks"
-// import { updateState } from "../../redux/slices/user.slice"
+import LinkButton from "../Dashboard/UserSections/Carrito/LinkButton"
 
 interface props {
   id: string
@@ -28,10 +27,12 @@ function CartCard({ id, image, title, price, quantity, stock }: props) {
       price,
       stock,
       quantity: quantity
-    }    
-    //console.log(`Cart card:${cartComponent}`);
-    
+    }   
     dispatch(updateState({cartComponent}))
+  }
+
+  const deleteFromCart = () => {
+    dispatch(updateState({removeComponent: id}))
   }
 
   return (
@@ -40,21 +41,16 @@ function CartCard({ id, image, title, price, quantity, stock }: props) {
         <img key={id} className="img-fluid cart-card-img" src={image} alt={title} />
       </div>
 
-
       <div className="row col-12  col-sm-9 col-lg-10 col-xl-10 align-items-center justify-content-start">
         <div className="row col-xl-6 align-items-center">
 
           <div className="col-12 align-items-start d-flex">
-            <span title={title} className="fs-5 text-truncate">{title}</span>
+            <p title={title} className="fs-5 text-truncate m-0">{title}</p>
           </div>
 
           <div className="row col-12 my-2 my-sm-0 d-flex">
-            <button type="button" className="col-auto  btn btn-link col-auto fs-7 text-start  text-decoration-none">
-              Eliminar
-            </button>
-            <button type="button" className="col-auto  btn btn-link col-auto fs-7 text-start text-decoration-none">
-              Comprar ahora
-            </button>
+            <LinkButton onClick={deleteFromCart} children={"Eliminar"}/>
+            <LinkButton children={"Comprar ahora"}/>
           </div>
         </div>
 

@@ -22,7 +22,7 @@ function Navbar() {
   const collapseElementList = useRef<HTMLDivElement>(null)
   const collapser = useRef<HTMLButtonElement>(null)
   const navBar = useRef<HTMLElement>(null)
-//-356px
+  //-356px
   window.onscroll = function () {
     let currentScrollPos = window.scrollY;
 
@@ -121,8 +121,26 @@ function Navbar() {
               {
                 userInfo.isAuthenticated &&
                 <>
-                  <Link to={`/dashboard/${PrivateRoutes.DASHBOARD_FAVORITES}`} className="btn btn-outline-success ms-1 pt-2 border-0"><i className="bi bi-heart fs-4"></i></Link>
-                  <Link to={`/dashboard/${PrivateRoutes.DASHBOARD_CART}`} className="btn btn-outline-success ms-1 pb-2 border-0"><i className="bi bi-cart2 fs-3"></i></Link>
+                  <Link to={`/dashboard/${PrivateRoutes.DASHBOARD_FAVORITES}`} className="btn btn-outline-success ms-1 border-0 position-relative">
+                    <i className="bi bi-heart fs-4"></i>
+                    {
+                      user.userInfo.favorites.length > 0 
+                      ? <span  className="rounded-circle position-absolute user-alert badge rounded-pill bg-danger z-2">
+                      {user.userInfo.favorites.length}
+                      </span>
+                      : null
+                    }
+                  </Link>
+                  <Link to={`/dashboard/${PrivateRoutes.DASHBOARD_CART}`} className="btn btn-outline-success ms-1 border-0 position-relative">
+                    <i className="bi bi-cart2 fs-4"></i>
+                    {
+                      user.userInfo.cart.length > 0 
+                      ? <span className="rounded-circle position-absolute user-alert badge rounded-pill bg-danger z-2">
+                      {user.userInfo.cart.length}
+                      </span>
+                      : null
+                    }
+                  </Link>
                 </>
               }
               <Link to={`${PublicRoutes.LOGIN}`} className="btn btn-outline-success ms-1 border-0"><i className="bi bi-person-fill fs-2"></i></Link>
@@ -154,7 +172,7 @@ function Navbar() {
                 user.isAuthenticated &&
                 <ul className="d-lg-none navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
                   {
-                 userDashboardItems.map((item) => <Navlink key={item.name} collapseHandler={collapseHandler} linkName={item.name} route={`/dashboard/${item.link}`} />)
+                    userDashboardItems.map((item) => <Navlink key={item.name} collapseHandler={collapseHandler} linkName={item.name} route={`/dashboard/${item.link}`} />)
                   }
                   <li className="nav-item mx-3 fs-5" onClick={() => logOutHandler()}>
                     <Link className="nav-link text-white link-success" aria-current="page" to={PublicRoutes.HOME}>

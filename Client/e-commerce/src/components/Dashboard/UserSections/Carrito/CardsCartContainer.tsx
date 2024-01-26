@@ -6,9 +6,13 @@ interface props {
 
 }
 
+const offsetsClass = "offset-1 offset-sm-0 offset-lg-1 offset-xl-0"
+const colsClass = "col-10 col-sm-12 col-lg-10 col-xl-8"
+const flexboxClass = "d-flex flex-column align-items-center justify-content-center  bg-light rounded-3 "
+
 function CardsCartContainer({components}:props) {
   return (
-    <div className="col-10 offset-1 offset-sm-0 col-sm-12 col-lg-10 col-xl-8  offset-lg-1 offset-xl-0 bg-light rounded-3 align-items-center d-flex justify-content-center flex-column">
+    <div className={`${colsClass} ${offsetsClass} ${flexboxClass}`}>
        {
         components.map((component:CartComponentInterface, index: number)=>{
           return (
