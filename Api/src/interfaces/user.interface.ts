@@ -1,3 +1,4 @@
+import Cart from "./cart.interface";
 import Favorite from "./favorite.interface";
 
 export default interface User {
@@ -11,7 +12,7 @@ export default interface User {
     banned: boolean,
     image: string,
     favorites: Favorite[],
-    cart: Favorite[]
+    cart: Cart[],
     userNameExist(userName:string): Promise<boolean>;
     EmailExist(email:string): Promise<boolean>;
     comparePassword(password: string, hash:string): Promise<boolean>;
@@ -33,7 +34,12 @@ interface userId  {
     userId: string
 }
 
-export interface CartAndFavIds extends userId {
+export interface FavItem extends userId {
     favComponentId?: string[]
-    cartComponentId?: string[]
 }
+
+export interface CartItem extends userId {
+    cartComponentId: string
+    quantity: number
+}
+

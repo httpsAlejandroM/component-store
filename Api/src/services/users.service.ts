@@ -1,5 +1,5 @@
 import Users from "../models/users";
-import { CartAndFavIds } from "../interfaces/user.interface";
+import { CartItem, FavItem } from "../interfaces/user.interface";
 import getUserInfo from "../utils/getUserInfo";
 import { ObjectId } from "mongodb";
 
@@ -12,8 +12,13 @@ const getAllUsers = async () => {
         .populate({
             path: 'cart.productId',
             model: 'Product',
-            select: "_id title brand image category price stock"
+            select: "_id title brand image category price stock",
         })
+        .populate({
+            path: 'cart', // path de la propiedad quantity dentro de cart
+            model: 'User',  // probablemente debería ser 'Product', según tu esquema
+            select: 'quantity'
+        });
 
     const usersInfo = allUsers.map((user) => getUserInfo(user))
     return usersInfo
@@ -39,20 +44,20 @@ const getUserByEmail = async (email: string) => {
     return userByEmail
 }
 
-const updateUserFavs = async (userId: string, prop: 'favorites' | 'cart', ids: string[]) => {
+const updateUserFavs = async (userId: string, ids: string[]) => {
 
     try {
         const user = await getUserById(userId);
-        if (user){
-            const existProduct = user[prop].filter((product) =>  ids.includes(product.productId.toString()));
-            
-            if(existProduct.length > 0){
-                const filteredProducts = user[prop].filter((product) =>  !ids.includes(product.productId.toString()));
+        if (user) {
+            const existProduct = user.favorites.filter((product) => ids.includes(product.productId.toString()));
+
+            if (existProduct.length > 0) {
+                const filteredProducts = user.favorites.filter((product) => !ids.includes(product.productId.toString()));
 
                 return filteredProducts
-            }else {
+            } else {
 
-                return [...user[prop], {productId: new ObjectId(ids[0])}]
+                return [...user.favorites, { productId: new ObjectId(ids[0]) }]
             }
         }
 
@@ -61,19 +66,14 @@ const updateUserFavs = async (userId: string, prop: 'favorites' | 'cart', ids: s
     }
 };
 
-
-const updateCartAndFav = async ({ favComponentId, cartComponentId, userId }: CartAndFavIds) => {
+const updateFav = async ({ favComponentId, userId }: FavItem) => {
     const userById = await getUserById(userId)
     if (userById) {
         if (favComponentId) {
-            const updatedFavs = await updateUserFavs(userId, "favorites", favComponentId)
+            const updatedFavs = await updateUserFavs(userId, favComponentId)
             if (updatedFavs) {
                 userById.favorites = updatedFavs
             }
-        }
-        if (cartComponentId) {
-
-
         }
 
         await userById.save()
@@ -82,9 +82,42 @@ const updateCartAndFav = async ({ favComponentId, cartComponentId, userId }: Car
 
 }
 
+const updateCartUser = async ({ cartComponentId, quantity, userId }: CartItem) => {
+    const userById = await getUserById(userId)
+
+    if (!userById) return { message: `No existe usuario con id: ${userId}` }
+    try {
+        if (cartComponentId) {
+            const existProduct = userById.cart.some((product) => product.productId.toString() === cartComponentId)
+            if (!existProduct) {
+                userById.cart = [...userById.cart, { productId: new ObjectId(cartComponentId), quantity: quantity }]
+            }
+            else {
+                const updatedCart = userById.cart.map((product) => {
+                    const updatedCartItem = { ...product, quantity: quantity }
+                    return product.productId.toString() === cartComponentId ? updatedCartItem : product
+
+                })
+                userById.cart = updatedCart
+            }
+           
+            await userById.save()
+
+            return userById
+        }
+
+
+    } catch (error) {
+        console.log(error);
+
+    }
+
+}
+
 export {
     getAllUsers,
-    updateCartAndFav,
+    updateFav,
     getUserById,
-    getUserByEmail
+    getUserByEmail,
+    updateCartUser
 }

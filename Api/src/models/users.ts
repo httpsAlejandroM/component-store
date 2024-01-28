@@ -64,6 +64,11 @@ const userSchema = new Schema<User>({
                 type: Schema.Types.ObjectId,
                 ref: "Product",
                 required: false,
+            },
+            quantity:{
+                type: Number,
+                required: true,
+                default: 1
             }
         },
     ]

@@ -13,7 +13,6 @@ export const checkAuth = createAsyncThunk("userInfo/checkAutch", async (_, { get
   if (currentState.accessToken) {
     const userInfo = await getUserInfo(currentState.accessToken)
     if (userInfo) {
-      console.log(userInfo);
       return userInfo
     }
     return null

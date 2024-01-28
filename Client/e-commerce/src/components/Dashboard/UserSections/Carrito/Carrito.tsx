@@ -7,7 +7,7 @@ function Carrito() {
  //MODIFICAR CARRITO EN BACKEND
   const cartItems = useAppSelector((state) => state.userReducer.userInfo.cart)
   const isEmpty = cartItems.length > 0
-  
+    
   return (
     <section className="container mb-5 mt-4">
       {

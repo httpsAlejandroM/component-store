@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getAllUsers, getUserByEmail, getUserById, updateCartAndFav } from "../services/users.service";
+import { getAllUsers, getUserByEmail, getUserById, updateCartUser, updateFav } from "../services/users.service";
 import errorHandler from "../utils/errorHandler";
 import responseHandler from "../utils/responseHandler";
 import { CustomRequest } from "../interfaces/customRequest.interface";
@@ -37,13 +37,27 @@ const deleteUser = async (req: Request, res: Response) => {
 
 }
 
-const updateWishList = async (req: CustomRequest, res: Response)=>{
-    const { favComponentId, cartComponentId, userId  } = req.body
+const updateFavorites = async (req: CustomRequest, res: Response)=>{
+    const { favComponentId, userId  } = req.body
     const { user } = req
     
     if(!userId) return responseHandler(res, 200, {message: "Faltan campos requeridos"})
     try {
-        const productById = await updateCartAndFav({favComponentId, cartComponentId, userId})
+        const productById = await updateFav({favComponentId, userId})
+        responseHandler(res, 200, productById)
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+const updateCart = async (req: CustomRequest, res: Response)=>{
+    const { cartComponentId, quantity, userId  } = req.body
+    const { user } = req
+    
+    if(!userId) return responseHandler(res, 200, {message: "Faltan campos requeridos"})
+    try {
+        const productById = await updateCartUser({cartComponentId, quantity, userId})
         responseHandler(res, 200, productById)
     } catch (error) {
         console.log(error);
@@ -56,5 +70,6 @@ export {
     getUsers,
     putUser,
     deleteUser,
-    updateWishList
+    updateFavorites,
+    updateCart
 }
