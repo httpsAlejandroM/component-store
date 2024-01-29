@@ -1,7 +1,7 @@
 import { CartComponentInterface } from "../../../../interfaces"
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks"
 import { setCart } from "../../../../redux/slices/user.slice"
-import { isStockSufficient } from "../../../../utilities/cartHelpers"
+import { isStockSufficient, updateCartBD } from "../../../../utilities/cartHelpers"
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -11,12 +11,13 @@ interface props {
 
 function AddCart({ component }: props) {
 
-  const cartItems = useAppSelector((state) => state.userReducer.userInfo.cart)
+  const userInfo = useAppSelector((state) => state.userReducer.userInfo)
   const dispatch = useAppDispatch()
 
 
   const addButtonToastHandler = (booleano: boolean) => {
     if (booleano) {
+     userInfo.id && updateCartBD(userInfo.id, component._id, component.quantity)
       toast.success(`Se agrego ${component.title} al carrito`, {
         position: "top-right",
         autoClose: 3500,
@@ -43,7 +44,7 @@ function AddCart({ component }: props) {
   }
 
   const addComponentCart = () => {
-    const hasSufficientStock = isStockSufficient(cartItems, component)
+    const hasSufficientStock = isStockSufficient(userInfo.cart, component)
     if (hasSufficientStock) {
       dispatch(setCart({ cartComponent: component }))
       addButtonToastHandler(hasSufficientStock)
