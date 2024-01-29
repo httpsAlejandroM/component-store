@@ -120,12 +120,13 @@ export const userSlice = createSlice({
     }
     ,
     updateState: (state, action: PayloadAction<ComponentInterface[] | any>) => {
-      const arrayComponents = action.payload
-      const { cartComponent, removeComponent } = action.payload
+      const { cartComponent, removeComponent, arrayComponents } = action.payload
 
       let result :userInfo = {...state.userInfo}
 
-      if (arrayComponents) result.favorites = result.favorites.concat(arrayComponents)
+      if (arrayComponents) {
+        result.favorites = result.favorites.concat(arrayComponents)
+      }
       if (cartComponent) {
         const updatedCart = updateProductById(state.userInfo.cart, cartComponent)
         result.cart = updatedCart

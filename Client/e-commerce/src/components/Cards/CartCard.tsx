@@ -1,8 +1,9 @@
-import { useAppDispatch } from "../../redux/hooks"
+import { useAppDispatch, useAppSelector } from "../../redux/hooks"
 import { updateState } from "../../redux/slices/user.slice"
 import QuantityProduct from "../../views/Detail/SubSections/Components/QuantityProduct"
 import { useState } from "react"
 import LinkButton from "../Dashboard/UserSections/Carrito/LinkButton"
+import { updateCartBD } from "../../utilities/cartHelpers"
 
 interface props {
   id: string
@@ -15,6 +16,7 @@ interface props {
 
 function CartCard({ id, image, title, price, quantity, stock }: props) {
 
+  const userInfo = useAppSelector((state)=> state.userReducer.userInfo)
   const [quantityProduct, setQuantityProduct] = useState<number>(quantity)
   const dispatch = useAppDispatch()
   const total = quantityProduct * price
@@ -29,10 +31,12 @@ function CartCard({ id, image, title, price, quantity, stock }: props) {
       quantity: quantity
     }   
     dispatch(updateState({cartComponent}))
+   userInfo.id && updateCartBD(userInfo.id, id, quantity)
   }
 
   const deleteFromCart = () => {
     dispatch(updateState({removeComponent: id}))
+    userInfo.id && updateCartBD(userInfo.id, id, 0)
   }
 
   return (

@@ -17,7 +17,6 @@ function QuantityProduct({ styles, stock, children, quantityProduct, setQuantity
             setQuantityProduct(quantityProduct - 1)
             if(updateCart){
                 cartQuantityHandler &&  cartQuantityHandler(quantityProduct - 1)
-                
             }
         }
     }

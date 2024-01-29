@@ -1,4 +1,6 @@
+import axios from "axios"
 import { CartComponentInterface, ComponentInterface } from "../interfaces"
+import { API } from "../redux/componentsApi/componentsApi"
 
 const cartComponentProps = (component: ComponentInterface, quantity: number) => {
     const componentFilteredProps = {
@@ -12,7 +14,6 @@ const cartComponentProps = (component: ComponentInterface, quantity: number) => 
 
     return componentFilteredProps
 }
-
 
 const checkExistProduct = (cartUser: CartComponentInterface[], product: CartComponentInterface) => {
     const existProduct = cartUser.some((component) => component._id === product._id)
@@ -51,11 +52,27 @@ const updateProductById = (cartUser: CartComponentInterface[], product: CartComp
 
     return updatedCartProducts
 }
+
+const updateCartBD = async (userId: string, cartComponentId: string, quantity: number) => {
+    try {
+        await axios.put(`${API}/users/update/cart`,{
+            userId,
+            quantity,
+            cartComponentId
+        })
+    } catch (error) {
+        console.log(error);
+        
+    } 
+}
+
+
 export {
     cartComponentProps,
     getProductCartById,
     checkExistProduct,
     isStockSufficient,
     filterProductsCartById,
-    updateProductById
+    updateProductById,
+    updateCartBD
 }

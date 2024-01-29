@@ -93,14 +93,19 @@ const updateCartUser = async ({ cartComponentId, quantity, userId }: CartItem) =
                 userById.cart = [...userById.cart, { productId: new ObjectId(cartComponentId), quantity: quantity }]
             }
             else {
-                const updatedCart = userById.cart.map((product) => {
+                if (quantity === 0) {
+                    const removedCartItem = userById.cart.filter((product) => product.productId.toString() !== cartComponentId)
+                    userById.cart = removedCartItem
+                }
+                else {
+                    const updatedCart = userById.cart.map((product) => {
                     const updatedCartItem = { ...product, quantity: quantity }
                     return product.productId.toString() === cartComponentId ? updatedCartItem : product
-
-                })
-                userById.cart = updatedCart
+                    })
+                    userById.cart = updatedCart
+                }
             }
-           
+
             await userById.save()
 
             return userById
