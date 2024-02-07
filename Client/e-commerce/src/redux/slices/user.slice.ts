@@ -4,9 +4,7 @@ import { AuthState, userInfo, userResponse } from '../../interfaces/user.interfa
 import { getRefreshToken } from '../../utilities/getRefreshToken'
 import { getAccessToken, getUserInfo } from '../../auth/AuthHelpers'
 import { CartComponentInterface, ComponentInterface } from '../../interfaces'
-import { filterProductsCartById, getProductCartById, updateProductById } from '../../utilities/cartHelpers'
-
-//SEPARAR RESPONSABILIDADES CARRO Y FAVORITOS
+import { getProductCartById, updateProductById } from '../../utilities/cartHelpers'
 
 export const checkAuth = createAsyncThunk("userInfo/checkAutch", async (_, { getState }) => {
   const currentState = getState() as AuthState
@@ -102,8 +100,8 @@ export const userSlice = createSlice({
         if (existComponent) {
           const newQuantity = existComponent.quantity + cartComponent.quantity
           const updatedQuantity = { ...existComponent, quantity: newQuantity }
-          const filteredComponent = filterProductsCartById(state.userInfo.cart, cartComponent)
-          cartResult = [...filteredComponent, updatedQuantity]
+          cartResult = updateProductById(state.userInfo.cart, updatedQuantity)
+           //= [...filteredComponent]
         }
         else {
           cartResult = state.userInfo.cart.concat(cartComponent)

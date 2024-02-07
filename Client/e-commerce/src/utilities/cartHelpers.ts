@@ -21,7 +21,7 @@ const checkExistProduct = (cartUser: CartComponentInterface[], product: CartComp
     return existProduct
 }
 
-const getProductCartById = (cartUser: CartComponentInterface[], product: CartComponentInterface) => {
+const getProductCartById = (cartUser: CartComponentInterface[], product: CartComponentInterface | ComponentInterface) => {
     const productById = cartUser.find((component) => component._id === product._id)
 
     return productById

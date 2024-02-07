@@ -104,6 +104,11 @@ function Navbar() {
     collapseHandler()
   }
 
+  const quantityProducts = userInfo.userInfo.cart.reduce((acc, component) => {
+    const totalProducts = component.quantity + acc
+    return totalProducts
+}, 0)
+
   return (
     <header ref={navBar} className="header" id="header">
       <nav className="container-fluid navbar navbar-expand-lg d-flex flex-column pt-1">
@@ -136,7 +141,7 @@ function Navbar() {
                     {
                       user.userInfo.cart.length > 0 
                       ? <span className="rounded-circle position-absolute user-alert badge rounded-pill bg-danger z-2">
-                      {user.userInfo.cart.length}
+                      {quantityProducts}
                       </span>
                       : null
                     }
@@ -163,7 +168,7 @@ function Navbar() {
               <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" >
                 <Navlink collapseHandler={collapseHandler} linkName="Inicio" route={PublicRoutes.HOME}></Navlink>
                 <Navlink collapseHandler={collapseHandler} linkName="Productos" route={PublicRoutes.SHOP}></Navlink>
-                <Navlink collapseHandler={collapseHandler} linkName="Arma tu Pc" route="arma-tu-pc"></Navlink>
+                <Navlink collapseHandler={collapseHandler} linkName="Arma tu Pc" route={PublicRoutes.SHOP}></Navlink>
                 <NavDropDown collapseHandler={collapseHandler} linkName="Categorias" />
                 <Navlink collapseHandler={collapseHandler} linkName="Ayuda" route={PublicRoutes.SUPPORT}></Navlink>
               </ul>
