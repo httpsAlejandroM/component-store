@@ -1,5 +1,5 @@
 import { ComponentInterface } from "../../../../interfaces"
-import { useAppDispatch } from "../../../../redux/hooks"
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks"
 import { setFavorites } from "../../../../redux/slices/user.slice"
 import { favoritesBDHandler } from "../../../../utilities/componentsCartAndFavs"
 import { ToastContainer, toast } from 'react-toastify';
@@ -16,18 +16,34 @@ interface props {
 function FavButton({styles, isFav, componentFav, userId, setIsFav}:props) {
 
     const dispatch = useAppDispatch()
+    const userIsAuth = useAppSelector((state)=>state.userReducer.isAuthenticated)
 
     const favToast = () => {
-        toast.success(`${isFav ? `Se quitó ${componentFav.title} de Favoritos` : `Se agregó ${componentFav.title} a Favoritos`}`, {
-            position: "top-right",
-            autoClose: 3500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
+        if(!userIsAuth){
+            toast.info(`Inicia sesión para agregar productos a Favoritos`, {
+                position: "top-right",
+                autoClose: 3500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+        }
+        else{
+            toast.success(`${isFav ? `Se quitó ${componentFav.title} de Favoritos` : `Se agregó ${componentFav.title} a Favoritos`}`, {
+                position: "top-right",
+                autoClose: 3500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+        }
+      
     }
 
     const favHandler = () =>{

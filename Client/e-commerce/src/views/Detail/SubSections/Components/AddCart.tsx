@@ -11,16 +11,29 @@ interface props {
 
 function AddCart({ component }: props) {
 
-  const userInfo = useAppSelector((state) => state.userReducer.userInfo)
+  const userInfo = useAppSelector((state) => state.userReducer)
   const dispatch = useAppDispatch()
 
-  const productInCart = getProductCartById(userInfo.cart, component)
+  const productInCart = getProductCartById(userInfo.userInfo.cart, component)
   const quantityInCart = productInCart && productInCart.quantity > 0 ? productInCart.quantity : 0
   const quantityTotal = quantityInCart + component.quantity
 
   const addButtonToastHandler = (booleano: boolean) => {
+    if(!userInfo.isAuthenticated){
+      toast.info(`Inicia sesión para agregar productos al Carrito`, {
+        position: "top-right",
+        autoClose: 3500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return
+    }
     if (booleano) {
-      userInfo.id && updateCartBD(userInfo.id, component._id, quantityTotal)
+      userInfo.userInfo.id && updateCartBD(userInfo.userInfo.id, component._id, quantityTotal)
       toast.success(`Se agrego ${component.title} al carrito`, {
         position: "top-right",
         autoClose: 3500,
@@ -47,7 +60,7 @@ function AddCart({ component }: props) {
   }
 
   const addComponentCart = () => {
-    const hasSufficientStock = isStockSufficient(userInfo.cart, component)
+    const hasSufficientStock = isStockSufficient(userInfo.userInfo.cart, component)
     if (hasSufficientStock) {
       dispatch(setCart({ cartComponent: component }))
       addButtonToastHandler(hasSufficientStock)
