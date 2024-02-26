@@ -1,3 +1,6 @@
+import axios from "axios"
+import { API } from "../../../../redux/componentsApi/componentsApi"
+import { CartComponentInterface } from "../../../../interfaces"
 
 interface props {
     components: any[]
@@ -31,6 +34,28 @@ function AccountSummary({ components }: props) {
         )
     })
 
+    const buyHandler = async() => {
+       const items = components.map((component:CartComponentInterface)=>{
+        return {
+            id:  component._id,
+            title: component.title,
+            quantity: component.quantity,
+            unit_price: component.price
+        }
+        })
+        
+        try {
+            const redirectionToMP = await axios.post(`${API}/payments`,{
+                 items
+             })
+             
+             window.location.href = redirectionToMP.data.data
+         } catch (error) {
+             console.log(error);
+             
+         } 
+    }
+
     return (
         <div className="col-12 col-xl-4 col-xxl-3 sticky-bottom mt-5 mt-xl-0 position-lg-static z-0">
             <div className="col-12 bg-light justify-content-center p-3 rounded-3">
@@ -50,7 +75,10 @@ function AccountSummary({ components }: props) {
                         {`$${total.toFixed(2)}`}
                     </span>
                 </div>
-                <button className="offset px-0 col-12 btn btn-buy">
+                <button 
+                className="offset px-0 col-12 btn btn-buy"
+                onClick={buyHandler}
+                >
                     Continuar compra
                 </button>
             </div>
