@@ -4,6 +4,8 @@ import QuantityProduct from "../../views/Detail/SubSections/Components/QuantityP
 import { useState } from "react"
 import LinkButton from "../Dashboard/UserSections/Carrito/LinkButton"
 import { updateCartBD } from "../../utilities/cartHelpers"
+import axios from "axios"
+import { API } from "../../redux/componentsApi/componentsApi"
 
 interface props {
   id: string
@@ -39,6 +41,24 @@ function CartCard({ id, image, title, price, quantity, stock }: props) {
     userInfo.id && updateCartBD(userInfo.id, id, 0)
   }
 
+  const buyHandler = async () => {
+    try {
+      const redirectionToMP = await axios.post(`${API}/payments`,{
+           items: [{
+             id: id,
+             title: title,
+             quantity: quantity,
+             unit_price: price,
+           }]
+       })
+       
+       window.location.href = redirectionToMP.data.data
+   } catch (error) {
+       console.log(error);
+       
+   } 
+  }
+
   return (
     <div className="cart-card row col-12 rounded-3 py-4  bg-light justify-content-between align-items-center">
       <div className="row col-12  col-sm-3 col-lg-2 col-xl-2 align-items-center justify-content-center d-flex">
@@ -54,7 +74,7 @@ function CartCard({ id, image, title, price, quantity, stock }: props) {
 
           <div className="row col-12 my-2 my-sm-0 d-flex">
             <LinkButton onClick={deleteFromCart} children={"Eliminar"}/>
-            <LinkButton children={"Comprar ahora"}/>
+            <LinkButton onClick={buyHandler} children={"Comprar ahora"}/>
           </div>
         </div>
 
