@@ -16,7 +16,15 @@ const paymentController = async (req: Request, res: Response) => {
 }
 
 const webHookController = async (req: Request, res: Response) => {
-    res.status(200).json({message: "jujuuu webhook"})
+    const { query } = req
+    try {
+        if(query.type === "payment"){
+            const paymentId = query["data.id"] 
+            res.status(200).json({message: "webhook"})
+        }
+    } catch (error) {
+        
+    }
 }
 
 export {
