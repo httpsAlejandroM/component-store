@@ -1,37 +1,77 @@
-import MercadoPagoConfig, { Preference } from "mercadopago";
+import MercadoPagoConfig, { Payment, Preference } from "mercadopago";
+import OrderInterface, { ItemsInterface, PayerInterface } from "../interfaces/order.interface";
 const { MERCADO_PAGO_ACCESS } = require("../config")
+import Users from "../models/users";
+import Order from "../models/order"
+import { ObjectId } from "mongodb";
 
 const client = new MercadoPagoConfig({ accessToken: MERCADO_PAGO_ACCESS });
+const preference = new Preference(client);
+const payment = new Payment(client)
 
-const createPreference = async (items:any) => {
-    const preference = new Preference(client);
+const createPreference = async (items: ItemsInterface[], payer: PayerInterface) => {
     const result = await preference.create({
         body: {
             items: items,
-            binary_mode: true,
-            back_urls:{
-                success: "https://component-store-delta.vercel.app/",
+            payer,
+            back_urls: {
+                success: "https://component-store-delta.vercel.app/", // "http://localhost:5173/"
                 failure: "http://127.0.0.1:5173/",
                 pending: "http://127.0.0.1:5173/",
             },
             auto_return: "approved",
-            notification_url:  "https://82ff-2800-810-5e3-263-7854-9f66-4bfe-4913.ngrok-free.app/payments/webhook" //"https://component-store-delta.vercel.app/payments/webhook"
+            notification_url:   "https://component-store-delta.vercel.app/payments/webhook" // "https://dc41-2800-810-5e3-263-9c67-3580-f7c3-21f.ngrok-free.app/payments/webhook"
         }
     })
 
     return result
 }
 
-const webhookPayment = async (type:string, paymentId:string) =>{
+const createOrder = async (order:OrderInterface) => {
+    //const user = await Users.findOne({_id: order.userId})
     try {
-        if(type === "payment"){
+        const existOrder = await Order.findOne({id: order._id})
+        if(existOrder){
+            //agregar logica para modificar orden
+            console.log({existOrder});
+            
+            return existOrder
+        }
+        else{
+            const newOrder = await Order.create(order)
+            //vaciar carro del usuario
+            //logica para descontar stock
+            return newOrder
         }
     } catch (error) {
-        console.log(error);
         
     }
 }
 
+const webhookPayment = async (paymentId: string) => {
+    try { 
+        const paymentById : any = await payment.get({ id: paymentId })
+        const order : OrderInterface = {
+            _id: Number(paymentId),
+            userId: new ObjectId("6566353b329786713a020376"),
+            items: paymentById.additional_info?.items,
+            status: paymentById.status === "approved"? true : false,
+            statusDetail: "Pagado",
+            datePayment: paymentById.date_approved,
+            total: paymentById.transaction_details?.total_paid_amount
+        }
+        if(paymentById.status === "approved"){
+            const newOrder = await createOrder(order)
+            return newOrder
+        }
+        return {mensaje: "Pago rechazado"}
+    } catch (error) {
+        console.log(error);
+
+    }
+}
+
 export {
-    createPreference
+    createPreference,
+    webhookPayment
 }
