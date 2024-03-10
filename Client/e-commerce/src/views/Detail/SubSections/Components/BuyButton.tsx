@@ -1,12 +1,15 @@
 import axios from "axios";
 import { CartComponentInterface } from "../../../../interfaces"
 import { API } from "../../../../redux/componentsApi/componentsApi";
+import { useAppSelector } from "../../../../redux/hooks";
 
 interface props{
   component: CartComponentInterface
 }
 
 function BuyButton({component}:props) {
+
+  const userInfo = useAppSelector((state)=>state.userReducer.userInfo)
 
   const buyHandler = async () => {
     try {
@@ -16,7 +19,17 @@ function BuyButton({component}:props) {
             title: component.title,
             quantity: component.quantity,
             unit_price: component.price,
-          }]
+          }],
+          payer:{
+            name: userInfo.name,
+            surname: userInfo.userName,
+            email: userInfo.email,
+            address: {
+              zip_code: 1615,
+              street_name: "Kattegat",
+              street_number: 1
+            }
+          }
       })
       
       window.location.href = redirectionToMP.data.data
