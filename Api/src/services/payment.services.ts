@@ -20,7 +20,7 @@ const createPreference = async (items: ItemsInterface[], payer: PayerInterface) 
                 pending: "http://127.0.0.1:5173/",
             },
             auto_return: "approved",
-            notification_url: "https://component-store.onrender.com/payments/webhook" //"https://dc41-2800-810-5e3-263-9c67-3580-f7c3-21f.ngrok-free.app/payments/webhook", 
+            notification_url: "https://component-store.onrender.com/payments/webhook", //"https://dc41-2800-810-5e3-263-9c67-3580-f7c3-21f.ngrok-free.app/payments/webhook", 
         }
     })
 

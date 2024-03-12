@@ -34,7 +34,7 @@ export enum StatusDetail {
 }
 
 export default interface OrderInterface {
-    _id: Number,
+    _id: Number, 
     userId: ObjectId,
     items: ItemsInterface,
     status: boolean,
