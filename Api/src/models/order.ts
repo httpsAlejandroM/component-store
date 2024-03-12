@@ -60,7 +60,6 @@ const orderSchema = new Schema<OrderInterface>({
     }
 },
 {
-    _id:false, 
     timestamps:true,
     versionKey:false
 })
