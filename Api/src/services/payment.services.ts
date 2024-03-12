@@ -15,12 +15,12 @@ const createPreference = async (items: ItemsInterface[], payer: PayerInterface) 
             items: items,
             payer,
             back_urls: {
-                success: "https://component-store-delta.vercel.app/", // "http://localhost:5173/"
+                success: "https://component-store-delta.vercel.app/",//"http://localhost:5173/" 
                 failure: "http://127.0.0.1:5173/",
                 pending: "http://127.0.0.1:5173/",
             },
             auto_return: "approved",
-            notification_url:   "https://component-store-delta.vercel.app/payments/webhook" // "https://dc41-2800-810-5e3-263-9c67-3580-f7c3-21f.ngrok-free.app/payments/webhook"
+            notification_url: "https://component-store-delta.vercel.app/payments/webhook" //"https://dc41-2800-810-5e3-263-9c67-3580-f7c3-21f.ngrok-free.app/payments/webhook", 
         }
     })
 
@@ -30,7 +30,7 @@ const createPreference = async (items: ItemsInterface[], payer: PayerInterface) 
 const createOrder = async (order:OrderInterface) => {
     //const user = await Users.findOne({_id: order.userId})
     try {
-        const existOrder = await Order.findOne({id: order._id})
+        const existOrder = await Order.findOne({id: order.id})
         if(existOrder){
             //agregar logica para modificar orden
             console.log({existOrder});
@@ -52,7 +52,7 @@ const webhookPayment = async (paymentId: string) => {
     try { 
         const paymentById : any = await payment.get({ id: paymentId })
         const order : OrderInterface = {
-            _id: Number(paymentId),
+            id: Number(paymentId),
             userId: new ObjectId("6566353b329786713a020376"),
             items: paymentById.additional_info?.items,
             status: paymentById.status === "approved"? true : false,
@@ -61,8 +61,9 @@ const webhookPayment = async (paymentId: string) => {
             total: paymentById.transaction_details?.total_paid_amount
         }
         if(paymentById.status === "approved"){
+            //https://www.mongodb.com/docs/manual/core/indexes/create-index/
             const newOrder = await createOrder(order)
-            return newOrder
+            return {mensaje: "Pago aprobado"}
         }
         return {mensaje: "Pago rechazado"}
     } catch (error) {

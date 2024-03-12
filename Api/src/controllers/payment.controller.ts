@@ -21,7 +21,6 @@ const webHookController = async (req: Request, res: Response) => {
         if(query.type === "payment"){
             const paymentId = query["data.id"] as string
             const result = await webhookPayment(paymentId)    
-
             responseHandler(res, 200, {success: true})
         }
         if(query.topic === "merchant_order"){
