@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 import OrderInterface, { StatusDetail } from "../interfaces/order.interface";
 
 const orderSchema = new Schema<OrderInterface>({
-    _id:{
+    id:{
         type: Number,
         required: true,
         unique: true
