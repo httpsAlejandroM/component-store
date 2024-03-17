@@ -4,6 +4,7 @@ const { MERCADO_PAGO_ACCESS } = require("../config")
 import Users from "../models/users";
 import Order from "../models/order"
 import { ObjectId } from "mongodb";
+import { formatDate } from "../utils/fomatDate";
 
 const client = new MercadoPagoConfig({ accessToken: MERCADO_PAGO_ACCESS });
 const preference = new Preference(client);
@@ -57,7 +58,7 @@ const webhookPayment = async (paymentId: string) => {
             items: paymentById.additional_info?.items,
             status: paymentById.status === "approved"? true : false,
             statusDetail: "Pagado",
-            datePayment: paymentById.date_approved,
+            datePayment: formatDate(paymentById.date_approved),
             total: paymentById.transaction_details?.total_paid_amount
         }
         if(paymentById.status === "approved"){

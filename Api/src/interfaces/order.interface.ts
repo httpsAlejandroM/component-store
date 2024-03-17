@@ -39,6 +39,6 @@ export default interface OrderInterface {
     items: ItemsInterface,
     status: boolean,
     statusDetail: "En proceso" | "Pagado" | "Enviado" | "Entregado" | "Cancelado"
-    datePayment: Date,
+    datePayment: String,
     total: Number
 }
