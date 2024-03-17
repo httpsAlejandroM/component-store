@@ -51,7 +51,7 @@ const orderSchema = new Schema<OrderInterface>({
         required: true
     },
     datePayment:{
-        type: Date,
+        type: String,
         required: true
     },
     total:{
