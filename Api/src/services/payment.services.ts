@@ -29,9 +29,8 @@ const createPreference = async (items: ItemsInterface[], payer: PayerInterface) 
 }
 
 const createOrder = async (order:OrderInterface) => {
-    //const user = await Users.findOne({_id: order.userId})
     try {
-        const existOrder = await Order.findOne({id: order.id}) // fix bug prop 
+        const existOrder = await Order.findOne({id: order.id})
         
         if(existOrder){
             //agregar logica para modificar orden
