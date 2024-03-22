@@ -1,7 +1,6 @@
 import MercadoPagoConfig, { Payment, Preference } from "mercadopago";
 import OrderInterface, { ItemsInterface, PayerInterface } from "../interfaces/order.interface";
 const { MERCADO_PAGO_ACCESS } = require("../config")
-import Users from "../models/users";
 import Order from "../models/order"
 import { ObjectId } from "mongodb";
 import { formatDate } from "../utils/fomatDate";
@@ -16,12 +15,12 @@ const createPreference = async (items: ItemsInterface[], payer: PayerInterface) 
             items: items,
             payer,
             back_urls: {
-                success: "https://component-store-delta.vercel.app/",//"http://localhost:5173/" 
+                success: "https://component-store-delta.vercel.app/",//"http://localhost:5173/",
                 failure: "http://127.0.0.1:5173/",
                 pending: "http://127.0.0.1:5173/",
             },
             auto_return: "approved",
-            notification_url: "https://component-store.onrender.com/payments/webhook", //"https://7412-2800-810-5e3-263-8d49-8ad-eedc-d75f.ngrok-free.app/payments/webhook"
+            notification_url: "https://component-store.onrender.com/payments/webhook",//"https://4d7a-2800-810-5e3-263-dd8b-d14b-1e60-96b2.ngrok-free.app/payments/webhook"
         }
     })
 
@@ -61,7 +60,6 @@ const webhookPayment = async (paymentId: string) => {
             total: paymentById.transaction_details?.total_paid_amount
         }
         if(paymentById.status === "approved"){
-            //https://www.mongodb.com/docs/manual/core/indexes/create-index/
             const newOrder = await createOrder(order)
             console.log({newOrder});
             

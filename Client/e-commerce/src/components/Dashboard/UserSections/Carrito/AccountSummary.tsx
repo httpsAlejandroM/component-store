@@ -1,6 +1,5 @@
-import axios from "axios"
-import { API } from "../../../../redux/componentsApi/componentsApi"
-import { CartComponentInterface } from "../../../../interfaces"
+import 'react-toastify/dist/ReactToastify.css';
+import BuyButton from "../../../../views/Detail/SubSections/Components/BuyButton";
 
 interface props {
     components: any[]
@@ -8,7 +7,7 @@ interface props {
 }
 
 function AccountSummary({ components }: props) {
-
+    
     const total = components.reduce((acc, component) => {
         const totalByComponent = component.price * component.quantity
         return acc + totalByComponent
@@ -34,28 +33,6 @@ function AccountSummary({ components }: props) {
         )
     })
 
-    const buyHandler = async() => {
-       const items = components.map((component:CartComponentInterface)=>{
-        return {
-            id:  component._id,
-            title: component.title,
-            quantity: component.quantity,
-            unit_price: component.price
-        }
-        })
-        
-        try {
-            const redirectionToMP = await axios.post(`${API}/payments`,{
-                 items
-             })
-             
-             window.location.href = redirectionToMP.data.data
-         } catch (error) {
-             console.log(error);
-             
-         } 
-    }
-
     return (
         <div className="col-12 col-xl-4 col-xxl-3 sticky-bottom mt-5 mt-xl-0 position-lg-static z-0">
             <div className="col-12 bg-light justify-content-center p-3 rounded-3">
@@ -75,12 +52,7 @@ function AccountSummary({ components }: props) {
                         {`$${total.toFixed(2)}`}
                     </span>
                 </div>
-                <button 
-                className="offset px-0 col-12 btn btn-buy"
-                onClick={buyHandler}
-                >
-                    Continuar compra
-                </button>
+                <BuyButton className="offset px-0 col-12 btn btn-buy" components={components}></BuyButton>
             </div>
         </div>
     )

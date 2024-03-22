@@ -2,24 +2,44 @@ import axios from "axios";
 import { CartComponentInterface } from "../../../../interfaces"
 import { API } from "../../../../redux/componentsApi/componentsApi";
 import { useAppSelector } from "../../../../redux/hooks";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ButtonHTMLAttributes, FC } from "react";
 
-interface props{
-  component: CartComponentInterface
+
+type BuyButtonComponent = ButtonHTMLAttributes<HTMLButtonElement> & {
+  components: CartComponentInterface[]
 }
 
-function BuyButton({component}:props) {
-
+const BuyButton:FC<BuyButtonComponent> = ({components, ...rest}) => {
   const userInfo = useAppSelector((state)=>state.userReducer.userInfo)
+  const isAuthenticated = useAppSelector((state)=> state.userReducer.isAuthenticated)
 
   const buyHandler = async () => {
+    if(!isAuthenticated){
+      toast.info(`Inicia sesión para continuar con la compra`, {
+        position: "top-right",
+        autoClose: 3500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+    else{
     try {
+      const items = components.map((component: CartComponentInterface)=>{
+        return {
+          id: component._id,
+          title: component.title,
+          quantity: component.quantity,
+          unit_price: component.price,
+        }
+      })
      const redirectionToMP = await axios.post(`${API}/payments`,{
-          items: [{
-            id: component._id,
-            title: component.title,
-            quantity: component.quantity,
-            unit_price: component.price,
-          }],
+          items,
           payer:{
             name: userInfo.name,
             surname: userInfo.userName,
@@ -36,12 +56,12 @@ function BuyButton({component}:props) {
   } catch (error) {
       console.log(error);
       
-  } 
+  }
+}
   }
 
   return (
-    <button 
-    className="btn btn-buy py-2 col-11 col-sm-8 fw-bolder"
+    <button {...rest}
     onClick={buyHandler}
     >Comprar ahora</button>
   )
