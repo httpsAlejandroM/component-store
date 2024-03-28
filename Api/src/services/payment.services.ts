@@ -4,6 +4,7 @@ const { MERCADO_PAGO_ACCESS } = require("../config")
 import Order from "../models/order"
 import { ObjectId } from "mongodb";
 import { formatDate } from "../utils/fomatDate";
+import User from "../models/users";
 
 const client = new MercadoPagoConfig({ accessToken: MERCADO_PAGO_ACCESS });
 const preference = new Preference(client);
@@ -20,7 +21,7 @@ const createPreference = async (items: ItemsInterface[], payer: PayerInterface) 
                 pending: "http://127.0.0.1:5173/",
             },
             auto_return: "approved",
-            notification_url: "https://component-store.onrender.com/payments/webhook",//"https://4d7a-2800-810-5e3-263-dd8b-d14b-1e60-96b2.ngrok-free.app/payments/webhook"
+            notification_url: "https://component-store.onrender.com/payments/webhook",//"https://0de5-2800-810-5e3-345-dc4a-25e1-89c-6499.ngrok-free.app/payments/webhook",
         }
     })
 
@@ -28,6 +29,7 @@ const createPreference = async (items: ItemsInterface[], payer: PayerInterface) 
 }
 
 const createOrder = async (order:OrderInterface) => {
+    let user = await User.findOne({_id: order.userId.toString()})
     try {
         const existOrder = await Order.findOne({id: order.id})
         
@@ -37,8 +39,15 @@ const createOrder = async (order:OrderInterface) => {
         }
         else{
             const newOrder = await Order.create(order)
-            //vaciar carro del usuario
             //logica para descontar stock
+           if(user){
+            user.cart = user.cart.filter((component)=>{
+                return !order.items.some((productOrder)=>{
+                   return productOrder.id === component.productId.toString()
+                })
+            })
+            user.save()
+           }
             
             return newOrder
         }
@@ -61,7 +70,7 @@ const webhookPayment = async (paymentId: string) => {
         }
         if(paymentById.status === "approved"){
             const newOrder = await createOrder(order)
-            console.log({newOrder});
+            console.log("Pago aprobado");
             
             return {mensaje: "Pago aprobado"}
         }
