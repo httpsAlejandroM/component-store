@@ -36,7 +36,7 @@ export enum StatusDetail {
 export default interface OrderInterface {
     id: Number, 
     userId: ObjectId,
-    items: ItemsInterface,
+    items: ItemsInterface[],
     status: boolean,
     statusDetail: "En proceso" | "Pagado" | "Enviado" | "Entregado" | "Cancelado"
     datePayment: String,
