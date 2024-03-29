@@ -10,7 +10,7 @@ const orderSchema = new Schema<OrderInterface>({
     userId:{
         type: Schema.Types.ObjectId,
         ref: "User",
-        required: false,
+        required: true,
     },
     items:[
         {

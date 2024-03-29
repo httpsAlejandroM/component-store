@@ -5,9 +5,9 @@ import { createPreference, webhookPayment } from "../services/payment.services";
 const { responseHandler, errorHandler } = utils
 
 const paymentController = async (req: Request, res: Response) => {
-    const { items, payer } = req.body
+    const { items, payer, metadata } = req.body
    try {
-        const result = await createPreference(items, payer)
+        const result = await createPreference(items, payer, metadata)
      responseHandler(res, 200, result.sandbox_init_point)
    } catch (error) {
     console.log(error);
