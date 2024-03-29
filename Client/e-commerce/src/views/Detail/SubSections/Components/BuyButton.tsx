@@ -49,6 +49,9 @@ const BuyButton:FC<BuyButtonComponent> = ({components, ...rest}) => {
               street_name: "Kattegat",
               street_number: 1
             }
+          },
+          metadata: {
+            id: userInfo.id
           }
       })
       
