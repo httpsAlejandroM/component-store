@@ -19,7 +19,7 @@ El proyecto es una aplicación de comercio electrónico que ofrece una experienc
 
 + Carrito de compras: Funcionalidad de carrito de compras que permite a los usuarios agregar y eliminar productos.
 
-+ Proceso de pago: Integración de un sistema de pago (Mercado pago) para garantisar transacciones.
++ Proceso de pago: Integración de un sistema de pago (Mercado pago) para garantizar transacciones.
 
 + Panel de administración: Herramienta para gestionar productos, compras, favoritos, perfil y dejar un puntaje del producto comprado.
 
