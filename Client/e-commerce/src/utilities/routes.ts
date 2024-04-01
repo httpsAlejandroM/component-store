@@ -14,5 +14,6 @@ export const PrivateRoutes = {
     DASHBOARD_FAVORITES: "favorites",
     DASHBOARD_CART:"cart",
     DASHBOARD_SUPPORT: "support",
-    DASHBOARD_MY_PROFILE: "my_profile"
+    DASHBOARD_MY_PROFILE: "my_profile",
+    SUCCESS_PAYMENT: "success_payment"
 }

@@ -21,6 +21,7 @@ const Favoritos = lazy(() => import("./components/Dashboard/UserSections/Favorit
 const Carrito = lazy(() => import("./components/Dashboard/UserSections/Carrito/Carrito"))
 const Soporte = lazy(() => import("./components/Dashboard/UserSections/Soporte"))
 const MiPerfil = lazy(() => import("./components/Dashboard/UserSections/MiPerfil"))
+//const SuccessPayment = lazy(()=> import("./components/Dashboard/UserSections/SuccessPayment/SuccessPayment"))
 
 function App() {
   const dispatch = useAppDispatch()
@@ -49,6 +50,7 @@ function App() {
               <Route path={PrivateRoutes.DASHBOARD_CART} element={<Carrito />} />
               <Route path={PrivateRoutes.DASHBOARD_SUPPORT} element={<Soporte />} />
               <Route path={PrivateRoutes.DASHBOARD_MY_PROFILE} element={<MiPerfil />} />
+              {/* <Route path={PrivateRoutes.SUCCESS_PAYMENT} element={<SuccessPayment/>}/> */}
             </Route>
           </Route>
         </Routes>

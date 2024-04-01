@@ -589,6 +589,14 @@ form {
 }
 }
 
+.modal-open {
+  overflow: auto !important;
+}
+
+.modal-backdrop.show {
+  opacity: 0.25
+}
+
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   .filter-menu::before {
