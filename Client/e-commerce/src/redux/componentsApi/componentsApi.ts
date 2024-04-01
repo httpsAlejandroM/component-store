@@ -2,7 +2,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { ComponentByIdQuery, QueryApi, ResponseBackend, ResponseComponentById } from '../../interfaces'
 
 //export const API = "http://localhost:3000"
-export const API = "https://component-store.onrender.com"
+//export const API = "https://component-store.onrender.com"
+export const API = import.meta.env.VITE_API_URL
 
 export const componentsApi = createApi({
   reducerPath: 'componentsApi',
