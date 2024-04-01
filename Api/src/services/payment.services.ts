@@ -1,6 +1,6 @@
 import MercadoPagoConfig, { Payment, Preference } from "mercadopago";
 import OrderInterface, { ItemsInterface, PayerInterface } from "../interfaces/order.interface";
-const { MERCADO_PAGO_ACCESS } = require("../config")
+const { MERCADO_PAGO_ACCESS, CLIENT_URL, API_NOTIFICATION_URL } = require("../config")
 import Order from "../models/order"
 import { formatDate } from "../utils/fomatDate";
 import User from "../models/users";
@@ -18,12 +18,12 @@ const createPreference = async (items: ItemsInterface[], payer: PayerInterface, 
             payer,
             metadata,
             back_urls: {
-                success:"https://component-store-delta.vercel.app/",//"http://localhost:5173/",//////
+                success:CLIENT_URL,//"https://component-store-delta.vercel.app/",
                 failure: "http://127.0.0.1:5173/",
                 pending: "http://127.0.0.1:5173/",
             },
             auto_return: "approved",
-            notification_url: "https://component-store.onrender.com/payments/webhook",// "https://7108-2800-810-5e3-345-5580-47f4-d041-5e5c.ngrok-free.app/payments/webhook",//////
+            notification_url: API_NOTIFICATION_URL//"https://component-store.onrender.com/payments/webhook",// ,//////
         }
     })
 
