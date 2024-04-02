@@ -2,6 +2,7 @@ import Users from "../models/users";
 import { CartItem, FavItem } from "../interfaces/user.interface";
 import getUserInfo from "../utils/getUserInfo";
 import { ObjectId } from "mongodb";
+import Order from "../models/order";
 
 const getAllUsers = async () => {
     const allUsers = await Users.find().populate({
@@ -119,10 +120,16 @@ const updateCartUser = async ({ cartComponentId, quantity, userId }: CartItem) =
 
 }
 
+const allOrders = async (userId:string) => {
+    const allUserOrders = await Order.find({userId: userId})
+    return allUserOrders
+}
+
 export {
     getAllUsers,
     updateFav,
     getUserById,
     getUserByEmail,
-    updateCartUser
+    updateCartUser,
+    allOrders
 }

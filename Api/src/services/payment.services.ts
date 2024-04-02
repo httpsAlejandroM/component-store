@@ -18,12 +18,12 @@ const createPreference = async (items: ItemsInterface[], payer: PayerInterface, 
             payer,
             metadata,
             back_urls: {
-                success:CLIENT_URL,//"https://component-store-delta.vercel.app/",
+                success:CLIENT_URL,
                 failure: "http://127.0.0.1:5173/",
                 pending: "http://127.0.0.1:5173/",
             },
             auto_return: "approved",
-            notification_url: API_NOTIFICATION_URL//"https://component-store.onrender.com/payments/webhook",// ,//////
+            notification_url: API_NOTIFICATION_URL
         }
     })
 

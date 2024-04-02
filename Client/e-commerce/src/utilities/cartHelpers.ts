@@ -6,6 +6,7 @@ const cartComponentProps = (component: ComponentInterface, quantity: number) => 
     const componentFilteredProps = {
         _id: component._id,
         title: component.title,
+        category: component.category,
         image: component.image,
         stock: component.stock,
         price: component.price,
