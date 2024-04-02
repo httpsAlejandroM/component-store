@@ -1,8 +1,9 @@
 import 'react-toastify/dist/ReactToastify.css';
 import BuyButton from "../../../../views/Detail/SubSections/Components/BuyButton";
+import { CartComponentInterface } from '../../../../interfaces';
 
 interface props {
-    components: any[]
+    components: CartComponentInterface[]
 
 }
 

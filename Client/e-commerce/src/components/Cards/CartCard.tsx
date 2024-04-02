@@ -12,10 +12,11 @@ interface props {
   title: string
   price: number
   quantity: number
+  category: string
   stock: number
 }
 
-function CartCard({ id, image, title, price, quantity, stock }: props) {
+function CartCard({ id, image, title, price, quantity, stock, category }: props) {
 
   const userInfo = useAppSelector((state)=> state.userReducer.userInfo)
   const [quantityProduct, setQuantityProduct] = useState<number>(quantity)
@@ -55,7 +56,7 @@ function CartCard({ id, image, title, price, quantity, stock }: props) {
 
           <div className="row col-12 my-2 my-sm-0 d-flex">
             <LinkButton onClick={deleteFromCart} children={"Eliminar"}/>
-            <BuyButton className="col-auto btn btn-link col-auto fs-7 text-start text-decoration-none" components={[{_id: id, image, title, price, quantity, stock}]}/>
+            <BuyButton className="col-auto btn btn-link col-auto fs-7 text-start text-decoration-none" components={[{_id: id, image, title, price, quantity, stock, category}]}/>
           </div>
         </div>
 

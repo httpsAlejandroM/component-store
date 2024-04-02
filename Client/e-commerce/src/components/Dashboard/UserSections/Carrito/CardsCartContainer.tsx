@@ -21,6 +21,7 @@ function CardsCartContainer({components}:props) {
             id={component._id} 
             price={component.price}
             image={component.image}
+            category={component.category}
             quantity={component.quantity}
             stock={component.stock}
             title={component.title}

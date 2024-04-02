@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getAllUsers, getUserByEmail, getUserById, updateCartUser, updateFav } from "../services/users.service";
+import { getAllUsers, getUserByEmail, updateCartUser, updateFav, allOrders } from "../services/users.service";
 import errorHandler from "../utils/errorHandler";
 import responseHandler from "../utils/responseHandler";
 import { CustomRequest } from "../interfaces/customRequest.interface";
@@ -65,11 +65,23 @@ const updateCart = async (req: CustomRequest, res: Response)=>{
     }
 }
 
+const getOrders = async  (req: Request, res: Response) => {
+    const { userId } = req.params
+    try {
+        const allUserOrders = await allOrders(userId)
+        responseHandler(res, 200, allUserOrders)
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
 export {
     getUser,
     getUsers,
     putUser,
     deleteUser,
     updateFavorites,
-    updateCart
+    updateCart,
+    getOrders
 }

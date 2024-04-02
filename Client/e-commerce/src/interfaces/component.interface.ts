@@ -45,6 +45,7 @@ export interface CartComponentInterface {
     _id: string,
     title: string,
     image: string,
+    category: string,
     price: number,
     stock: number
     quantity: number

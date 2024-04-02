@@ -34,6 +34,8 @@ const BuyButton:FC<BuyButtonComponent> = ({components, ...rest}) => {
         return {
           id: component._id,
           title: component.title,
+          picture_url:component.image,
+          description: component.category,
           quantity: component.quantity,
           unit_price: component.price,
         }
