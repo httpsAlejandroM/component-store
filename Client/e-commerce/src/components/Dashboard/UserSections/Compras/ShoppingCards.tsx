@@ -12,7 +12,7 @@ function ShoppingCard({ items, statusDetail, datePayment, total }: orderInterfac
     }
 
     return (
-        <div  className="bg-light d-flex flex-column mt-3 rounded-3">
+        <div className="bg-light d-flex flex-column mt-3 rounded-3">
             <div className="row d-flex flex-row align-items-center p-3">
                 <p className="p-0 ps-3 m-0 mb-1">{formatDate(datePayment)}</p>
                 <hr className="p-0 m-0" />
@@ -40,9 +40,13 @@ function ShoppingCard({ items, statusDetail, datePayment, total }: orderInterfac
                                     Opinar
                                 </button>
                             </div>
+
                         </div>
                     )
                 })}
+            </div>
+            <div className="d-flex flex-row justify-content-end align-items-center col-11 p-2 pe-0 fs-5">
+                {`Total $${total}`}
             </div>
         </div>
     )
