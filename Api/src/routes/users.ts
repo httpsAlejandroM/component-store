@@ -10,7 +10,7 @@ router.put("/:id", putUser)
 router.put("/update/favs", updateFavorites)
 router.put("/update/cart", updateCart)
 router.delete("/:id", deleteUser)
-router.get("/:userId/orders", getOrders)
+router.get("/:userId/orders", authenticate, getOrders)
 
 export { router }
 

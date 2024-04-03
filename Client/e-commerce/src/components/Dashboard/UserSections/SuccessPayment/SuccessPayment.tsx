@@ -1,5 +1,6 @@
 import { useRef, useState } from "react"
 import { useAppSelector } from "../../../../redux/hooks"
+import { getAccessToken } from "../../../../auth/AuthHelpers"
 
 function SuccessPayment() {
 
@@ -29,8 +30,8 @@ function SuccessPayment() {
   return (
     <>
 
-      <button onClick={() => setIsOpen(!isOpen)}>un boton random</button>
-      {/* <button onClick={()=>setIsOpen(!isOpen)}>isOpenButton</button> */}
+      {/* <button onClick={() => setIsOpen(!isOpen)}>un boton random</button> */}
+      <button onClick={()=>console.log(getAccessToken())}>isOpenButton</button>
       <div ref={modal} className="modal fade" id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog">
           <div className="modal-content">
