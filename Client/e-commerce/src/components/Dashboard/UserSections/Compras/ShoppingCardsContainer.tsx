@@ -9,6 +9,7 @@ function ShoppingCardsContainer({orders}:props) {
   return (
     <div className="rounded-3 mb-4 col-12 d-flex flex-column">
         {
+            orders &&
             orders.map((order)=>{
                 return (
                     <ShoppingCard
