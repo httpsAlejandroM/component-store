@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom"
 import { ComponentInterface } from "../../interfaces"
 import { useAppDispatch, useAppSelector } from "../../redux/hooks"
 import { setFavorites } from "../../redux/slices/user.slice"
 import { favoritesBDHandler } from "../../utilities/componentsCartAndFavs"
+import { PublicRoutes } from "../../utilities/routes"
 
 interface props {
     component: ComponentInterface
@@ -23,7 +25,10 @@ function FavoriteCard({ containerStyle, component }: props) {
         <div className={`${containerStyle} `}>
 
             <div className="col-10 col-sm-6 col-lg-2 d-flex  align-items-center justify-content-center order-sm-1 order-1">
-                <img className="img-fluid col-12 align-self-center" src={component.image} alt={component.title} />
+                <Link to={`${PublicRoutes.DETAIL}/${component._id}`}>
+                    <img className="img-fluid col-12 align-self-center" src={component.image} alt={component.title} />
+                </Link>
+
             </div>
 
             <div className="col-12 col-sm-6 col-lg align-self-center order-sm-2 order-0">

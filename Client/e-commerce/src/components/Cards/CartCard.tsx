@@ -5,6 +5,8 @@ import { useState } from "react"
 import LinkButton from "../Dashboard/UserSections/Carrito/LinkButton"
 import { updateCartBD } from "../../utilities/cartHelpers"
 import BuyButton from "../../views/Detail/SubSections/Components/BuyButton"
+import { Link } from "react-router-dom"
+import { PublicRoutes } from "../../utilities/routes"
 
 interface props {
   id: string
@@ -44,7 +46,9 @@ function CartCard({ id, image, title, price, quantity, stock, category }: props)
   return (
     <div className="cart-card row col-12 rounded-3 py-4  bg-light justify-content-between align-items-center">
       <div className="row col-12  col-sm-3 col-lg-2 col-xl-2 align-items-center justify-content-center d-flex">
-        <img key={id} className="img-fluid cart-card-img" src={image} alt={title} />
+        <Link to={`${PublicRoutes.DETAIL}/${id}`} className="row col cart-card-img img-fluid p-0">
+        <img key={id} className="img-fluid cart-card-img ms-md-3" src={image} alt={title} />
+        </Link>
       </div>
 
       <div className="row col-12  col-sm-9 col-lg-10 col-xl-10 align-items-center justify-content-start">
