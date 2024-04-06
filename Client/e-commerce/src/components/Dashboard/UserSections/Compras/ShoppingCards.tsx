@@ -13,9 +13,9 @@ function ShoppingCard({ items, statusDetail, datePayment, total }: orderInterfac
         return `${dia} de ${mes[Number(splitedDate[1]) - 1]} de ${splitedDate[2].split(",")[0]}`
     }
 
-   const textColor = datePayment === "Pagado" || "Enviado"? "text-success-alpha" : "text-warning"
+    const textColor = datePayment === "Pagado" || "Enviado" ? "text-success-alpha" : "text-warning"
 
-   
+
     return (
         <div className="bg-light d-flex flex-column mt-3 rounded-3">
             <div className="row d-flex flex-row align-items-center p-3">
@@ -25,34 +25,34 @@ function ShoppingCard({ items, statusDetail, datePayment, total }: orderInterfac
             <div className="row d-flex flex-column">
                 {items?.map((component) => {
                     return (
-                        <>
-                        <div key={component.id} className="d-flex flex-row p-5 align-items-center justify-content-evenly">
-                            <div className="row col-2  p-2">
-                                <Link to={`${PublicRoutes.DETAIL}/${component.id}`}>
-                                <img className="img-fluid" src={component.picture_url} alt="" />
-                                </Link>
-                                
-                            </div>
-                            <div className="row col-5 ps-4 d-flex  flex-column justify-content-evenly align-items-center">
-                                <p className={`row ${textColor} fs-6`}>{statusDetail}</p>
-                                <p className="row fs-5">{component.title}</p>
-                                <small className="row">{`${component.quantity} unidad`}</small>
-                            </div>
-                            <div className="row col-2 fs-4 d-flex flex-row justify-content-center align-items-center">
-                                {`$${component.unit_price}`}
-                            </div>
-                            <div className="row col-3 d-flex flex-column justify-content-center align-items-center gap-2">
-                                <Link to={`${PublicRoutes.DETAIL}/${component.id}`} className="btn btn-buy col-10">
-                                    Ver compra
-                                </Link>
-                                <button className={`btn btn-outline-danger ${statusDetail !== "Entregado" ? "disabled" : ""} col-10`}>
-                                    Opinar
-                                </button>
-                            </div>
+                        <div className="p-0 m-0 " key={component.id}>
+                            <div className="d-flex flex-row p-5 align-items-center justify-content-evenly">
+                                <div className="row col-2  p-2">
+                                    <Link to={`${PublicRoutes.DETAIL}/${component.id}`}>
+                                        <img className="img-fluid" src={component.picture_url} alt="" />
+                                    </Link>
 
+                                </div>
+                                <div className="row col-5 ps-4 d-flex  flex-column justify-content-evenly align-items-center">
+                                    <p className={`row ${textColor} fs-6`}>{statusDetail}</p>
+                                    <p className="row fs-5">{component.title}</p>
+                                    <small className="row">{`${component.quantity} ${component.quantity > 1? "Unidades" : "Unidad"}`}</small>
+                                </div>
+                                <div className="row col-2 fs-4 d-flex flex-row justify-content-center align-items-center">
+                                    {`$${component.unit_price}`}
+                                </div>
+                                <div className="row col-3 d-flex flex-column justify-content-center align-items-center gap-2">
+                                    <Link to={`${PublicRoutes.DETAIL}/${component.id}`} className="btn btn-buy col-10">
+                                        Ver compra
+                                    </Link>
+                                    <button className={`btn btn-outline-danger ${statusDetail !== "Entregado" ? "disabled" : ""} col-10`}>
+                                        Opinar
+                                    </button>
+                                </div>
+
+                            </div>
+                            <hr className="p-0 m-0" />
                         </div>
-                        <hr className="p-0 m-0"/>
-                        </>
                     )
                 })}
             </div>
