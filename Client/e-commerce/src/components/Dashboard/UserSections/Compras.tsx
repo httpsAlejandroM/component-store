@@ -8,34 +8,33 @@ import EmptyCart from "./Carrito/EmptyCart"
 
 function Compras() {
 
-    const userInfo = useAppSelector((state)=>state.userReducer.userInfo)
-    const [ orders, setOrders ] = useState<orderInterface[]>([])
+    const userInfo = useAppSelector((state) => state.userReducer.userInfo)
+    const [orders, setOrders] = useState<orderInterface[]>([])
 
-const getUserOrders = async () => {
-    if(userInfo.id){
-        const ordenes = await getOrders(userInfo.id)
-        setOrders(ordenes.data) 
-        return
+    const getUserOrders = async () => {
+        if (userInfo.id) {
+            const ordenes = await getOrders(userInfo.id)
+            setOrders(ordenes.data)
+            return
+        }
     }
-}
 
- useEffect(()=>{
- getUserOrders()
-   
- },[])
+    useEffect(() => {
+        getUserOrders()
+    }, [])
 
     return (
-        <section className="container mt-5 w-100 h-100 rounded-3">
+        <section className="container rounded-3 mt-4 mb-4">
             {/* <SuccessPayment/> */}
-            <h2 className="col fs-3 mb-4 text-white text-start">Compras</h2>
+            <h2 className="col fs-3 mb-2 text-white text-start">Compras</h2>
             {
-                orders?.length 
-                ?<ShoppingCardsContainer orders={orders}/>
-                : 
-                <EmptyCart textButton="Descubrir productos" className="content text-dark d-flex align-items-center justify-content-center">
-                <h2>Aún no tienes Compras</h2>
-                <p className="fs-6 text-center">¡Explora todos nuestros componentes!</p>
-              </EmptyCart>
+                orders?.length
+                    ? <ShoppingCardsContainer orders={orders} />
+                    :
+                    <EmptyCart textButton="Descubrir productos" className="content text-dark d-flex align-items-center justify-content-center">
+                        <h2>Aún no tienes Compras</h2>
+                        <p className="fs-6 text-center">¡Explora todos nuestros componentes!</p>
+                    </EmptyCart>
             }
         </section>
     )
