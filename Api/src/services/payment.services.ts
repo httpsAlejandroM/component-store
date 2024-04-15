@@ -1,13 +1,13 @@
 import MercadoPagoConfig, { Payment, Preference } from "mercadopago";
 import OrderInterface, { ItemsInterface, PayerInterface } from "../interfaces/order.interface";
-const { MERCADO_PAGO_ACCESS, CLIENT_URL, API_NOTIFICATION_URL } = require("../config")
+import  config from "../config"
 import Order from "../models/order"
 import { formatDate } from "../utils/fomatDate";
 import User from "../models/users";
 import { filteredItemsById } from "../utils/userHelpers";
 import { discountStock } from "../utils/productHelper";
 
-const client = new MercadoPagoConfig({ accessToken: MERCADO_PAGO_ACCESS });
+const client = new MercadoPagoConfig({ accessToken: config.MERCADO_PAGO_ACCESS as string});
 const preference = new Preference(client);
 const payment = new Payment(client)
 
@@ -18,12 +18,12 @@ const createPreference = async (items: ItemsInterface[], payer: PayerInterface, 
             payer,
             metadata,
             back_urls: {
-                success:CLIENT_URL,
+                success: config.CLIENT_URL,
                 failure: "http://127.0.0.1:5173/",
                 pending: "http://127.0.0.1:5173/",
             },
             auto_return: "approved",
-            notification_url: API_NOTIFICATION_URL
+            notification_url: config.API_NOTIFICATION_URL
         }
     })
 

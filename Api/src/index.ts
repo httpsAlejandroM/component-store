@@ -1,7 +1,9 @@
-const server = require("./app")
-const { PORT } = require("./config");
-require("./database")()
+import app from "./app";
+import config from "./config";
+import connect from "./database"
 
-server.listen(PORT, () => {
-    console.log(`listening on port ${PORT}`)
+connect()
+
+app.listen(config.PORT, () => {
+    console.log(`listening on port ${config.PORT}`)
 })

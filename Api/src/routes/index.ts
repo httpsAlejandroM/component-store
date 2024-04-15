@@ -9,4 +9,4 @@ readdirSync("./src/routes").filter((file) => {
     import(`./${cleanName}`).then((moduleRouter) =>{router.use(`/${cleanName}`, moduleRouter.router) })
 })
 
-module.exports = router
+export default router

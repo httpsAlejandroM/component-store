@@ -1,13 +1,13 @@
-const express = require("express")
-const router = require("./routes/index")
-const cors = require("cors")
-const morgan = require("morgan")
+import router from "./routes"
+import express, { Application} from "express"
+import cors  from "cors"
+import morgan from "morgan"
 
-const app = express()
+const app: Application = express()
 
 app.use(morgan("dev"))
 app.use(express.json())
 app.use(cors())
 app.use(router)
 
-module.exports = app
+export default app
