@@ -28,8 +28,11 @@ describe("Tests /Components ", () => {
       expect(response.body.error).toBe(false)
     })
 
+    it("'data' property should be of type array", async () => {
+      expect(response.body.data).toBeInstanceOf(Array)
+    })
+
     it("'data' property it should return an array of components", async () => {
-      expect(Array.isArray(response.body.data)).toBe(true)
       response.body.data.forEach((product: Product) => {
         expect(product).toEqual(expect.objectContaining({
           _id: expect.any(String),
@@ -44,13 +47,33 @@ describe("Tests /Components ", () => {
         }));
       });
     })
+  })
 
-    
+  describe("GET /Components?= Querys Test", () => {
+
+    it("Query failed", async () => {
+      const res = await request(app).get("/components?title=asdasdasdasdasdsaddad").send()
+      expect(typeof res.body.data.message === "string").toBe(true)
+    })
+
+    it("Query by title success", async () => {
+      const res = await request(app).get("/components?title=playstation").send()
+      expect(res.body.data.length).toBeGreaterThan(0)
+    })
+
+    it("Query by category success", async () => {
+      const res = await request(app).get("/components?category=consolas").send()
+      expect(res.body.data.length).toBeGreaterThan(0)
+    })
+
+    it("Query by brand success", async () => {
+      const res = await request(app).get("/components?brand=sony").send()
+      expect(res.body.data.length).toBeGreaterThan(0)
+    })
 
   })
 
 
-  
 })
 
 
