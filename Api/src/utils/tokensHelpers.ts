@@ -1,12 +1,14 @@
 import Jwt from "jsonwebtoken"
-const { REFRESH_TOKEN, ACCESS_TOKEN } = require("../config");
+import config from "../config";
+
+const { REFRESH_TOKEN , ACCESS_TOKEN } = config
 
 const sign = (payload: any, isAccessToken: boolean) => {
     return Jwt.sign(
         payload,
         isAccessToken
-            ? ACCESS_TOKEN
-            : REFRESH_TOKEN,
+            ? ACCESS_TOKEN as string
+            : REFRESH_TOKEN as string,
         {
             algorithm: "HS256",
             expiresIn: "7d"
@@ -23,12 +25,12 @@ const generateRefreshToken = (user: any) => {
 }
 
 const verifyAccessToken = (token: string) => {
-    return Jwt.verify(token, ACCESS_TOKEN)
+    return Jwt.verify(token, ACCESS_TOKEN as string)
 }
 
 const verifyRefreshToken = (token: string) => {
     if (token) {
-        return Jwt.verify(token, REFRESH_TOKEN)
+        return Jwt.verify(token, REFRESH_TOKEN as string)
     }
 }
 

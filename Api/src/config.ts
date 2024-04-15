@@ -1,8 +1,9 @@
-require("dotenv").config();
+import dotenv from "dotenv"
+dotenv.config()
 
 const {DB, HOST, PORT_API, ACCESS_TOKEN, REFRESH_TOKEN, MERCADO_PAGO_KEY, CLIENT_URL, API_NOTIFICATION_URL} = process.env;
 
-module.exports = {
+export default  {
     MONGO_DATABASE: DB, // DB
     MONGO_USER: "admin",
     MONGO_PASSWORD: "admin",
