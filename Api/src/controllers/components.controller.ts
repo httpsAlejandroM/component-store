@@ -50,7 +50,7 @@ const getComponent = async (req: Request, res: Response) => {
         const componentById = await getComponentById(id)
         responseHandler(res, 200, componentById)
     } catch (error) {
-        errorHandler(res, 400, `No se encontro componente con id ${id}`)
+        errorHandler(res, 400, error)
     }
 }
 
