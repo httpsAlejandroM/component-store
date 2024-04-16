@@ -40,9 +40,29 @@ const getComponentById = async (id: string) => {
 
 }
 
-const createComponent = async (component: interfaceProduct): Promise<componentType> => {
-  const newComponent = await Products.create(component);
-  return newComponent;
+const createComponent = async (component: interfaceProduct | any) => {
+  const productProps = ["title", "brand", "image", "description", "category", "price", "stock"]
+  const propsMissing: any = []
+
+  productProps.forEach((prop) => {
+    if (!component[prop]) propsMissing.push(prop)
+  })
+
+  if (propsMissing.length > 0) {
+    return { message: `Las siguentes propiedades son requeridas: ${propsMissing.join(', ')}` }
+  }
+  else {
+    const alreadyExist = await Products.find({ title: component.title })
+    if (alreadyExist[0]) {
+      return { message: `Ya existe producto con el titulo ${component.title}` }
+    }
+    else {
+      const newComponent = await Products.create(component);
+      return { message: "Producto creado exitosamente", newProduct: newComponent }
+    }
+  }
+
+
 }
 
 const updateComponent = async (id: string, component: interfaceProduct) => {
