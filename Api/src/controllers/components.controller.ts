@@ -50,14 +50,14 @@ const getComponent = async (req: Request, res: Response) => {
         const componentById = await getComponentById(id)
         responseHandler(res, 200, componentById)
     } catch (error) {
-        errorHandler(res, 400, `No se encontro componente con id ${id}`)
+        errorHandler(res, 400, error)
     }
 }
 
 const postComponent = async (req: Request, res: Response) => {
     try {
         const newComponent = await createComponent(req.body)
-        responseHandler(res, 200, { message: "Producto creado exitosamente", newProduct: newComponent })
+        responseHandler(res, 200, newComponent)
     } catch (error) {
         errorHandler(res, 400, "No se pudo crear el componente", error)
     }

@@ -2,7 +2,7 @@ import filterInterface from "../interfaces/filter.interface";
 import interfaceProduct from "../interfaces/product.interface"
 import QueryInterface from "../interfaces/querys.interface";
 import Products from "../models/products"
-import { Document, SortOrder, Types } from 'mongoose';
+import mongoose, { Document, SortOrder, Types } from 'mongoose';
 
 
 type componentType = Document<unknown, {}, interfaceProduct> & interfaceProduct & {
@@ -21,7 +21,7 @@ const createDocumentsBD = async (components: interfaceProduct[]) => {
 const getAllComponents = async ({ order, page = 1, perPage = 12 }: QueryInterface) => {
   const orderBy = sortProducts(order)
   const countQuery = await Products.countDocuments()
-  const allComponents = await Products.find().sort(orderBy).skip((page - 1) * perPage).limit(perPage)  
+  const allComponents = await Products.find().sort(orderBy).skip((page - 1) * perPage).limit(perPage)
   return {
     allComponents,
     countQuery
@@ -30,13 +30,39 @@ const getAllComponents = async ({ order, page = 1, perPage = 12 }: QueryInterfac
 
 
 const getComponentById = async (id: string) => {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return { message: `El Id ${id} no es válido` }
+  }
+
   const componentById = await Products.findById(id);
-  return componentById;
+  if (componentById) return componentById
+  else return { message: `No se encontro componente con id ${id}` }
+
 }
 
-const createComponent = async (component: interfaceProduct): Promise<componentType> => {
-  const newComponent = await Products.create(component);
-  return newComponent;
+const createComponent = async (component: interfaceProduct | any) => {
+  const productProps = ["title", "brand", "image", "description", "category", "price", "stock"]
+  const propsMissing: any = []
+
+  productProps.forEach((prop) => {
+    if (!component[prop]) propsMissing.push(prop)
+  })
+
+  if (propsMissing.length > 0) {
+    return { message: `Las siguentes propiedades son requeridas: ${propsMissing.join(', ')}` }
+  }
+  else {
+    const alreadyExist = await Products.find({ title: component.title })
+    if (alreadyExist[0]) {
+      return { message: `Ya existe producto con el titulo ${component.title}` }
+    }
+    else {
+      const newComponent = await Products.create(component);
+      return { message: "Producto creado exitosamente", newProduct: newComponent }
+    }
+  }
+
+
 }
 
 const updateComponent = async (id: string, component: interfaceProduct) => {
@@ -51,7 +77,7 @@ const removeComponent = async (id: string) => {
 const applyFilters = async ({ title, category, brand, order, page = 1, perPage = 12, minPrice, maxPrice }: QueryInterface) => {
   const filterOptions: filterInterface = {};
   if (title) filterOptions.title = new RegExp(title, 'i');
-  
+
   if (category) {
     const categoryValues = category.split(",");
     const regex = categoryValues.map((categoria: string) => new RegExp(categoria, 'i'))
@@ -62,9 +88,9 @@ const applyFilters = async ({ title, category, brand, order, page = 1, perPage =
     const regex = brandValues.map((marca: string) => new RegExp(marca, 'i'))
     filterOptions.brand = { $in: regex };
   }
-  
-  if (minPrice) filterOptions.price = { $gte: minPrice};
-  
+
+  if (minPrice) filterOptions.price = { $gte: minPrice };
+
   if (maxPrice) filterOptions.price = { ...filterOptions.price, $lte: maxPrice };
 
 
@@ -166,7 +192,7 @@ const sortProducts = (order: string | undefined): { [prop: string]: SortOrder } 
 const getAllCategoriesAndBrands = async ({ category, brand, title, minPrice, maxPrice }: QueryInterface) => {
   const aggregatePipeline: any[] = [];
 
-  if (category || brand || title  || minPrice || maxPrice) {
+  if (category || brand || title || minPrice || maxPrice) {
     const matchStage: any = {};
 
     if (category) matchStage.category = category;
@@ -176,9 +202,9 @@ const getAllCategoriesAndBrands = async ({ category, brand, title, minPrice, max
     if (title) matchStage.title = new RegExp(title, 'i');
 
     if (minPrice) matchStage.price = { $gte: Number(minPrice) };
-    
+
     if (maxPrice) matchStage.price = { ...matchStage.price, $lte: Number(maxPrice) };
-    
+
     aggregatePipeline.push({
       $match: matchStage
     });
