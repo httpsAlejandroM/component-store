@@ -61,17 +61,29 @@ const createComponent = async (component: interfaceProduct | any) => {
       return { message: "Producto creado exitosamente", newProduct: newComponent }
     }
   }
-
-
 }
 
 const updateComponent = async (id: string, component: interfaceProduct) => {
-  const componentById = await Products.findByIdAndUpdate(id, component, { new: true });
-  return componentById
+  if (!mongoose.Types.ObjectId.isValid(id)) return { message: `El Id ${id} no es válido` }
+
+  const updatedComponent = await Products.findByIdAndUpdate(id, component, { new: true });
+
+  if (updatedComponent) return { message: "Producto modificado exitosamente", updatedComponent }
+
+  else return { message: `No se encontro producto con el Id ${id}` }
+
+
 }
 
 const removeComponent = async (id: string) => {
-  return await Products.findByIdAndRemove(id)
+  if (!mongoose.Types.ObjectId.isValid(id)) return { message: `El Id ${id} no es válido` }
+  
+  const deletedComponent = await Products.findByIdAndRemove(id)
+
+  if (deletedComponent) return { message: "Componente eliminado correctamente" }
+
+  else return { message: `No se encontro producto con el id ${id}` }
+
 }
 
 const applyFilters = async ({ title, category, brand, order, page = 1, perPage = 12, minPrice, maxPrice }: QueryInterface) => {

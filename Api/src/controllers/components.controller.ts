@@ -57,7 +57,7 @@ const getComponent = async (req: Request, res: Response) => {
 const postComponent = async (req: Request, res: Response) => {
     try {
         const newComponent = await createComponent(req.body)
-        responseHandler(res, 200, newComponent)
+        responseHandler(res, 201, newComponent)
     } catch (error) {
         errorHandler(res, 400, "No se pudo crear el componente", error)
     }
@@ -67,9 +67,9 @@ const putComponent = async (req: Request, res: Response) => {
     const { id } = req.params
     try {
         const updatedComponent = await updateComponent(id, req.body)
-        responseHandler(res, 200, { message: "Producto modificado exitosamente", updatedComponent })
+        responseHandler(res, 200, updatedComponent)
     } catch (error) {
-        errorHandler(res, 400, "No se pudo crear el componente", error)
+        errorHandler(res, 400, "No se pudo modificar el componente", error)
     }
 }
 
@@ -77,7 +77,7 @@ const deleteComponent = async (req: Request, res: Response) => {
     const { id } = req.params
     try {
         const deletedComponent = await removeComponent(id)
-        responseHandler(res, 200, { message: "Componente eliminado correctamente", deletedComponent: deletedComponent })
+        responseHandler(res, 200, deletedComponent)
     } catch (error) {
         errorHandler(res, 400, "No se pudo crear el componente", error)
     }

@@ -5,7 +5,7 @@ import { authenticate } from "../middlewares/authMiddleware";
 const router = Router()
 
 router.get("/", authenticate, getUser)
-router.get("/allusers", getUsers)
+router.get("/users", getUsers)
 router.put("/:id", putUser)
 router.put("/update/favs", updateFavorites)
 router.put("/update/cart", updateCart)
