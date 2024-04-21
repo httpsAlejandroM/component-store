@@ -37,7 +37,7 @@ const deleteUser = async (req: Request, res: Response) => {
     const { id } = req.params
     try {
         const deletedUser = await removeUser(id)
-        responseHandler(res, 200, deleteUser)
+        responseHandler(res, 200, deletedUser)
     } catch (error) {
         errorHandler(res, 400, "Error, algo salio mal", error)
     }
