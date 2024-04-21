@@ -59,7 +59,7 @@ describe("Tests /auth", () => {
                 favorites: expect.any(Array),
                 cart: expect.any(Array),
               }));
-            await request(app).delete(`/auth/signup/${newUser.id}`).send()
+            await request(app).delete(`/users/${newUser.id}`).send()
         })
     })
 })
