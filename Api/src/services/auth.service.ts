@@ -12,7 +12,7 @@ const createUser = async (name:string, email:string, userName:string, password:s
 
     if(emailExist)  errorMessage.push("Email en uso")
     if(userNameExist) errorMessage.push("Nombre de usuario en uso")
-    if(errorMessage.length > 0) return {message: errorMessage}
+    if(errorMessage.length > 0) return {message: errorMessage.join(", ")}
 
     return await newUser.save()
 }
