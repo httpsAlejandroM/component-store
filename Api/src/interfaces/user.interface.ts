@@ -27,7 +27,7 @@ export interface UserInterface {
     userName: string
     image: string
     favorites: Favorite[]
-    cart: Favorite[]
+    cart: Cart[]
 }
 
 interface userId  {

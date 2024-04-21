@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getAllUsers, getUserByEmail, updateCartUser, updateFav, allOrders } from "../services/users.service";
+import { getAllUsers, getUserByEmail, updateCartUser, updateFav, allOrders, removeUser } from "../services/users.service";
 import errorHandler from "../utils/errorHandler";
 import responseHandler from "../utils/responseHandler";
 import { CustomRequest } from "../interfaces/customRequest.interface";
@@ -34,7 +34,13 @@ const putUser = async (req: Request, res: Response) => {
 
 }
 const deleteUser = async (req: Request, res: Response) => {
-
+    const { id } = req.params
+    try {
+        const deletedUser = await removeUser(id)
+        responseHandler(res, 200, deleteUser)
+    } catch (error) {
+        errorHandler(res, 400, "Error, algo salio mal", error)
+    }
 }
 
 const updateFavorites = async (req: CustomRequest, res: Response)=>{
