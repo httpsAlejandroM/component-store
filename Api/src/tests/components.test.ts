@@ -3,7 +3,6 @@ import request, { Response } from "supertest"
 import mongoose from "mongoose"
 import config from "../config"
 import Product from "../interfaces/product.interface"
-import { response } from "express"
 
 describe("Tests /Components ", () => {
   beforeAll(async () => {
@@ -31,7 +30,6 @@ describe("Tests /Components ", () => {
   }
 
   let failedProduct: any = {
-    brand: "Sony",
     image: "https://http2.mlstatic.com/D_NQ_NP_922449-MLA69358249132_052023-O.webp",
     description: [
       "Resolución maxima de salida de video 1920px x 1080px",
@@ -149,7 +147,7 @@ describe("Tests /Components ", () => {
 
     it("Should return an error message when the product cannot be created", async () => {
       const response = await request(app).post("/components").send(failedProduct)
-      expect(typeof response.body.data.message).toBe("string")
+      expect(typeof response.body.message).toBe("string")
     })
 
     it("It should return a status code 201", async () => {

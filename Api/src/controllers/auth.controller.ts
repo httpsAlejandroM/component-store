@@ -7,9 +7,6 @@ import { createUser, deleteRefreshToken, findRefreshToken, loginUser } from "../
 const signUpController = async (req: Request, res: Response) => {
     const { name, email, userName, password } = req.body
     try {
-        if (!userName || !email || !userName || !password) {
-            return responseHandler(res, 200, {message: ["Faltan campos requeridos"]})
-        }
         const newUser = await createUser(name, email, userName, password)
         responseHandler(res, 200, newUser)
     } catch (error) {
@@ -20,9 +17,6 @@ const signUpController = async (req: Request, res: Response) => {
 const loginController = async (req: Request, res: Response) => {
     const { email, password } = req.body
     try {
-        if (!email || !password) {
-            return responseHandler(res, 200, { message: "Faltan campos requeridos" })
-        }
         const userByEmail = await loginUser(email, password)
         responseHandler(res, 200, userByEmail)
     } catch (error) {
