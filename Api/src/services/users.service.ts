@@ -3,6 +3,7 @@ import { CartItem, FavItem } from "../interfaces/user.interface";
 import getUserInfo from "../utils/getUserInfo";
 import { ObjectId } from "mongodb";
 import Order from "../models/order";
+import mongoose from "mongoose";
 
 const getAllUsers = async () => {
     const allUsers = await Users.find().populate({
@@ -125,11 +126,22 @@ const allOrders = async (userId:string) => {
     return allUserOrders
 }
 
+const removeUser = async (id: string) => {
+    if (!mongoose.Types.ObjectId.isValid(id)) return { message: `El Id ${id} no es válido` }
+
+    const deletedUser = await Users.findByIdAndRemove(id)
+
+    if (deletedUser) return {message:"Usuario eliminado correctamente"}
+
+    else return {message: `No se encontro usuario con el id ${id}`}
+}
+
 export {
     getAllUsers,
     updateFav,
     getUserById,
     getUserByEmail,
     updateCartUser,
-    allOrders
+    allOrders,
+    removeUser
 }

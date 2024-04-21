@@ -14,7 +14,7 @@ const createUser = async (name:string, email:string, userName:string, password:s
     if(userNameExist) errorMessage.push("Nombre de usuario en uso")
     if(errorMessage.length > 0) return {message: errorMessage.join(", ")}
 
-    return await newUser.save()
+    return getUserInfo(await newUser.save())
 }
 
 
