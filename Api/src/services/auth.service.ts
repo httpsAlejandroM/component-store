@@ -62,7 +62,7 @@ const findRefreshToken = async (refreshToken: string) => {
             accessToken
         }
     }
-    else return { message: "Unauthorized" }
+    else return { message: "Expired token" }
 }
 
 const deleteRefreshToken = async (refreshToken:string) => {
