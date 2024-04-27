@@ -136,7 +136,7 @@ function Navbar() {
                       : null
                     }
                   </Link>
-                  <Link to={`/dashboard/${PrivateRoutes.DASHBOARD_CART}`} className="btn btn-outline-success ms-1 border-0 position-relative">
+                  <Link  to={`/dashboard/${PrivateRoutes.DASHBOARD_CART}`} className="btn btn-outline-success ms-1 border-0 position-relative">
                     <i className="bi bi-cart2 fs-4"></i>
                     {
                       user.userInfo.cart.length > 0 
@@ -148,7 +148,7 @@ function Navbar() {
                   </Link>
                 </>
               }
-              <Link to={`${PublicRoutes.LOGIN}`} className="btn btn-outline-success ms-1 border-0"><i className="bi bi-person-fill fs-2"></i></Link>
+              <Link id="userProfile" to={`${PublicRoutes.LOGIN}`} className="btn btn-outline-success ms-1 border-0"><i className="bi bi-person-fill fs-2"></i></Link>
             </div>
           </div>
           <button

@@ -6,6 +6,12 @@ import { Provider } from 'react-redux'
 import { store } from './redux/store.ts'
 import { BrowserRouter } from "react-router-dom";
 
+// @ts-ignore
+if(window.Cypress){
+  // @ts-ignore
+  window.store = store
+}
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
