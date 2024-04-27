@@ -70,7 +70,7 @@ function Login() {
             </div>
 
 
-            <form className="bg-light " noValidate>
+            <form id="loginForm" className="bg-light " noValidate>
 
               <div className="mb-4 text-start ">
                 <label className="form-label text-dark" htmlFor="email" >Correo electrónico</label>
