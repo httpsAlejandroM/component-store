@@ -109,6 +109,7 @@ function Sidebar() {
             {/*LOG OUT */}
             <div className="mt-1 d-flex flex-row align-items-center">
                 <i
+                    id="logOut"
                     title="Cerrar sesión"
                     onClick={logOut}
                     className={`bi bi-box-arrow-left text-white link-success fs-4 ${styles.hamburger}`}></i>
