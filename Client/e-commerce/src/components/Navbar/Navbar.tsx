@@ -122,7 +122,7 @@ function Navbar() {
                   alt="Logo Pagina" /></Link>
             </div>
             <SearchBar styles={`col-11 d-none d-lg-flex container py-4 me-4 ${userInfo.isAuthenticated ? "w-60" : "w-75"}`}></SearchBar>
-            <div className="align-self-center">
+            <div test-id="userNav" className="align-self-center">
               {
                 userInfo.isAuthenticated &&
                 <>
