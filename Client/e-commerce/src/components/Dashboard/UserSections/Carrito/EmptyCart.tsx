@@ -12,7 +12,7 @@ const EmptyCart:FC<EmptySection> = ({children, textButton, ...rest}) => {
     <section {...rest} >
         <div className="bg-light p-4 d-flex flex-column align-items-center justify-content-center rounded-3">
         {children}
-        <Link to={PublicRoutes.SHOP} className="btn btn-success">
+        <Link to={PublicRoutes.SHOP} className="btn btn-success shadow-sm">
            {textButton}
         </Link>
         </div>

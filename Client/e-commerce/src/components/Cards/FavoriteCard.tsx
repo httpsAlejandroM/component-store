@@ -37,10 +37,10 @@ function FavoriteCard({ containerStyle, component }: props) {
             </div>
 
             <div className="col-12 col-sm-10 col-lg-4 col-xxl-3 d-flex flex-column gap-3 align-self-center order-sm-3 order-2">
-                <button className="btn btn-buy col col-xl-10">
+                <button className="btn btn-buy col col-xl-10 shadow-sm">
                     Agregar al Carrito
                 </button>
-                <button onClick={removeFavHandler} className="btn btn-outline-danger col col-xl-10">
+                <button onClick={removeFavHandler} className="btn btn-outline-danger col col-xl-10 shadow-sm">
                     Eliminar
                 </button>
             </div>

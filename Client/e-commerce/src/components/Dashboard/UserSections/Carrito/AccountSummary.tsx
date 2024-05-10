@@ -53,7 +53,7 @@ function AccountSummary({ components }: props) {
                         {`$${total.toFixed(2)}`}
                     </span>
                 </div>
-                <BuyButton className="offset px-0 col-12 btn btn-buy" components={components}></BuyButton>
+                <BuyButton className="offset px-0 col-12 btn btn-buy shadow" components={components}></BuyButton>
             </div>
         </div>
     )
