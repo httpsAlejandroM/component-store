@@ -21,7 +21,9 @@ function Compras() {
 
     useEffect(() => {
         getUserOrders()
-    }, [orders])
+        console.log(orders);
+        
+    }, [])
 
     return (
         <section className="container rounded-3 mt-4 mb-4">

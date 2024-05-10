@@ -35,7 +35,7 @@ function BuyContainer({ data, magnifiedImgRef }: props) {
             <div className="mt-2 "><p className="m-0 p-0 display-4">{`$${data.price}`}</p></div>
             <QuantityProduct quantityProduct={quantityProduct} setQuantityProduct={setQuantityProduct} children={<div className="d-inline-flex ms-3"><span className="fs-7 text-truncate">{`(${data.stock} disponibles)`}</span></div>} stock={data.stock} styles="d-flex justify-content- justify-content-lg-start  align-items-center mt-2 "></QuantityProduct>
             <div className="d-flex flex-column gap-2 align-items-center my-4">
-                <BuyButton className="btn btn-buy py-2 col-11 col-sm-8 fw-bolder" components={[cartComponentProps(data, quantityProduct)]}/>
+                <BuyButton className="btn btn-buy shadow-sm py-2 col-11 col-sm-8 fw-bolder" components={[cartComponentProps(data, quantityProduct)]}/>
                 <AddCart component={cartComponentProps(data, quantityProduct) }/>
             </div>
             <Benefits />

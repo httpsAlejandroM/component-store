@@ -131,7 +131,12 @@ function Login() {
               </div>
 
               <div className="d-grid">
-                <button id="loginBtn" className={`btn btn-buy`} disabled={!validateEmail(email) || !validatePassword(password) && true} type="submit" onClick={fetchUser}>{loading ? loadingSpinner : "Iniciar Sesión"}</button>
+                <button id="loginBtn" className={`btn btn-buy`} 
+                disabled={
+                  !validateEmail(email) 
+                // || !validatePassword(password) 
+                && true} 
+                type="submit" onClick={fetchUser}>{loading ? loadingSpinner : "Iniciar Sesión"}</button>
               </div>
 
               <div className="my-3 text-dark text-start my-4">

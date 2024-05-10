@@ -23,32 +23,40 @@ function ShoppingCard({ items, statusDetail, datePayment, total }: orderInterfac
                 <hr className="p-0 m-0" />
             </div>
             <div className="row d-flex flex-column">
-                {items?.map((component) => {
+                {items?.map((component, index) => {
                     return (
-                        <div className="p-0 m-0 " key={component.id}>
-                            <div className="d-flex flex-row p-5 align-items-center justify-content-evenly">
-                                <div className="row col-2  p-2">
+                        <div className="" key={component.id}>
+                            <div className="row d-flex flex-row p-3 p-md-5 align-items-center justify-content-center justify-content-lg-evenly">
+                                
+                                <div className="row col-4 offset-1 offset-md-0 col-lg-2 p-0">
                                     <Link to={`${PublicRoutes.DETAIL}/${component.id}`}>
                                         <img className="img-fluid" src={component.picture_url} alt="" />
                                     </Link>
 
                                 </div>
-                                <div className="row col-5 ps-4 d-flex  flex-column justify-content-evenly align-items-center">
+
+                                <div className="row col-8 col-lg-5 ps-4 d-flex  flex-column justify-content-evenly align-items-center">
                                     <p className={`row ${textColor} fs-6`}>{statusDetail}</p>
-                                    <p className="row fs-5">{component.title}</p>
+                                    <p className="row fs-6">{component.title}</p>
                                     <small className="row">{`${component.quantity} ${component.quantity > 1? "Unidades" : "Unidad"}`}</small>
                                 </div>
-                                <div className="row col-2 fs-4 d-flex flex-row justify-content-center align-items-center">
+
+                                <div className="row col-2 col-lg-2 fs-4 d-none d-md-flex flex-row justify-content-center align-items-center">
                                     {`$${component.unit_price}`}
                                 </div>
-                                <div className="row col-3 d-flex flex-column justify-content-center align-items-center gap-2">
-                                    <Link to={`${PublicRoutes.DETAIL}/${component.id}`} className="btn btn-buy col-10">
+
+                               { 
+                               index === items.length -1
+                               ?<div className="row col-12 col-lg-3 d-flex flex-column justify-content-center align-items-center gap-2 mt-4 mt-md-0">
+                                    <Link to={`${PublicRoutes.DETAIL}/${component.id}`} className="btn btn-buy shadow-sm col-10">
                                         Ver compra
                                     </Link>
-                                    <button className={`btn btn-outline-danger ${statusDetail !== "Entregado" ? "disabled" : ""} col-10`}>
+                                    <button className={`btn btn-outline-danger shadow-sm ${statusDetail !== "Entregado" ? "disabled" : ""} col-10`}>
                                         Opinar
                                     </button>
                                 </div>
+                                : <div className="row col-12 col-lg-3"></div>
+                                }
 
                             </div>
                             <hr className="p-0 m-0" />
