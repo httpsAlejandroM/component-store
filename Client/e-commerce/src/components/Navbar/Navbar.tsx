@@ -57,17 +57,6 @@ function Navbar() {
       link: PrivateRoutes.DASHBOARD_REVIEWS
     },
     {
-      name: "Favoritos",
-      icon: "bi bi-heart",
-      link: PrivateRoutes.DASHBOARD_FAVORITES
-    },
-
-    {
-      name: "Carrito",
-      icon: "bi bi-cart2",
-      link: PrivateRoutes.DASHBOARD_CART
-    },
-    {
       name: "Soporte",
       icon: "bi bi-question-circle",
       link: PrivateRoutes.DASHBOARD_SUPPORT
@@ -110,7 +99,7 @@ function Navbar() {
 }, 0)
 
   return (
-    <header ref={navBar} className="header" id="header">
+    <header ref={navBar} className="header " id="header">
       <nav className="container-fluid navbar navbar-expand-lg d-flex flex-column pt-1">
         <div className="container-fluid d-flex m-0 flex-lg-column " >
           <div className="d-flex d-lg-flex">
@@ -121,7 +110,7 @@ function Navbar() {
                   src={logoPag}
                   alt="Logo Pagina" /></Link>
             </div>
-            <SearchBar styles={`col-11 d-none d-lg-flex container py-4 me-4 ${userInfo.isAuthenticated ? "w-60" : "w-75"}`}></SearchBar>
+            <SearchBar styles={`col-11 d-none d-lg-flex container py-4 position-relative me-4 ${userInfo.isAuthenticated ? "w-60" : "w-75"}`}></SearchBar>
             <div test-id="userNav" className="align-self-center">
               {
                 userInfo.isAuthenticated &&
@@ -163,7 +152,7 @@ function Navbar() {
             aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div ref={collapseElementList} className="collapse navbar-collapse justify-content-lg-center" id="navbarScroll">
+          <div ref={collapseElementList} className="collapse navbar-collapse justify-content-lg-center" style={{maxHeight:350, overflowY:"auto"}} id="navbarScroll">
             <div>
               <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" >
                 <Navlink collapseHandler={collapseHandler} linkName="Inicio" route={PublicRoutes.HOME}></Navlink>
@@ -186,7 +175,7 @@ function Navbar() {
                   </li>
                 </ul>
               }
-              <SearchBar styles="col-11 d-flex container py-2  d-lg-none"></SearchBar>
+              <SearchBar styles="col-11 d-flex container py-3 d-lg-none"></SearchBar>
             </div>
 
           </div>

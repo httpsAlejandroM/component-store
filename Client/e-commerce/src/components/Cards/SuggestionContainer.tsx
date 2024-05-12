@@ -31,7 +31,7 @@ function SuggestionContainer({ input, sugerencias, inputWidth, setInput, isLoadi
    
 
     return (
-        <div style={{width: inputWidth, minWidth:300}} className="searchResults position-absolute d-flex flex-column rounded-2  ">
+        <div style={{width: inputWidth, minWidth:300}} className="searchResults position-absolute d-flex flex-column rounded-2  z-2">
             {contenido}
         </div>
     )

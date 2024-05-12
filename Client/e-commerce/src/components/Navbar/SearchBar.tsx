@@ -56,7 +56,7 @@ function SearchBar({ styles }: props) {
 
     return (
         <form
-            className={`${styles} position-relative`}
+            className={`${styles}`}
             role="search">
             <input
                 ref={inputRef}
