@@ -50,6 +50,7 @@ const initialState: AuthState & Status = {
     isAdmin: false,
     direction: "",
     userName: "",
+    orders: [],
   }
 }
 
@@ -118,12 +119,12 @@ export const userSlice = createSlice({
     }
     ,
     updateState: (state, action: PayloadAction<ComponentInterface[] | any>) => {
-      const { cartComponent, removeComponent, arrayComponents } = action.payload
+      const { cartComponent, removeComponent, favoriteComponents } = action.payload
 
       let result :userInfo = {...state.userInfo}
 
-      if (arrayComponents) {
-        result.favorites = result.favorites.concat(arrayComponents)
+      if (favoriteComponents) {
+        result.favorites = result.favorites.concat(favoriteComponents)
       }
       if (cartComponent) {
         const updatedCart = updateProductById(state.userInfo.cart, cartComponent)
@@ -140,6 +141,17 @@ export const userSlice = createSlice({
       }
     }
     ,
+    setOrders: (state, action: PayloadAction<any>) => {
+      const { orders } = action.payload;
+
+      return {
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          orders: [...orders]
+        }
+      };
+    },
     setTokens: (state, action: PayloadAction<userResponse>) => {
       const { refreshToken, isAuthenticated, accessToken } = action.payload.data;
 
@@ -195,6 +207,6 @@ export const userSlice = createSlice({
   },
 })
 
-export const { getUser, setTokens, clearTokens, setFavorites, updateState, setCart } = userSlice.actions
+export const { getUser, setTokens, clearTokens, setFavorites, updateState, setCart, setOrders } = userSlice.actions
 
 export default userSlice.reducer

@@ -1,4 +1,5 @@
 import { CartComponentInterface, ComponentInterface } from "."
+import { orderInterface } from "./order.interface"
 
 export interface User {
     id: string
@@ -18,6 +19,7 @@ export interface userInfo {
     image?: string
     favorites: ComponentInterface[]
     cart: CartComponentInterface[]
+    orders: orderInterface[]
 }
 
 export interface QueryUser {
