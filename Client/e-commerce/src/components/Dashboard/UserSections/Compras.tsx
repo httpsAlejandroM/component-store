@@ -1,44 +1,48 @@
 import { useEffect, useState } from "react"
-import { orderInterface } from "../../../interfaces/order.interface"
 import ShoppingCardsContainer from "./Compras/ShoppingCardsContainer"
 import { getOrders } from "../../../utilities/getOrders"
-import { useAppSelector } from "../../../redux/hooks"
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks"
 import EmptyCart from "./Carrito/EmptyCart"
+import { orderInterface } from "../../../interfaces/order.interface"
+import { setOrders } from "../../../redux/slices/user.slice"
+import Spinner from "../../Spinner"
 // import SuccessPayment from "./SuccessPayment/SuccessPayment"
 
 function Compras() {
 
     const userInfo = useAppSelector((state) => state.userReducer.userInfo)
-    const [orders, setOrders] = useState<orderInterface[]>([])
+    const dispatch = useAppDispatch()
+    const [loading, setLoading] = useState(true);
 
     const getUserOrders = async () => {
         if (userInfo.id) {
-            const ordenes = await getOrders(userInfo.id)
-            setOrders(ordenes.data)
+            const ordenes = (await getOrders(userInfo.id)).data as orderInterface[]
+            dispatch(setOrders({orders: ordenes}))
+            setLoading(false);
             return
         }
     }
 
     useEffect(() => {
-        getUserOrders()
-        console.log(orders);
-        
-    }, [])
+        getUserOrders()        
+    }, [userInfo])
 
     return (
         <section className="container rounded-3 mt-4 mb-4">
             {/* <SuccessPayment/> */}
             <h2 className="col fs-3 mb-2 text-white text-start">Compras</h2>
             {
-                orders?.length
-                    ? <ShoppingCardsContainer orders={orders} />
-                    :
-                    <EmptyCart textButton="Descubrir productos" className="content text-dark d-flex align-items-center justify-content-center">
+                loading
+                ? <Spinner styles={{margin:"auto"}}/>
+                : (userInfo.orders?.length
+                    ? <ShoppingCardsContainer orders={userInfo.orders} />
+                    : <EmptyCart textButton="Descubrir productos" className="content text-dark d-flex align-items-center justify-content-center">
                         <h2>Aún no tienes Compras</h2>
                         <p className="fs-6 text-center">¡Explora todos nuestros componentes!</p>
                     </EmptyCart>
+                )
             }
         </section>
     )
-}
+} 
 export default Compras
