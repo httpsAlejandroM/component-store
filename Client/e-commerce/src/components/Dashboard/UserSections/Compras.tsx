@@ -44,5 +44,5 @@ function Compras() {
             }
         </section>
     )
-}
+} 
 export default Compras

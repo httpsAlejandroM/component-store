@@ -21,7 +21,7 @@ export interface userInfo {
     cart: CartComponentInterface[]
     orders: orderInterface[]
 }
-
+ 
 export interface QueryUser {
     name: string
     email:string

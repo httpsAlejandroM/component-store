@@ -144,7 +144,7 @@ export const userSlice = createSlice({
     setOrders: (state, action: PayloadAction<any>) => {
       const { orders } = action.payload;
 
-      return {
+      return { 
         ...state,
         userInfo: {
           ...state.userInfo,
