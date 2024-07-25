@@ -7,6 +7,7 @@ import { checkAuth } from "./redux/slices/user.slice";
 import { useAppDispatch } from "./redux/hooks";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+import SuccessBuy from "./components/SuccessBuy/SuccessBuy";
 const Home = lazy(() => import('./views/Home/Home'));
 const Shop = lazy(() => import('./views/Shop/Shop'));
 const Detail = lazy(() => import('./views/Detail/Detail'));
@@ -30,10 +31,12 @@ function App() {
     dispatch(checkAuth())
   }, [])
 
+  const isSuccessPaymentRoute = location.pathname === `/${PrivateRoutes.SUCCESS_PAYMENT}`;
+
   return (
     <>
       <Suspense fallback={<Loader />}>
-        <Navbar />
+        {!isSuccessPaymentRoute && <Navbar />}
         <Routes>
           <Route path={PublicRoutes.HOME} element={<Home />} />
           <Route path="*" element={<RouteNotFound />} />
@@ -50,11 +53,11 @@ function App() {
               <Route path={PrivateRoutes.DASHBOARD_CART} element={<Carrito />} />
               <Route path={PrivateRoutes.DASHBOARD_SUPPORT} element={<Soporte />} />
               <Route path={PrivateRoutes.DASHBOARD_MY_PROFILE} element={<MiPerfil />} />
-              {/* <Route path={PrivateRoutes.SUCCESS_PAYMENT} element={<SuccessPayment/>}/> */}
             </Route>
           </Route>
+              <Route path={PrivateRoutes.SUCCESS_PAYMENT} element={<SuccessBuy />} />
         </Routes>
-        <Footer />
+        {!isSuccessPaymentRoute && <Footer />}
       </Suspense>
     </>
   );
