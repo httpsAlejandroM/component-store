@@ -59,11 +59,12 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     getUser: (state, action: PayloadAction<userResponse>) => {
-      const { email, userName, image, favorites, cart } = action.payload.data.userInfo
+      const { id, email, userName, image, favorites, cart } = action.payload.data.userInfo
       return {
         ...state,
         userInfo: {
           ...state.userInfo,
+          id,
           userName,
           email,
           image,
