@@ -126,6 +126,10 @@ const allOrders = async (userId:string) => {
     return allUserOrders
 }
 
+const orderById = async (userId:string, orderId:string) => {
+    const orderById = await Order.find()
+}
+
 const removeUser = async (id: string) => {
     if (!mongoose.Types.ObjectId.isValid(id)) return { message: `El Id ${id} no es válido` }
 

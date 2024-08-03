@@ -82,6 +82,17 @@ const getOrders = async  (req: Request, res: Response) => {
     }
 }
 
+// const getOrderById = async (req: Request, res: Response) => {
+//     const { userId, orderId } = req.params
+
+//     try {
+//         const newOrderById = await orderById(user, orderId)
+//     } catch (error) {
+//         console.log(error);
+        
+//     }
+// }
+
 export {
     getUser,
     getUsers,
