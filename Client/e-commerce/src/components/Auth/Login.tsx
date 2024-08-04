@@ -106,7 +106,7 @@ function Login() {
               <div className="mb-4 text-start ">
                 <label className="form-label text-dark" htmlFor="email" >Correo electrónico</label>
                 <input
-                  autoComplete="off"
+                  autoComplete="on"
                   className={`form-control ${email ? !validateEmail(email) ? "is-invalid" : "is-valid" : ""}`}
                   type="email" id="email"
                   value={email} name="email"
@@ -134,7 +134,7 @@ function Login() {
                 <button id="loginBtn" className={`btn btn-buy`} 
                 disabled={
                   !validateEmail(email) 
-                // || !validatePassword(password) 
+                 //|| !validatePassword(password) // Descomentar despues de cambiar password de usuario de prueba 
                 && true} 
                 type="submit" onClick={fetchUser}>{loading ? loadingSpinner : "Iniciar Sesión"}</button>
               </div>
