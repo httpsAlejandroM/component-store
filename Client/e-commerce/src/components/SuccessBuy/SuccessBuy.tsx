@@ -1,10 +1,18 @@
-import { Link, useParams } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import logoPag from "../../assets/firebase.png"
 import { PublicRoutes } from "../../utilities/routes"
 
 function SuccessBuy() {
 
-  //const { orderId } = useParams()
+  function useQuery() {
+    return new URLSearchParams(useLocation().search);
+  }
+
+  const query = useQuery();
+  const paymentId = query.get('payment_id');
+
+  console.log(paymentId);
+  
 
   return (
     <section className="container-fluid row p-0 m-0 second-color d-flex justify-content-center">
@@ -28,8 +36,9 @@ function SuccessBuy() {
           <hr className="opacity-"/>
           <div className="col-12">
             <p>Pronto llegara a tu domicilio </p>
-            <div>
-              <img src="" alt="Producto comprado" />
+            <div className="display-1">
+              {`Producto con Id: ${paymentId}`}
+              {/* <img src="" alt="Producto comprado" /> */}
             </div>
             <hr className=""/>
           </div>

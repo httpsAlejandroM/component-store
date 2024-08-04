@@ -6,6 +6,7 @@ import { formatDate } from "../utils/fomatDate";
 import User from "../models/users";
 import { filteredItemsById } from "../utils/userHelpers";
 import { discountStock } from "../utils/productHelper";
+import { PreferenceRequest } from "mercadopago/dist/clients/preference/commonTypes";
 
 const client = new MercadoPagoConfig({ accessToken: config.MERCADO_PAGO_ACCESS as string });
 const preference = new Preference(client);
@@ -20,7 +21,7 @@ const createPreference = async (items: ItemsInterface[], payer: PayerInterface, 
                 payer,
                 metadata,
                 back_urls: {
-                    success: config.CLIENT_URL,
+                    success: `${config.CLIENT_URL}success_payment/`,
                     failure: "http://127.0.0.1:5173/",
                     pending: "http://127.0.0.1:5173/",
                 },
@@ -57,32 +58,32 @@ const createOrder = async (order: OrderInterface) => {
     }
 }
 
-const updatePreference = async (preferenceId: string, paymentId: string) => {
-//const updatedPreference = await preference.update(preferenceId)
-    const back_urls =  {
-        success: `${config.CLIENT_URL}/success_buy/${paymentId}`,
-        failure: "http://127.0.0.1:5173/",
-        pending: "http://127.0.0.1:5173/",
-    }
+// const updatePreference = async (preferenceId: string, paymentId: string) => {
+//     const back_urls =  {
+//         success: `${config.CLIENT_URL}/success_buy/${paymentId}`,
+//         failure: "http://127.0.0.1:5173/",
+//         pending: "http://127.0.0.1:5173/",
+//     }
+    
 
-    try {
-        const updatedPreference = await fetch(`https://api.mercadopago.com/checkout/preferences/${preferenceId}`,{
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${config.MERCADO_PAGO_ACCESS}`
-            },
-            body: JSON.stringify({back_urls})
-          })
-    } catch (error) {
-        console.log(error);
-    }
+//     try {
+//         // const updatedPreference = await fetch(`https://api.mercadopago.com/checkout/preferences/${preferenceId}`,{
+//         //     method: "PUT",
+//         //     headers: {
+//         //       "Content-Type": "application/json",
+//         //       Authorization: `Bearer ${config.MERCADO_PAGO_ACCESS}`
+//         //     },
+//         //     body: JSON.stringify({back_urls})
+//         //   })
+//         const updatedPreference = await preference.update({id: preferenceId, updatePreferenceRequest: {back_urls}})
+//         return updatedPreference
+//     } catch (error) {
+//         console.log(error);
+//     }
 
-}
+// }
 
 const webhookPayment = async (paymentId: string) => {
-    console.log(paymentId);
-
     try {
         const paymentById: any = await payment.get({ id: paymentId })
         const order: OrderInterface = {
@@ -95,7 +96,7 @@ const webhookPayment = async (paymentId: string) => {
             total: paymentById.transaction_details?.total_paid_amount
         }
         if (paymentById.status === "approved") {
-            const updatedPreference = await updatePreference(order.id.toString(), paymentById)
+           // const updatedPreference = await updatePreference(order.id.toString(), paymentById)
             const newOrder = await createOrder(order)
             console.log("Pago aprobado");
 

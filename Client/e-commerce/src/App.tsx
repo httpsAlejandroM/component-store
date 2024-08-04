@@ -1,4 +1,4 @@
-import { Routes, Route, matchPath } from "react-router-dom"
+import { Routes, Route, matchPath, useLocation } from "react-router-dom"
 import { lazy, Suspense, useEffect } from 'react';
 import Loader from "./components/Loader";
 import RouteNotFound from "./components/RouteNotFound";
@@ -24,11 +24,10 @@ const Soporte = lazy(() => import("./components/Dashboard/UserSections/Soporte")
 const MiPerfil = lazy(() => import("./components/Dashboard/UserSections/MiPerfil"))
 
 function App() {
-
-  const isSuccessPaymentRoute = matchPath(`/${PrivateRoutes.SUCCESS_PAYMENT}/:orderId`, location.pathname);
-
-  const hideNavbarAndFooter = !isSuccessPaymentRoute;
+  const location = useLocation();
   const dispatch = useAppDispatch()
+  const isSuccessPaymentRoute = matchPath(`/${PrivateRoutes.SUCCESS_PAYMENT}`, location.pathname);
+  const hideNavbarAndFooter = !isSuccessPaymentRoute;
 
   useEffect(() => {
     dispatch(checkAuth())
@@ -40,7 +39,6 @@ function App() {
         {hideNavbarAndFooter && <Navbar />}
         <Routes>
           <Route path={PublicRoutes.HOME} element={<Home />} />
-          <Route path="*" element={<RouteNotFound />} />
           <Route path={PublicRoutes.SHOP} element={<Shop />} />
           <Route path={`${PublicRoutes.DETAIL}/:id`} element={<Detail />} />
           <Route path={PublicRoutes.SUPPORT} element={<Support />} />
@@ -56,7 +54,8 @@ function App() {
               <Route path={PrivateRoutes.DASHBOARD_MY_PROFILE} element={<MiPerfil />} />
             </Route>
           </Route>
-          <Route path={`${PrivateRoutes.SUCCESS_PAYMENT}/:orderId`} element={<SuccessBuy />} />
+          <Route path={`${PrivateRoutes.SUCCESS_PAYMENT}`} element={<SuccessBuy />} />
+          <Route path="*" element={<RouteNotFound />} />
         </Routes>
         {hideNavbarAndFooter && <Footer />}
       </Suspense>
