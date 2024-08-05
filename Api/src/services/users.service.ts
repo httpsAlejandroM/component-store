@@ -127,7 +127,8 @@ const allOrders = async (userId:string) => {
 }
 
 const orderById = async (userId:string, orderId:string) => {
-    const orderById = await Order.find()
+    const orderById = await Order.find({userId: userId, id: orderId})
+    return orderById
 }
 
 const removeUser = async (id: string) => {
@@ -147,5 +148,6 @@ export {
     getUserByEmail,
     updateCartUser,
     allOrders,
-    removeUser
+    removeUser,
+    orderById
 }

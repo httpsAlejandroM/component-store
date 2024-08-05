@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getAllUsers, getUserByEmail, updateCartUser, updateFav, allOrders, removeUser } from "../services/users.service";
+import { getAllUsers, getUserByEmail, updateCartUser, updateFav, allOrders, removeUser, orderById } from "../services/users.service";
 import errorHandler from "../utils/errorHandler";
 import responseHandler from "../utils/responseHandler";
 import { CustomRequest } from "../interfaces/customRequest.interface";
@@ -82,16 +82,17 @@ const getOrders = async  (req: Request, res: Response) => {
     }
 }
 
-// const getOrderById = async (req: Request, res: Response) => {
-//     const { userId, orderId } = req.params
+const getOrderById = async (req: Request, res: Response) => {
+    const { userId, orderId } = req.params
 
-//     try {
-//         const newOrderById = await orderById(user, orderId)
-//     } catch (error) {
-//         console.log(error);
+    try {
+        const newOrderById = await orderById(userId, orderId)
+        responseHandler(res, 200, newOrderById[0])
+    } catch (error) {
+        console.log(error);
         
-//     }
-// }
+    }
+}
 
 export {
     getUser,
@@ -100,5 +101,6 @@ export {
     deleteUser,
     updateFavorites,
     updateCart,
-    getOrders
+    getOrders,
+    getOrderById
 }
