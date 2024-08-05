@@ -1,26 +1,23 @@
 import axios from "axios"
 import { API } from "../redux/componentsApi/componentsApi"
+import { orderInterface } from "../interfaces/order.interface"
 import { getAccessToken } from "../auth/AuthHelpers"
 
-const getOrders = async (userId: string) => {
-    
+const getOrderById = async (userId: string, orderId: string) => {
     try {
         const accessToken = await getAccessToken()
-        const orders = await axios.get(`${API}/users/${userId}/orders`, {
+        const orderById = await axios.get(`${API}/users/${userId}/${orderId}`, {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${accessToken}`
             }
         })
-        return orders.data
+        return orderById.data.data as orderInterface
     } catch (error) {
-        console.log(error);
-        
+
     }
-
-
 }
 
 export {
-    getOrders
+    getOrderById
 }
