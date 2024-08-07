@@ -20,7 +20,7 @@ function ShoppingCard({ items, statusDetail, datePayment, total }: orderInterfac
         <div className="bg-light d-flex flex-column mt-3 rounded-3">
             <div className="row d-flex flex-row align-items-center p-3">
                 <p className="p-0 ps-3 m-0 mb-1">{formatDate(datePayment)}</p>
-                <hr className="p-0 m-0" />
+                <hr className="p-0 m-0 border-dark-subtle" />
             </div>
             <div className="row d-flex flex-column">
                 {items?.map((component, index) => {
@@ -59,7 +59,7 @@ function ShoppingCard({ items, statusDetail, datePayment, total }: orderInterfac
                                 }
 
                             </div>
-                            <hr className="p-0 m-0" />
+                            <hr className="p-0 m-0 border-dark-subtle" />
                         </div>
                     )
                 })}

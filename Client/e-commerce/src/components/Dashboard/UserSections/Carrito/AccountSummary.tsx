@@ -40,7 +40,7 @@ function AccountSummary({ components }: props) {
                 <h3 className="fs-5 text-start">
                     Resumen de compra
                 </h3>
-                <hr className="col-12 " />
+                <hr className="col-12 border-dark-subtle" />
                 <div className="my-3 row justify-content-center" >
                     {totalProducts}
                     {detailProducts}

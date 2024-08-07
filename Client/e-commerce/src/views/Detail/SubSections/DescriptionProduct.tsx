@@ -17,7 +17,7 @@ function DescriptionProduct({description}:props) {
                 })
             }
             </ul>
-            <hr className="border-dark border-1  mt-2 col-12 p-0" />
+            <hr className="border-dark-subtle border-1  mt-2 col-12 p-0" />
         </section>
   )
 }

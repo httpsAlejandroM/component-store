@@ -18,7 +18,7 @@ function Card({ stock, title, price, image, id }: Card) {
           <img src={image} className="card-img-top " style={{ maxHeight: "15rem", maxWidth: "11rem" }} alt="" />
         </div>
 
-        <hr className="border-dark m-0" />
+        <hr className="border-dark-subtle opacity-50 m-0" />
 
         <div className="card-body text-dark text-center p-2 position-relative" style={{ height: "10rem" }}>
           <div className="mt-1">
