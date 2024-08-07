@@ -11,7 +11,7 @@ router.put("/update/favs", updateFavorites)//cambiar "update" por :id y cambiar 
 router.put("/update/cart", updateCart)//cambiar "update" por :id y cambiar solicitud en front
 router.delete("/:id", deleteUser)
 router.get("/:userId/orders", authenticate, getOrders)
-router.get("/:userId/:orderId", getOrderById)
+router.get("/:userId/:orderId",authenticate, getOrderById)
 
 export { router }
 
