@@ -59,7 +59,7 @@ function Favoritos() {
           </div>
           <span className="fs-6 me-2 me-sm-4 ">{`Favoritos ${favoritos.length ? "1" : "0"} - ${favoritos.length} de ${favoritos.length}`}</span>
         </div>
-        <hr />
+        <hr className="border-dark-subtle"/>
         {/* aca van las cartas */}
         <div className="container">
           {
@@ -71,7 +71,7 @@ function Favoritos() {
                       <CheckboxInput isChecked={checkInputs.includes(component._id) ? true : false} checkFunction={handleCheckboxChange} containerStyle="col-1" inputStyle="border-2 border-dark-subtle" inputValue={component._id} />
                       <FavoriteCard containerStyle={`row col-11 col-lg-11 align-self-center justify-content-center favorite-card`} component={component} />
                     </div>
-                    {favoritos && index !== favoritos.length - 1 ? <hr /> : null}
+                    {favoritos && index !== favoritos.length - 1 ? <hr className="border-dark-subtle"/> : null}
                   </div>
                 )
               })

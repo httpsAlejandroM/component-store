@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import logoPag from "../../assets/firebase.png"
-import { PublicRoutes } from "../../utilities/routes"
+import { PrivateRoutes, PublicRoutes } from "../../utilities/routes"
 import { useQuery } from "../../hooks/useQuery";
 import { useEffect, useState } from "react";
 import { getOrderById } from "../../utilities/getOrderById";
@@ -18,59 +18,64 @@ function SuccessBuy() {
     if (userInfo?.id && paymentId) {
       const orderById = await getOrderById(userInfo?.id, paymentId) as orderInterface
       setOrder(orderById)
-      console.log(order);
+      console.log(orderById);
     }
   }
 
   useEffect(() => {
-    orderById()
-  }, [userInfo])
+    userInfo?.id && paymentId && orderById()
+  }, [userInfo, paymentId])
 
   return (
-    <section className="container-fluid row p-0 m-0 second-color d-flex justify-content-center">
+    <section className="container-fluid  p-0 m-0 flex-column d-flex align-items-center vh-100">
 
-      <div className="col-9 d-flex justify-content-between align-items-center">
-        <div className="d-flex col-11" >
-          <Link className="col-2"
+      <div className="col-12 bg-dark d-flex justify-content-around gap-5 align-items-center">
+        <div className="d-flex me-5" >
+          <Link className=""
             to={`${PublicRoutes.HOME}`}><img
-              className="img-fluid col-12 col-sm-9 col-md-6 col-lg-5 col-xl-3"
+              className="img-fluid"
+              style={{ maxWidth: "60px" }}
               src={logoPag}
               alt="Logo Pagina" /></Link>
         </div>
-        <p className="col-1 text-white p-0 m-0">Ayuda</p>
+
+        <p className=" text-white p-0 my-0 ms-5">Ayuda</p>
 
       </div>
 
-      <div className="col-12 bg-success w-100 d-flex flex-column align-items-center">
+      <div className="d-flex flex-row justify-content-center align-items-center content">
 
-        <div className=" bg-light rounded-3 shadow">
-          <div className="col-12 px-5 pt-4">¡Felicidades! Tu compra se ha realizado con éxito</div>
-          <hr className="" />
+        <div className="bg-light rounded-3 shadow">
+          <div className="px-5 pt-4 fs-5 text-dark">¡Felicidades! Tu compra se ha realizado con éxito</div>
+          <hr className="border-dark-subtle" />
 
-          <div className="d-flex flex-row justify-content-between align-items-center">
-            
-            <p className="d-flex">Pronto llegara a tu domicilio </p>
-            
-            <div className="d-flex justify-content-center">
+          <div className="d-flex flex-row justify-content-around align-items-center">
+
+            <p className="d-flex p-0 m-0">{`Pronto llegara a tu domicilio`} </p>
+
+            <div className={`d-flex ${order && order.items.length > 1 ? "flex-column" : "flex-row"} justify-content-center align-items-center`}>
               {order?.items.map((item, index: number) => {
                 return (
-                  <img className="img-fluid col" src={item.picture_url} alt={`Producto ${index}`} />
+                  <img
+                    style={{ maxWidth: "150px" }}
+                    key={index}
+                    className="img-fluid"
+                    src={item.picture_url}
+                    alt={`Producto ${item.title}`} />
                 )
               })}
             </div>
-            <hr className="col-12" />
           </div>
-
-          <div className="col-12 px-5 pb-4">
-            <button className="btn btn-success">
+          <hr className="border-dark-subtle" />
+          <div className="col-12 px-5 pb-3">
+            <Link className="btn btn-sm btn-success" to={`${PrivateRoutes.DASHBOARD}`}>
               Ver mis compras
-            </button>
+            </Link>
           </div>
 
         </div>
       </div>
 
-      {/* <div className="col-12 bg-light w-100">SuccessBuy</div> */}
     </section>
   )
 }

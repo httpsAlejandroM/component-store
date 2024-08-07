@@ -26,7 +26,7 @@ function CardsCartContainer({components}:props) {
             stock={component.stock}
             title={component.title}
             />
-            {components.length && index !== components.length - 1 ?  <hr className="col-12 my-0 p-0"/> : null}
+            {components.length && index !== components.length - 1 ?  <hr className="col-12 my-0 p-0 border-dark-subtle"/> : null}
            </div>
           )
         })

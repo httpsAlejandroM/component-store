@@ -18,13 +18,13 @@ function ReviewsSection() {
             review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum accusamus consequuntur rerum, voluptates Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum accusamus consequuntur rerum,"
         },
         {
-            user: "Ragnar Lothbrok",
+            user: "Lagertha Lothbrok",
             date: "5/11/2023",
             stars: 4,
             review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum accusamus consequuntur rerum, voluptates Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum accusamus consequuntur rerum,"
         },
         {
-            user: "Ragnar Lothbrok",
+            user: "Ivar The Boneless",
             date: "5/11/2023",
             stars: 4,
             review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum accusamus consequuntur rerum, voluptates Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum accusamus consequuntur rerum,"
@@ -64,7 +64,7 @@ function ReviewsSection() {
                                 <p className="mt-1">{review.review}
                                 </p>
                             </div>
-                            <hr className="border-dark border-1 my-0" />
+                            <hr className="border-dark-subtle border-1 my-0" />
                         </div>
                     )
                 })

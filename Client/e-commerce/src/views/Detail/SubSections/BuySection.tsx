@@ -79,7 +79,7 @@ function BuySection({ data }: props) {
             <TopResponsiveDetail data={data} />
             <CarouselDetail arrayImages={images} autoPlay={false} />
             <BuyContainer data={data} selectedImage={selectedImage} magnifiedImgRef={magnifiedImg} />
-            <hr className="border-dark border-1  col-12 p-0" />
+            <hr className="border-dark border-1 border-dark-subtle col-12 p-0" />
         </section>
     )
 }

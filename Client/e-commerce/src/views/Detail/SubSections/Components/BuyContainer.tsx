@@ -22,7 +22,7 @@ function BuyContainer({ data, magnifiedImgRef }: props) {
     const [quantityProduct, setQuantityProduct] = useState(1)
 
     return (
-        <div className="bg-light col-lg-4 p-4 d-flex flex-column  position-relative border border-dark-subtle text-wrap rounded-top-4 rounded-bottom-0 border-bottom-0">
+        <div className="bg-light col-lg-4 p-4 d-flex flex-column  position-relative border text-wrap rounded-top-4 rounded-bottom-0 border-bottom-0">
             <div ref={magnifiedImgRef} className={`magnified-img bg-light position-absolute top-0 start-0  rounded-4 `}>
             </div>
             <FavButton setIsFav={setIsFav} componentFav={data} userId={userInfo.userInfo.id} isFav={isFav} styles="d-none d-lg-flex justify-content-end"></FavButton>
