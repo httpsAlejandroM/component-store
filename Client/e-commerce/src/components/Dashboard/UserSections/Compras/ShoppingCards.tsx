@@ -2,10 +2,11 @@ import { Link } from "react-router-dom"
 import { orderInterface } from "../../../../interfaces/order.interface"
 import { PublicRoutes } from "../../../../utilities/routes"
 import { useRef } from "react";
+import OrderDetail from "./OrderDetail";
 
 
 
-function ShoppingCard({ items, statusDetail, datePayment, total }: orderInterface) {
+function ShoppingCard({ items, statusDetail, datePayment, total, id }: orderInterface) {
 
     const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -28,7 +29,7 @@ function ShoppingCard({ items, statusDetail, datePayment, total }: orderInterfac
         return `${dia} de ${mes[Number(splitedDate[1]) - 1]} de ${splitedDate[2].split(",")[0]}`
     }
 
-    const textColor = datePayment === "Pagado" || "Enviado" ? "text-success-alpha" : "text-warning"
+   // const textColor = datePayment === "Pagado" || "Enviado" ? "text-success-alpha" : "text-warning"
 
 
     return (
@@ -51,26 +52,18 @@ function ShoppingCard({ items, statusDetail, datePayment, total }: orderInterfac
                                 </div>
 
                                 <div className="row col-8  col-lg-5 ps-4 d-flex  flex-column justify-content-evenly align-items-center">
-                                    <p className={`row ${textColor} fs-6`}>{statusDetail}</p>
+                                    {/* <p className={`row ${textColor} fs-6`}>{statusDetail}</p> */}
                                     <p className="row fs-6">{component.title}</p>
                                     <small className="row">{`${component.quantity} ${component.quantity > 1 ? "Unidades" : "Unidad"}`}</small>
                                 </div>
 
-                                <div className="row col-2 col-lg-2 fs-4 d-none d-lg-flex flex-row justify-content-center align-items-center">
+                                {/* <div className="row col-2 col-lg-2 fs-4 d-none d-lg-flex flex-row justify-content-center align-items-center">
                                     {`$${component.unit_price}`}
-                                </div>
+                                </div> */}
 
                                 {
                                     index === items.length - 1
                                         ?
-                                        //    <div className="row col-12 col-lg-3 d-flex flex-column justify-content-center align-items-center gap-2 mt-4 mt-lg-0">
-                                        //         <Link to={`${PublicRoutes.DETAIL}/${component.id}`} className="btn btn-buy shadow-sm col-10">
-                                        //             Ver compra
-                                        //         </Link>
-                                        //         <button className={`btn btn-outline-danger shadow-sm ${statusDetail !== "Entregado" ? "disabled" : ""} col-10`}>
-                                        //             Opinar
-                                        //         </button>
-                                        //     </div>
                                         <div className="row col-12 col-lg-3 d-flex flex-column justify-content-center align-items-center gap-2 mt-4 mt-lg-0">
                                             <button
                                                 onClick={openDialog}
@@ -80,8 +73,8 @@ function ShoppingCard({ items, statusDetail, datePayment, total }: orderInterfac
                                             <button className={`btn btn-outline-danger shadow-sm ${statusDetail !== "Entregado" ? "disabled" : ""} col-10`}>
                                                 Opinar
                                             </button>
-                                            <dialog ref={dialogRef}>
-                                                <button onClick={closeDialog} type="button" className="btn-close"></button>
+                                            <dialog className="position-absolute  w-25 top-50 start-50 end-50 translate-middle border-0 rounded-3" ref={dialogRef}>
+                                                <OrderDetail closeDialog={closeDialog} order={{items, statusDetail, datePayment: formatDate(datePayment), total, id}}></OrderDetail>
                                             </dialog>
                                         </div>
                                         : <div className="row col-12 col-lg-3"></div>
@@ -93,9 +86,9 @@ function ShoppingCard({ items, statusDetail, datePayment, total }: orderInterfac
                     )
                 })}
             </div>
-            <div className="d-flex flex-row justify-content-end align-items-center col-11 p-2 pe-0 fs-5">
+            {/* <div className="d-flex flex-row justify-content-end align-items-center col-11 p-2 pe-0 fs-5">
                 {`Total $${total}`}
-            </div>
+            </div> */}
         </div>
     )
 }
