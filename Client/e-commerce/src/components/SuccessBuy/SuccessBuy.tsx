@@ -45,7 +45,7 @@ function SuccessBuy() {
 
       <div className="d-flex flex-row justify-content-center align-items-center content">
 
-        <div className="bg-light rounded-3 shadow">
+        <div className="bg-light rounded-3 shadow m-1">
           <div className="px-5 pt-4 fs-5 text-dark">¡Felicidades! Tu compra se ha realizado con éxito</div>
           <hr className="border-dark-subtle" />
 

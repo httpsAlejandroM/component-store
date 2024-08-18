@@ -6,6 +6,16 @@ interface props {
 }
 
 export default function OrderDetail({order, closeDialog}: props) {
+
+
+    const textColor = {
+        "En proceso": "text-warning",
+        "Pagado": "text-success-alpha",
+        "Enviado": "text-primary",
+        "Entregado": "text-success",
+        "Cancelado": "text-danger"
+    }
+
     return (
         <>
             <div className="d-flex flex-column">
@@ -13,7 +23,7 @@ export default function OrderDetail({order, closeDialog}: props) {
                     <span className="fs-5">Detalle de la compra</span>
                     <button onClick={closeDialog} type="button" className="btn-close "></button>
                 </div>
-                <small>
+                <small className="text-light-emphasis">
                 {`${order.datePayment} | ${order.id}`}
                 </small>
             </div>
@@ -28,12 +38,12 @@ export default function OrderDetail({order, closeDialog}: props) {
                         order.items.map((component)=>{
                             return (
                                 <div key={component.title}
-                                className="d-flex flex-row justify-content-end align-items-center"
+                                className="d-flex flex-row justify-content-end align-items-center gap-5"
                                 >
-                                    <div className="d-flex flex-row justify-content-start align-items-center">
+                                    <div className="d-flex flex-row justify-content-start align-items-center text-light-emphasis">
                                         <small>{`$${component.unit_price}`}</small>
                                     </div>
-                                    <div className="d-flex flex-row justify-content-end align-items-center">
+                                    <div className="d-flex flex-row justify-content-end align-items-center ">
                                         <img className="img-fluid" style={{maxWidth: "100px"}} src={component.picture_url} alt={component.title} />
                                     </div>
                                 </div>
@@ -49,7 +59,7 @@ export default function OrderDetail({order, closeDialog}: props) {
                     <span>Estado</span>
                 </div>
                 <div>
-                    <span>
+                    <span className={`${textColor["Pagado"]}`}>
                         {order.statusDetail}
                     </span>
                 </div>
@@ -57,10 +67,10 @@ export default function OrderDetail({order, closeDialog}: props) {
 
             <hr className="border-dark-subtle" />
             <div className="d-flex flex-row justify-content-between">
-                    <div>
+                    <div className="">
                         Total
                     </div>
-                    <div>
+                    <div className="text-light-emphasis">
                         {`$${order.total}`}
                     </div>
             </div>
