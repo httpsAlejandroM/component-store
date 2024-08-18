@@ -29,7 +29,7 @@ function ShoppingCard({ items, statusDetail, datePayment, total, id }: orderInte
         return `${dia} de ${mes[Number(splitedDate[1]) - 1]} de ${splitedDate[2].split(",")[0]}`
     }
 
-   // const textColor = datePayment === "Pagado" || "Enviado" ? "text-success-alpha" : "text-warning"
+    //const textColor = datePayment === "Pagado" || "Enviado" ? "text-success-alpha" : "text-warning"
 
 
     return (
@@ -73,7 +73,7 @@ function ShoppingCard({ items, statusDetail, datePayment, total, id }: orderInte
                                             <button className={`btn btn-outline-danger shadow-sm ${statusDetail !== "Entregado" ? "disabled" : ""} col-10`}>
                                                 Opinar
                                             </button>
-                                            <dialog className="position-absolute  w-25 top-50 start-50 end-50 translate-middle border-0 rounded-3" ref={dialogRef}>
+                                            <dialog className="col-10 col-sm-8 col-md-6 col-lg-5 col-xl-4 col-xxl-3 translate-middle top-50 start-50 end-50 border-0 rounded-3" ref={dialogRef}>
                                                 <OrderDetail closeDialog={closeDialog} order={{items, statusDetail, datePayment: formatDate(datePayment), total, id}}></OrderDetail>
                                             </dialog>
                                         </div>
