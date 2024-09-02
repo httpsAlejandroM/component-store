@@ -47,7 +47,7 @@ function CartCard({ id, image, title, price, quantity, stock, category }: props)
     <div className="cart-card row col-12 rounded-3 py-4  bg-light justify-content-between align-items-center">
       <div className="row col-12  col-sm-3 col-lg-2 col-xl-2 align-items-center justify-content-center d-flex">
         <Link to={`${PublicRoutes.DETAIL}/${id}`} className="row col cart-card-img img-fluid p-0">
-        <img key={id} className="img-fluid cart-card-img ms-md-3" src={image} alt={title} />
+        <img key={id} className="img-fluid cart-card-img ms-md-3" title={title} src={image} alt={title} />
         </Link>
       </div>
 

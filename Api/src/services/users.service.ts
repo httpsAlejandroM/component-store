@@ -4,6 +4,9 @@ import getUserInfo from "../utils/getUserInfo";
 import { ObjectId } from "mongodb";
 import Order from "../models/order";
 import mongoose from "mongoose";
+import Review from "../models/review";
+import { formatDate } from "../utils/fomatDate";
+import { pushReview } from "./components.service";
 
 const getAllUsers = async () => {
     const allUsers = await Users.find().populate({
@@ -101,8 +104,8 @@ const updateCartUser = async ({ cartComponentId, quantity, userId }: CartItem) =
                 }
                 else {
                     const updatedCart = userById.cart.map((product) => {
-                    const updatedCartItem = { ...product, quantity: quantity }
-                    return product.productId.toString() === cartComponentId ? updatedCartItem : product
+                        const updatedCartItem = { ...product, quantity: quantity }
+                        return product.productId.toString() === cartComponentId ? updatedCartItem : product
                     })
                     userById.cart = updatedCart
                 }
@@ -121,13 +124,13 @@ const updateCartUser = async ({ cartComponentId, quantity, userId }: CartItem) =
 
 }
 
-const allOrders = async (userId:string) => {
-    const allUserOrders = await Order.find({userId: userId})
+const allOrders = async (userId: string) => {
+    const allUserOrders = await Order.find({ userId: userId })
     return allUserOrders
 }
 
-const orderById = async (userId:string, orderId:string) => {
-    const orderById = await Order.find({userId: userId, id: orderId})
+const orderById = async (userId: string, orderId: string) => {
+    const orderById = await Order.find({ userId: userId, id: orderId })
     return orderById
 }
 
@@ -136,9 +139,33 @@ const removeUser = async (id: string) => {
 
     const deletedUser = await Users.findByIdAndRemove(id)
 
-    if (deletedUser) return {message:"Usuario eliminado correctamente"}
+    if (deletedUser) return { message: "Usuario eliminado correctamente" }
 
-    else return {message: `No se encontro usuario con el id ${id}`}
+    else return { message: `No se encontro usuario con el id ${id}` }
+}
+
+const createReview = async (userName: string, productId: string, comment: string, calification: number) => {
+    try {
+
+        const reviewExist = await Review.findOne({ userName, productId })
+        if (reviewExist) {
+            return { message: "No es posible reseñar nuevamente el mismo producto" }
+        } else {
+            const newReview = await Review.create({
+                userName,
+                productId,
+                comment,
+                calification,
+                date: formatDate(new Date().toISOString())
+            })
+
+            console.log(newReview);
+            await pushReview(productId, newReview._id.toString())
+            return { message: "Reseña completada exitosamente" }
+        }
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 export {
@@ -149,5 +176,6 @@ export {
     updateCartUser,
     allOrders,
     removeUser,
-    orderById
+    orderById,
+    createReview
 }

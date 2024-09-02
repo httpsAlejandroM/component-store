@@ -1,7 +1,10 @@
+import { ObjectId } from "mongodb"
+
 export default interface Review {
-    userId:string,
+    userName: string,
+    productId: ObjectId
     comment: string,
-    stars: number,
-    date: Date
+    calification: number,
+    date: string
 }
 

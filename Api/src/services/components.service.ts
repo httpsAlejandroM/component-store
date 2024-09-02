@@ -263,7 +263,11 @@ const getAllCategoriesAndBrands = async ({ category, brand, title, minPrice, max
   return allCategoriesAndBrands;
 };
 
-
+const pushReview = async (productId: string, reviewId: string) => {
+  await Products.findByIdAndUpdate(productId, {
+    $push: { reviews: reviewId }
+  })
+}
 
 export {
   getAllComponents,
@@ -273,5 +277,6 @@ export {
   removeComponent,
   createDocumentsBD,
   applyFilters,
-  getAllCategoriesAndBrands
+  getAllCategoriesAndBrands,
+  pushReview
 }

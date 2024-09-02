@@ -9,6 +9,6 @@ export default interface Product {
     category:string,
     price:number,
     stock:number,
-    reviews?:Types.DocumentArray<Review>,
+    reviews: Review[],
     banned:boolean
 }

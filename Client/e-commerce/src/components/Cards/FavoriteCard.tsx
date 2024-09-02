@@ -26,7 +26,7 @@ function FavoriteCard({ containerStyle, component }: props) {
 
             <div className="col-10 col-sm-6 col-lg-2 d-flex  align-items-center justify-content-center order-sm-1 order-1">
                 <Link to={`${PublicRoutes.DETAIL}/${component._id}`}>
-                    <img className="img-fluid col-12 align-self-center" src={component.image} alt={component.title} />
+                    <img className="img-fluid col-12 align-self-center" title={component.title} src={component.image} alt={component.title} />
                 </Link>
 
             </div>
