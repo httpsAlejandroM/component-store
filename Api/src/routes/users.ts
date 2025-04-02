@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getUsers, putUser, deleteUser, getUser, updateFavorites, updateCart, getOrders, getOrderById } from "../controllers/users.controller";
+import { getUsers, putUser, deleteUser, getUser, updateFavorites, updateCart, getOrders, getOrderById, postReview } from "../controllers/users.controller";
 import { authenticate } from "../middlewares/authMiddleware";
 
 const router = Router()
@@ -12,6 +12,7 @@ router.put("/update/cart", updateCart)//cambiar "update" por :id y cambiar solic
 router.delete("/:id", deleteUser)
 router.get("/:userId/orders", authenticate, getOrders)
 router.get("/:userId/:orderId",authenticate, getOrderById)
+router.post("/review", postReview)
 
 export { router }
 

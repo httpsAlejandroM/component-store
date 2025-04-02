@@ -44,7 +44,7 @@ export default function OrderDetail({order, closeDialog}: props) {
                                         <small>{`$${component.unit_price}`}</small>
                                     </div>
                                     <div className="d-flex flex-row justify-content-end align-items-center ">
-                                        <img className="img-fluid" style={{maxWidth: "100px"}} src={component.picture_url} alt={component.title} />
+                                        <img className="img-fluid" style={{maxWidth: "100px"}} src={component.picture_url} title={component.title} alt={component.title} />
                                     </div>
                                 </div>
                             )

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getAllUsers, getUserByEmail, updateCartUser, updateFav, allOrders, removeUser, orderById } from "../services/users.service";
+import { getAllUsers, getUserByEmail, updateCartUser, updateFav, allOrders, removeUser, orderById, createReview } from "../services/users.service";
 import errorHandler from "../utils/errorHandler";
 import responseHandler from "../utils/responseHandler";
 import { CustomRequest } from "../interfaces/customRequest.interface";
@@ -85,9 +85,21 @@ const getOrders = async  (req: Request, res: Response) => {
 const getOrderById = async (req: Request, res: Response) => {
     const { userId, orderId } = req.params
 
-    try {
+    try { 
         const newOrderById = await orderById(userId, orderId)
         responseHandler(res, 200, newOrderById[0])
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+const postReview = async (req: Request, res: Response) => {
+    const { comment, productId, calification, userName } = req.body
+    
+    try {
+        const newReview = await createReview(userName, productId, comment, calification)
+        responseHandler(res, 200, newReview)
     } catch (error) {
         console.log(error);
         
@@ -102,5 +114,6 @@ export {
     updateFavorites,
     updateCart,
     getOrders,
-    getOrderById
+    getOrderById,
+    postReview
 }

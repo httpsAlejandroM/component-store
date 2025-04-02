@@ -1,5 +1,6 @@
 import { Schema, Types, model, Model } from "mongoose";
 import  Product  from "../interfaces/product.interface";
+import Review from "../interfaces/review.interface";
 
 const productSchema = new Schema<Product>({
     title: {
@@ -39,11 +40,11 @@ const productSchema = new Schema<Product>({
         required: true,
         trim: true
     },
-    reviews:{
-        type: Number,
-        trim: true,
-        default: 0
-    },
+    reviews:[{
+        type: Schema.Types.ObjectId,
+        ref: "Review" // Referencia al modelo de Review
+    }
+    ],
     banned:{
         type: Boolean,
         default: false
