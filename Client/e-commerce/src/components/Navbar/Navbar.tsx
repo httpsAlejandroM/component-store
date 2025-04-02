@@ -152,7 +152,7 @@ function Navbar() {
             aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div ref={collapseElementList} className="collapse navbar-collapse justify-content-lg-center" style={{maxHeight:350, overflowY:"auto"}} id="navbarScroll">
+          <div ref={collapseElementList} className={`collapse navbar-collapse justify-content-lg-center ${isNavbarExpanded ? "overflow-y-visible" : "overflow-y-auto"}`} style={{maxHeight:350}} id="navbarScroll">
             <div>
               <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" >
                 <Navlink collapseHandler={collapseHandler} linkName="Inicio" route={PublicRoutes.HOME}></Navlink>
