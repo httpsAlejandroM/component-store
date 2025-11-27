@@ -9,6 +9,7 @@ export default interface Product {
     category:string,
     price:number,
     stock:number,
-    reviews: Review[],
+    reviews?: Review[],
     banned:boolean
 }
+
